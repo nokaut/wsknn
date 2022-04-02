@@ -1,24 +1,110 @@
 # WSKNN: k-NN recommender for session-based data
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6393177.svg)](https://doi.org/10.5281/zenodo.6393177)
+
 ## Weighted session-based k-NN - Intro
 
-...
+Do you build a recommender system for your website? K-nearest neighbours algorithm is a good choice if you are looking for the simple, fast, and explainable solution. Weighted-session based k-nn recommendations are close to the state-of-the-art and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
 
-### When?
+### How does it work?
 
-...
+You provide two input structures as a **training** data:
 
-### Why?
+```
+sessions : dict
+               sessions = {
+                   session id: (
+                       [sequence of items with user interaction],
+                       [timestamp of user interaction per item],
+                       [sequence of weighting factors]
+                   )
+               }
 
-...
+items : dict
+        items = {
+            item id: (
+                [sequence of sessions with an item],
+                [the first timestamp of each session with an item]
+            )
+        }
+```
+
+And you ask model to recommend products based on the user session:
+
+```
+user session: {session id: [[sequence of items], [sequence of timestamps]]}
+```
+
+The package is lightweight. It depends only on the `numpy` and `pyyaml`. 
+
+Moreover, we can provide package for non-programmers and they can use `settings.yaml` to control a model behavior.
+
+
+### Why should we use WSKNN?
+
+- training is faster than deep learning or XGBoost algorithms, model memorizes map of session-items and item-sessions,
+- recommendations are easy to control, we can change how algorithm works in just a few lines... of text,
+- as a baseline, for comparison of deep learning / XGBoost architectures,
+- very fast prototyping,
+- easy to run in production.
+
+Model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization and other. Its performance was always very close to the level of a fine-tuned neural networks, but it was much easier and faster to train.
+
+### What are the limitations of WSKNN?
+
+- model memorizes session-items and item-sessions maps and if your product base is large, and you use sessions from a long period of time, then model may be too big to fit an available memory, in this case you can 
+divide your products base into categories and train different model for each category,
+- response time may be slower than from other models, especially if there are available many sessions,
+- there's additional overhead related to the preparation of the input.
 
 ### Example
 
-...
+
+```python
+
+import numpy as np
+from wsknn import fit
+from wsknn.utils import load_pickled
+
+# Load data
+ITEMS = 'demo-data/items.pkl'
+SESSIONS = 'demo-data/sessions.pkl'
+
+items = load_pickled(ITEMS)
+sessions = load_pickled(SESSIONS)
+
+trained_model = fit(sessions, items)
+
+test_session = {'unique id': [
+    ['product id 1', 'product id 2'],
+    ['timestamp #1', 'timestamp #2']
+]}
+
+recommendations = trained_model.predict(test_session, number_of_recommendations=3)
+print(recommendations)
+
+```
+
+Output:
+
+```shell
+[
+ ('product id 3', 0.7),
+ ('product id 4', 0.33),
+ ('product id 5', 0.059)
+]
+```
+
 
 ## Setup
 
-...
+Version 0.1 of a package can be installed with `pip`:
+
+```shell
+pip install wsknn
+```
+
+It works with a Python versions greater or equal to 3.6.
 
 ## Requirements
 
@@ -30,6 +116,10 @@
 ## Developers
 
 - Szymon Moliński (Sales Intelligence : Digitree Group SA)
+
+## Citation
+
+Szymon Moliński. (2022). WSKNN - Weighted Session-based k-NN Recommendations in Python (0.1). Zenodo. https://doi.org/10.5281/zenodo.6393177
 
 ## Bibliography
 
