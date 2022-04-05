@@ -61,8 +61,9 @@ def mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, r_number=0, skip_
             # Get rank
             rank = 0
             for idx, prod in enumerate(predictions[k]):
+                ii = idx + 1
                 if prod[0] in eval_items:
-                    rank = 1 / idx
+                    rank = 1 / ii
                     break
 
             mrr = mrr + rank

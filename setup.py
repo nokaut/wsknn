@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wsknn",
-    version="0.1",
+    version="0.1.1",
     author="Szymon Moliński",
     author_email="s.molinski@digitree.pl",
     description="VSKNN model for recommendations",

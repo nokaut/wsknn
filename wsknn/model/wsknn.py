@@ -1,9 +1,11 @@
 import random
+import numpy as np
 from typing import Iterable
 
 from wsknn.weighting import weight_session_items, weight_item_score
 from wsknn.utils.calc import weight_set_pair
-from wsknn.utils.errors import check_data_dimension, InvalidDimensionsError, InvalidTimestampError
+from wsknn.utils.errors import check_data_dimension, check_numeric_type_instance,\
+    InvalidDimensionsError, InvalidTimestampError
 
 
 class WSKNN:
@@ -259,7 +261,7 @@ class WSKNN:
 
         # Check timestamp type
         for tstamp in sample_rec[1]:
-            if not isinstance(tstamp, int):
+            if not check_numeric_type_instance(tstamp):
                 raise InvalidTimestampError(tstamp)
 
     @staticmethod
@@ -308,7 +310,7 @@ class WSKNN:
 
         # Check timestamp type
         for tstamp in sample_rec[1]:
-            if not isinstance(tstamp, int):
+            if not check_numeric_type_instance(tstamp):
                 raise InvalidTimestampError(tstamp)
 
     def _is_sampling_strategy_valid(self, sampling_strategy):

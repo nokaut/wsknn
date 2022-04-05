@@ -20,6 +20,28 @@ def check_data_dimension(record: list, dimensions: int) -> bool:
     return len(record) == dimensions
 
 
+def check_numeric_type_instance(value) -> bool:
+    """Method checks if value is int or float
+
+    Parameters
+    ----------
+    value : Expected Numeric type
+
+    Returns
+    -------
+    : bool
+        True - value is numeric, False - value is other than number
+    """
+    if isinstance(value, str):
+        return False
+    else:
+        try:
+            _ = int(value)
+        except Exception as _e:
+            return False
+        return True
+
+
 class InvalidDimensionsError(Exception):
     """Exception raised when dimension of input session-items map or input item-sessions map is not valid.
 
@@ -48,7 +70,7 @@ class InvalidTimestampError(Exception):
         self.timestamp_type = type(timestamp_sample)
 
     def __str__(self):
-        msg = f'Expected timestamp type should be int, got {self.timestamp_type} instead.'
+        msg = f'Expected timestamp type should be int or float, got {self.timestamp_type} instead.'
         return msg
 
 

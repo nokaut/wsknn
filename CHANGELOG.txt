@@ -1,0 +1,4 @@
+Version 0.1.1:
+
+- Timestamps can be a floating-point numbers,
+- MRR bug (ZeroDivisionError),
