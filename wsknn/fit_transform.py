@@ -2,7 +2,8 @@ from wsknn.model.wsknn import WSKNN
 
 
 def fit(sessions: dict, items: dict) -> WSKNN:
-    """Function fits given session maps and item maps into a wsknn model.
+    """
+    The Function fits given session maps and item maps into the wsknn model.
 
     Parameters
     ----------
@@ -54,10 +55,10 @@ def fit(sessions: dict, items: dict) -> WSKNN:
     """
 
     # Initilize VSKNN model
-    vsknn = WSKNN()
-    vsknn.fit(
+    wsknn = WSKNN()
+    wsknn.fit(
         sessions,
         items
     )
 
-    return vsknn
+    return wsknn

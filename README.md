@@ -4,11 +4,11 @@
 
 ## Weighted session-based k-NN - Intro
 
-Do you build a recommender system for your website? K-nearest neighbours algorithm is a good choice if you are looking for the simple, fast, and explainable solution. Weighted-session based k-nn recommendations are close to the state-of-the-art and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
+Do you build a recommender system for your website? K-nearest neighbors algorithm is a good choice if you are looking for a simple, fast, and explainable solution. Weighted-session-based k-nn recommendations are close to the state-of-the-art, and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
 
 ### How does it work?
 
-You provide two input structures as a **training** data:
+You provide two input structures as **training** data:
 
 ```
 sessions : dict
@@ -29,7 +29,7 @@ items : dict
         }
 ```
 
-And you ask model to recommend products based on the user session:
+And you ask a model to recommend products based on the user session:
 
 ```
 user session: {session id: [[sequence of items], [sequence of timestamps]]}
@@ -37,23 +37,23 @@ user session: {session id: [[sequence of items], [sequence of timestamps]]}
 
 The package is lightweight. It depends only on the `numpy` and `pyyaml`. 
 
-Moreover, we can provide package for non-programmers and they can use `settings.yaml` to control a model behavior.
+Moreover, we can provide a package for non-programmers, and they can use `settings.yaml` to control a model behavior.
 
 
 ### Why should we use WSKNN?
 
 - training is faster than deep learning or XGBoost algorithms, model memorizes map of session-items and item-sessions,
-- recommendations are easy to control, we can change how algorithm works in just a few lines... of text,
+- recommendations are easy to control. We can change how the algorithm works in just a few lines... of text,
 - as a baseline, for comparison of deep learning / XGBoost architectures,
-- very fast prototyping,
+- swift prototyping,
 - easy to run in production.
 
-Model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization and other. Its performance was always very close to the level of a fine-tuned neural networks, but it was much easier and faster to train.
+The model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization, and others. Its performance was always very close to the level of fine-tuned neural networks, but it was much easier and faster to train.
 
 ### What are the limitations of WSKNN?
 
-- model memorizes session-items and item-sessions maps and if your product base is large, and you use sessions from a long period of time, then model may be too big to fit an available memory, in this case you can 
-divide your products base into categories and train different model for each category,
+- model memorizes session-items and item-sessions maps, and if your product base is large and you use sessions for an extended period, then the model may be too big to fit an available memory; in this case, you can 
+categorize products and train a different model for each category,
 - response time may be slower than from other models, especially if there are available many sessions,
 - there's additional overhead related to the preparation of the input.
 
@@ -104,7 +104,7 @@ Version 0.1 of a package can be installed with `pip`:
 pip install wsknn
 ```
 
-It works with a Python versions greater or equal to 3.6.
+It works with Python versions greater or equal to 3.6.
 
 ## Requirements
 
@@ -131,5 +131,5 @@ Szymon Moliński. (2022). WSKNN - Weighted Session-based k-NN Recommendations in
 
 - Development of the package was partially based on the research project
 **E-commerce Shopping Patterns Prediction System** that 
-was funded under Priority Axis 1.1 of Smart Growth Operational Programme 2014-2020 for Poland
+was founded under Priority Axis 1.1 of Smart Growth Operational Programme 2014-2020 for Poland
 co-funded by European Regional Development Fund. Project number: `POIR.01.01.01-00-0632/18`

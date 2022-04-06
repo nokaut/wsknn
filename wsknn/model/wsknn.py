@@ -9,15 +9,16 @@ from wsknn.utils.errors import check_data_dimension, check_numeric_type_instance
 
 
 class WSKNN:
-    """Class represent Weighted Session-Based k-nn model.
+    """
+    The class represents the Weighted Session-Based k-nn model.
 
     Parameters
     ----------
     number_of_recommendations : int, default=5
-                                Number of items recommended.
+                                The number of recommended items.
 
     number_of_neighbors : int, default=10
-                          Number of closest sessions to choose the items from.
+                          The number of closest sessions to choose the items from.
 
     sampling_strategy : str, default='common_items'
                         How to filter the initial sample of sessions. Available strategies are:
@@ -157,7 +158,8 @@ class WSKNN:
                 possible_neighbors_sample_size=None,
                 weighting_strategy=None,
                 rank_strategy=None) -> dict:
-        """Method predicts n next recommendations from a given session.
+        """
+        The method predicts n next recommendations from a given session.
 
         Parameters
         ----------
@@ -165,10 +167,10 @@ class WSKNN:
                    User ID (key) and sequence of viewed products and their timestamps (values).
 
         number_of_recommendations : int or None, default=None
-                                    Resets number of recommendations.
+                                    Resets the number of recommendations.
 
         number_of_closest_neighbors : int or None, default=None
-                                      Resets number of closest neighbors.
+                                      Resets the number of closest neighbors.
 
         session_sampling_strategy : str or None, default=None
                                     How to filter the initial sample of sessions. Available strategies are:

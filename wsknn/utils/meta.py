@@ -2,7 +2,8 @@ import yaml
 
 
 def parse_settings(settings_file: str) -> dict:
-    """Function parses settings file into dict
+    """
+    The function parses settings file into dict
 
     Parameters
     ----------

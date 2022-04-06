@@ -1,5 +1,6 @@
 def weight_set_pair(first: set, second: set, mapped_items_weights: dict) -> float:
-    """ Function calculates weighted average of the common items from two sessions based on the dict with items and
+    """
+    The function calculates weighted average of the common items from two sessions based on the dict with items and
         their weights.
 
     Parameters
@@ -29,7 +30,8 @@ def weight_set_pair(first: set, second: set, mapped_items_weights: dict) -> floa
 
 
 def is_there_any_common_element(first: set, second: set) -> int:
-    """Function checks if there are common elements in two sets and if there is any then it returns 1, else 0.
+    """
+    The function checks if there are common elements in two sets and if there are any then it returns 1, else 0.
 
     Parameters
     ----------

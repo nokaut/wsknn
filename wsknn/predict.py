@@ -5,7 +5,7 @@ def predict(model: WSKNN,
             sessions: dict,
             settings_dict=None) -> dict:
     """
-    Function is an alias to predict method of VSKNN model.
+    The function is an alias to the .predict() method of the WSKNN model.
 
     Parameters
     ----------
@@ -28,7 +28,7 @@ def predict(model: WSKNN,
     Returns
     -------
     predicted : dict or list
-                List of tuples (Item, Weight) of the length given by number_of_recommendations parameter in
+                List of tuples (Item, Weight) of the length given by the number_of_recommendations parameter in
                 a descending order; or the same
 
     Raises

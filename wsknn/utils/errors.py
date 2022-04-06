@@ -2,7 +2,8 @@ from typing import Union
 
 
 def check_data_dimension(record: list, dimensions: int) -> bool:
-    """Method checks if dimension of a record is equal to dimensions parameter.
+    """
+    The method checks if the dimension of a record is equal to the --dimensions-- parameter.
 
     Parameters
     ----------
@@ -15,7 +16,7 @@ def check_data_dimension(record: list, dimensions: int) -> bool:
     Returns
     -------
     : bool
-        True - dimensions are equal to number of the nested sequences. False otherwise.
+        True - dimensions are equal to a number of the nested sequences. False otherwise.
     """
     return len(record) == dimensions
 
@@ -30,7 +31,7 @@ def check_numeric_type_instance(value) -> bool:
     Returns
     -------
     : bool
-        True - value is numeric, False - value is other than number
+        True - value is numeric, False - value is other than the number
     """
     if isinstance(value, str):
         return False
@@ -43,7 +44,8 @@ def check_numeric_type_instance(value) -> bool:
 
 
 class InvalidDimensionsError(Exception):
-    """Exception raised when dimension of input session-items map or input item-sessions map is not valid.
+    """
+    The exception is raised when the dimension of the input session-items map or input item-sessions map is not valid.
 
     Attributes
     ----------
@@ -63,7 +65,8 @@ class InvalidDimensionsError(Exception):
 
 
 class InvalidTimestampError(Exception):
-    """Exception raised when timestamp is given in a different format than int.
+    """
+    The exception is raised when the timestamp is not a numeric value.
     """
 
     def __init__(self, timestamp_sample):
@@ -75,7 +78,8 @@ class InvalidTimestampError(Exception):
 
 
 class TooShortSessionException(Exception):
-    """Exception raised by Mean Reciprocal Rank metrics if session length is shorter than the
+    """
+    The exception is raised by the Mean Reciprocal Rank metrics if session length is shorter than the
     number of top n recommendations."""
 
     def __init__(self, session_length: int, top_n: int):

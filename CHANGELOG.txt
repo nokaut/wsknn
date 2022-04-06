@@ -1,4 +1,5 @@
 Version 0.1.1:
 
-- Timestamps can be a floating-point numbers,
+- Timestamps can be floating-point numbers,
 - MRR bug (ZeroDivisionError),
+- Typos and descriptions in docstrings,

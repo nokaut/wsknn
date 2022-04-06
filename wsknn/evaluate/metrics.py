@@ -4,7 +4,7 @@ from wsknn.utils.errors import TooShortSessionException
 
 def mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, r_number=0, skip_short_sessions=True) -> float:
     """
-    Function calculates mean reciprocal rank of a top r_number recommendations.
+    The function calculates the mean reciprocal rank of a top r_number of recommendations.
     Given session must be longer than r_number.
 
     Parameters
@@ -21,11 +21,11 @@ def mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, r_number=0, skip_
 
     r_number : int, default=0
                Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-               when it is set, then r_number is equal to number of recommendations from a trained model. If r_number
+               when it is set, then r_number is equal to the number of recommendations from a trained model. If r_number
                is greater than the number of recommendations then the latter is adjusted to it.
 
     skip_short_sessions : bool, default=True
-                          Should algorithm skip short sessions when calculates MRR or should raise an error?
+                          Should the algorithm skip short sessions when calculating MRR or should raise an error?
 
     Returns
     -------
