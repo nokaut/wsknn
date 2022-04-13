@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>wsknn.utils package</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">wsknn</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#welcome-to-wsknn-s-documentation">Contents:</a></span>
+      </p>
+      <ul class="">
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>wsknn.utils package</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <div class="section" id="wsknn-utils-package">
+<h1>wsknn.utils package<a class="headerlink" href="#wsknn-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-wsknn.utils.calc">
+<span id="wsknn-utils-calc-module"></span><h2>wsknn.utils.calc module<a class="headerlink" href="#module-wsknn.utils.calc" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.calc.is_there_any_common_element">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.calc.</span></span><span class="sig-name descname"><span class="pre">is_there_any_common_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#wsknn.utils.calc.is_there_any_common_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function checks if there are common elements in two sets and if there are any then it returns 1, else 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first</strong> (<em>set</em>) – unique items from the set A</p></li>
+<li><p><strong>second</strong> (<em>set</em>) – unique items from the set B</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is any common element between sets A and B; 0 otherwise</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.calc.weight_set_pair">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.calc.</span></span><span class="sig-name descname"><span class="pre">weight_set_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapped_items_weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.utils.calc.weight_set_pair" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The function calculates weighted average of the common items from two sessions based on the dict with items and</dt><dd><p>their weights.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first</strong> (<em>set</em>) – unique items from the set A</p></li>
+<li><p><strong>second</strong> (<em>set</em>) – unique items from the set B</p></li>
+<li><p><strong>mappped_items_weights</strong> (<em>dict</em>) – {item_id : weight}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Estimated weight between two item sets. Always 0 or positive.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.utils.errors">
+<span id="wsknn-utils-errors-module"></span><h2>wsknn.utils.errors module<a class="headerlink" href="#module-wsknn.utils.errors" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="wsknn.utils.errors.InvalidDimensionsError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wsknn.utils.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidDimensionsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_dimensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.utils.errors.InvalidDimensionsError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>The exception is raised when the dimension of the input session-items map or input item-sessions map is not valid.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="wsknn.utils.errors.InvalidDimensionsError.set_type">
+<span class="sig-name descname"><span class="pre">set_type</span></span><a class="headerlink" href="#wsknn.utils.errors.InvalidDimensionsError.set_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Item-sessions map or session-items map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="wsknn.utils.errors.InvalidDimensionsError.expected_dimensions">
+<span class="sig-name descname"><span class="pre">expected_dimensions</span></span><a class="headerlink" href="#wsknn.utils.errors.InvalidDimensionsError.expected_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="wsknn.utils.errors.InvalidTimestampError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wsknn.utils.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidTimestampError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.utils.errors.InvalidTimestampError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>The exception is raised when the timestamp is not a numeric value.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="wsknn.utils.errors.TooShortSessionException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wsknn.utils.errors.</span></span><span class="sig-name descname"><span class="pre">TooShortSessionException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.utils.errors.TooShortSessionException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>The exception is raised by the Mean Reciprocal Rank metrics if session length is shorter than the
+number of top n recommendations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.errors.check_data_dimension">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.errors.</span></span><span class="sig-name descname"><span class="pre">check_data_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#wsknn.utils.errors.check_data_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method checks if the dimension of a record is equal to the –dimensions– parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>list</em>) – Nested iterable.</p></li>
+<li><p><strong>dimensions</strong> (<em>int</em>) – Number of nested dimensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True - dimensions are equal to a number of the nested sequences. False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.errors.check_numeric_type_instance">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.errors.</span></span><span class="sig-name descname"><span class="pre">check_numeric_type_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#wsknn.utils.errors.check_numeric_type_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method checks if value is int or float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>Expected Numeric type</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True - value is numeric, False - value is other than the number</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.utils.meta">
+<span id="wsknn-utils-meta-module"></span><h2>wsknn.utils.meta module<a class="headerlink" href="#module-wsknn.utils.meta" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.meta.parse_settings">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.meta.</span></span><span class="sig-name descname"><span class="pre">parse_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#wsknn.utils.meta.parse_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function parses settings file into dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>settings_file</strong> (<em>str</em>) – File with the model settings, must be in yaml.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ydict</strong> – Parsed settings used for modeling.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.utils.transform">
+<span id="wsknn-utils-transform-module"></span><h2>wsknn.utils.transform module<a class="headerlink" href="#module-wsknn.utils.transform" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_pickled">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.transform.</span></span><span class="sig-name descname"><span class="pre">load_pickled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#wsknn.utils.transform.load_pickled" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function loads pickled items / sessions object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>pickled_object</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2022, Szymon Molinski.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

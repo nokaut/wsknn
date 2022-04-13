@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>wsknn.weighting package</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">wsknn</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#welcome-to-wsknn-s-documentation">Contents:</a></span>
+      </p>
+      <ul class="">
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>wsknn.weighting package</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <div class="section" id="wsknn-weighting-package">
+<h1>wsknn.weighting package<a class="headerlink" href="#wsknn-weighting-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-wsknn.weighting.item_weighting">
+<span id="wsknn-weighting-item-weighting-module"></span><h2>wsknn.weighting.item_weighting module<a class="headerlink" href="#module-wsknn.weighting.item_weighting" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.item_weighting.inv_pos_item_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">inv_pos_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.inv_pos_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function returns the final rank as a simple inverse of the item position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Inverted position rank.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.item_weighting.linear_item_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">linear_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.linear_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Function weights events based on their position in a sequence. Output is normalized to the range [0:1]. For the</dt><dd><p>long sequences of events (index 10+) it returns zero.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Linear rank.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.item_weighting.log_item_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">log_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.log_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Function returns rank as a transformed inverted log10 of the sum (position + 1.7).</dt><dd><p>Result is normalized to the range (0:1].</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Logarithmic rank.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.item_weighting.quadratic_item_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">quadratic_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.quadratic_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Function is similar to inverted and linear functions but weights are decreasing at non-linear rate</dt><dd><p>and accelerate with the item position.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Inverted square position rank.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.weighting.session_weighting">
+<span id="wsknn-weighting-session-weighting-module"></span><h2>wsknn.weighting.session_weighting module<a class="headerlink" href="#module-wsknn.weighting.session_weighting" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.session_weighting.linear_session_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.session_weighting.</span></span><span class="sig-name descname"><span class="pre">linear_session_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.session_weighting.linear_session_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Newest elements in sequence =&gt; largest weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Element position, i+1 must be less than length.</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – Length of a sequence.</p></li>
+<li><p><strong>Results</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>result</strong> (<em>float</em>) – Session rank between 0 and 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.session_weighting.log_session_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.session_weighting.</span></span><span class="sig-name descname"><span class="pre">log_session_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.session_weighting.log_session_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Newest element in sequence =&gt; largest weight.</p>
+<dl class="simple">
+<dt>Function calculates weights based on the sequence length and a position of element in a sequence.</dt><dd><p>Longer sequences create more steps between limits of 0 and 2.31.
+For example:</p>
+<ol class="loweralpha simple">
+<li><p>element position: 1, sequence length: 10   -&gt; weight = 0.97</p></li>
+<li><p>element position: 1, sequence length: 1000 -&gt; weight = 0.33</p></li>
+</ol>
+</dd>
+<dt>In practice it means that the past elements of the longest sequences have lower weights than the past elements</dt><dd><p>of a short sequence. It mimics our short-term memory and fn gives the biggest weights to the newest events and
+past and middle-sequence events are treated as a not relevant, approx.: to 90% of the sequence.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Element position, i+1 must be less than length.</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – Length of a sequence.</p></li>
+<li><p><strong>Results</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>result</strong> (<em>float</em>) – Session rank between 0 and 1. Normalized from 0:2.31.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.session_weighting.quadratic_session_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.session_weighting.</span></span><span class="sig-name descname"><span class="pre">quadratic_session_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.session_weighting.quadratic_session_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Function penalizes old elements in sequence more than the new events. The past elements have much smaller</dt><dd><p>weights than the new ones. It follows a quadratic function.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Element position, i+1 must be less than length.</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – Length of a sequence.</p></li>
+<li><p><strong>Results</strong> – </p></li>
+<li><p><strong>-------</strong> – </p></li>
+<li><p><strong>result</strong> (<em>float</em>) – Session rank between 0 and 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.weighting.weighting">
+<span id="wsknn-weighting-weighting-module"></span><h2>wsknn.weighting.weighting module<a class="headerlink" href="#module-wsknn.weighting.weighting" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.weighting.weight_item_score">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.weighting.</span></span><span class="sig-name descname"><span class="pre">weight_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.weighting.weighting.weight_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function calculates item weight based on its position in a session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn_name</strong> (<em>str</em>) – Function used for item weighting. Available options: ‘linear’, ‘div’, ‘log’, ‘quadratic’.</p></li>
+<li><p><strong>element_pos</strong> (<em>int</em>) – Position of an element in a sequence.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Item weight.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.weighting.weighting.weight_session_items">
+<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.weighting.</span></span><span class="sig-name descname"><span class="pre">weight_session_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.weighting.weighting.weight_session_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function weights session items by specific fn.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn_name</strong> (<em>str</em>) – Function used for session weighting. Available options: ‘linear’, ‘log’, ‘quadratic’.</p></li>
+<li><p><strong>element_pos</strong> (<em>int</em>) – Position of an element in a sequence.</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – Overall session length.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Session’s item weight.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-wsknn.weighting">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.weighting" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2022, Szymon Molinski.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>
