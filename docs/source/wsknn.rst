@@ -1,8 +1,27 @@
 wsknn package
 =============
 
-Subpackages
------------
+Core functions
+--------------
+
+fit\_transform
+--------------
+
+.. automodule:: wsknn.fit_transform
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+predict
+-------
+
+.. automodule:: wsknn.predict
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
 
 .. toctree::
    :maxdepth: 4
@@ -12,29 +31,3 @@ Subpackages
    wsknn.utils
    wsknn.weighting
 
-Submodules
-----------
-
-wsknn.fit\_transform module
----------------------------
-
-.. automodule:: wsknn.fit_transform
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-wsknn.predict module
---------------------
-
-.. automodule:: wsknn.predict
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: wsknn
-   :members:
-   :undoc-members:
-   :show-inheritance:

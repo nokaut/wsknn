@@ -7,9 +7,10 @@ Welcome to wsknn's documentation!
 =================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :caption: Contents:
 
+   modules.rst
 
 
 Indices and tables
