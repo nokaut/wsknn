@@ -13,7 +13,10 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
-sys.setrecursionlimit(1500)
+from wsknn import __version__ as release_number
+
+
+sys.setrecursionlimit(1000)
 
 
 # -- Project information -----------------------------------------------------
@@ -23,7 +26,7 @@ copyright = '2022, Szymon Molinski'
 author = 'Szymon Molinski'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.1'
+release = release_number
 
 
 # -- General configuration ---------------------------------------------------
