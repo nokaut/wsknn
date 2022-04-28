@@ -1,6 +1,5 @@
 import random
-import numpy as np
-from typing import Iterable, Union
+from typing import Iterable, Union, List, Set, Dict
 
 from wsknn.weighting import weight_session_items, weight_item_score
 from wsknn.utils.calc import weight_set_pair
@@ -25,7 +24,7 @@ class WSKNN:
                         - 'common_items': sample sessions with the same items as the input session,
                         - 'recent': sample the most actual sessions,
                         - 'random': get a random sample of sessions,
-                        - 'event_type': get a sample with a specific event types,
+                        - 'with_event': get a sample with a specific event types,
 
     sample_size : int, default=1000
                   How many sessions from the model are sampled to make a recommendation.
@@ -37,15 +36,19 @@ class WSKNN:
                        How we calculate an item rank (based on its position in a session sequence). Available options
                        are: 'inv', 'linear', 'log', 'quadratic'.
 
+    sampling_event : int or str, default = None
+                     If sampling strategy is 'with_event' then this paramater must be set to the name
+                     of an event passed with dataset.
+
     Attributes
     ----------
-    weighting_functions: list
+    weighting_functions: List
                          List with weighting functions: ['linear', 'log', 'quadratic'].
 
-    ranking_strategies : list
+    ranking_strategies : List
                          List with ranking strategies: ['linear', 'log', 'quadratic', 'inv'].
 
-    session_item_map : dict
+    session_item_map : Dict
                        sessions = {
                            session_id: (
                                [sequence_of_items],
@@ -55,7 +58,7 @@ class WSKNN:
                        }
                        Dict populated with fit() method.
 
-    item_session_map : dict
+    item_session_map : Dict
                        items = {
                            item_id: (
                                [sequence_of_sessions],
@@ -98,15 +101,15 @@ class WSKNN:
     """
 
     def __init__(self,
-                 number_of_recommendations=5,
-                 number_of_neighbors=10,
-                 sampling_strategy='common_items',
-                 sample_size=1000,
-                 weighting_func='linear',
-                 ranking_strategy='linear',
-                 required_events: Union[str, list] = None):
+                 number_of_recommendations: int = 5,
+                 number_of_neighbors: int = 10,
+                 sampling_strategy: str = 'common_items',
+                 sample_size: int = 1000,
+                 weighting_func: str = 'linear',
+                 ranking_strategy: str = 'linear',
+                 sampling_event: Union[int, str] = None):
 
-        self.sampling_strategies = ['common_items', 'recent', 'random']
+        self.sampling_strategies = ['common_items', 'recent', 'random', 'with_event']
         self.weighting_functions = ['linear', 'log', 'quadratic']
         self.ranking_strategies = ['linear', 'log', 'quadratic', 'inv']
 
@@ -118,26 +121,27 @@ class WSKNN:
         self.possible_neighbors_sample_size = sample_size
 
         self.sampling_strategy = self._is_sampling_strategy_valid(sampling_strategy)
+        self.sampling_event = self._is_with_event_strategy_valid(sampling_event)
         self.weighting_function = self._is_weighting_function_valid(weighting_func)
         self.ranking_strategy = self._is_ranking_strategy_valid(ranking_strategy)
 
     # Core methods
 
-    def fit(self, sessions: dict, items: dict):
+    def fit(self, sessions: Dict, items: Dict):
         """Sets input session-items and item-sessions maps.
 
         Parameters
         ----------
-        sessions : dict
+        sessions : Dict
                    sessions = {
                        session_id: (
                            [ sequence_of_items ],
                            [ sequence_of_timestamps ],
-                           [ [OPTIONAL] sequence_of_event_type ]
+                           [ [OPTIONAL] sequence_of_event_types ]
                        )
                    }
 
-        items : dict
+        items : Dict
                 items = {
                     item_id: (
                         [ sequence_of_sessions ],
@@ -153,19 +157,19 @@ class WSKNN:
         self.session_item_map = sessions
         self.item_session_map = items
 
-    def predict(self, sessions: dict,
+    def predict(self, sessions: Dict,
                 number_of_recommendations=None,
                 number_of_closest_neighbors=None,
                 session_sampling_strategy=None,
                 possible_neighbors_sample_size=None,
                 weighting_strategy=None,
-                rank_strategy=None) -> dict:
+                rank_strategy=None) -> Dict:
         """
         The method predicts n next recommendations from a given session.
 
         Parameters
         ----------
-        sessions : dict
+        sessions : Dict
                    User ID (key) and sequence of viewed products and their timestamps (values).
 
         number_of_recommendations : int or None, default=None
@@ -196,7 +200,7 @@ class WSKNN:
 
         Returns
         -------
-        : dict
+        : Dict
           ranked items in descending order
           - {user ID: [[item, rank] ...]}
         """
@@ -220,12 +224,12 @@ class WSKNN:
 
     # Settings
     @staticmethod
-    def _check_sessions_input(sessions: dict):
+    def _check_sessions_input(sessions: Dict):
         """Check if sessions have required dimensions.
 
         Parameters
         ----------
-        sessions : dict
+        sessions : Dict
                    sessions = {
                        session_id: (
                            [ sequence_of_items ],
@@ -316,6 +320,30 @@ class WSKNN:
         for tstamp in sample_rec[1]:
             if not check_numeric_type_instance(tstamp):
                 raise InvalidTimestampError(tstamp)
+
+    def _is_with_event_strategy_valid(self, event_type):
+        """
+        Checks if event has been passed if sampling_strategy is set to "with_event".
+
+        Parameters
+        ----------
+        event_type : str | int | None
+
+        Returns
+        -------
+        event_type : str | int
+
+        Raises
+        ------
+        KeyError
+            Event is None.
+        """
+
+        if event_type is None:
+            msg = 'When you set sampling strategy to "with_event" you must pass event id / name in sampling_event' \
+                  ' parameter. Make sure that this event exists in your data.'
+            raise KeyError(msg)
+        return event_type
 
     def _is_sampling_strategy_valid(self, sampling_strategy):
         """Check sampling strategy.
@@ -482,7 +510,7 @@ class WSKNN:
 
     # Transform, sample, rank - core
 
-    def _nearest_neighbors(self, session: list) -> list:
+    def _nearest_neighbors(self, session: List) -> List:
         """Method searches for nearest neighbors for a given session.
 
         Parameters
@@ -590,20 +618,20 @@ class WSKNN:
 
     # Transform, sample, rank - additional
 
-    def _calculate_similarity(self, session_items: list, possible_neighbours: list) -> list:
+    def _calculate_similarity(self, session_items: List, possible_neighbours: List) -> List:
         """Function calculates similarity between sessions based on the items ranking.
 
         Parameters
         ----------
-        session_items : list
+        session_items : List
                         List of items from the customer session.
 
-        possible_neighbours : list
+        possible_neighbours : List
                               List of sessions from the possible neighbors pool (based on a sampling strategy).
 
         Returns
         -------
-        neighbors : list
+        neighbors : List
                     List of similar sessions to the customer session.
         """
 
@@ -623,7 +651,7 @@ class WSKNN:
 
         return neighbours
 
-    def _sampling_common(self, sessions: set, session: list) -> list:
+    def _sampling_common(self, sessions: Set, session: List) -> List:
         """Function gets the most similar sessions based on the number of common elements between sessions.
 
         Parameters
@@ -645,7 +673,7 @@ class WSKNN:
         sample_size = min(self.possible_neighbors_sample_size, len(sessions))
         return result[:sample_size]
 
-    def _sample_possible_neighbors(self, all_sessions: set, session: list) -> list:
+    def _sample_possible_neighbors(self, all_sessions: Set, session: List) -> List:
         """Method samples possible neighbors.
 
         Parameters
@@ -674,7 +702,7 @@ class WSKNN:
                       f' {self.sampling_strategies}.'
             raise TypeError(err_msg)
 
-    def _sampling_random(self, sessions: set) -> list:
+    def _sampling_random(self, sessions: Set) -> List:
         """Get random sessions from the sessions space. This method is good to estimate model performance or to test it.
 
         Parameters
@@ -690,7 +718,7 @@ class WSKNN:
         sample_size = min(self.possible_neighbors_sample_size, len(sessions))
         return random.sample(sessions, sample_size)
 
-    def _sampling_recent(self, sessions: set) -> list:
+    def _sampling_recent(self, sessions: Set) -> List:
         """Get most recent sessions from the possible neighbors.
 
         Parameters
