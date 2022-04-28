@@ -1,6 +1,6 @@
 import random
 import numpy as np
-from typing import Iterable
+from typing import Iterable, Union
 
 from wsknn.weighting import weight_session_items, weight_item_score
 from wsknn.utils.calc import weight_set_pair
@@ -24,7 +24,8 @@ class WSKNN:
                         How to filter the initial sample of sessions. Available strategies are:
                         - 'common_items': sample sessions with the same items as the input session,
                         - 'recent': sample the most actual sessions,
-                        - 'random': get a random sample of sessions.
+                        - 'random': get a random sample of sessions,
+                        - 'event_type': get a sample with a specific event types,
 
     sample_size : int, default=1000
                   How many sessions from the model are sampled to make a recommendation.
@@ -102,7 +103,8 @@ class WSKNN:
                  sampling_strategy='common_items',
                  sample_size=1000,
                  weighting_func='linear',
-                 ranking_strategy='linear'):
+                 ranking_strategy='linear',
+                 required_events: Union[str, list] = None):
 
         self.sampling_strategies = ['common_items', 'recent', 'random']
         self.weighting_functions = ['linear', 'log', 'quadratic']
