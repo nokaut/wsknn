@@ -1,6 +1,7 @@
 Version 0.1.2:
 
 - Load JSON Lines and gzipped JSON Lines,
+- Force model to choose sessions with a specific events,
 -
 
 
