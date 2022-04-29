@@ -62,7 +62,6 @@ categorize products and train a different model for each category,
 
 ```python
 
-import numpy as np
 from wsknn import fit
 from wsknn.utils import load_pickled
 
@@ -110,7 +109,7 @@ It works with Python versions greater or equal to 3.6.
 
 | Package Version | Python versions | Other packages |
 |-----------------|-----------------|----------------|
-| 0.1 | 3.6+ | numpy, yaml |
+| 0.1             | 3.6+            | numpy, yaml    |
 
 
 ## Developers

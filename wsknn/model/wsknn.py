@@ -23,8 +23,7 @@ class WSKNN:
                         How to filter the initial sample of sessions. Available strategies are:
                         - 'common_items': sample sessions with the same items as the input session,
                         - 'recent': sample the most actual sessions,
-                        - 'random': get a random sample of sessions,
-                        - 'with_event': get a sample with a specific event types,
+                        - 'random': get a random sample of sessions.
 
     sample_size : int, default=1000
                   How many sessions from the model are sampled to make a recommendation.
@@ -36,9 +35,9 @@ class WSKNN:
                        How we calculate an item rank (based on its position in a session sequence). Available options
                        are: 'inv', 'linear', 'log', 'quadratic'.
 
-    sampling_event : int or str, default = None
-                     If sampling strategy is 'with_event' then this paramater must be set to the name
-                     of an event passed with dataset.
+    required_sampling_event : int or str, default = None
+                              Set this paramater to the event name if sessions with it must be included in
+                              the neighbors selection. For example, this event may be a "purchase".
 
     Attributes
     ----------
@@ -84,6 +83,9 @@ class WSKNN:
     ranking_strategy : str
                        See ranking_strategy parameter.
 
+    required_sampling_event : Union[int, str], default = None
+                              See required_sampling_event parameter.
+
     Methods
     -------
     fit()
@@ -107,9 +109,9 @@ class WSKNN:
                  sample_size: int = 1000,
                  weighting_func: str = 'linear',
                  ranking_strategy: str = 'linear',
-                 sampling_event: Union[int, str] = None):
+                 required_sampling_event: Union[int, str] = None):
 
-        self.sampling_strategies = ['common_items', 'recent', 'random', 'with_event']
+        self.sampling_strategies = ['common_items', 'recent', 'random']
         self.weighting_functions = ['linear', 'log', 'quadratic']
         self.ranking_strategies = ['linear', 'log', 'quadratic', 'inv']
 
@@ -120,8 +122,8 @@ class WSKNN:
         self.number_of_closest_neighbors = number_of_neighbors
         self.possible_neighbors_sample_size = sample_size
 
+        self.required_sampling_event = required_sampling_event
         self.sampling_strategy = self._is_sampling_strategy_valid(sampling_strategy)
-        self.sampling_event = self._is_with_event_strategy_valid(sampling_event)
         self.weighting_function = self._is_weighting_function_valid(weighting_func)
         self.ranking_strategy = self._is_ranking_strategy_valid(ranking_strategy)
 
@@ -321,30 +323,6 @@ class WSKNN:
             if not check_numeric_type_instance(tstamp):
                 raise InvalidTimestampError(tstamp)
 
-    def _is_with_event_strategy_valid(self, event_type):
-        """
-        Checks if event has been passed if sampling_strategy is set to "with_event".
-
-        Parameters
-        ----------
-        event_type : str | int | None
-
-        Returns
-        -------
-        event_type : str | int
-
-        Raises
-        ------
-        KeyError
-            Event is None.
-        """
-
-        if event_type is None:
-            msg = 'When you set sampling strategy to "with_event" you must pass event id / name in sampling_event' \
-                  ' parameter. Make sure that this event exists in your data.'
-            raise KeyError(msg)
-        return event_type
-
     def _is_sampling_strategy_valid(self, sampling_strategy):
         """Check sampling strategy.
 
@@ -515,7 +493,7 @@ class WSKNN:
 
         Parameters
         ----------
-        session : list
+        session : List
                   Session is a sequence of products, events (product view / click) and timestamps of those events:
 
             session = [
@@ -526,7 +504,7 @@ class WSKNN:
 
         Returns
         -------
-        : list
+        : List
           n closest sessions, where n - number of closest sessions or length of ranked session if smaller than
           number of closest sessions.
         """
@@ -538,12 +516,12 @@ class WSKNN:
         idx = min(self.number_of_closest_neighbors, length)
         return rank[0:idx]
 
-    def _possible_neighbors(self, session: list) -> list:
+    def _possible_neighbors(self, session: List) -> List:
         """Get set of possible neighbors based on the item similarity.
 
         Parameters
         ----------
-        session : list
+        session : List
                   Session is a sequence of products, events (product view / click) and timestamps of those events:
 
             session = [
@@ -554,7 +532,7 @@ class WSKNN:
 
         Returns
         -------
-        : list
+        : List
           Sample of possible neighbors. Sampling controlled by the sampling_strategy attribute.
         """
         session_items = set(session[0])
@@ -563,23 +541,28 @@ class WSKNN:
             if s_item in self.item_session_map:
                 s_item_sessions = set(self.item_session_map[s_item][0])
                 common_sessions |= s_item_sessions
+
+        # Filter session by event if needed
+        if self.required_sampling_event is not None:
+            common_sessions = self._get_sessions_with_event(common_sessions)
+
         sample_subset = self._sample_possible_neighbors(common_sessions, session)
         return sample_subset
 
-    def _rank_items(self, closest_neighbors: list, session: list) -> list:
+    def _rank_items(self, closest_neighbors: List, session: List) -> List:
         """Function ranks given items to return the best recommendation results.
 
         Parameters
         ----------
-        closest_neighbors : list
+        closest_neighbors : List
                             The closest sessions ranked by similarity to a given session.
 
-        session : list
+        session : List
                   User session.
 
         Returns
         -------
-        : list
+        : List
           List of rated items in descending order.
         """
         session_items = session[0]
@@ -651,6 +634,28 @@ class WSKNN:
 
         return neighbours
 
+    def _get_sessions_with_event(self, raw_sessions: Set) -> Set:
+        """Method parses available input sessions based on the occurence of a specific event and returns list of
+        unique sessions with this event.
+
+        Parameters
+        ----------
+        raw_sessions : Set
+
+        Returns
+        -------
+        unique_session_with_event : Set
+
+        """
+        new_sessions = set()
+
+        for sess in raw_sessions:
+            session_sample = self.session_item_map[sess]
+            if self.required_sampling_event in session_sample[2]:
+                new_sessions.add(sess)
+
+        return new_sessions
+
     def _sampling_common(self, sessions: Set, session: List) -> List:
         """Function gets the most similar sessions based on the number of common elements between sessions.
 
@@ -659,12 +664,12 @@ class WSKNN:
         sessions : set
                    Unique sessions.
 
-        session : list
+        session : List
                   The customer session.
 
         Returns
         -------
-        : list
+        : List
           List of n possible sessions with the same items as a customer session.
         """
         rank = [(ses, len(set(self.session_item_map[ses][0]) & set(session[0]))) for ses in sessions]
@@ -681,15 +686,14 @@ class WSKNN:
         all_sessions : set
                        All sessions to sample possible neighbors.
 
-        session : list
+        session : List
                   Customer session.
 
         Returns
         -------
-        : list
+        : List
           subset of possible neighbors
         """
-        # TODO: Sample based on the click / view
 
         if self.sampling_strategy == 'random':
             return self._sampling_random(all_sessions)
@@ -712,11 +716,14 @@ class WSKNN:
 
         Returns
         -------
-        : list
+        : List
           Random sample of self.possible_neighbors_sample_size sessions.
         """
+
         sample_size = min(self.possible_neighbors_sample_size, len(sessions))
-        return random.sample(sessions, sample_size)
+        sample = random.sample(sessions, sample_size)
+
+        return sample
 
     def _sampling_recent(self, sessions: Set) -> List:
         """Get most recent sessions from the possible neighbors.
@@ -728,7 +735,7 @@ class WSKNN:
 
         Returns
         -------
-        : list
+        : List
           Most recent sessions. Sample of size possible_neighbors_sample_size.
         """
         rank = [(sid, self.session_item_map[sid][1]) for sid in sessions]
