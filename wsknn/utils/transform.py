@@ -66,3 +66,20 @@ def load_gzipped_jsonl(filename: str, encoding: str = 'UTF-8') -> dict:
             datadict.update(json.loads(fline))
 
     return datadict
+
+
+def load_gzipped_pickle(filename: str) -> dict:
+    """
+    The function loads gzipped and pickled items / sessions object.
+
+    Parameters
+    ----------
+    filename : str
+
+    Returns
+    -------
+    pickled_object : dict
+    """
+    with gzip.open(filename, 'rb') as fstream:
+        pickled_object = pickle.load(fstream)
+    return pickled_object
