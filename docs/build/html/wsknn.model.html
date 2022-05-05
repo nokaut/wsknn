@@ -2,7 +2,8 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
       <title>wsknn.model package</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -20,7 +21,9 @@
       <script src="_static/theme.js" defer></script>
     
   <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" /> 
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="wsknn.utils package" href="wsknn.utils.html" />
+  <link rel="prev" title="wsknn.evaluate package" href="wsknn.evaluate.html" /> 
   </head>
 
   <body>
@@ -67,9 +70,18 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="index.html#welcome-to-wsknn-s-documentation">Contents:</a></span>
+        <span class="caption-text"><a href="modules.html#modules">modules</a></span>
       </p>
       <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="wsknn.html" class="reference internal ">wsknn package</a>
+            
+
+            
+          </li>
+
         
       </ul>
     </div>
@@ -83,27 +95,39 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
+      <li><a href="modules.html">Modules</a> &raquo;</li>
+    
+      <li><a href="wsknn.html">wsknn package</a> &raquo;</li>
+    
     <li>wsknn.model package</li>
   </ul>
   
 
   <ul class="page-nav">
+  <li class="prev">
+    <a href="wsknn.evaluate.html"
+       title="previous chapter">← wsknn.evaluate package</a>
+  </li>
+  <li class="next">
+    <a href="wsknn.utils.html"
+       title="next chapter">wsknn.utils package →</a>
+  </li>
 </ul>
   
 </div>
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="wsknn-model-package">
+  <section id="wsknn-model-package">
 <h1>wsknn.model package<a class="headerlink" href="#wsknn-model-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-wsknn.model.wsknn">
+</section>
+<section id="module-wsknn.model.wsknn">
 <span id="wsknn-model-wsknn-module"></span><h2>wsknn.model.wsknn module<a class="headerlink" href="#module-wsknn.model.wsknn" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wsknn.model.wsknn.</span></span><span class="sig-name descname"><span class="pre">WSKNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wsknn.model.wsknn.</span></span><span class="sig-name descname"><span class="pre">WSKNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_sampling_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The class represents the Weighted Session-Based k-nn model.</p>
 <dl class="field-list simple">
@@ -119,6 +143,8 @@
 <li><p><strong>weighting_func</strong> (<em>str</em><em>, </em><em>default='linear'</em>) – The similarity measurement between sessions. Available options: ‘linear’, ‘log’ and ‘quadratic’.</p></li>
 <li><p><strong>ranking_strategy</strong> (<em>str</em><em>, </em><em>default='linear'</em>) – How we calculate an item rank (based on its position in a session sequence). Available options
 are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p></li>
+<li><p><strong>required_sampling_event</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>default = None</em>) – Set this paramater to the event name if sessions with it must be included in
+the neighbors selection. For example, this event may be a “purchase”.</p></li>
 </ul>
 </dd>
 </dl>
@@ -128,7 +154,7 @@ are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p></li>
 <dd><p>List with weighting functions: [‘linear’, ‘log’, ‘quadratic’].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p>List</p>
 </dd>
 </dl>
 </dd></dl>
@@ -139,7 +165,7 @@ are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p></li>
 <dd><p>List with ranking strategies: [‘linear’, ‘log’, ‘quadratic’, ‘inv’].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p>List</p>
 </dd>
 </dl>
 </dd></dl>
@@ -161,7 +187,7 @@ are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p></li>
 Dict populated with fit() method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -182,7 +208,7 @@ Dict populated with fit() method.</p>
 Dict populated with fit() method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -252,6 +278,17 @@ Dict populated with fit() method.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.required_sampling_event">
+<span class="sig-name descname"><span class="pre">required_sampling_event</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.required_sampling_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>See required_sampling_event parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Union[int, str], default = None</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.fit" title="Permalink to this definition">¶</a></dt>
@@ -267,16 +304,16 @@ Dict populated with fit() method.</p>
 :raises TypeError : wrong type of nested structures within session-items or item-sessions maps.:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets input session-items and item-sessions maps.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>dict</em>) – <dl>
+<li><p><strong>sessions</strong> (<em>Dict</em>) – <dl>
 <dt>sessions = {</dt><dd><dl class="simple">
 <dt>session_id: (</dt><dd><p>[ sequence_of_items ],
 [ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+[ [OPTIONAL] sequence_of_event_types ]</p>
 </dd>
 </dl>
 <p>)</p>
@@ -284,7 +321,7 @@ Dict populated with fit() method.</p>
 </dl>
 <p>}</p>
 </p></li>
-<li><p><strong>items</strong> (<em>dict</em>) – <dl>
+<li><p><strong>items</strong> (<em>Dict</em>) – <dl>
 <dt>items = {</dt><dd><dl class="simple">
 <dt>item_id: (</dt><dd><p>[ sequence_of_sessions ],
 [ sequence_of_the_first_session_timestamps ]</p>
@@ -302,12 +339,12 @@ Dict populated with fit() method.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_closest_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_neighbors_sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_closest_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_neighbors_sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method predicts n next recommendations from a given session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>dict</em>) – User ID (key) and sequence of viewed products and their timestamps (values).</p></li>
+<li><p><strong>sessions</strong> (<em>Dict</em>) – User ID (key) and sequence of viewed products and their timestamps (values).</p></li>
 <li><p><strong>number_of_recommendations</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Resets the number of recommendations.</p></li>
 <li><p><strong>number_of_closest_neighbors</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Resets the number of closest neighbors.</p></li>
 <li><p><strong>session_sampling_strategy</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – <dl class="simple">
@@ -334,23 +371,31 @@ during the initilization.</p></li>
 - {user ID: [[item, rank] …]}</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-wsknn.model">
+</section>
+<section id="module-wsknn.model">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.model" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="wsknn.evaluate.html"
+       title="previous chapter">← wsknn.evaluate package</a>
+  </li>
+  <li class="next">
+    <a href="wsknn.utils.html"
+       title="next chapter">wsknn.utils package →</a>
+  </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2022, Szymon Molinski.
     <br>

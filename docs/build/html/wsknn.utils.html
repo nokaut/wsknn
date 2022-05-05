@@ -2,7 +2,8 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
       <title>wsknn.utils package</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -20,7 +21,9 @@
       <script src="_static/theme.js" defer></script>
     
   <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" /> 
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="wsknn.weighting package" href="wsknn.weighting.html" />
+  <link rel="prev" title="wsknn.model package" href="wsknn.model.html" /> 
   </head>
 
   <body>
@@ -67,9 +70,18 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="index.html#welcome-to-wsknn-s-documentation">Contents:</a></span>
+        <span class="caption-text"><a href="modules.html#modules">modules</a></span>
       </p>
       <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="wsknn.html" class="reference internal ">wsknn package</a>
+            
+
+            
+          </li>
+
         
       </ul>
     </div>
@@ -83,23 +95,35 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
+      <li><a href="modules.html">Modules</a> &raquo;</li>
+    
+      <li><a href="wsknn.html">wsknn package</a> &raquo;</li>
+    
     <li>wsknn.utils package</li>
   </ul>
   
 
   <ul class="page-nav">
+  <li class="prev">
+    <a href="wsknn.model.html"
+       title="previous chapter">← wsknn.model package</a>
+  </li>
+  <li class="next">
+    <a href="wsknn.weighting.html"
+       title="next chapter">wsknn.weighting package →</a>
+  </li>
 </ul>
   
 </div>
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="wsknn-utils-package">
+  <section id="wsknn-utils-package">
 <h1>wsknn.utils package<a class="headerlink" href="#wsknn-utils-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-wsknn.utils.calc">
+</section>
+<section id="module-wsknn.utils.calc">
 <span id="wsknn-utils-calc-module"></span><h2>wsknn.utils.calc module<a class="headerlink" href="#module-wsknn.utils.calc" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.utils.calc.is_there_any_common_element">
@@ -145,8 +169,8 @@
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-wsknn.utils.errors">
+</section>
+<section id="module-wsknn.utils.errors">
 <span id="wsknn-utils-errors-module"></span><h2>wsknn.utils.errors module<a class="headerlink" href="#module-wsknn.utils.errors" title="Permalink to this headline">¶</a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="wsknn.utils.errors.InvalidDimensionsError">
@@ -228,8 +252,8 @@ number of top n recommendations.</p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-wsknn.utils.meta">
+</section>
+<section id="module-wsknn.utils.meta">
 <span id="wsknn-utils-meta-module"></span><h2>wsknn.utils.meta module<a class="headerlink" href="#module-wsknn.utils.meta" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.utils.meta.parse_settings">
@@ -248,9 +272,46 @@ number of top n recommendations.</p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-wsknn.utils.transform">
+</section>
+<section id="module-wsknn.utils.transform">
 <span id="wsknn-utils-transform-module"></span><h2>wsknn.utils.transform module<a class="headerlink" href="#module-wsknn.utils.transform" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_gzipped_jsonl">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.transform.</span></span><span class="sig-name descname"><span class="pre">load_gzipped_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UTF-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#wsknn.utils.transform.load_gzipped_jsonl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function loads data stored in gzipped JSON Lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Path to the file.</p></li>
+<li><p><strong>encoding</strong> (<em>str</em><em>, </em><em>default = 'utf-8'</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Python dictionary with unique records.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_jsonl">
+<span class="sig-prename descclassname"><span class="pre">wsknn.utils.transform.</span></span><span class="sig-name descname"><span class="pre">load_jsonl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#wsknn.utils.transform.load_jsonl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function loads data stored in JSON Lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Python dictionary with unique records.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.utils.transform.load_pickled">
 <span class="sig-prename descclassname"><span class="pre">wsknn.utils.transform.</span></span><span class="sig-name descname"><span class="pre">load_pickled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#wsknn.utils.transform.load_pickled" title="Permalink to this definition">¶</a></dt>
@@ -268,16 +329,24 @@ number of top n recommendations.</p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-wsknn.utils">
+</section>
+<section id="module-wsknn.utils">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.utils" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="wsknn.model.html"
+       title="previous chapter">← wsknn.model package</a>
+  </li>
+  <li class="next">
+    <a href="wsknn.weighting.html"
+       title="next chapter">wsknn.weighting package →</a>
+  </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2022, Szymon Molinski.
     <br>
