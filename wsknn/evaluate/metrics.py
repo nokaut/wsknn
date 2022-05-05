@@ -6,7 +6,13 @@ from wsknn.utils.errors import TooShortSessionException
 # TODO: Check precision recall, test precision recall
 
 
-def score_model(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True) -> Dict:
+def score_model(sessions: dict,
+                trained_model: WSKNN,
+                k=0,
+                skip_short_sessions=True,
+                calc_mrr: bool = True,
+                calc_precision: bool = True,
+                calc_recall: bool = True) -> Dict:
     """
     Function get Precision@k, Recall@k and MRR@k.
 
@@ -30,6 +36,15 @@ def score_model(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=T
     skip_short_sessions : bool, default=True
                           Should the algorithm skip short sessions when calculating MRR or should raise an error?
 
+    calc_mrr : bool, default = True
+               Should MRR be calculated?
+
+    calc_precision : bool, default = True
+                     Should Precision be calculated?
+
+    calc_recall : bool, default = True
+                  Should Recall be calculated?
+
     Returns
     -------
     : Dict
@@ -44,19 +59,25 @@ def score_model(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=T
     for session_k, session in sessions.items():
         eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
 
-        preds = predictions[session_k]
+        for i in range(len(eval_items)):
 
-        # Get rank
-        partial_rank = __mrr(preds, eval_items)
-        mrrs.append(partial_rank)
+            preds = predictions[i][session_k]
+            eitmes = eval_items[i]
 
-        # Get precisions
-        partial_precision = __precision(preds, eval_items, k)
-        precisions.append(partial_precision)
+            # Get rank
+            if calc_mrr:
+                partial_rank = __mrr(preds, eitmes)
+                mrrs.append(partial_rank)
 
-        # Get recalls
-        partial_recall = __recall(preds, eval_items)
-        recalls.append(partial_recall)
+            # Get precisions
+            if calc_precision:
+                partial_precision = __precision(preds, eitmes, k)
+                precisions.append(partial_precision)
+
+            # Get recalls
+            if calc_recall:
+                partial_recall = __recall(preds, eitmes)
+                recalls.append(partial_recall)
 
     mrr = float(np.mean(mrrs))
     prec = float(np.mean(precisions))
@@ -67,6 +88,7 @@ def score_model(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=T
         'Precision': prec,
         'Recall': rec
     }
+
     return scores
 
 
@@ -109,9 +131,10 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
         eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
 
         # Get rank
-        partial_rank = __mrr(predictions[session_k], eval_items)
+        for i in range(len(eval_items)):
+            partial_rank = __mrr(predictions[i][session_k], eval_items[i])
 
-        mrrs.append(partial_rank)
+            mrrs.append(partial_rank)
 
     mrr = np.mean(mrrs)
     return float(mrr)
@@ -160,9 +183,10 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
 
         eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
 
-        # Get precision
-        partial_precision = __precision(predictions[session_k], eval_items, k)
-        precisions.append(partial_precision)
+        for i in range(len(eval_items)):
+            # Get precision
+            partial_precision = __precision(predictions[i][session_k], eval_items[i], k)
+            precisions.append(partial_precision)
 
     precision = np.mean(precisions)
     return float(precision)
@@ -210,10 +234,11 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
 
         eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
 
-        # Get recall
-        partial_recall = __recall(predictions[session_k], eval_items)
+        for i in range(len(eval_items)):
+            # Get recall
+            partial_recall = __recall(predictions[i][session_k], eval_items[i])
 
-        recalls.append(partial_recall)
+            recalls.append(partial_recall)
 
     recall = np.mean(recalls)
     return float(recall)
@@ -282,11 +307,11 @@ def _prepare_metrics_data(session, session_key, k, trained_model, skip_short_ses
 
     _should_raise_short_session_exception(s_length, k, skip_short_sessions)
 
-    relevant_items, recommends = _get_test_eval_preds(session, session_key, k, trained_model)
+    relevant_items, recommends = _get_test_eval_preds(session, session_key, trained_model)
     return relevant_items, recommends
 
 
-def _get_test_eval_preds(session, session_key: str, k: int, trained_model: WSKNN):
+def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN):
     """
     Function parses session into test session, evaluation items (relevant items), and recommendations.
 
@@ -298,9 +323,6 @@ def _get_test_eval_preds(session, session_key: str, k: int, trained_model: WSKNN
     session_key : str
                   Unique key of a session (for example could be a user ID)
 
-    k : int
-        Number of recommendations.
-
     trained_model : WSKNN
                     Model to make predictions.
 
@@ -309,12 +331,22 @@ def _get_test_eval_preds(session, session_key: str, k: int, trained_model: WSKNN
     : Tuple[List, List]
         (relevant items, recommended items)
     """
-    test_session = [x[:-k] for x in session]
-    relevant_items = session[0][-k:]
-    recommended_items = trained_model.predict(
-        {session_key: test_session}
-    )
-    return relevant_items, recommended_items
+    recommended_items_list = list()
+    relevants_items_list = list()
+
+    session_range = len(session[0])
+
+    for i in range(session_range):
+        test_session = [x[:i] for x in session]
+        relevant_items = session[0][i:]
+        recommended_items = trained_model.predict(
+            {session_key: test_session}
+        )
+
+        recommended_items_list.append(recommended_items)
+        relevants_items_list.append(relevant_items)
+
+    return relevants_items_list, recommended_items_list
 
 
 def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> Tuple[int, WSKNN]:
