@@ -4,3 +4,4 @@ matplotlib~=3.5.1
 pytest~=7.0.1
 setuptools~=57.0.0
 sphinx
+sphinx_press_theme

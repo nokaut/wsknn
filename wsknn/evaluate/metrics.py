@@ -3,7 +3,6 @@ from typing import Tuple, Dict
 import numpy as np
 from wsknn.model.wsknn import WSKNN
 from wsknn.utils.errors import TooShortSessionException
-# TODO: Check precision recall, test precision recall
 
 
 def score_model(sessions: dict,

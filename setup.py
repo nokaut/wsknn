@@ -1,4 +1,5 @@
 import setuptools
+from wsknn import __version__ as package_version
 
 
 with open("README.md", "r") as fh:
@@ -6,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="wsknn",
-    version="0.1.1",
+    version=package_version,
     author="Szymon Moliński",
     author_email="s.molinski@digitree.pl",
     description="VSKNN model for recommendations",

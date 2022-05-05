@@ -2,7 +2,8 @@ Version 0.1.2:
 
 - Load JSON Lines and gzipped JSON Lines,
 - Force model to choose sessions with a specific event,
-- Prec@k and Rec@k metrics added to the evaluation metrics.
+- Prec@k and Rec@k metrics added to the evaluation metrics,
+- Test MRR, Precison and Recall.
 
 
 Version 0.1.1:
