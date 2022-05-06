@@ -159,20 +159,23 @@ class WSKNN:
         self.session_item_map = sessions
         self.item_session_map = items
 
-    def predict(self, sessions: Dict,
+    def predict(self, sessions: Union[Dict, List],
                 number_of_recommendations=None,
                 number_of_closest_neighbors=None,
                 session_sampling_strategy=None,
                 possible_neighbors_sample_size=None,
                 weighting_strategy=None,
-                rank_strategy=None) -> Dict:
+                rank_strategy=None,
+                required_sampling_event=None) -> Dict:
         """
         The method predicts n next recommendations from a given session.
 
         Parameters
         ----------
-        sessions : Dict
-                   User ID (key) and sequence of viewed products and their timestamps (values).
+        sessions : Union[Dict, List]
+                   Sequence of items for recommendation. As a dict, it is a user id (key) and products and
+                   their timestamps (values). As a List it is a nested List of user actions and their timestamps,
+                   and additional properties.
 
         number_of_recommendations : int or None, default=None
                                     Resets the number of recommendations.
@@ -200,11 +203,16 @@ class WSKNN:
                         are: 'inv', 'linear', 'log', 'quadratic'. If not set then model uses rank strategy given
                         during the initilization.
 
+        required_sampling_event : int or str, default = None
+                                  Set this paramater to the event name if sessions with it must be included in
+                                  the neighbors selection. For example, this event may be a "purchase".
+
         Returns
         -------
         : Dict
           ranked items in descending order
-          - {user ID: [[item, rank] ...]}
+          - {user ID: [[item, rank] ...]} (input as a Dict)
+          - {int: [[item, rank] ...]} (input as a List)
         """
 
         # Set class consts
@@ -213,16 +221,28 @@ class WSKNN:
                                  session_sampling_strategy,
                                  possible_neighbors_sample_size,
                                  weighting_strategy,
-                                 rank_strategy)
+                                 rank_strategy,
+                                 required_sampling_event)
 
         output_ranks = dict()
-        for _key, session in sessions.items():
-            neighbors = self._nearest_neighbors(session)
-            ranked_items = self._rank_items(neighbors, session)
-            ranked_items.sort(key=lambda x: x[1], reverse=True)
-            recommendations = ranked_items[:self.n_of_recommendations]
-            output_ranks[_key] = recommendations
+        if isinstance(sessions, dict):
+            for _key, session in sessions.items():
+                recommendations = self._part_predict(session)
+                output_ranks[_key] = recommendations
+        elif isinstance(sessions, list):
+            for idx, session in enumerate(sessions):
+                recommendations = self._part_predict(session)
+                output_ranks[idx] = recommendations
+        else:
+            raise TypeError('Not supported input type for prediction')
         return output_ranks
+
+    def _part_predict(self, session):
+        neighbors = self._nearest_neighbors(session)
+        ranked_items = self._rank_items(neighbors, session)
+        ranked_items.sort(key=lambda x: x[1], reverse=True)
+        recommendations = ranked_items[:self.n_of_recommendations]
+        return recommendations
 
     # Settings
     @staticmethod
@@ -396,7 +416,8 @@ class WSKNN:
                             session_sampling_strategy,
                             possible_neighbors_sample_size,
                             weighting_strategy,
-                            rank_strategy):
+                            rank_strategy,
+                            required_sampling_event):
         """Methods resets and maps new model parameters.
 
         Parameters
@@ -412,6 +433,8 @@ class WSKNN:
         weighting_strategy : str
 
         rank_strategy : str
+
+        required_sampling_event : str or int
 
         Raises
         -------
@@ -466,6 +489,12 @@ class WSKNN:
             else:
                 raise TypeError(f'Defined ranking function should be a string. '
                                 f'Got {type(rank_strategy)} instead')
+
+        if required_sampling_event is not None:
+            if isinstance(required_sampling_event, str) or isinstance(required_sampling_event, int):
+                self.required_sampling_event = required_sampling_event
+            else:
+                raise TypeError('Defined required sampling event can be int or str, other datatypes are not supported')
 
     def _set_n_of_recs(self, n):
         self.n_of_recommendations = n

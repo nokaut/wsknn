@@ -1,4 +1,4 @@
-from typing import Tuple, Dict
+from typing import Dict
 
 import numpy as np
 from wsknn.model.wsknn import WSKNN
@@ -11,7 +11,8 @@ def score_model(sessions: dict,
                 skip_short_sessions=True,
                 calc_mrr: bool = True,
                 calc_precision: bool = True,
-                calc_recall: bool = True) -> Dict:
+                calc_recall: bool = True,
+                sliding_window: bool = False) -> Dict:
     """
     Function get Precision@k, Recall@k and MRR@k.
 
@@ -44,6 +45,10 @@ def score_model(sessions: dict,
     calc_recall : bool, default = True
                   Should Recall be calculated?
 
+    sliding_window : bool, default = False
+                     When calculating metrics slide through a single session up to the point when it is not possible
+                     to have the same number of evaluation products as the number of recommendations.
+
     Returns
     -------
     : Dict
@@ -53,10 +58,23 @@ def score_model(sessions: dict,
     precisions = list()
     recalls = list()
 
-    k, trained_model = _set_number_of_recommendations(k, trained_model)
+    trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
-        eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
+
+        s_length = len(session[0])
+
+        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
+
+        eval_items, predictions = list(), list()
+
+        if skip_short_sessions:
+            if s_length < k + 1:
+                pass
+            else:
+                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        else:
+            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
         for i in range(len(eval_items)):
 
@@ -91,7 +109,8 @@ def score_model(sessions: dict,
     return scores
 
 
-def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True) -> float:
+def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True,
+                             sliding_window=False) -> float:
     """
     The function calculates the mean reciprocal rank of a top k recommendations.
     Given session must be longer than k events.
@@ -116,6 +135,10 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
     skip_short_sessions : bool, default=True
                           Should the algorithm skip short sessions when calculating MRR or should raise an error?
 
+    sliding_window : bool, default = False
+                     When calculating metrics slide through a single session up to the point when it is not possible
+                     to have the same number of evaluation products as the number of recommendations.
+
     Returns
     -------
     : float
@@ -123,11 +146,23 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
     """
     mrrs = list()
 
-    k, trained_model = _set_number_of_recommendations(k, trained_model)
+    trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
-        eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
+        s_length = len(session[0])
+
+        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
+
+        eval_items, predictions = list(), list()
+
+        if skip_short_sessions:
+            if s_length < k + 1:
+                pass
+            else:
+                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        else:
+            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
         # Get rank
         for i in range(len(eval_items)):
@@ -139,7 +174,7 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
     return float(mrr)
 
 
-def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True) -> float:
+def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True, sliding_window=False) -> float:
     """
     The function calculates the precision score of a top k recommendations.
     Given session must be longer than k events.
@@ -164,6 +199,10 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
     skip_short_sessions : bool, default=True
                           Should the algorithm skip short sessions when calculating Precision or should raise an error?
 
+    sliding_window : bool, default = False
+                     When calculating metrics slide through a single session up to the point when it is not possible
+                     to have the same number of evaluation products as the number of recommendations.
+
     Returns
     -------
     : float
@@ -176,11 +215,23 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
 
     precisions = list()
 
-    k, trained_model = _set_number_of_recommendations(k, trained_model)
+    trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
-        eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
+        s_length = len(session[0])
+
+        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
+
+        eval_items, predictions = list(), list()
+
+        if skip_short_sessions:
+            if s_length < k + 1:
+                pass
+            else:
+                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        else:
+            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
         for i in range(len(eval_items)):
             # Get precision
@@ -191,7 +242,7 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
     return float(precision)
 
 
-def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True) -> float:
+def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True, sliding_window=False) -> float:
     """
     The function calculates the recall score of a top k recommendations.
     Given session must be longer than k events.
@@ -216,6 +267,10 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
     skip_short_sessions : bool, default=True
                           Should the algorithm skip short sessions when calculating Recall or should raise an error?
 
+    sliding_window : bool, default = False
+                     When calculating metrics slide through a single session up to the point when it is not possible
+                     to have the same number of evaluation products as the number of recommendations.
+
     Returns
     -------
     : float
@@ -227,11 +282,23 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
     """
     recalls = list()
 
-    k, trained_model = _set_number_of_recommendations(k, trained_model)
+    trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
-        eval_items, predictions = _prepare_metrics_data(session, session_k, k, trained_model, skip_short_sessions)
+        s_length = len(session[0])
+
+        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
+
+        eval_items, predictions = list(), list()
+
+        if skip_short_sessions:
+            if s_length < k + 1:
+                pass
+            else:
+                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        else:
+            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
         for i in range(len(eval_items)):
             # Get recall
@@ -277,7 +344,7 @@ def __recall(preds, rel_items):
     return session_recall
 
 
-def _prepare_metrics_data(session, session_key, k, trained_model, skip_short_sessions):
+def _prepare_metrics_data(session, session_key, trained_model, sliding_window):
     """
     Function prepares metrics data.
 
@@ -289,28 +356,23 @@ def _prepare_metrics_data(session, session_key, k, trained_model, skip_short_ses
     session_key : str
                   Unique key of a session (for example could be a user ID)
 
-    k : int
-        Number of recommendations.
-
     trained_model : WSKNN
                     Model to make predictions.
 
-    skip_short_sessions : bool
+    sliding_window : bool, default = False
+                     When calculating metrics slide through a single session up to the point when it is not possible
+                     to have the same number of evaluation products as the number of recommendations.
 
     Returns
     -------
     : Tuple[List, List]
         (relevant items, recommended items)
     """
-    s_length = len(session[0])
-
-    _should_raise_short_session_exception(s_length, k, skip_short_sessions)
-
-    relevant_items, recommends = _get_test_eval_preds(session, session_key, trained_model)
+    relevant_items, recommends = _get_test_eval_preds(session, session_key, trained_model, sliding_window)
     return relevant_items, recommends
 
 
-def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN):
+def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, sliding_window: bool):
     """
     Function parses session into test session, evaluation items (relevant items), and recommendations.
 
@@ -325,6 +387,10 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN):
     trained_model : WSKNN
                     Model to make predictions.
 
+    sliding_window : bool, default = False
+                     When calculating metrics slide through a single session up to the point when it is not possible
+                     to have the same number of evaluation products as the number of recommendations.
+
     Returns
     -------
     : Tuple[List, List]
@@ -335,12 +401,21 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN):
 
     session_range = len(session[0])
 
-    for i in range(session_range):
-        test_session = [x[:i] for x in session]
-        relevant_items = session[0][i:]
-        recommended_items = trained_model.predict(
-            {session_key: test_session}
-        )
+    if sliding_window:
+        for i in range(session_range):
+            test_session = [x[:i] for x in session]
+            relevant_items = session[0][i:]
+            recommended_items = trained_model.predict(
+                {session_key: test_session}
+            )
+
+            recommended_items_list.append(recommended_items)
+            relevants_items_list.append(relevant_items)
+    else:
+        k = trained_model.n_of_recommendations
+        test_session = [x[:-k] for x in session]
+        recommended_items = trained_model.predict({session_key: test_session})
+        relevant_items = session[0][k:]
 
         recommended_items_list.append(recommended_items)
         relevants_items_list.append(relevant_items)
@@ -348,7 +423,7 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN):
     return relevants_items_list, recommended_items_list
 
 
-def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> Tuple[int, WSKNN]:
+def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> WSKNN:
     """
     Function checks if k parameter is different than no_of_neighbors and sets it to
 
@@ -373,7 +448,7 @@ def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> Tuple[int, WSK
     if k != wsknn_model.n_of_recommendations:
         wsknn_model.n_of_recommendations = k
 
-    return k, wsknn_model
+    return wsknn_model
 
 
 def _should_raise_short_session_exception(s_length: int, k: int, skip_short: bool) -> None:

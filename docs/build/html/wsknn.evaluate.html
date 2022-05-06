@@ -126,10 +126,10 @@
 <section id="module-wsknn.evaluate.metrics">
 <span id="wsknn-evaluate-metrics-module"></span><h2>wsknn.evaluate.metrics module<a class="headerlink" href="#module-wsknn.evaluate.metrics" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="wsknn.evaluate.metrics.mean_reciprocal_rank">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">mean_reciprocal_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.mean_reciprocal_rank" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the mean reciprocal rank of a top r_number of recommendations.
-Given session must be longer than r_number.</p>
+<dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_mean_reciprocal_rank">
+<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_mean_reciprocal_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_mean_reciprocal_rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function calculates the mean reciprocal rank of a top k recommendations.
+Given session must be longer than k events.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -142,10 +142,12 @@ Given session must be longer than r_number.</p>
 <p>]}</p>
 </p></li>
 <li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>r_number</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-when it is set, then r_number is equal to the number of recommendations from a trained model. If r_number
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
+when it is set, then k is equal to the number of recommendations from a trained model. If k
 is greater than the number of recommendations then the latter is adjusted to it.</p></li>
 <li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating MRR or should raise an error?</p></li>
+<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
+to have the same number of evaluation products as the number of recommendations.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -153,6 +155,115 @@ is greater than the number of recommendations then the latter is adjusted to it.
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_precision">
+<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_precision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function calculates the precision score of a top k recommendations.
+Given session must be longer than k events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sessions</strong> (<em>dict</em>) – <dl class="simple">
+<dt>{‘session_id’: [</dt><dd><p>[ sequence_of_items ],
+[ sequence_of_timestamps ],
+[ [OPTIONAL] sequence_of_event_type ]</p>
+</dd>
+</dl>
+<p>]}</p>
+</p></li>
+<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate Precision. Default is 0 and
+when it is set, then k is equal to the number of recommendations from a trained model. If k
+is greater than the number of recommendations then the latter is adjusted to it.</p></li>
+<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating Precision or should raise an error?</p></li>
+<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
+to have the same number of evaluation products as the number of recommendations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Precision: The average score of Precision per n sessions.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Precision is defined as (no of recommendations that are relevant) / (number of items recommended).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_recall">
+<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_recall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_recall" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function calculates the recall score of a top k recommendations.
+Given session must be longer than k events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sessions</strong> (<em>dict</em>) – <dl class="simple">
+<dt>{‘session_id’: [</dt><dd><p>[ sequence_of_items ],
+[ sequence_of_timestamps ],
+[ [OPTIONAL] sequence_of_event_type ]</p>
+</dd>
+</dl>
+<p>]}</p>
+</p></li>
+<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate Recall. Default is 0 and
+when it is set, then k is equal to the number of recommendations from a trained model. If k
+is greater than the number of recommendations then the latter is adjusted to it.</p></li>
+<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating Recall or should raise an error?</p></li>
+<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
+to have the same number of evaluation products as the number of recommendations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Precision: The average score of Recall per n sessions.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Recall is defined as (no of recommendations that are relevant) / (all relevant items for a user).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.evaluate.metrics.score_model">
+<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">score_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_mrr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_recall</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.score_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function get Precision&#64;k, Recall&#64;k and MRR&#64;k.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sessions</strong> (<em>dict</em>) – <dl class="simple">
+<dt>{‘session_id’: [</dt><dd><p>[ sequence_of_items ],
+[ sequence_of_timestamps ],
+[ [OPTIONAL] sequence_of_event_type ]</p>
+</dd>
+</dl>
+<p>]}</p>
+</p></li>
+<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
+when it is set, then k is equal to the number of recommendations from a trained model. If k
+is greater than the number of recommendations then the latter is adjusted to it.</p></li>
+<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating MRR or should raise an error?</p></li>
+<li><p><strong>calc_mrr</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should MRR be calculated?</p></li>
+<li><p><strong>calc_precision</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should Precision be calculated?</p></li>
+<li><p><strong>calc_recall</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should Recall be calculated?</p></li>
+<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
+to have the same number of evaluation products as the number of recommendations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Dict</em></p></li>
+<li><p><strong>{‘MRR’</strong> (<em>float, ‘Recall’: float, ‘Precision’: float}</em>)</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>

@@ -126,3 +126,41 @@ def test_vsknn_flow2():
     }
 
     assert predictions == expected_predictions
+
+
+def test_vsknn_flow3():
+    # Type of sessions is int, type of items is str
+    sessions = {
+        0: [
+            ['1', '2', '3', '4', '5'],
+            [1, 2, 3, 4, 5]
+        ],
+        1: [
+            ['2', '3', '4', '5'],
+            [10, 11, 12, 13]
+        ]
+    }
+
+    items = {
+        '1': [[0], [1]],
+        '2': [[0, 1], [2]],
+        '3': [[0, 1], [3]],
+        '4': [[0, 1], [4]],
+        '5': [[0, 1], [5]]
+    }
+
+    list_sessions = [
+        [['1'], [100]],
+        [['2', '3'], [200, 300]]
+        ]
+
+    model = WSKNN()
+    model.fit(sessions, items)
+
+    predictions = model.predict(list_sessions, number_of_recommendations=10, number_of_closest_neighbors=10)
+    expected_predictions = {
+        0: [('2', 2.0), ('3', 2.0), ('4', 2.0), ('5', 2.0)],
+        1: [('4', 2.5), ('5', 2.5), ('1', 1.25)]
+    }
+
+    assert predictions == expected_predictions

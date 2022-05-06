@@ -12,9 +12,9 @@ def predict(model: WSKNN,
     model : WSKNN
             Fitted VSKNN model.
 
-    sessions : dict
+    sessions : Union[Dict, List]
                Sequence of items for recommendation. As a dict, it is a user id (key) and products and their timestamps
-               (values).
+               (values). As a List it is a nested List of user actions and their timestamps, and additional properties.
 
     settings_dict : None or dict
                     If given them it overwrites initial settings of a model. Available fields are:
@@ -23,7 +23,8 @@ def predict(model: WSKNN,
                     - session_sampling_strategy: str, available options: 'random', 'recent', 'common_items'
                     - possible_neighbors_sample_size : int
                     - weighting_strategy: str, available options: 'linear', 'log', 'quadratic'
-                    - rank_strategy: str, available options: 'linear', 'inv', 'log', 'quadratic'
+                    - rank_strategy: str, available options: 'linear', 'inv', 'log', 'quadratic',
+                    - required_event: str, int or None
 
     Returns
     -------

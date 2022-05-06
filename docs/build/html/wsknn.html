@@ -212,15 +212,16 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Fitted VSKNN model.</p></li>
-<li><p><strong>sessions</strong> (<em>dict</em>) – Sequence of items for recommendation. As a dict, it is a user id (key) and products and their timestamps
-(values).</p></li>
+<li><p><strong>sessions</strong> (<em>Union</em><em>[</em><em>Dict</em><em>, </em><em>List</em><em>]</em>) – Sequence of items for recommendation. As a dict, it is a user id (key) and products and their timestamps
+(values). As a List it is a nested List of user actions and their timestamps, and additional properties.</p></li>
 <li><p><strong>settings_dict</strong> (<em>None</em><em> or </em><em>dict</em>) – If given them it overwrites initial settings of a model. Available fields are:
 - number_of_recommendations : int
 - number_of_closest_neighbors : int
 - session_sampling_strategy: str, available options: ‘random’, ‘recent’, ‘common_items’
 - possible_neighbors_sample_size : int
 - weighting_strategy: str, available options: ‘linear’, ‘log’, ‘quadratic’
-- rank_strategy: str, available options: ‘linear’, ‘inv’, ‘log’, ‘quadratic’</p></li>
+- rank_strategy: str, available options: ‘linear’, ‘inv’, ‘log’, ‘quadratic’,
+- required_event: str, int or None</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
