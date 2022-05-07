@@ -1,3 +1,8 @@
+## Version 0.1.3.post1:
+
+- Changed API with metrics.
+- Fit method takes hyperparameters.
+
 ## Version 0.1.3:
 
 - Make predictions from the List of user actions,

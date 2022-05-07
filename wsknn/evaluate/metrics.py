@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Tuple
 
 import numpy as np
 from wsknn.model.wsknn import WSKNN
@@ -58,7 +58,7 @@ def score_model(sessions: dict,
     precisions = list()
     recalls = list()
 
-    trained_model = _set_number_of_recommendations(k, trained_model)
+    k, trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
@@ -83,17 +83,17 @@ def score_model(sessions: dict,
 
             # Get rank
             if calc_mrr:
-                partial_rank = __mrr(preds, eitmes)
+                partial_rank = mrr_func(preds, eitmes)
                 mrrs.append(partial_rank)
 
             # Get precisions
             if calc_precision:
-                partial_precision = __precision(preds, eitmes, k)
+                partial_precision = precision_func(preds, eitmes, k)
                 precisions.append(partial_precision)
 
             # Get recalls
             if calc_recall:
-                partial_recall = __recall(preds, eitmes)
+                partial_recall = recall_func(preds, eitmes)
                 recalls.append(partial_recall)
 
     mrr = float(np.mean(mrrs))
@@ -146,7 +146,7 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
     """
     mrrs = list()
 
-    trained_model = _set_number_of_recommendations(k, trained_model)
+    k, trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
@@ -166,7 +166,7 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
 
         # Get rank
         for i in range(len(eval_items)):
-            partial_rank = __mrr(predictions[i][session_k], eval_items[i])
+            partial_rank = mrr_func(predictions[i][session_k], eval_items[i])
 
             mrrs.append(partial_rank)
 
@@ -215,7 +215,7 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
 
     precisions = list()
 
-    trained_model = _set_number_of_recommendations(k, trained_model)
+    k, trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
@@ -235,7 +235,7 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
 
         for i in range(len(eval_items)):
             # Get precision
-            partial_precision = __precision(predictions[i][session_k], eval_items[i], k)
+            partial_precision = precision_func(predictions[i][session_k], eval_items[i], k)
             precisions.append(partial_precision)
 
     precision = np.mean(precisions)
@@ -282,7 +282,7 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
     """
     recalls = list()
 
-    trained_model = _set_number_of_recommendations(k, trained_model)
+    k, trained_model = _set_number_of_recommendations(k, trained_model)
 
     for session_k, session in sessions.items():
 
@@ -302,7 +302,7 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
 
         for i in range(len(eval_items)):
             # Get recall
-            partial_recall = __recall(predictions[i][session_k], eval_items[i])
+            partial_recall = recall_func(predictions[i][session_k], eval_items[i])
 
             recalls.append(partial_recall)
 
@@ -310,17 +310,16 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
     return float(recall)
 
 
-def __mrr(preds, rel_items):
-    rank = 0
+def mrr_func(preds, rel_items):
     for idx, prod in enumerate(preds):
         ii = idx + 1
         if prod[0] in rel_items:
             rank = 1 / ii
             return rank
-    return rank
+    return 0
 
 
-def __precision(preds, rel_items, k):
+def precision_func(preds, rel_items, k):
     rank = 0
 
     for recommendation in preds:
@@ -332,7 +331,7 @@ def __precision(preds, rel_items, k):
     return session_precision
 
 
-def __recall(preds, rel_items):
+def recall_func(preds, rel_items):
     rank = 0
 
     for recommendation in preds:
@@ -423,7 +422,7 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, slidin
     return relevants_items_list, recommended_items_list
 
 
-def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> WSKNN:
+def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> Tuple[int, WSKNN]:
     """
     Function checks if k parameter is different than no_of_neighbors and sets it to
 
@@ -448,7 +447,7 @@ def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> WSKNN:
     if k != wsknn_model.n_of_recommendations:
         wsknn_model.n_of_recommendations = k
 
-    return wsknn_model
+    return k, wsknn_model
 
 
 def _should_raise_short_session_exception(s_length: int, k: int, skip_short: bool) -> None:
