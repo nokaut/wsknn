@@ -2,6 +2,8 @@
 
 - Changed API with metrics.
 - Fit method takes hyperparameters.
+- Changed API for precision calculation.
+- Session slicing bug corrected.
 
 ## Version 0.1.3:
 

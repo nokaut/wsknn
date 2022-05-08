@@ -1,17 +1,17 @@
-from typing import Dict
+from typing import Dict, Union
 
 from wsknn.model.wsknn import WSKNN
 
 
 def fit(sessions: Dict,
         items: Dict,
-        number_of_recommendations=None,
-        number_of_closest_neighbors=None,
-        session_sampling_strategy=None,
-        possible_neighbors_sample_size=None,
-        weighting_strategy=None,
-        rank_strategy=None,
-        required_sampling_event=None):
+        number_of_recommendations: int = 5,
+        number_of_neighbors: int = 10,
+        sampling_strategy: str = 'common_items',
+        sample_size: int = 1000,
+        weighting_func: str = 'linear',
+        ranking_strategy: str = 'linear',
+        required_sampling_event: Union[int, str] = None):
     """
 
     Sets input session-items and item-sessions maps.
@@ -35,31 +35,27 @@ def fit(sessions: Dict,
                 )
             }
 
-    number_of_recommendations : int or None, default=None
-                                Resets the number of recommendations.
+    number_of_recommendations : int, default=5
+                                The number of recommended items.
 
-    number_of_closest_neighbors : int or None, default=None
-                                  Resets the number of closest neighbors.
+    number_of_neighbors : int, default=10
+                          The number of closest sessions to choose the items from.
 
-    session_sampling_strategy : str or None, default=None
-                                How to filter the initial sample of sessions. Available strategies are:
-                                    - 'common_items': sample sessions with the same items as the input session,
-                                    - 'recent': sample the most actual sessions,
-                                    - 'random': get a random sample of sessions.
+    sampling_strategy : str, default='common_items'
+                        How to filter the initial sample of sessions. Available strategies are:
+                        - 'common_items': sample sessions with the same items as the input session,
+                        - 'recent': sample the most actual sessions,
+                        - 'random': get a random sample of sessions.
 
-    possible_neighbors_sample_size : int or None, default=None
-                                     How many sessions from the model are sampled to make a recommendation. If not
-                                     set then it is the number given during the class initilization.
+    sample_size : int, default=1000
+                  How many sessions from the model are sampled to make a recommendation.
 
-    weighting_strategy : str or None, default=None
-                         The similarity measurement between sessions. Available options: 'linear', 'log'
-                         and 'quadratic'. If not set then weighting strategy is taken from the parameter set
-                         during the class initialization.
+    weighting_func : str, default='linear'
+                     The similarity measurement between sessions. Available options: 'linear', 'log' and 'quadratic'.
 
-    rank_strategy : str or None, default=None
-                    How we calculate an item rank (based on its position in a session sequence). Available options
-                    are: 'inv', 'linear', 'log', 'quadratic'. If not set then model uses rank strategy given
-                    during the initilization.
+    ranking_strategy : str, default='linear'
+                       How we calculate an item rank (based on its position in a session sequence). Available options
+                       are: 'inv', 'linear', 'log', 'quadratic'.
 
     required_sampling_event : int or str, default = None
                               Set this paramater to the event name if sessions with it must be included in
@@ -98,11 +94,11 @@ def fit(sessions: Dict,
     # Initilize VSKNN model
 
     wsknn = WSKNN(number_of_recommendations,
-                  number_of_closest_neighbors,
-                  session_sampling_strategy,
-                  possible_neighbors_sample_size,
-                  weighting_strategy,
-                  rank_strategy,
+                  number_of_neighbors,
+                  sampling_strategy,
+                  sample_size,
+                  weighting_func,
+                  ranking_strategy,
                   required_sampling_event)
 
     wsknn.fit(sessions, items)

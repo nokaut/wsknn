@@ -2,6 +2,7 @@ from typing import Dict, Tuple
 
 import numpy as np
 from wsknn.model.wsknn import WSKNN
+from wsknn.evaluate.scores.scores import mrr_func, precision_func, recall_func
 from wsknn.utils.errors import TooShortSessionException
 
 
@@ -63,38 +64,34 @@ def score_model(sessions: dict,
     for session_k, session in sessions.items():
 
         s_length = len(session[0])
+        session_length_test = _should_skip_short_session(s_length, k, skip_short_sessions)
 
-        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
-
-        eval_items, predictions = list(), list()
-
-        if skip_short_sessions:
-            if s_length < k + 1:
-                pass
-            else:
-                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        if session_length_test:
+            # Session is too short to make any valuable scoring
+            pass
         else:
             eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
-        for i in range(len(eval_items)):
+            for i in range(len(eval_items)):
 
-            preds = predictions[i][session_k]
-            eitmes = eval_items[i]
+                recommendations = predictions[i][session_k]
+                recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
+                evaluation_items = eval_items[i]
 
-            # Get rank
-            if calc_mrr:
-                partial_rank = mrr_func(preds, eitmes)
-                mrrs.append(partial_rank)
+                # Get rank
+                if calc_mrr:
+                    partial_rank = mrr_func(recommendations, evaluation_items)
+                    mrrs.append(partial_rank)
 
-            # Get precisions
-            if calc_precision:
-                partial_precision = precision_func(preds, eitmes, k)
-                precisions.append(partial_precision)
+                # Get precisions
+                if calc_precision:
+                    partial_precision = precision_func(recommendations, evaluation_items)
+                    precisions.append(partial_precision)
 
-            # Get recalls
-            if calc_recall:
-                partial_recall = recall_func(preds, eitmes)
-                recalls.append(partial_recall)
+                # Get recalls
+                if calc_recall:
+                    partial_recall = recall_func(recommendations, evaluation_items)
+                    recalls.append(partial_recall)
 
     mrr = float(np.mean(mrrs))
     prec = float(np.mean(precisions))
@@ -109,7 +106,10 @@ def score_model(sessions: dict,
     return scores
 
 
-def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True,
+def get_mean_reciprocal_rank(sessions: dict,
+                             trained_model: WSKNN,
+                             k=0,
+                             skip_short_sessions=True,
                              sliding_window=False) -> float:
     """
     The function calculates the mean reciprocal rank of a top k recommendations.
@@ -151,30 +151,30 @@ def get_mean_reciprocal_rank(sessions: dict, trained_model: WSKNN, k=0, skip_sho
     for session_k, session in sessions.items():
 
         s_length = len(session[0])
-
-        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
-
-        eval_items, predictions = list(), list()
-
-        if skip_short_sessions:
-            if s_length < k + 1:
-                pass
-            else:
-                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        session_length_test = _should_skip_short_session(s_length, k, skip_short_sessions)
+        if session_length_test:
+            # Session is too short to make any valuable scoring
+            pass
         else:
             eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
-        # Get rank
-        for i in range(len(eval_items)):
-            partial_rank = mrr_func(predictions[i][session_k], eval_items[i])
-
-            mrrs.append(partial_rank)
+            # Get rank
+            for i in range(len(eval_items)):
+                recommendations = predictions[i][session_k]
+                recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
+                evaluation_items = eval_items[i]
+                partial_rank = mrr_func(recommendations, evaluation_items)
+                mrrs.append(partial_rank)
 
     mrr = np.mean(mrrs)
     return float(mrr)
 
 
-def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True, sliding_window=False) -> float:
+def get_precision(sessions: dict,
+                  trained_model: WSKNN,
+                  k=0,
+                  skip_short_sessions=True,
+                  sliding_window=False) -> float:
     """
     The function calculates the precision score of a top k recommendations.
     Given session must be longer than k events.
@@ -221,28 +221,31 @@ def get_precision(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions
 
         s_length = len(session[0])
 
-        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
+        session_length_test = _should_skip_short_session(s_length, k, skip_short_sessions)
 
-        eval_items, predictions = list(), list()
-
-        if skip_short_sessions:
-            if s_length < k + 1:
-                pass
-            else:
-                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        if session_length_test:
+            # Session is too short to make any valuable scoring
+            pass
         else:
             eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
-        for i in range(len(eval_items)):
-            # Get precision
-            partial_precision = precision_func(predictions[i][session_k], eval_items[i], k)
-            precisions.append(partial_precision)
+            # Get rank
+            for i in range(len(eval_items)):
+                recommendations = predictions[i][session_k]
+                recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
+                evaluation_items = eval_items[i]
+                partial_precision = precision_func(recommendations, evaluation_items)
+                precisions.append(partial_precision)
 
     precision = np.mean(precisions)
     return float(precision)
 
 
-def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=True, sliding_window=False) -> float:
+def get_recall(sessions: dict,
+               trained_model: WSKNN,
+               k=0,
+               skip_short_sessions=True,
+               sliding_window=False) -> float:
     """
     The function calculates the recall score of a top k recommendations.
     Given session must be longer than k events.
@@ -288,59 +291,25 @@ def get_recall(sessions: dict, trained_model: WSKNN, k=0, skip_short_sessions=Tr
 
         s_length = len(session[0])
 
-        _should_raise_short_session_exception(s_length, k, skip_short_sessions)
+        session_length_test = _should_skip_short_session(s_length, k, skip_short_sessions)
 
-        eval_items, predictions = list(), list()
-
-        if skip_short_sessions:
-            if s_length < k + 1:
-                pass
-            else:
-                eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+        if session_length_test:
+            # Session is too short to make any valuable scoring
+            pass
         else:
             eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
 
-        for i in range(len(eval_items)):
-            # Get recall
-            partial_recall = recall_func(predictions[i][session_k], eval_items[i])
+            # Get rank
+            for i in range(len(eval_items)):
+                recommendations = predictions[i][session_k]
+                recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
+                evaluation_items = eval_items[i]
+                partial_recall = recall_func(recommendations, evaluation_items)
 
-            recalls.append(partial_recall)
+                recalls.append(partial_recall)
 
     recall = np.mean(recalls)
     return float(recall)
-
-
-def mrr_func(preds, rel_items):
-    for idx, prod in enumerate(preds):
-        ii = idx + 1
-        if prod[0] in rel_items:
-            rank = 1 / ii
-            return rank
-    return 0
-
-
-def precision_func(preds, rel_items, k):
-    rank = 0
-
-    for recommendation in preds:
-        ritem = recommendation[0]
-        if ritem in rel_items:
-            rank = rank + 1
-
-    session_precision = rank / k
-    return session_precision
-
-
-def recall_func(preds, rel_items):
-    rank = 0
-
-    for recommendation in preds:
-        ritem = recommendation[0]
-        if ritem in rel_items:
-            rank = rank + 1
-
-    session_recall = rank / len(rel_items)
-    return session_recall
 
 
 def _prepare_metrics_data(session, session_key, trained_model, sliding_window):
@@ -396,12 +365,14 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, slidin
         (relevant items, recommended items)
     """
     recommended_items_list = list()
-    relevants_items_list = list()
+    relevant_items_list = list()
 
     session_range = len(session[0])
+    k = trained_model.n_of_recommendations
 
     if sliding_window:
-        for i in range(session_range):
+        srange = range(session_range-k, session_range)
+        for i in srange:
             test_session = [x[:i] for x in session]
             relevant_items = session[0][i:]
             recommended_items = trained_model.predict(
@@ -409,17 +380,17 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, slidin
             )
 
             recommended_items_list.append(recommended_items)
-            relevants_items_list.append(relevant_items)
+            relevant_items_list.append(relevant_items)
     else:
-        k = trained_model.n_of_recommendations
+
         test_session = [x[:-k] for x in session]
         recommended_items = trained_model.predict({session_key: test_session})
         relevant_items = session[0][k:]
 
         recommended_items_list.append(recommended_items)
-        relevants_items_list.append(relevant_items)
+        relevant_items_list.append(relevant_items)
 
-    return relevants_items_list, recommended_items_list
+    return relevant_items_list, recommended_items_list
 
 
 def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> Tuple[int, WSKNN]:
@@ -450,7 +421,7 @@ def _set_number_of_recommendations(k: int, wsknn_model: WSKNN) -> Tuple[int, WSK
     return k, wsknn_model
 
 
-def _should_raise_short_session_exception(s_length: int, k: int, skip_short: bool) -> None:
+def _should_skip_short_session(s_length: int, k: int, skip_short: bool) -> bool:
     """
     Function checks if session length is smaller than number of recommendations -> in this case it is not possible
     to clip session into a prediction and evaluation parts.
@@ -466,12 +437,19 @@ def _should_raise_short_session_exception(s_length: int, k: int, skip_short: boo
     skip_short : bool
                  If True then nothing happens even if session is short. Else error is raised.
 
+    Returns
+    -------
+    : bool
+        True, if session is too short and should be skipped.
+
     Raises
     ------
     TooShortSessionException : Raised if session length is < k and if skip_short parameter is set to False.
     """
     if s_length <= k:
         if skip_short:
-            pass
+            return True
         else:
             raise TooShortSessionException(s_length, k)
+    else:
+        return False
