@@ -3,15 +3,15 @@ input_sessions: ''
 model:
   number_of_recommendations: 10
   # Sessions parameters
-  number_of_closest_neighbors: 100
+  number_of_neighbors: 100
   #   - random:       select random subset of sessions,
   #   - recent:       select most recent sessions,
   #   - common_items: select sessions that contains any item from the recommended session.
-  session_sampling_strategy: "common_items"
-  possible_neighbors_sample_size: 1000
+  sampling_strategy: "common_items"
+  sample_size: 1000
   # Required event (below) is an optional parameter. You may set it if you want to force algorithm to choose sessions
   # with, for example, "purchase", "add to cart" or 33 event types.
-  required_event_in_session: null
+  required_sampling_event: null
   # Items parameters
   #    - linear:    basic linear weighting, distances between events in a sequence are equal and depended only on the
   #                 position of element in a sequence, always gives larger weights than the other methods,
@@ -21,11 +21,13 @@ model:
   #    - quadratic: the oldest elements are penalized much more than the middle-part and the newest elements in a
   #                 sequence. Function rises quicker than the log10 function but values are smaller than returned from
   #                 the linear function. Newest observation -> larger weight assigned to it.
-  weighting_strategy: "log"
+  weighting_func: "linear"
   #   - linear:    simple linear function - up to 10 positions it is 1 - 0.1 * position normalized to [0:1], and 0 if
   #                the position is greater than 10.
   #   - inv:       inverted position of the item: 1/position within (0:1] limits.
   #   - log:       1 / log10(position + 1.7) normalized to the range [0:1].
   #   - quadratic: 1 / (position**2) - events closer to the end of sequence have larger weights than the past events,
   #                it is similar to linear function but weights are decreasing at larger and non-linear rate.
-  rank_strategy: "quadratic"
+  ranking_strategy: "log"
+  return_events_from_session: True
+  recommend_any: False

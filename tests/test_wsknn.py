@@ -84,10 +84,10 @@ def test_vsknn_flow1():
     expected_recommendations = [[(2, 2.0), (3, 2.0), (4, 2.0), (5, 2.0)], [(4, 2.5), (5, 2.5), (1, 1.25)]]
 
     model = WSKNN()
-    model.fit(sessions, items, number_of_recommendations=10, number_of_closest_neighbors=10)
+    model.fit(sessions, items)
 
     for idx, sess in enumerate(some_sessions):
-        recomms = model.recommend(sess, recommend_any=False)
+        recomms = model.recommend(sess)
         assert recomms == expected_recommendations[idx]
 
 
@@ -119,8 +119,8 @@ def test_vsknn_flow2():
     ]
 
     model = WSKNN()
-    model.fit(sessions, items, number_of_recommendations=10, number_of_closest_neighbors=10)
+    model.fit(sessions, items)
 
     for idx, sess in enumerate(some_sessions):
-        recomms = model.recommend(sess, recommend_any=False)
+        recomms = model.recommend(sess)
         assert recomms == expected_recommendations[idx]

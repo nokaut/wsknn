@@ -1,3 +1,8 @@
+## Version 0.1.4.dev2:
+
+- added `return_events_from_session` parameter to force algorithm to return items the same as in a given session if there are no other neighbors,
+- `recommend()` method resets settings if provided (instead of `fit()`).
+
 ## Version 0.1.4.dev1:
 
 - `predict` method changed to `recommend`, accepts only List of Lists as the input,

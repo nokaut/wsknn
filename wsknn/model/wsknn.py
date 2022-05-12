@@ -35,11 +35,14 @@ class WSKNN:
                        How we calculate an item rank (based on its position in a session sequence). Available options
                        are: 'inv', 'linear', 'log', 'quadratic'.
 
+    return_events_from_session : bool, default = True
+                                 Should algorithm return the same events as in session if this is only neighbor?
+
     required_sampling_event : int or str, default = None
                               Set this paramater to the event name if sessions with it must be included in
                               the neighbors selection. For example, this event may be a "purchase".
 
-    recommend_any : bool, default = True
+    recommend_any : bool, default = False
                     If recommender returns less than number of recommendations items then return random items.
 
     Attributes
@@ -86,14 +89,22 @@ class WSKNN:
     ranking_strategy : str
                        See ranking_strategy parameter.
 
+    return_events_from_session : bool, default = True
+                                 See return_events_from_session parameter.
+
     required_sampling_event : Union[int, str], default = None
                               See required_sampling_event parameter.
+
+    recommend_any : bool, default = False
+                    See recommend_any parameter.
 
     Methods
     -------
     fit()
 
-    predict()
+    recommend()
+
+    set_model_params()
 
     Raises
     ------
@@ -112,8 +123,9 @@ class WSKNN:
                  sample_size: int = 1000,
                  weighting_func: str = 'linear',
                  ranking_strategy: str = 'linear',
+                 return_events_from_session: bool = True,
                  required_sampling_event: Union[int, str] = None,
-                 recommend_any: bool = True):
+                 recommend_any: bool = False):
 
         self.sampling_strategies = ['common_items', 'recent', 'random']
         self.weighting_functions = ['linear', 'log', 'quadratic']
@@ -130,20 +142,14 @@ class WSKNN:
         self.sampling_strategy = self._is_sampling_strategy_valid(sampling_strategy)
         self.weighting_function = self._is_weighting_function_valid(weighting_func)
         self.ranking_strategy = self._is_ranking_strategy_valid(ranking_strategy)
-        self.rec_any = recommend_any
+        self.return_events_from_session = return_events_from_session
+        self.recommend_any = recommend_any
 
     # Core methods
 
     def fit(self,
             sessions: Dict,
-            items: Dict,
-            number_of_recommendations=None,
-            number_of_closest_neighbors=None,
-            session_sampling_strategy=None,
-            possible_neighbors_sample_size=None,
-            weighting_strategy=None,
-            rank_strategy=None,
-            required_sampling_event=None):
+            items: Dict):
         """Sets input session-items and item-sessions maps.
 
         Parameters
@@ -165,54 +171,18 @@ class WSKNN:
                     )
                 }
 
-        number_of_recommendations : int or None, default=None
-                                    Resets the number of recommendations.
-
-        number_of_closest_neighbors : int or None, default=None
-                                      Resets the number of closest neighbors.
-
-        session_sampling_strategy : str or None, default=None
-                                    How to filter the initial sample of sessions. Available strategies are:
-                                        - 'common_items': sample sessions with the same items as the input session,
-                                        - 'recent': sample the most actual sessions,
-                                        - 'random': get a random sample of sessions.
-
-        possible_neighbors_sample_size : int or None, default=None
-                                         How many sessions from the model are sampled to make a recommendation. If not
-                                         set then it is the number given during the class initilization.
-
-        weighting_strategy : str or None, default=None
-                             The similarity measurement between sessions. Available options: 'linear', 'log'
-                             and 'quadratic'. If not set then weighting strategy is taken from the parameter set
-                             during the class initialization.
-
-        rank_strategy : str or None, default=None
-                        How we calculate an item rank (based on its position in a session sequence). Available options
-                        are: 'inv', 'linear', 'log', 'quadratic'. If not set then model uses rank strategy given
-                        during the initilization.
-
-        required_sampling_event : int or str, default = None
-                                  Set this paramater to the event name if sessions with it must be included in
-                                  the neighbors selection. For example, this event may be a "purchase".
         """
 
         # Check input data
         self._check_sessions_input(sessions)
         self._check_items_input(items)
 
-        # Set params
-        self._reset_model_params(number_of_recommendations,
-                                 number_of_closest_neighbors,
-                                 session_sampling_strategy,
-                                 possible_neighbors_sample_size,
-                                 weighting_strategy,
-                                 rank_strategy,
-                                 required_sampling_event)
-
         self.session_item_map = sessions
         self.item_session_map = items
 
-    def recommend(self, event_stream: List, recommend_any: bool = True) -> List:
+    def recommend(self,
+                  event_stream: List,
+                  settings: dict = None) -> List:
         """
         The method predicts n next recommendations from a given session.
 
@@ -226,8 +196,8 @@ class WSKNN:
                 [properties]
             ]
 
-        recommend_any : bool, default = True
-                        If recommender returns less than number of recommendations items then return random items.
+        settings : Dict, default = None
+                   Model settings and parameters.
 
         Returns
         -------
@@ -237,17 +207,124 @@ class WSKNN:
             ]
         """
 
-        self.rec_any = recommend_any
+        if settings is not None:
+            self.set_model_params(**settings)
 
         recommendations = self._predict(event_stream)
 
         return recommendations
 
+    def set_model_params(self,
+                         number_of_recommendations=None,
+                         number_of_neighbors=None,
+                         sampling_strategy=None,
+                         sample_size=None,
+                         weighting_func=None,
+                         ranking_strategy=None,
+                         return_events_from_session=None,
+                         required_sampling_event=None,
+                         recommend_any=False):
+        """Methods resets and maps new model parameters.
+
+        Parameters
+        ----------
+        number_of_recommendations : int, default = None
+
+        number_of_neighbors : int, default = None
+
+        sampling_strategy : str, default = None
+
+        sample_size : int, default = None
+
+        weighting_func : str, default = None
+
+        ranking_strategy : str, default = None
+
+        return_events_from_session : bool, default = None
+
+        required_sampling_event : str or int, default = None
+
+        recommend_any : bool, default = None
+
+        Raises
+        -------
+        TypeError
+            Wrong type of an input parameter.
+
+        KeyError
+            Wrong name of sampling strategy, ranking strategy or weighting function.
+
+        """
+        if number_of_recommendations is not None:
+            if isinstance(number_of_recommendations, int):
+                self._set_n_of_recs(number_of_recommendations)
+            else:
+                raise TypeError(f'Number of output recommendations should be an integer, '
+                                f'got {type(number_of_recommendations)} instead')
+
+        if number_of_neighbors is not None:
+            if isinstance(number_of_neighbors, int):
+                self._set_number_of_closest_neighbors(number_of_neighbors)
+            else:
+                raise TypeError(f'Number of closest neighbors should be an integer, '
+                                f'got {type(number_of_neighbors)} instead')
+
+        if sampling_strategy is not None:
+            if isinstance(sampling_strategy, str):
+                session_sampling_strategy = self._is_sampling_strategy_valid(sampling_strategy)
+                self._set_sampling_strategy(session_sampling_strategy)
+            else:
+                raise TypeError(f'Defined sampling strategy should be a string. '
+                                f'Got {type(sampling_strategy)} instead')
+
+        if sample_size is not None:
+            if isinstance(sample_size, int):
+                self._set_possible_neighbors_sample_size(sample_size)
+            else:
+                raise TypeError(f'Number of possible neighbors should be an integer, '
+                                f'got {type(sample_size)} instead')
+
+        if weighting_func is not None:
+            if isinstance(weighting_func, str):
+                weighting_strategy = self._is_weighting_function_valid(weighting_func)
+                self._set_weighting_strategy(weighting_strategy)
+            else:
+                raise TypeError(f'Defined weighting function should be a string. '
+                                f'Got {type(weighting_func)} instead')
+
+        if ranking_strategy is not None:
+            if isinstance(ranking_strategy, str):
+                rank_strategy = self._is_ranking_strategy_valid(ranking_strategy)
+                self._set_ranking_strategy(rank_strategy)
+            else:
+                raise TypeError(f'Defined ranking function should be a string. '
+                                f'Got {type(ranking_strategy)} instead')
+
+        if return_events_from_session is not None:
+            if isinstance(return_events_from_session, bool):
+                self.return_events_from_session = return_events_from_session
+            else:
+                raise TypeError(f'return_events_from_session parameter should be set only to True or False (bool). '
+                                f'Got type {type(return_events_from_session)} instead')
+
+        if required_sampling_event is not None:
+            if isinstance(required_sampling_event, str) or isinstance(required_sampling_event, int):
+                self.required_sampling_event = required_sampling_event
+            else:
+                raise TypeError('Defined required sampling event can be int or str, other datatypes are not supported')
+
+        if recommend_any is not None:
+            if isinstance(recommend_any, bool):
+                self.recommend_any = recommend_any
+            else:
+                raise TypeError(f'recommend_any parameter should be set only to True or False (bool). '
+                                f'Got type {type(recommend_any)} instead')
+
     def _predict(self, session):
         neighbors = self._nearest_neighbors(session)
 
         if len(neighbors) == 0:
-            if self.rec_any:
+            if self.recommend_any:
                 recs = list()
                 recommendations = self._get_more_items(recs)
                 return recommendations
@@ -256,7 +333,7 @@ class WSKNN:
             ranked_items.sort(key=lambda x: x[1], reverse=True)
             recommendations = ranked_items[:self.n_of_recommendations]
 
-            if self.rec_any:
+            if self.recommend_any:
                 if len(recommendations) < self.n_of_recommendations:
                     recommendations = self._get_more_items(recommendations)
 
@@ -437,92 +514,6 @@ class WSKNN:
                   f"Use 'linear', 'log', 'quadratic', instead"
             raise KeyError(msg)
 
-    def _reset_model_params(self,
-                            number_of_recommendations,
-                            number_of_closest_neighbors,
-                            session_sampling_strategy,
-                            possible_neighbors_sample_size,
-                            weighting_strategy,
-                            rank_strategy,
-                            required_sampling_event):
-        """Methods resets and maps new model parameters.
-
-        Parameters
-        ----------
-        number_of_recommendations : int
-
-        number_of_closest_neighbors : int
-
-        session_sampling_strategy : str
-
-        possible_neighbors_sample_size : int
-
-        weighting_strategy : str
-
-        rank_strategy : str
-
-        required_sampling_event : str or int
-
-        Raises
-        -------
-        TypeError
-            Wrong type of an input parameter.
-
-        KeyError
-            Wrong name of sampling strategy, ranking strategy or weighting function.
-
-        """
-        if number_of_recommendations is not None:
-            if isinstance(number_of_recommendations, int):
-                self._set_n_of_recs(number_of_recommendations)
-            else:
-                raise TypeError(f'Number of output recommendations should be an integer, '
-                                f'got {type(number_of_recommendations)} instead')
-
-        if number_of_closest_neighbors is not None:
-            if isinstance(number_of_closest_neighbors, int):
-                self._set_number_of_closest_neighbors(number_of_closest_neighbors)
-            else:
-                raise TypeError(f'Number of closest neighbors should be an integer, '
-                                f'got {type(number_of_closest_neighbors)} instead')
-
-        if session_sampling_strategy is not None:
-            if isinstance(session_sampling_strategy, str):
-                session_sampling_strategy = self._is_sampling_strategy_valid(session_sampling_strategy)
-                self._set_sampling_strategy(session_sampling_strategy)
-            else:
-                raise TypeError(f'Defined sampling strategy should be a string. '
-                                f'Got {type(session_sampling_strategy)} instead')
-
-        if possible_neighbors_sample_size is not None:
-            if isinstance(possible_neighbors_sample_size, int):
-                self._set_possible_neighbors_sample_size(possible_neighbors_sample_size)
-            else:
-                raise TypeError(f'Number of possible neighbors should be an integer, '
-                                f'got {type(possible_neighbors_sample_size)} instead')
-
-        if weighting_strategy is not None:
-            if isinstance(weighting_strategy, str):
-                weighting_strategy = self._is_weighting_function_valid(weighting_strategy)
-                self._set_weighting_strategy(weighting_strategy)
-            else:
-                raise TypeError(f'Defined weighting function should be a string. '
-                                f'Got {type(weighting_strategy)} instead')
-
-        if rank_strategy is not None:
-            if isinstance(rank_strategy, str):
-                rank_strategy = self._is_ranking_strategy_valid(rank_strategy)
-                self._set_ranking_strategy(rank_strategy)
-            else:
-                raise TypeError(f'Defined ranking function should be a string. '
-                                f'Got {type(rank_strategy)} instead')
-
-        if required_sampling_event is not None:
-            if isinstance(required_sampling_event, str) or isinstance(required_sampling_event, int):
-                self.required_sampling_event = required_sampling_event
-            else:
-                raise TypeError('Defined required sampling event can be int or str, other datatypes are not supported')
-
     def _set_n_of_recs(self, n):
         self.n_of_recommendations = n
 
@@ -636,9 +627,8 @@ class WSKNN:
 
             for n_item in n_items:
                 if n_item in session_items:
-                    # We do not want to score items viewed by the user
-                    # TODO: condition to control this behavior
-                    pass
+                    if not self.return_events_from_session:
+                        pass
                 else:
                     old_score = scores.get(n_item)
                     new_score = neighbor[1]

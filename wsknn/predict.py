@@ -1,10 +1,10 @@
-from typing import List
+from typing import Dict, List
 from wsknn.model.wsknn import WSKNN
 
 
 def predict(model: WSKNN,
             sessions: List,
-            recommend_any = False) -> List:
+            settings: Dict = None) -> List:
     """
     The function is an alias to the .predict() method of the WSKNN model.
 
@@ -21,8 +21,7 @@ def predict(model: WSKNN,
                     [properties]
                 ]
 
-    recommend_any : bool, default = True
-                        If recommender returns less than number of recommendations items then return random items.
+    settings : Dict
 
     Returns
     -------
@@ -39,5 +38,5 @@ def predict(model: WSKNN,
     if model.item_session_map is None or model.session_item_map is None:
         raise ValueError('Given model does not have an item map and a session map. Fit those before prediction')
 
-    recommendations = model.recommend(sessions, recommend_any)
+    recommendations = model.recommend(sessions, settings)
     return recommendations
