@@ -1,9 +1,9 @@
-## Version 0.1.4.experimental1:
+## Version 0.1.4.dev1:
 
 - `predict` method changed to `recommend`, accepts only List of Lists as the input,
 - refactored scoring,
 - added `recommend_any` parameter to force algorithm to return k-recommendations. If there is less than k recommendations, and this parameter is set to `True`, then algorithm returns missing products from the product pool at random,
-- added `.experimental` suffix to package version, to pinpoint the fact that package is still unstable.
+- added `.dev` suffix to package version, to pinpoint the fact that package is still unstable.
 
 ## Version 0.1.3.post1 (unstable):
 
