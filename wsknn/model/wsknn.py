@@ -39,6 +39,9 @@ class WSKNN:
                               Set this paramater to the event name if sessions with it must be included in
                               the neighbors selection. For example, this event may be a "purchase".
 
+    recommend_any : bool, default = True
+                    If recommender returns less than number of recommendations items then return random items.
+
     Attributes
     ----------
     weighting_functions: List
@@ -109,7 +112,8 @@ class WSKNN:
                  sample_size: int = 1000,
                  weighting_func: str = 'linear',
                  ranking_strategy: str = 'linear',
-                 required_sampling_event: Union[int, str] = None):
+                 required_sampling_event: Union[int, str] = None,
+                 recommend_any: bool = True):
 
         self.sampling_strategies = ['common_items', 'recent', 'random']
         self.weighting_functions = ['linear', 'log', 'quadratic']
@@ -126,6 +130,7 @@ class WSKNN:
         self.sampling_strategy = self._is_sampling_strategy_valid(sampling_strategy)
         self.weighting_function = self._is_weighting_function_valid(weighting_func)
         self.ranking_strategy = self._is_ranking_strategy_valid(ranking_strategy)
+        self.rec_any = recommend_any
 
     # Core methods
 
@@ -207,89 +212,63 @@ class WSKNN:
         self.session_item_map = sessions
         self.item_session_map = items
 
-    def predict(self, sessions: Union[Dict, List],
-                number_of_recommendations=None,
-                number_of_closest_neighbors=None,
-                session_sampling_strategy=None,
-                possible_neighbors_sample_size=None,
-                weighting_strategy=None,
-                rank_strategy=None,
-                required_sampling_event=None) -> Dict:
+    def recommend(self, event_stream: List, recommend_any: bool = True) -> List:
         """
         The method predicts n next recommendations from a given session.
 
         Parameters
         ----------
-        sessions : Union[Dict, List]
-                   Sequence of items for recommendation. As a dict, it is a user id (key) and products and
-                   their timestamps (values). As a List it is a nested List of user actions and their timestamps,
-                   and additional properties.
+        event_stream : List
+            Sequence of items for recommendation. It must be a nested List of lists:
+            [
+                [items],
+                [timestamps],
+                [properties]
+            ]
 
-        number_of_recommendations : int or None, default=None
-                                    Resets the number of recommendations.
-
-        number_of_closest_neighbors : int or None, default=None
-                                      Resets the number of closest neighbors.
-
-        session_sampling_strategy : str or None, default=None
-                                    How to filter the initial sample of sessions. Available strategies are:
-                                        - 'common_items': sample sessions with the same items as the input session,
-                                        - 'recent': sample the most actual sessions,
-                                        - 'random': get a random sample of sessions.
-                                        
-        possible_neighbors_sample_size : int or None, default=None
-                                         How many sessions from the model are sampled to make a recommendation. If not
-                                         set then it is the number given during the class initilization.
-
-        weighting_strategy : str or None, default=None
-                             The similarity measurement between sessions. Available options: 'linear', 'log'
-                             and 'quadratic'. If not set then weighting strategy is taken from the parameter set
-                             during the class initialization.
-
-        rank_strategy : str or None, default=None
-                        How we calculate an item rank (based on its position in a session sequence). Available options
-                        are: 'inv', 'linear', 'log', 'quadratic'. If not set then model uses rank strategy given
-                        during the initilization.
-
-        required_sampling_event : int or str, default = None
-                                  Set this paramater to the event name if sessions with it must be included in
-                                  the neighbors selection. For example, this event may be a "purchase".
+        recommend_any : bool, default = True
+                        If recommender returns less than number of recommendations items then return random items.
 
         Returns
         -------
-        : Dict
-          ranked items in descending order
-          - {user ID: [[item, rank] ...]} (input as a Dict)
-          - {int: [[item, rank] ...]} (input as a List)
+        recommendations : List
+            [
+                (item a, rank a), (item b, rank b)
+            ]
         """
 
-        # Set class consts
-        self._reset_model_params(number_of_recommendations,
-                                 number_of_closest_neighbors,
-                                 session_sampling_strategy,
-                                 possible_neighbors_sample_size,
-                                 weighting_strategy,
-                                 rank_strategy,
-                                 required_sampling_event)
+        self.rec_any = recommend_any
 
-        output_ranks = dict()
-        if isinstance(sessions, dict):
-            for _key, session in sessions.items():
-                recommendations = self._part_predict(session)
-                output_ranks[_key] = recommendations
-        elif isinstance(sessions, list):
-            for idx, session in enumerate(sessions):
-                recommendations = self._part_predict(session)
-                output_ranks[idx] = recommendations
-        else:
-            raise TypeError('Not supported input type for prediction')
-        return output_ranks
+        recommendations = self._predict(event_stream)
 
-    def _part_predict(self, session):
+        return recommendations
+
+    def _predict(self, session):
         neighbors = self._nearest_neighbors(session)
-        ranked_items = self._rank_items(neighbors, session)
-        ranked_items.sort(key=lambda x: x[1], reverse=True)
-        recommendations = ranked_items[:self.n_of_recommendations]
+
+        if len(neighbors) == 0:
+            if self.rec_any:
+                recs = list()
+                recommendations = self._get_more_items(recs)
+                return recommendations
+        else:
+            ranked_items = self._rank_items(neighbors, session)
+            ranked_items.sort(key=lambda x: x[1], reverse=True)
+            recommendations = ranked_items[:self.n_of_recommendations]
+
+            if self.rec_any:
+                if len(recommendations) < self.n_of_recommendations:
+                    recommendations = self._get_more_items(recommendations)
+
+            return recommendations
+
+    def _get_more_items(self, recommendations):
+        add_items_size = self.n_of_recommendations - len(recommendations)
+        possible_items = list(self.item_session_map.keys())
+        for _ in range(add_items_size):
+            rnd_item = random.choice(possible_items)
+            rnd_rec = (rnd_item, 0.0)
+            recommendations.append(rnd_rec)
         return recommendations
 
     # Settings

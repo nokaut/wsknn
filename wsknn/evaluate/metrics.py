@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, List, Tuple
 
 import numpy as np
 from wsknn.model.wsknn import WSKNN
@@ -6,7 +6,7 @@ from wsknn.evaluate.scores.scores import mrr_func, precision_func, recall_func
 from wsknn.utils.errors import TooShortSessionException
 
 
-def score_model(sessions: dict,
+def score_model(sessions: List,
                 trained_model: WSKNN,
                 k=0,
                 skip_short_sessions=True,
@@ -19,12 +19,12 @@ def score_model(sessions: dict,
 
     Parameters
     ----------
-    sessions : dict
-               {'session_id': [
+    sessions : List of sessions
+               [
                    [ sequence_of_items ],
                    [ sequence_of_timestamps ],
                    [ [OPTIONAL] sequence_of_event_type ]
-               ]}
+               ], [other session]
 
     trained_model : WSKNN
                     Trained VSKNN model.
@@ -61,7 +61,7 @@ def score_model(sessions: dict,
 
     k, trained_model = _set_number_of_recommendations(k, trained_model)
 
-    for session_k, session in sessions.items():
+    for session in sessions:
 
         s_length = len(session[0])
         session_length_test = _should_skip_short_session(s_length, k, skip_short_sessions)
@@ -70,11 +70,10 @@ def score_model(sessions: dict,
             # Session is too short to make any valuable scoring
             pass
         else:
-            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+            eval_items, predictions = _prepare_metrics_data(session, trained_model, sliding_window)
 
             for i in range(len(eval_items)):
-
-                recommendations = predictions[i][session_k]
+                recommendations = predictions[i]
                 recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
                 evaluation_items = eval_items[i]
 
@@ -106,7 +105,7 @@ def score_model(sessions: dict,
     return scores
 
 
-def get_mean_reciprocal_rank(sessions: dict,
+def get_mean_reciprocal_rank(sessions: List,
                              trained_model: WSKNN,
                              k=0,
                              skip_short_sessions=True,
@@ -117,12 +116,12 @@ def get_mean_reciprocal_rank(sessions: dict,
 
     Parameters
     ----------
-    sessions : dict
-               {'session_id': [
+    sessions : List of sessions
+               [
                    [ sequence_of_items ],
                    [ sequence_of_timestamps ],
                    [ [OPTIONAL] sequence_of_event_type ]
-               ]}
+               ], [other session]
 
     trained_model : WSKNN
                     Trained VSKNN model.
@@ -148,7 +147,7 @@ def get_mean_reciprocal_rank(sessions: dict,
 
     k, trained_model = _set_number_of_recommendations(k, trained_model)
 
-    for session_k, session in sessions.items():
+    for session in sessions:
 
         s_length = len(session[0])
         session_length_test = _should_skip_short_session(s_length, k, skip_short_sessions)
@@ -156,11 +155,11 @@ def get_mean_reciprocal_rank(sessions: dict,
             # Session is too short to make any valuable scoring
             pass
         else:
-            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+            eval_items, predictions = _prepare_metrics_data(session, trained_model, sliding_window)
 
             # Get rank
             for i in range(len(eval_items)):
-                recommendations = predictions[i][session_k]
+                recommendations = predictions[i]
                 recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
                 evaluation_items = eval_items[i]
                 partial_rank = mrr_func(recommendations, evaluation_items)
@@ -170,7 +169,7 @@ def get_mean_reciprocal_rank(sessions: dict,
     return float(mrr)
 
 
-def get_precision(sessions: dict,
+def get_precision(sessions: List,
                   trained_model: WSKNN,
                   k=0,
                   skip_short_sessions=True,
@@ -181,12 +180,12 @@ def get_precision(sessions: dict,
 
     Parameters
     ----------
-    sessions : dict
-               {'session_id': [
+    sessions : List of sessions
+               [
                    [ sequence_of_items ],
                    [ sequence_of_timestamps ],
                    [ [OPTIONAL] sequence_of_event_type ]
-               ]}
+               ], [other session]
 
     trained_model : WSKNN
                     Trained VSKNN model.
@@ -217,7 +216,7 @@ def get_precision(sessions: dict,
 
     k, trained_model = _set_number_of_recommendations(k, trained_model)
 
-    for session_k, session in sessions.items():
+    for session in sessions:
 
         s_length = len(session[0])
 
@@ -227,11 +226,11 @@ def get_precision(sessions: dict,
             # Session is too short to make any valuable scoring
             pass
         else:
-            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+            eval_items, predictions = _prepare_metrics_data(session, trained_model, sliding_window)
 
             # Get rank
             for i in range(len(eval_items)):
-                recommendations = predictions[i][session_k]
+                recommendations = predictions[i]
                 recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
                 evaluation_items = eval_items[i]
                 partial_precision = precision_func(recommendations, evaluation_items)
@@ -241,7 +240,7 @@ def get_precision(sessions: dict,
     return float(precision)
 
 
-def get_recall(sessions: dict,
+def get_recall(sessions: List,
                trained_model: WSKNN,
                k=0,
                skip_short_sessions=True,
@@ -252,12 +251,12 @@ def get_recall(sessions: dict,
 
     Parameters
     ----------
-    sessions : dict
-               {'session_id': [
+    sessions : List of sessions
+               [
                    [ sequence_of_items ],
                    [ sequence_of_timestamps ],
                    [ [OPTIONAL] sequence_of_event_type ]
-               ]}
+               ], [other session]
 
     trained_model : WSKNN
                     Trained VSKNN model.
@@ -287,7 +286,7 @@ def get_recall(sessions: dict,
 
     k, trained_model = _set_number_of_recommendations(k, trained_model)
 
-    for session_k, session in sessions.items():
+    for session in sessions:
 
         s_length = len(session[0])
 
@@ -297,11 +296,11 @@ def get_recall(sessions: dict,
             # Session is too short to make any valuable scoring
             pass
         else:
-            eval_items, predictions = _prepare_metrics_data(session, session_k, trained_model, sliding_window)
+            eval_items, predictions = _prepare_metrics_data(session, trained_model, sliding_window)
 
             # Get rank
             for i in range(len(eval_items)):
-                recommendations = predictions[i][session_k]
+                recommendations = predictions[i]
                 recommendations = [x[0] for x in recommendations]  # We are not interested in the weights
                 evaluation_items = eval_items[i]
                 partial_recall = recall_func(recommendations, evaluation_items)
@@ -312,7 +311,7 @@ def get_recall(sessions: dict,
     return float(recall)
 
 
-def _prepare_metrics_data(session, session_key, trained_model, sliding_window):
+def _prepare_metrics_data(session, trained_model, sliding_window):
     """
     Function prepares metrics data.
 
@@ -320,9 +319,6 @@ def _prepare_metrics_data(session, session_key, trained_model, sliding_window):
     ----------
     session : Any
               Array or list with a session.
-
-    session_key : str
-                  Unique key of a session (for example could be a user ID)
 
     trained_model : WSKNN
                     Model to make predictions.
@@ -336,11 +332,11 @@ def _prepare_metrics_data(session, session_key, trained_model, sliding_window):
     : Tuple[List, List]
         (relevant items, recommended items)
     """
-    relevant_items, recommends = _get_test_eval_preds(session, session_key, trained_model, sliding_window)
+    relevant_items, recommends = _get_test_eval_preds(session, trained_model, sliding_window)
     return relevant_items, recommends
 
 
-def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, sliding_window: bool):
+def _get_test_eval_preds(session, trained_model: WSKNN, sliding_window: bool):
     """
     Function parses session into test session, evaluation items (relevant items), and recommendations.
 
@@ -348,9 +344,6 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, slidin
     ----------
     session : Any
               Array or list with a session.
-
-    session_key : str
-                  Unique key of a session (for example could be a user ID)
 
     trained_model : WSKNN
                     Model to make predictions.
@@ -375,16 +368,14 @@ def _get_test_eval_preds(session, session_key: str, trained_model: WSKNN, slidin
         for i in srange:
             test_session = [x[:i] for x in session]
             relevant_items = session[0][i:]
-            recommended_items = trained_model.predict(
-                {session_key: test_session}
-            )
+            recommended_items = trained_model.recommend(test_session)
 
             recommended_items_list.append(recommended_items)
             relevant_items_list.append(relevant_items)
     else:
 
         test_session = [x[:-k] for x in session]
-        recommended_items = trained_model.predict({session_key: test_session})
+        recommended_items = trained_model.recommend(test_session)
         relevant_items = session[0][k:]
 
         recommended_items_list.append(recommended_items)
