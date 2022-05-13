@@ -1,4 +1,9 @@
-## Version 0.1.4.dev2:
+## Version 0.1.4
+
+- updated scoring selection,
+- package is stable.
+
+## Version 0.1.4.dev2 and 0.1.4.dev3:
 
 - added `return_events_from_session` parameter to force algorithm to return items the same as in a given session if there are no other neighbors,
 - `recommend()` method resets settings if provided (instead of `fit()`).

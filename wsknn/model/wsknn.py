@@ -626,9 +626,8 @@ class WSKNN:
                 step = step + 1
 
             for n_item in n_items:
-                if n_item in session_items:
-                    if not self.return_events_from_session:
-                        pass
+                if n_item in session_items and not self.return_events_from_session:
+                    pass
                 else:
                     old_score = scores.get(n_item)
                     new_score = neighbor[1]

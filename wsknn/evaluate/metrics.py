@@ -335,7 +335,6 @@ def _prepare_metrics_data(session, trained_model, sliding_window):
     relevant_items, recommends = _get_test_eval_preds(session, trained_model, sliding_window)
     return relevant_items, recommends
 
-
 def _get_test_eval_preds(session, trained_model: WSKNN, sliding_window: bool):
     """
     Function parses session into test session, evaluation items (relevant items), and recommendations.
@@ -374,7 +373,7 @@ def _get_test_eval_preds(session, trained_model: WSKNN, sliding_window: bool):
             relevant_items_list.append(relevant_items)
     else:
 
-        test_session = [x[:-k] for x in session]
+        test_session = [x[:k] for x in session]
         recommended_items = trained_model.recommend(test_session)
         relevant_items = session[0][k:]
 
