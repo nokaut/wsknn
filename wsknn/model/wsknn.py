@@ -42,6 +42,14 @@ class WSKNN:
                               Set this paramater to the event name if sessions with it must be included in
                               the neighbors selection. For example, this event may be a "purchase".
 
+    required_sampling_event_index : int, default = None
+                                    If required_sampling_event parameter is filled then you must pass an index of a row
+                                    with event names.
+
+    sampling_str_event_weights_index : int, default = None
+                                       If sampling_strategy is set to weighted_events then you must pass an index of a
+                                       row with event weights.
+
     recommend_any : bool, default = False
                     If recommender returns less than number of recommendations items then return random items.
 
@@ -95,6 +103,12 @@ class WSKNN:
     required_sampling_event : Union[int, str], default = None
                               See required_sampling_event parameter.
 
+    required_sampling_event_index : int, default = None
+                                    See required_sampling_event_index parameter.
+
+    sampling_str_event_weights_index : int, default = None
+                                       See sampling_str_event_weights_index parameter.
+
     recommend_any : bool, default = False
                     See recommend_any parameter.
 
@@ -114,6 +128,10 @@ class WSKNN:
 
     TypeError : wrong type of nested structures within session-items or item-sessions maps.
 
+    IndexError :
+        - wrong index of event names,
+        - wrong index of event weights.
+
     """
 
     def __init__(self,
@@ -125,9 +143,30 @@ class WSKNN:
                  ranking_strategy: str = 'linear',
                  return_events_from_session: bool = True,
                  required_sampling_event: Union[int, str] = None,
+                 required_sampling_event_index: int = None,
+                 sampling_str_event_weights_index: int = None,
                  recommend_any: bool = False):
 
-        self.sampling_strategies = ['common_items', 'recent', 'random']
+        # CHECKS
+
+        # Check if all parameters are given: required sampling event
+
+        if required_sampling_event is not None:
+            # User must provide index of event names
+            if required_sampling_event_index is None:
+                msg = 'With required sampling event given you must provide index of a row with names of events!'
+                raise IndexError(msg)
+
+        # Check if all parameters are given: sampling_strategy == 'weighted_events'
+        if sampling_strategy == 'weighted_events':
+            if sampling_str_event_weights_index is None:
+                msg = 'If you want to sample sessions based on the weights then you must provide index to ' \
+                      'the row with weights'
+                raise IndexError(msg)
+
+        # INITILIAZATION
+
+        self.sampling_strategies = ['common_items', 'recent', 'random', 'weighted_events']
         self.weighting_functions = ['linear', 'log', 'quadratic']
         self.ranking_strategies = ['linear', 'log', 'quadratic', 'inv']
 
@@ -143,6 +182,8 @@ class WSKNN:
         self.weighting_function = self._is_weighting_function_valid(weighting_func)
         self.ranking_strategy = self._is_ranking_strategy_valid(ranking_strategy)
         self.return_events_from_session = return_events_from_session
+        self.sampling_str_event_weights_index = sampling_str_event_weights_index
+        self.required_sampling_event_index = required_sampling_event_index
         self.recommend_any = recommend_any
 
     # Core methods

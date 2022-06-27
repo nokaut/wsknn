@@ -83,7 +83,7 @@ def test_vsknn_flow1():
 
     expected_recommendations = [[(2, 2.0), (3, 2.0), (4, 2.0), (5, 2.0)], [(4, 2.5), (5, 2.5), (1, 1.25)]]
 
-    model = WSKNN()
+    model = WSKNN(return_events_from_session=False)
     model.fit(sessions, items)
 
     for idx, sess in enumerate(some_sessions):
@@ -118,7 +118,7 @@ def test_vsknn_flow2():
         [('4', 2.5), ('5', 2.5), ('1', 1.25)]
     ]
 
-    model = WSKNN()
+    model = WSKNN(return_events_from_session=False)
     model.fit(sessions, items)
 
     for idx, sess in enumerate(some_sessions):
