@@ -11,7 +11,11 @@ def fit(sessions: Dict,
         sample_size: int = 1000,
         weighting_func: str = 'linear',
         ranking_strategy: str = 'linear',
-        required_sampling_event: Union[int, str] = None):
+        return_events_from_session: bool = True,
+        required_sampling_event: Union[int, str] = None,
+        required_sampling_event_index: int = None,
+        sampling_str_event_weights_index: int = None,
+        recommend_any: bool = False):
     """
 
     Sets input session-items and item-sessions maps.
@@ -23,7 +27,8 @@ def fit(sessions: Dict,
                    session_id: (
                        [ sequence_of_items ],
                        [ sequence_of_timestamps ],
-                       [ [OPTIONAL] sequence_of_event_types ]
+                       [ [OPTIONAL] sequence_of_event_types ],
+                       [ [OPTIONAL] sequence_of_event_weights]
                    )
                }
 
@@ -39,13 +44,14 @@ def fit(sessions: Dict,
                                 The number of recommended items.
 
     number_of_neighbors : int, default=10
-                          The number of closest sessions to choose the items from.
+                          The number of the closest sessions to choose the items from.
 
     sampling_strategy : str, default='common_items'
                         How to filter the initial sample of sessions. Available strategies are:
                         - 'common_items': sample sessions with the same items as the input session,
                         - 'recent': sample the most actual sessions,
-                        - 'random': get a random sample of sessions.
+                        - 'random': get a random sample of sessions,
+                        - 'weighted_events': select sessions based on the specific weights assigned to events.
 
     sample_size : int, default=1000
                   How many sessions from the model are sampled to make a recommendation.
@@ -57,9 +63,23 @@ def fit(sessions: Dict,
                        How we calculate an item rank (based on its position in a session sequence). Available options
                        are: 'inv', 'linear', 'log', 'quadratic'.
 
+    return_events_from_session : bool, default = True
+                                 Should algorithm return the same events as in session if this is only neighbor?
+
     required_sampling_event : int or str, default = None
                               Set this paramater to the event name if sessions with it must be included in
                               the neighbors selection. For example, this event may be a "purchase".
+
+    required_sampling_event_index : int, default = None
+                                    If required_sampling_event parameter is filled then you must pass an index of a row
+                                    with event names.
+
+    sampling_str_event_weights_index : int, default = None
+                                       If sampling_strategy is set to weighted_events then you must pass an index of a
+                                       row with event weights.
+
+    recommend_any : bool, default = False
+                    If recommender returns less than number of recommendations items then return random items.
 
     Returns
     -------
@@ -91,16 +111,20 @@ def fit(sessions: Dict,
     >>> fitted_model = fit(input_sessions, input_items)
     """
 
-    # Initilize VSKNN model
+    # Set model parameters
+    wsknn = WSKNN(number_of_recommendations=number_of_recommendations,
+                  number_of_neighbors=number_of_neighbors,
+                  sampling_strategy=sampling_strategy,
+                  sample_size=sample_size,
+                  weighting_func=weighting_func,
+                  ranking_strategy=ranking_strategy,
+                  return_events_from_session=return_events_from_session,
+                  required_sampling_event=required_sampling_event,
+                  required_sampling_event_index=required_sampling_event_index,
+                  sampling_event_weights_index=sampling_str_event_weights_index,
+                  recommend_any=recommend_any)
 
-    wsknn = WSKNN(number_of_recommendations,
-                  number_of_neighbors,
-                  sampling_strategy,
-                  sample_size,
-                  weighting_func,
-                  ranking_strategy,
-                  required_sampling_event)
-
+    # Fit sessions and items
     wsknn.fit(sessions, items)
 
     return wsknn

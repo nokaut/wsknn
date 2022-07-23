@@ -18,7 +18,7 @@ def check_data_dimension(record: list, dimensions: int) -> bool:
     : bool
         True - dimensions are equal to a number of the nested sequences. False otherwise.
     """
-    return len(record) == dimensions
+    return len(record) >= dimensions
 
 
 def check_numeric_type_instance(value) -> bool:
@@ -60,7 +60,8 @@ class InvalidDimensionsError(Exception):
         self.expected_dimensions = f'{expected_dimensions}'
 
     def __str__(self):
-        msg = f'Expected number(s) of nested sequences for {self.set_type} is {self.expected_dimensions}'
+        msg = f'Expected number(s) of nested sequences for {self.set_type} must be greater than' \
+              f' {self.expected_dimensions}'
         return msg
 
 
