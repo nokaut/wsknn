@@ -1,4 +1,5 @@
 import random
+import numpy as np
 from typing import Iterable, Union, List, Set, Dict
 
 from wsknn.weighting import weight_session_items, weight_item_score
@@ -23,7 +24,8 @@ class WSKNN:
                         How to filter the initial sample of sessions. Available strategies are:
                         - 'common_items': sample sessions with the same items as the input session,
                         - 'recent': sample the most actual sessions,
-                        - 'random': get a random sample of sessions.
+                        - 'random': get a random sample of sessions,
+                        - 'weighted_events': select sessions based on the specific weights assigned to events.
 
     sample_size : int, default=1000
                   How many sessions from the model are sampled to make a recommendation.
@@ -46,7 +48,7 @@ class WSKNN:
                                     If required_sampling_event parameter is filled then you must pass an index of a row
                                     with event names.
 
-    sampling_str_event_weights_index : int, default = None
+    sampling_event_weights_index : int, default = None
                                        If sampling_strategy is set to weighted_events then you must pass an index of a
                                        row with event weights.
 
@@ -106,8 +108,8 @@ class WSKNN:
     required_sampling_event_index : int, default = None
                                     See required_sampling_event_index parameter.
 
-    sampling_str_event_weights_index : int, default = None
-                                       See sampling_str_event_weights_index parameter.
+    sampling_event_weights_index : int, default = None
+                                   See sampling_str_event_weights_index parameter.
 
     recommend_any : bool, default = False
                     See recommend_any parameter.
@@ -144,7 +146,7 @@ class WSKNN:
                  return_events_from_session: bool = True,
                  required_sampling_event: Union[int, str] = None,
                  required_sampling_event_index: int = None,
-                 sampling_str_event_weights_index: int = None,
+                 sampling_event_weights_index: int = None,
                  recommend_any: bool = False):
 
         # CHECKS
@@ -159,8 +161,8 @@ class WSKNN:
 
         # Check if all parameters are given: sampling_strategy == 'weighted_events'
         if sampling_strategy == 'weighted_events':
-            if sampling_str_event_weights_index is None:
-                msg = 'If you want to sample sessions based on the weights then you must provide index to ' \
+            if sampling_event_weights_index is None:
+                msg = 'If you want to sample sessions based on the weights then you must provide index of ' \
                       'the row with weights'
                 raise IndexError(msg)
 
@@ -182,7 +184,7 @@ class WSKNN:
         self.weighting_function = self._is_weighting_function_valid(weighting_func)
         self.ranking_strategy = self._is_ranking_strategy_valid(ranking_strategy)
         self.return_events_from_session = return_events_from_session
-        self.sampling_str_event_weights_index = sampling_str_event_weights_index
+        self.sampling_event_weights_index = sampling_event_weights_index
         self.required_sampling_event_index = required_sampling_event_index
         self.recommend_any = recommend_any
 
@@ -234,7 +236,8 @@ class WSKNN:
             [
                 [items],
                 [timestamps],
-                [properties]
+                [(optional) event names],
+                [(optional) weights]
             ]
 
         settings : Dict, default = None
@@ -423,10 +426,10 @@ class WSKNN:
         sample_rec = sessions[sample_key]
 
         # Check dimensions
-        test_dims = check_data_dimension(sample_rec, 2) or check_data_dimension(sample_rec, 3)
+        test_dims = check_data_dimension(sample_rec, 2)
 
         if not test_dims:
-            raise InvalidDimensionsError('Session-items map', [2, 3])
+            raise InvalidDimensionsError('Session-items map', 2)
 
         # Check type
         for subrec in sample_rec:
@@ -587,7 +590,8 @@ class WSKNN:
             session = [
                 [sequence_of_items],
                 [sequence_of_timestamps],
-                [sequence_of_event_type]
+                [optional sequence_of_event_type],
+                [optional sequence of weights]
             ]
 
         Returns
@@ -615,7 +619,8 @@ class WSKNN:
             session = [
                 [sequence_of_items],
                 [sequence_of_timestamps],
-                [sequence_of_event_type]
+                [optional sequence_of_event_type],
+                [optional sequence of weights]
             ]
 
         Returns
@@ -737,7 +742,7 @@ class WSKNN:
 
         for sess in raw_sessions:
             session_sample = self.session_item_map[sess]
-            if self.required_sampling_event in session_sample[2]:
+            if self.required_sampling_event in session_sample[self.required_sampling_event_index]:
                 new_sessions.add(sess)
 
         return new_sessions
@@ -787,6 +792,8 @@ class WSKNN:
             return self._sampling_recent(all_sessions)
         elif self.sampling_strategy == 'common_items':
             return self._sampling_common(all_sessions, session)
+        elif self.sampling_strategy == 'weighted_events':
+            return self._sampling_weighted_events(all_sessions)
         else:
             err_msg = f'Defined sampling strategy {self.sampling_strategy} not implemented. Available strategies are:' \
                       f' {self.sampling_strategies}.'
@@ -825,6 +832,32 @@ class WSKNN:
           Most recent sessions. Sample of size possible_neighbors_sample_size.
         """
         rank = [(sid, self.session_item_map[sid][1]) for sid in sessions]
+        rank.sort(key=lambda x: x[1], reverse=True)
+        result = [x[0] for x in rank]
+        sample_size = min(self.possible_neighbors_sample_size, len(sessions))
+        return result[:sample_size]
+
+    def _sampling_weighted_events(self, sessions: Set) -> List:
+        """Get sessions with the highest weights.
+
+        Parameters
+        ----------
+        sessions : set
+                   Unique sessions.
+
+        Returns
+        -------
+        : List
+          Sessions with the highest weights. Sample of size possible_neighbors_sample_size.
+        """
+
+        rank = [(
+            ses,
+            np.mean(
+                self.session_item_map[ses][self.sampling_event_weights_index]
+            )
+        ) for ses in sessions]
+
         rank.sort(key=lambda x: x[1], reverse=True)
         result = [x[0] for x in rank]
         sample_size = min(self.possible_neighbors_sample_size, len(sessions))

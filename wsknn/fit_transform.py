@@ -44,13 +44,14 @@ def fit(sessions: Dict,
                                 The number of recommended items.
 
     number_of_neighbors : int, default=10
-                          The number of closest sessions to choose the items from.
+                          The number of the closest sessions to choose the items from.
 
     sampling_strategy : str, default='common_items'
                         How to filter the initial sample of sessions. Available strategies are:
                         - 'common_items': sample sessions with the same items as the input session,
                         - 'recent': sample the most actual sessions,
-                        - 'random': get a random sample of sessions.
+                        - 'random': get a random sample of sessions,
+                        - 'weighted_events': select sessions based on the specific weights assigned to events.
 
     sample_size : int, default=1000
                   How many sessions from the model are sampled to make a recommendation.
@@ -120,7 +121,7 @@ def fit(sessions: Dict,
                   return_events_from_session=return_events_from_session,
                   required_sampling_event=required_sampling_event,
                   required_sampling_event_index=required_sampling_event_index,
-                  sampling_str_event_weights_index=sampling_str_event_weights_index,
+                  sampling_event_weights_index=sampling_str_event_weights_index,
                   recommend_any=recommend_any)
 
     # Fit sessions and items
