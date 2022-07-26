@@ -1,3 +1,9 @@
+## Version 0.1.5
+
+- updated session selection algorithm, added `weighted_events` parameter that allows to weight the closest neighbours by the vector of weights,
+- new tutorial with comparison of a different recommendation settings,
+- updated documentation.
+
 ## Version 0.1.4
 
 - updated scoring selection,

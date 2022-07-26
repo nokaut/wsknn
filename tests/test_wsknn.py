@@ -6,13 +6,13 @@ from wsknn.utils.errors import InvalidDimensionsError, InvalidTimestampError
 def test_vsknn_invalid_dimensions_exception():
 
     sessions = {
-        'A': [1, 2, 3, 4],
-        'B': [4, 3, 4, 3, 3],
-        'C': [10, 2, 1, 1, 1]
+        'A': [[1, 2, 3, 4]],
+        'B': [[4, 3, 4, 3, 3]],
+        'C': [[10, 2, 1, 1, 1]]
     }
 
     items = {
-        '0': 0
+        '0': [0]
     }
 
     model = WSKNN()
@@ -29,7 +29,7 @@ def test_vsknn_invalid_type_exception():
     }
 
     items = {
-        '0': 0
+        '0': [0]
     }
 
     model = WSKNN()
@@ -83,7 +83,7 @@ def test_vsknn_flow1():
 
     expected_recommendations = [[(2, 2.0), (3, 2.0), (4, 2.0), (5, 2.0)], [(4, 2.5), (5, 2.5), (1, 1.25)]]
 
-    model = WSKNN()
+    model = WSKNN(return_events_from_session=False)
     model.fit(sessions, items)
 
     for idx, sess in enumerate(some_sessions):
@@ -118,7 +118,47 @@ def test_vsknn_flow2():
         [('4', 2.5), ('5', 2.5), ('1', 1.25)]
     ]
 
-    model = WSKNN()
+    model = WSKNN(return_events_from_session=False)
+    model.fit(sessions, items)
+
+    for idx, sess in enumerate(some_sessions):
+        recomms = model.recommend(sess)
+        assert recomms == expected_recommendations[idx]
+
+
+def test_wsknn_with_weights():
+    # Type of sessions is int, type of items is str
+    sessions = {
+        0: [
+            ['1', '2', '3', '4', '5'],
+            [1, 2, 3, 4, 5],
+            [0.9, 0.9, 0.9, 0.1, 0.2]
+        ],
+        1: [
+            ['2', '3', '4', '5'],
+            [10, 11, 12, 13],
+            [0.3, 0.4, 0.5, 0.1]
+        ]
+    }
+
+    items = {
+        '1': [[0], [1]],
+        '2': [[0, 1], [2]],
+        '3': [[0, 1], [3]],
+        '4': [[0, 1], [4]],
+        '5': [[0, 1], [5]]
+    }
+
+    some_sessions = [[['1'], [100], [10]], [['2', '3'], [200, 300], [5, 5]]]
+    expected_recommendations = [
+        [('2', 2.0), ('3', 2.0), ('4', 2.0), ('5', 2.0)],
+        [('4', 2.5), ('5', 2.5), ('1', 1.25)]
+    ]
+
+    model = WSKNN(return_events_from_session=False,
+                  sampling_strategy='weighted_events',
+                  sampling_event_weights_index=2)
+
     model.fit(sessions, items)
 
     for idx, sess in enumerate(some_sessions):

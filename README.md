@@ -79,7 +79,7 @@ test_session = {'unique id': [
     ['timestamp #1', 'timestamp #2']
 ]}
 
-recommendations = trained_model.predict(test_session, number_of_recommendations=3)
+recommendations = trained_model.recommend(test_session, number_of_recommendations=3)
 print(recommendations)
 
 ```
@@ -109,7 +109,7 @@ It works with Python versions greater or equal to 3.6.
 
 | Package Version | Python versions | Other packages |
 |-----------------|-----------------|----------------|
-| 0.1             | 3.6+            | numpy, yaml    |
+| 0.1+            | 3.6+            | numpy, yaml    |
 
 
 ## Developers

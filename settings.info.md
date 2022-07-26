@@ -38,7 +38,8 @@ sessions = {
         session_id: (
             [sequence_of_items],
             [sequence_of_timestamps],
-            [sequence_of_event_type]
+            [sequence_of_event_type],
+            [sequence_of_event_weights]
         )
     }
 ```
@@ -97,7 +98,8 @@ model:
 Neighboring sessions are sampled based on the three strategies:
 - **random**: select random subset of sessions,
 - **recent**: select most recent sessions,
-- **common_items**: select sessions that contains any item from the recommended session.
+- **common_items**: select sessions that contains any item from the recommended session,
+- **weighted_events**: special type of ranking strategy where we are weighting products by a specific weight.
   
 #### Example:
 

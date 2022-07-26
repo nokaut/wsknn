@@ -4,10 +4,11 @@ model:
   number_of_recommendations: 10
   # Sessions parameters
   number_of_neighbors: 100
-  #   - random:       select random subset of sessions,
-  #   - recent:       select most recent sessions,
-  #   - common_items: select sessions that contains any item from the recommended session.
-  sampling_strategy: "common_items"
+  #   - random:          select random subset of sessions,
+  #   - recent:          select most recent sessions,
+  #   - common_items:    select sessions that contains any item from the recommended session,
+  #   - weighted_events: select sessions based on the specific weights assigned to events.
+  sampling_strategy: "recent"
   sample_size: 1000
   # Required event (below) is an optional parameter. You may set it if you want to force algorithm to choose sessions
   # with, for example, "purchase", "add to cart" or 33 event types.
