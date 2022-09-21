@@ -6,7 +6,7 @@ model:
   number_of_neighbors: 100
   #   - random:          select random subset of sessions,
   #   - recent:          select most recent sessions,
-  #   - common_items:    select sessions that contains any item from the recommended session,
+  #   - common_items:    select sessions that contain any item from the recommended session,
   #   - weighted_events: select sessions based on the specific weights assigned to events.
   sampling_strategy: "recent"
   sample_size: 1000

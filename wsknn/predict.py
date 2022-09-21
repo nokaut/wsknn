@@ -6,34 +6,47 @@ def predict(model: WSKNN,
             sessions: List,
             settings: Dict = None) -> List:
     """
-    The function is an alias to the .predict() method of the WSKNN model.
+    The function is an alias for the .predict() method of the WSKNN model.
 
     Parameters
     ----------
     model : WSKNN
-            Fitted VSKNN model.
+        Fitted WSKNN model.
 
     sessions : List
-               Sequence of items for recommendation. It must be a nested List of lists:
-                [
-                    [items],
-                    [timestamps],
-                    [properties]
-                ]
+        Sequence of items for recommendation. It must be a nested List of lists:
+        >>> [
+        ...     [items],
+        ...     [timestamps],
+        ...     [(optional) event names],
+        ...     [(optional) weights]
+        ... ]
 
     settings : Dict
+        Settings of the model. It is worth noticing, that using this parameter allows to test different setups.
+        Possible parameters are grouped in the `settings.yml` file under the `model` key.
 
     Returns
     -------
     recommendations : List
-        [
-            [item a, rank a], [item b, rank b]
-        ]
+        Item recommendations and their ranks.
+
+        >>> [
+        ...     [item a, rank a], [item b, rank b]
+        ... ]
 
     Raises
     ------
     ValueError
-        Model not fitted.
+        Model wasn't fitted.
+
+    Examples
+    --------
+    >>> sessions = [
+            [['item a', 'item b'], []],
+            [[], []]
+    ... ]
+    >>> recommendations = predict(fitted_model, )
     """
     if model.item_session_map is None or model.session_item_map is None:
         raise ValueError('Given model does not have an item map and a session map. Fit those before prediction')

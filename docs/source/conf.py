@@ -22,8 +22,8 @@ sys.setrecursionlimit(1000)
 # -- Project information -----------------------------------------------------
 
 project = 'wsknn'
-copyright = '2022, Szymon Moliński'
-author = 'Szymon Moliński'
+copyright = '2022, Szymon Moliński, Sales Intelligence'
+author = 'Szymon Moliński, Sales Intelligence'
 
 # The full version, including alpha/beta/rc tags
 release = release_number

@@ -117,10 +117,13 @@ class WSKNN:
     Methods
     -------
     fit()
+        Sets input session-items and item-sessions maps.
 
     recommend()
+        The method predicts n next recommendations from a given session.
 
     set_model_params()
+        Methods resets and maps the new model parameters.
 
     Raises
     ------
@@ -268,7 +271,7 @@ class WSKNN:
                          return_events_from_session=None,
                          required_sampling_event=None,
                          recommend_any=False):
-        """Methods resets and maps new model parameters.
+        """Methods resets and maps the new model parameters.
 
         Parameters
         ----------
