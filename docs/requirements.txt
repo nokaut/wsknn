@@ -1,4 +1,6 @@
 numpy
 pyyaml
 sphinx
-sphinx_press_theme
+numpydoc
+sphinx-sizzle-theme
+sphinx-copybutton

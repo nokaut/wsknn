@@ -24,35 +24,30 @@ WSKNN
 
 .. automodule::  wsknn.model.wsknn
    :members:
-   :undoc-members:
-   :show-inheritance:
 
 -----
 
 Evaluation metrics
 ------------------
 
-.. automodule::  wsknn.evaluate.metrics
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autofunction:: wsknn.evaluate.metrics.score_model
+   :noindex:
 
------
+.. autofunction:: wsknn.evaluate.metrics.get_mean_reciprocal_rank
+   :noindex:
 
-Weighting methods
------------------
+.. autofunction:: wsknn.evaluate.metrics.get_precision
+   :noindex:
 
-.. automodule::  wsknn.evaluate.weighting
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autofunction:: wsknn.evaluate.metrics.get_recall
+   :noindex:
 
 -----
 
 Utilities
 ---------
 
-.. automodule::  wsknn.evaluate.utils
+.. automodule::  wsknn.utils.transform
    :members:
    :undoc-members:
    :show-inheritance:

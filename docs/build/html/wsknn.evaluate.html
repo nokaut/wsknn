@@ -1,279 +1,712 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-      <title>wsknn.evaluate package</title>
-    
-          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
-      
-      <!-- sphinx script_files -->
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-
-      
-      <!-- bundled in js (rollup iife) -->
-      <!-- <script src="_static/theme-vendors.js"></script> -->
-      <script src="_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" /> 
-  </head>
-
-  <body>
-    <div id="app">
-    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="index.html" class="home-link">
-    
-      <span class="site-name">wsknn</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
+<html lang="en-gb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+<title>wsknn - wsknn.evaluate package</title>
 
-    </navlinks>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha256-8uHMIn1ru0GS5KO+zf7Zccf8Uw12IA5DrdEcmMuWLFM=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/tooltipster.bundle.min.css" integrity="sha256-Qc4lCfqZWYaHF5hgEOFrYzSIX9Rrxk0NPHRac+08QeQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" integrity="sha256-Wa1I4jhSXeWd3N6RhfPlkqr1WlT+zS3Vh2YGCg0129E=" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro|Roboto|Roboto+Mono" rel="stylesheet">
+<link href="https://fonts.red-dove.com/iosevka-ss09-regular/webfont.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/js/tooltipster.bundle.min.js" integrity="sha256-v8akIv8SCqn5f3mbVB7vEWprIizxPh6oV0yhao/dbB4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+    <script>
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        LINK_SUFFIX: '.html',
+        HAS_SOURCE:  false,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+      $(document).data('sizzle', {on_load: []});
+    </script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="app-data.js"></script>
+<link rel="index" title="Index" href="genindex.html" />
+<link rel="search" title="Search" href="search.html" />
+
+</head>
+<body class="full-height test">
+<noscript>
+  <div>
+    <div id="noscript-message">JavaScript is not enabled. It is needed for this website to work.</div>
   </div>
-</navbar>
+</noscript>
+<div id="whole-page" class="container-fluid content full-height">
+  <div id="header-row" class="row">
+    <div id="header-container" class="col-md-12">
+      <div id="hdr-left">
+        <i class="fa fa-bars menu-toggle"></i>
+        
+<a href="index.html" class="text-logo">wsknn 0.1.5 documentation</a>
 
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
       </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
+      <div id="hdr-centre" class="text-center stretch">
+        <h3 title="wsknn.evaluate package">wsknn.evaluate package</h3>
+        <h6>wsknn.evaluate package</h6>
+      </div>
+      <div id="hdr-search">
+        
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
+      </div>
+
+      <div id="hdr-index">
+        <a href="genindex.html" class="btn btn-default" title="Go to the index"><i class="fa fa-list"></i></a>
+      </div>
+
+      <div id="hdr-source">
+        <a href="_sources/wsknn.evaluate.rst.txt" class="btn btn-default" title="See the source for this page"><i class="fa fa-code"></i></a>
+      </div>
+
+      <div id="hdr-right">
+        
+  
+      </div>
+      <div id="alt-hdr-right">
 
 
+        <a href="index.html"><i class="fa fa-home mr-8"></i></a>
 
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
+
+        <a href="search.html"><i class="fa fa-search mr-8"></i></a>
+
+
+        <a href="genindex.html"><i class="fa fa-list mr-8"></i></a>
+
+
+      </div>
     </div>
   </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="index.html#weighted-session-based-k-nn-intro">Contents:</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 ">
-            
-              <a href="api.html" class="reference internal ">API</a>
-            
 
-            
-          </li>
-
-        
-      </ul>
+  <div id="content-row" class="row">
+    <div id="page-content" class="col-md-12 flex-col">
+      <div id="content-container">
+        <div id="nav">
+          
+  <div class="navsidebar">
+    <div id="sidebar-search">
+      
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
     </div>
+      <div class="sidebar-block">
+        <div class="sidebar-tocheading">
+          <div class="pull-left">
+            <h2>Table Of Contents</h2>
+          </div>
+          <div class="pull-right" title="Hide this sidebar (hover at left edge to bring it back)"><i class="fa fa-chevron-left hidetoc"></i></div>
+        </div>
+        <div class="sidebar-toc">
+      
+          <div id="toc-filter" title="Type in here to show only matching topics">
+            <input class="form-control" id="toc-filter-query" placeholder="Filter by title ...">
+          </div>
+      
+        
   
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-    
-    <li>wsknn.evaluate package</li>
-  </ul>
-  
-
-  <ul class="page-nav">
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
+
   
-</div>
-<hr>
-          <div class="content" role="main" v-pre>
+        </div>
+      </div>
+  </div>
+        </div>
+        <div id="content" tabindex="0" class="stretch">
+          <div id="mnav">
             
-  <section id="wsknn-evaluate-package">
+  
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html#api">API</a></li>
+</ul>
+
+  
+          </div>
+          <div class="body">
+            
+  <div class="section" id="wsknn-evaluate-package">
 <h1>wsknn.evaluate package<a class="headerlink" href="#wsknn-evaluate-package" title="Permalink to this headline">¶</a></h1>
-<section id="submodules">
+<div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="module-wsknn.evaluate.metrics">
+</div>
+<div class="section" id="module-wsknn.evaluate.metrics">
 <span id="wsknn-evaluate-metrics-module"></span><h2>wsknn.evaluate.metrics module<a class="headerlink" href="#module-wsknn.evaluate.metrics" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_mean_reciprocal_rank">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_mean_reciprocal_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_mean_reciprocal_rank" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the mean reciprocal rank of a top k recommendations.
-Given session must be longer than k events.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<code class="sig-name descname"><span class="pre">get_mean_reciprocal_rank</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#get_mean_reciprocal_rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.evaluate.metrics.get_mean_reciprocal_rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function calculates the mean reciprocal rank of a top <code class="docutils literal notranslate"><span class="pre">k</span></code> recommendations. Given session must be longer
+than <code class="docutils literal notranslate"><span class="pre">k</span></code> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>MRR</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating <strong>MRR</strong> or should it raise an error?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating MRR or should raise an error?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Mean Reciprocal Rank: The average score of MRR per n sessions.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mrr</strong><span class="classifier">float</span></dt><dd><p>Mean Reciprocal Rank: The average score of <strong>MRR</strong> per <code class="docutils literal notranslate"><span class="pre">n</span></code> sessions.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_precision">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_precision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_precision" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the precision score of a top k recommendations.
-Given session must be longer than k events.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<code class="sig-name descname"><span class="pre">get_precision</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#get_precision"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.evaluate.metrics.get_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function calculates the precision score of a top <code class="docutils literal notranslate"><span class="pre">k</span></code> recommendations. Given session must be longer than
+<code class="docutils literal notranslate"><span class="pre">k</span></code> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>precision</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating <strong>precision</strong> or should it raise an error?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate Precision. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating Precision or should raise an error?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Precision: The average score of Precision per n sessions.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>precision</strong><span class="classifier">float</span></dt><dd><p>Precision: The average score of <strong>precision</strong> per <code class="docutils literal notranslate"><span class="pre">n</span></code> sessions.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Notes</p>
-<p>Precision is defined as (no of recommendations that are relevant) / (number of items recommended).</p>
+<p>Precision is defined as <code class="docutils literal notranslate"><span class="pre">(no</span> <span class="pre">of</span> <span class="pre">recommendations</span> <span class="pre">that</span> <span class="pre">are</span> <span class="pre">relevant)</span> <span class="pre">/</span> <span class="pre">(number</span> <span class="pre">of</span> <span class="pre">items</span> <span class="pre">recommended)</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_recall">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_recall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_recall" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the recall score of a top k recommendations.
-Given session must be longer than k events.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<code class="sig-name descname"><span class="pre">get_recall</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#get_recall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.evaluate.metrics.get_recall" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function calculates the <strong>recall</strong> score of a top <code class="docutils literal notranslate"><span class="pre">k</span></code> recommendations. Given session must be longer than
+<code class="docutils literal notranslate"><span class="pre">k</span></code> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>recall</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating <strong>recall</strong> or should it raise an error?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate Recall. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating Recall or should raise an error?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Precision: The average score of Recall per n sessions.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>recall</strong><span class="classifier">float</span></dt><dd><p>The average score of Recall per <code class="docutils literal notranslate"><span class="pre">n</span></code> sessions.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Notes</p>
 <p>Recall is defined as (no of recommendations that are relevant) / (all relevant items for a user).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.evaluate.metrics.score_model">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">score_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_mrr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_recall</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.score_model" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">score_model</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_mrr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_recall</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#score_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.evaluate.metrics.score_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function get Precision&#64;k, Recall&#64;k and MRR&#64;k.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List of sessions</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>MRR</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating MRR or should it raise an error?</p>
+</dd>
+<dt><strong>calc_mrr</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should <strong>MRR</strong> be calculated?</p>
+</dd>
+<dt><strong>calc_precision</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should <strong>precision</strong> be calculated?</p>
+</dd>
+<dt><strong>calc_recall</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should <strong>recall</strong> be calculated?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="wsknn.model.html#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating MRR or should raise an error?</p></li>
-<li><p><strong>calc_mrr</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should MRR be calculated?</p></li>
-<li><p><strong>calc_precision</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should Precision be calculated?</p></li>
-<li><p><strong>calc_recall</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should Recall be calculated?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><em>Dict</em></p></li>
-<li><p><strong>{‘MRR’</strong> (<em>float, ‘Recall’: float, ‘Precision’: float}</em>)</p></li>
-</ul>
-</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>scores</strong><span class="classifier">Dict</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">{'MRR':</span> <span class="pre">float,</span> <span class="pre">'Recall':</span> <span class="pre">float,</span> <span class="pre">'Precision':</span> <span class="pre">float}</span></code></p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-</section>
-<section id="module-wsknn.evaluate">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.evaluate" title="Permalink to this headline">¶</a></h2>
-</section>
-</section>
-
-
-          </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2022, Szymon Moliński, Sales Intelligence.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
-            </div>
+<div class="section" id="module-wsknn.evaluate">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.evaluate" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
           </div>
-      </page>
-    </div></div>
-    
-    
-  </body>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-row" class="row">
+
+    <div class="col-md-12">
+        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <a href="https://pypi.org/project/sphinx-sizzle-theme/"
+
+           title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"
+
+        >Sizzle</a> theme.</span>
+    </div>
+
+  </div>
+</div>
+
+<div id="tooltips" class="hidden">
+</div>
+
+<script>
+$(document).ready(function() {
+  'use strict';
+  var $search = $('.search-query');
+
+  var $filter = $('#toc-filter-query');
+  var $toclist = $('.sidebar-toc > ul').find('li');
+
+  if ($toclist.length === 0) {
+    $toclist = $('.localtoc > ul').find('li');
+  }
+
+
+  var $nav = $('#nav');
+
+  //$('#whole-page').removeClass('hidden');
+  var nav_width = $nav.width();
+
+
+  var search_url = 'search.html';
+
+  function perform_search(e) {
+    var $elem;
+
+    if (e.type === 'keypress') {
+      $elem = $(e.target);
+    }
+    else if (e.type === 'click') {
+      $elem = $(e.target).parents('.input-group').find('input');
+    }
+    var q = $elem.val().trim();
+
+    if (q) {
+      var url = search_url + '?q=' + q + '&check_keywords=yes&area=default';
+
+      location.href = url;
+    }
+  }
+
+
+  function apply_filter() {
+    var s = $filter.val().trim().toLowerCase();
+
+    $toclist.find('a').removeClass('hidden');
+    $toclist.each(function() {
+      var $this = $(this);
+      var $link = $this.find('> a');
+      var t = $link.text().toLowerCase();
+      var show = t.indexOf(s) >= 0;
+
+      if (!show) {
+        $link.addClass('hidden');
+      }
+    });
+  }
+
+  $filter.on('keyup', function(e) {
+    apply_filter();
+  });
+
+
+
+  $search.on('keypress', function(e) {
+    if (e.which == 13) {
+      perform_search(e);
+    }
+  });
+  $search.parents('.input-group').find('.input-group-addon').on('click', perform_search);
+  $(document).on('click', '.summary .fa-caret-right', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $next = $elem.next();
+    $elem.addClass('hidden');
+    $next.removeClass('hidden');
+  });
+  $(document).on('click', '.detail .fa-caret-down', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $prev = $elem.prev();
+    $elem.addClass('hidden');
+    $prev.removeClass('hidden');
+  });
+
+  $('#content').on('click', function() {
+    $('#mnav').hide();
+  });
+
+  var counter = 0;
+  var timer = null;
+
+  function show_nav() {
+    $('#content').off('mousemove', track_mouse);
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    $nav.show();
+  }
+
+  function track_mouse(e) {
+    var x = e.clientX;
+
+    if (x < 15) {
+      ++counter;
+      if (timer === null) {
+        timer = setTimeout(show_nav, 2000);
+      }
+    }
+    else {
+      counter = 0;
+    }
+    if (counter >= 20) {
+      show_nav();
+    }
+  };
+
+  function hide_nav() {
+    $nav.hide();
+    counter = 0;
+    $('#content').on('mousemove', track_mouse);
+  }
+
+  $('.hidetoc').on('click', hide_nav);
+
+  $(document).on('keyup', function(e) {
+    if (e.ctrlKey) {
+      if (e.which == 37) {      // Ctrl+left arrow
+        hide_nav();
+      }
+      else if (e.which == 39) { // Ctrl+right arrow
+        show_nav();
+      }
+    }
+  });
+
+  $('.menu-toggle').on('click', function(e) {
+    $('#mnav').toggle();
+  });
+
+  function scroll_nav(frag) {
+    var sel = '#nav ' + (frag ? 'a[href="' + frag + '"]' : '.toctree-l1 a.current');
+
+    var $link = $(sel);
+
+    if ($link.length > 0) {
+      $link[0].scrollIntoView({block: 'center'});
+    }
+  }
+
+  // If the navigator is long, then the item we clicked on to get here might
+  // not be in view. Try to scroll it into the view - a slight delay is needed
+  // to get it to sync properly with other stuff going on (as the page has just
+  // loaded). Hence the setTimeout with a timeout of 0.
+
+  function do_scroll() {
+    scroll_nav(window.location.hash);
+  }
+
+  setTimeout(do_scroll, 0);
+
+  function adjust_size() {
+    // we need to set the height explicitly so that scrolling regions in the
+    // content area work properly.
+    var h = $('#page-content').height();
+
+    $('#nav, #content').height(h);
+    if ($('#nav').is(':visible')) {
+      $('#mnav').hide();
+    }
+  }
+
+  adjust_size();
+
+  $(window).on('resize', adjust_size);
+
+  function focus_content() {
+    $('#content').focus();  // so that keyboard can be used to scroll, etc.
+  }
+
+  setTimeout(focus_content, 150);
+
+  var sizzle = $(document).data('sizzle');
+
+  function make_tooltip(id, h, b) {
+    var $e = $('<div>').attr('id', id);
+    var $b = $('<div>').addClass('tc-body').html(b);
+
+    if (h) {
+      var $h = $('<div>').addClass('tc-heading').html(h);
+      $e.append($h);
+    }
+    $e.append($b);
+    return $e;
+  }
+
+  var default_tt_options = {
+    theme: ['tooltipster-light', 'tooltipster-light-customized'],
+    interactive: true,
+    maxWidth: 600,
+    contentCloning: true
+  };
+
+  function activate_tooltips() {
+    var $tt = $('.tt');
+
+    //console.log('tt links:', $tt.length);
+    $tt.tooltipster(default_tt_options);
+  }
+
+
+
+  function add_glossary_tooltips() {
+    var links = $('a');  // can qualify with .reference.internal
+    var glinks = {};
+    var pat = /(.*)\.html#(term-.*)$/;
+    var found = false;  // links in this document
+
+    $.each(links, function(i, link) {
+        var $link = $(link);
+        var href = $link.attr('href');
+        var m = href.match(pat);
+
+        if (m) {
+          var s = m[1].replace(/^(\.\.\/)+/, '');
+
+          if (s === sizzle.app_data.glossary.document) {
+            var k = m[2];
+
+            if (k in glinks) {
+              glinks[k].push($link);
+            }
+            else {
+              glinks[k] = [$link];
+            }
+            found = true;
+          }
+        }
+    });
+    if (found) {
+      var $t = $('#tooltips');
+      var data = sizzle.app_data.glossary.terms;
+
+      $.each(glinks, function(k, v) {
+        var d = data[k];
+
+        if (d) {  // as a sanity check
+          var s = 'tc-'+ k;
+          var $e = make_tooltip(s, d.term, d.defn);
+          $t.append($e);
+
+          $.each(v, function(i, link) {
+            link.addClass('tt').attr('data-tooltip-content', '#' + s);
+          });
+        }
+      });
+    }
+  }
+
+  if (sizzle.app_data && sizzle.app_data.glossary &&
+      sizzle.app_data.glossary.document) {
+    add_glossary_tooltips();
+  }
+
+
+
+
+  function add_custom_tooltips() {
+    if (!sizzle.app_data) {
+      return;
+    }
+
+    var info_tips = sizzle.app_data.custom_data['info-tips'] || {};
+
+    if ($.isEmptyObject(info_tips)) {
+      return;
+    }
+
+    var tt_options = $.extend({contentAsHTML: true}, default_tt_options);
+
+    $('.tc-info').each(function() {
+      var $elem = $(this).prev();
+      var classes = $elem.attr('class');
+      var m = /\btci-([\S]+)/.exec(classes);
+
+      if (m !== null) {
+        var key = m[1];
+
+        if (key in info_tips) {
+          var v = info_tips[key];
+          var tt = $elem.tooltipster(tt_options).tooltipster('content', v);
+        }
+      }
+    });
+  }
+
+  add_custom_tooltips();
+
+  setTimeout(activate_tooltips, 1000);
+
+
+  // Clipboard copy for code blocks with captions
+
+  $('.code-block-caption').each(function() {
+    var $cap = $(this);
+    var $btn = $('<span class="clip-copy"><span class="copied hidden">Copied!</span><i class="fa fa-clipboard" title="Copy contents"></i></span>');
+    var $code = $cap.parent().find('.highlight');
+
+    $cap.append($btn);
+    $btn.find('.fa-clipboard').data('clip-text', $code.text());
+  });
+
+  var clipboard = new ClipboardJS('.code-block-caption .fa-clipboard', {
+    'text': function(trigger) {
+      return $(trigger).data('clip-text');
+    }
+  });
+
+  clipboard.on('success', function(e) {
+    var $copied = $(e.trigger).prev();
+
+    $copied.removeClass('hidden');
+
+    setTimeout(function() {$copied.addClass('hidden'); }, 1000);
+  });
+
+  if (sizzle.on_load) {
+    sizzle.on_load.forEach(function(f) {
+      f();
+    });
+  }
+});
+</script>
+</body>
 </html>

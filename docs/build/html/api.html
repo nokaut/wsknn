@@ -1,142 +1,214 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-      <title>API</title>
-    
-          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
-      
-      <!-- sphinx script_files -->
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-
-      
-      <!-- bundled in js (rollup iife) -->
-      <!-- <script src="_static/theme-vendors.js"></script> -->
-      <script src="_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" />
-  <link rel="prev" title="Weighted session-based k-NN - Intro" href="index.html" /> 
-  </head>
-
-  <body>
-    <div id="app">
-    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="index.html" class="home-link">
-    
-      <span class="site-name">wsknn</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
+<html lang="en-gb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+<title>wsknn - API</title>
 
-    </navlinks>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha256-8uHMIn1ru0GS5KO+zf7Zccf8Uw12IA5DrdEcmMuWLFM=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/tooltipster.bundle.min.css" integrity="sha256-Qc4lCfqZWYaHF5hgEOFrYzSIX9Rrxk0NPHRac+08QeQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" integrity="sha256-Wa1I4jhSXeWd3N6RhfPlkqr1WlT+zS3Vh2YGCg0129E=" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro|Roboto|Roboto+Mono" rel="stylesheet">
+<link href="https://fonts.red-dove.com/iosevka-ss09-regular/webfont.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/js/tooltipster.bundle.min.js" integrity="sha256-v8akIv8SCqn5f3mbVB7vEWprIizxPh6oV0yhao/dbB4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+    <script>
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        LINK_SUFFIX: '.html',
+        HAS_SOURCE:  false,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+      $(document).data('sizzle', {on_load: []});
+    </script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="app-data.js"></script>
+<link rel="index" title="Index" href="genindex.html" />
+<link rel="search" title="Search" href="search.html" />
+<link rel="prev" title="Weighted session-based k-NN - Intro" href="index.html" />
+
+</head>
+<body class="full-height test">
+<noscript>
+  <div>
+    <div id="noscript-message">JavaScript is not enabled. It is needed for this website to work.</div>
   </div>
-</navbar>
+</noscript>
+<div id="whole-page" class="container-fluid content full-height">
+  <div id="header-row" class="row">
+    <div id="header-container" class="col-md-12">
+      <div id="hdr-left">
+        <i class="fa fa-bars menu-toggle"></i>
+        
+<a href="index.html" class="text-logo">wsknn 0.1.5 documentation</a>
 
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
       </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
+      <div id="hdr-centre" class="text-center stretch">
+        <h3 title="API">API</h3>
+        <h6>API</h6>
+      </div>
+      <div id="hdr-search">
+        
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
+      </div>
+
+      <div id="hdr-index">
+        <a href="genindex.html" class="btn btn-default" title="Go to the index"><i class="fa fa-list"></i></a>
+      </div>
+
+      <div id="hdr-source">
+        <a href="_sources/api.rst.txt" class="btn btn-default" title="See the source for this page"><i class="fa fa-code"></i></a>
+      </div>
+
+      <div id="hdr-right">
+        
+  
+  <div class="prev-next">
+    
+      <div class="pull-left">
+        <a class="btn btn-default prev" href="index.html" title="Previous chapter (Weighted session-based k-NN - Intro)"><i class="fa fa-chevron-left mr-1em" aria-hidden="true"></i><span class="btn-text">Weighted session-based k-NN - Intro</span></a>
+      </div>
+    
+    </div>
+  
+      </div>
+      <div id="alt-hdr-right">
+
+        <a href="index.html"><i class="fa fa-chevron-left mr-8"></i></a>
 
 
+        <a href="index.html"><i class="fa fa-home mr-8"></i></a>
 
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
+
+        <a href="search.html"><i class="fa fa-search mr-8"></i></a>
+
+
+        <a href="genindex.html"><i class="fa fa-list mr-8"></i></a>
+
+
+      </div>
     </div>
   </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="index.html#weighted-session-based-k-nn-intro">Contents:</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 current">
-            
-              <a href="#" class="reference internal current">API</a>
-            
 
-            
-              <ul>
-                
-                  <li class="toctree-l2"><a href="#core-functions" class="reference internal">Core functions</a></li>
-                
-                  <li class="toctree-l2"><a href="#core-wsknn-class" class="reference internal">Core WSKNN class</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-wsknn.evaluate.metrics" class="reference internal">Evaluation metrics</a></li>
-                
-                  <li class="toctree-l2"><a href="#weighting-methods" class="reference internal">Weighting methods</a></li>
-                
-                  <li class="toctree-l2"><a href="#utilities" class="reference internal">Utilities</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-      </ul>
+  <div id="content-row" class="row">
+    <div id="page-content" class="col-md-12 flex-col">
+      <div id="content-container">
+        <div id="nav">
+          
+  <div class="navsidebar">
+    <div id="sidebar-search">
+      
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
     </div>
+      <div class="sidebar-block">
+        <div class="sidebar-tocheading">
+          <div class="pull-left">
+            <h2>Table Of Contents</h2>
+          </div>
+          <div class="pull-right" title="Hide this sidebar (hover at left edge to bring it back)"><i class="fa fa-chevron-left hidetoc"></i></div>
+        </div>
+        <div class="sidebar-toc">
+      
+          <div id="toc-filter" title="Type in here to show only matching topics">
+            <input class="form-control" id="toc-filter-query" placeholder="Filter by title ...">
+          </div>
+      
+        
   
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-    
-    <li>API</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="index.html"
-       title="previous chapter">← Weighted session-based k-NN - Intro</a>
-  </li>
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#api">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fit-transform">fit_transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predict">predict</a></li>
 </ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#core-wsknn-class">Core WSKNN class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsknn.model.wsknn">WSKNN</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation-metrics">Evaluation metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-wsknn.utils.transform">Utilities</a></li>
+</ul>
+</li>
+</ul>
+
   
-</div>
-<hr>
-          <div class="content" role="main" v-pre>
+        </div>
+      </div>
+  </div>
+        </div>
+        <div id="content" tabindex="0" class="stretch">
+          <div id="mnav">
             
-  <section id="api">
+  
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#api">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fit-transform">fit_transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predict">predict</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#core-wsknn-class">Core WSKNN class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsknn.model.wsknn">WSKNN</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation-metrics">Evaluation metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-wsknn.utils.transform">Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+  
+          </div>
+          <div class="body">
+            
+  <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
-<section id="core-functions">
+<div class="section" id="core-functions">
 <h2>Core functions<a class="headerlink" href="#core-functions" title="Permalink to this headline">¶</a></h2>
-<section id="fit-transform">
+<div class="section" id="fit-transform">
 <h3>fit_transform<a class="headerlink" href="#fit-transform" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">wsknn.fit_transform.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_events_from_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_sampling_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_sampling_event_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_str_event_weights_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recommend_any</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">items</span></span></em>, <em><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">return_events_from_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">sampling_str_event_weights_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">recommend_any</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/fit_transform.html#fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Sets input session-items and item-sessions maps.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>Dict</em>) – <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sessions</span> <span class="o">=</span> <span class="p">{</span>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">Dict</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sessions</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>   <span class="n">session_id</span><span class="p">:</span> <span class="p">(</span>
 <span class="gp">... </span>       <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
 <span class="gp">... </span>       <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
@@ -146,8 +218,8 @@
 <span class="go">...}</span>
 </pre></div>
 </div>
-</p></li>
-<li><p><strong>items</strong> (<em>Dict</em>) – <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">{</span>
+</dd>
+<dt><strong>items</strong><span class="classifier">Dict</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>   <span class="n">item_id</span><span class="p">:</span> <span class="p">(</span>
 <span class="gp">... </span>       <span class="p">[</span> <span class="n">sequence_of_sessions</span> <span class="p">],</span>
 <span class="gp">... </span>       <span class="p">[</span> <span class="n">sequence_of_the_first_session_timestamps</span> <span class="p">]</span>
@@ -155,38 +227,50 @@
 <span class="go">...}</span>
 </pre></div>
 </div>
-</p></li>
-<li><p><strong>number_of_recommendations</strong> (<em>int</em><em>, </em><em>default=5</em>) – The number of recommended items.</p></li>
-<li><p><strong>number_of_neighbors</strong> (<em>int</em><em>, </em><em>default=10</em>) – The number of the closest sessions to choose the items from.</p></li>
-<li><p><strong>sampling_strategy</strong> (<em>str</em><em>, </em><em>default='common_items'</em>) – <dl class="simple">
-<dt>How to filter the initial sample of sessions. Available strategies are:</dt><dd><ul>
-<li><p>’common_items’: sample sessions with the same items as the input session,</p></li>
-<li><p>’recent’: sample the most actual sessions,</p></li>
-<li><p>’random’: get a random sample of sessions,</p></li>
-<li><p>’weighted_events’: select sessions based on the specific weights assigned to events.</p></li>
+</dd>
+<dt><strong>number_of_recommendations</strong><span class="classifier">int, default=5</span></dt><dd><p>The number of recommended items.</p>
+</dd>
+<dt><strong>number_of_neighbors</strong><span class="classifier">int, default=10</span></dt><dd><p>The number of the closest sessions to choose the items from.</p>
+</dd>
+<dt><strong>sampling_strategy</strong><span class="classifier">str, default=’common_items’</span></dt><dd><dl class="docutils">
+<dt>How to filter the initial sample of sessions. Available strategies are:</dt><dd><ul class="simple">
+<li>‘common_items’: sample sessions with the same items as the input session,</li>
+<li>‘recent’: sample the most actual sessions,</li>
+<li>‘random’: get a random sample of sessions,</li>
+<li>‘weighted_events’: select sessions based on the specific weights assigned to events.</li>
 </ul>
 </dd>
 </dl>
-</p></li>
-<li><p><strong>sample_size</strong> (<em>int</em><em>, </em><em>default=1000</em>) – How many sessions from the model are sampled to make a recommendation.</p></li>
-<li><p><strong>weighting_func</strong> (<em>str</em><em>, </em><em>default='linear'</em>) – The similarity measurement between sessions. Available options: ‘linear’, ‘log’ and ‘quadratic’.</p></li>
-<li><p><strong>ranking_strategy</strong> (<em>str</em><em>, </em><em>default='linear'</em>) – How we calculate an item rank (based on its position in a session sequence). Available options
-are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p></li>
-<li><p><strong>return_events_from_session</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should algorithm return the same events as in session if this is only neighbor?</p></li>
-<li><p><strong>required_sampling_event</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>default = None</em>) – Set this paramater to the event name if sessions with it must be included in the neighbors selection.
-For example, this event may be a “purchase”.</p></li>
-<li><p><strong>required_sampling_event_index</strong> (<em>int</em><em>, </em><em>default = None</em>) – If the <cite>required_sampling_event</cite> parameter is filled then you must pass an index of a row with event names.</p></li>
-<li><p><strong>sampling_str_event_weights_index</strong> (<em>int</em><em>, </em><em>default = None</em>) – If <cite>sampling_strategy</cite> is set to <cite>weighted_events</cite> then you must pass an index of a row with event weights.</p></li>
-<li><p><strong>recommend_any</strong> (<em>bool</em><em>, </em><em>default = False</em>) – If recommender returns less than number of recommendations items then return random items.</p></li>
-</ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>wsknn</strong> – The trained Weighted session-based K-nn model.</p>
+<dt><strong>sample_size</strong><span class="classifier">int, default=1000</span></dt><dd><p>How many sessions from the model are sampled to make a recommendation.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN">WSKNN</a></p>
+<dt><strong>weighting_func</strong><span class="classifier">str, default=’linear’</span></dt><dd><p>The similarity measurement between sessions. Available options: ‘linear’, ‘log’ and ‘quadratic’.</p>
+</dd>
+<dt><strong>ranking_strategy</strong><span class="classifier">str, default=’linear’</span></dt><dd><p>How we calculate an item rank (based on its position in a session sequence). Available options
+are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p>
+</dd>
+<dt><strong>return_events_from_session</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should algorithm return the same events as in session if this is only neighbor?</p>
+</dd>
+<dt><strong>required_sampling_event</strong><span class="classifier">int or str, default = None</span></dt><dd><p>Set this paramater to the event name if sessions with it must be included in the neighbors selection.
+For example, this event may be a “purchase”.</p>
+</dd>
+<dt><strong>required_sampling_event_index</strong><span class="classifier">int, default = None</span></dt><dd><p>If the <cite>required_sampling_event</cite> parameter is filled then you must pass an index of a row with event names.</p>
+</dd>
+<dt><strong>sampling_str_event_weights_index</strong><span class="classifier">int, default = None</span></dt><dd><p>If <cite>sampling_strategy</cite> is set to <cite>weighted_events</cite> then you must pass an index of a row with event weights.</p>
+</dd>
+<dt><strong>recommend_any</strong><span class="classifier">bool, default = False</span></dt><dd><p>If recommender returns less than number of recommendations items then return random items.</p>
 </dd>
 </dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>wsknn</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained Weighted session-based K-nn model.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">input_sessions</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s1">&#39;session_x&#39;</span><span class="p">:</span> <span class="p">(</span>
@@ -214,561 +298,946 @@ For example, this event may be a “purchase”.</p></li>
 </div>
 </dd></dl>
 
-</section>
-<section id="predict">
+</div>
+<div class="section" id="predict">
 <h3>predict<a class="headerlink" href="#predict" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">wsknn.predict.</span></span><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span></dt>
+<code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">model</span></span></em>, <em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/predict.html#predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>The function is an alias for the .predict() method of the WSKNN model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Fitted WSKNN model.</p></li>
-<li><p><strong>sessions</strong> (<em>List</em>) – Sequence of items for recommendation. It must be a nested List of lists:
-&gt;&gt;&gt; [ [items], [timestamps], [properties] ]</p></li>
-<li><p><strong>settings</strong> (<em>Dict</em>) – Settings of the model. It is worth noticing, that using this parameter allows to test different setups.
-Possible parameters are grouped in the <cite>settings.yaml</cite> file under the <cite>model</cite> key.</p></li>
-</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>model</strong><span class="classifier">WSKNN</span></dt><dd><p>Fitted WSKNN model.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>recommendations</strong> – Item recommendations and their ranks.</p>
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><p>Sequence of items for recommendation. It must be a nested List of lists:
+&gt;&gt;&gt; [
+…     [items],
+…     [timestamps],
+…     [(optional) event names],
+…     [(optional) weights]
+… ]</p>
+</dd>
+<dt><strong>settings</strong><span class="classifier">Dict</span></dt><dd><p>Settings of the model. It is worth noticing, that using this parameter allows to test different setups.
+Possible parameters are grouped in the <cite>settings.yml</cite> file under the <cite>model</cite> key.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>recommendations</strong><span class="classifier">List</span></dt><dd><p>Item recommendations and their ranks.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="n">item</span> <span class="n">a</span><span class="p">,</span> <span class="n">rank</span> <span class="n">a</span><span class="p">],</span> <span class="p">[</span><span class="n">item</span> <span class="n">b</span><span class="p">,</span> <span class="n">rank</span> <span class="n">b</span><span class="p">]</span>
 <span class="gp">... </span><span class="p">]</span>
 </pre></div>
 </div>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>List</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Model wasn’t fitted.</p>
 </dd>
 </dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt>ValueError</dt><dd><p>Model wasn’t fitted.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sessions</span> <span class="o">=</span> <span class="p">[</span>
+<span class="go">        [[&#39;item a&#39;, &#39;item b&#39;], []],</span>
+<span class="go">        [[&#39;item x&#39;, &#39;item a&#39;, &#39;item n&#39;], []]</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">recommendations</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">fitted_model</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
-</section>
-</section>
-<section id="core-wsknn-class">
+</div>
+</div>
+<div class="section" id="core-wsknn-class">
 <h2>Core WSKNN class<a class="headerlink" href="#core-wsknn-class" title="Permalink to this headline">¶</a></h2>
-<section id="module-wsknn.model.wsknn">
+<div class="section" id="module-wsknn.model.wsknn">
 <span id="wsknn"></span><h3>WSKNN<a class="headerlink" href="#module-wsknn.model.wsknn" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wsknn.model.wsknn.</span></span><span class="sig-name descname"><span class="pre">WSKNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking_strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_events_from_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_sampling_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_sampling_event_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_event_weights_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recommend_any</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The class represents the Weighted Session-Based k-nn model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>number_of_recommendations</strong> (<em>int</em><em>, </em><em>default=5</em>) – The number of recommended items.</p></li>
-<li><p><strong>number_of_neighbors</strong> (<em>int</em><em>, </em><em>default=10</em>) – The number of closest sessions to choose the items from.</p></li>
-<li><p><strong>sampling_strategy</strong> (<em>str</em><em>, </em><em>default='common_items'</em>) – How to filter the initial sample of sessions. Available strategies are:
-- ‘common_items’: sample sessions with the same items as the input session,
-- ‘recent’: sample the most actual sessions,
-- ‘random’: get a random sample of sessions,
-- ‘weighted_events’: select sessions based on the specific weights assigned to events.</p></li>
-<li><p><strong>sample_size</strong> (<em>int</em><em>, </em><em>default=1000</em>) – How many sessions from the model are sampled to make a recommendation.</p></li>
-<li><p><strong>weighting_func</strong> (<em>str</em><em>, </em><em>default='linear'</em>) – The similarity measurement between sessions. Available options: ‘linear’, ‘log’ and ‘quadratic’.</p></li>
-<li><p><strong>ranking_strategy</strong> (<em>str</em><em>, </em><em>default='linear'</em>) – How we calculate an item rank (based on its position in a session sequence). Available options
-are: ‘inv’, ‘linear’, ‘log’, ‘quadratic’.</p></li>
-<li><p><strong>return_events_from_session</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should algorithm return the same events as in session if this is only neighbor?</p></li>
-<li><p><strong>required_sampling_event</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>default = None</em>) – Set this paramater to the event name if sessions with it must be included in
-the neighbors selection. For example, this event may be a “purchase”.</p></li>
-<li><p><strong>required_sampling_event_index</strong> (<em>int</em><em>, </em><em>default = None</em>) – If required_sampling_event parameter is filled then you must pass an index of a row
-with event names.</p></li>
-<li><p><strong>sampling_event_weights_index</strong> (<em>int</em><em>, </em><em>default = None</em>) – If sampling_strategy is set to weighted_events then you must pass an index of a
-row with event weights.</p></li>
-<li><p><strong>recommend_any</strong> (<em>bool</em><em>, </em><em>default = False</em>) – If recommender returns less than number of recommendations items then return random items.</p></li>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-name descname"><span class="pre">WSKNN</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">return_events_from_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">sampling_event_weights_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">recommend_any</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/model/wsknn.html#WSKNN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.model.wsknn.WSKNN" title="Permalink to this definition">¶</a></dt>
+<dd><p>The class represents the Weighted Session-Based k-nn model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>number_of_recommendations</strong><span class="classifier">int, default=5</span></dt><dd><p>The number of recommended items.</p>
+</dd>
+<dt><strong>number_of_neighbors</strong><span class="classifier">int, default=10</span></dt><dd><p>The number of the closest sessions to choose the items from.</p>
+</dd>
+<dt><strong>sampling_strategy</strong><span class="classifier">str, default=’common_items’</span></dt><dd><p>How to filter the initial sample of sessions. Available strategies are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'common_items'</span></code>: sample sessions with the same items as the input session,</li>
+<li><code class="docutils literal notranslate"><span class="pre">'recent'</span></code>: sample the most actual sessions,</li>
+<li><code class="docutils literal notranslate"><span class="pre">'random'</span></code>: get a random sample of sessions,</li>
+<li><code class="docutils literal notranslate"><span class="pre">'weighted_events'</span></code>: select sessions based on the specific weights assigned to events.</li>
 </ul>
 </dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.weighting_functions">
-<span class="sig-name descname"><span class="pre">weighting_functions</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.weighting_functions" title="Permalink to this definition">¶</a></dt>
-<dd><p>List with weighting functions: [‘linear’, ‘log’, ‘quadratic’].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List</p>
+<dt><strong>sample_size</strong><span class="classifier">int, default=1000</span></dt><dd><p>How many sessions from the model are sampled to make a recommendation.</p>
+</dd>
+<dt><strong>weighting_func</strong><span class="classifier">str, default=’linear’</span></dt><dd><p>The similarity measurement between sessions. Available options: <code class="docutils literal notranslate"><span class="pre">'linear'</span></code>, <code class="docutils literal notranslate"><span class="pre">'log'</span></code> and <code class="docutils literal notranslate"><span class="pre">'quadratic'</span></code>.</p>
+</dd>
+<dt><strong>ranking_strategy</strong><span class="classifier">str, default=’linear’</span></dt><dd><p>How we calculate an item rank (based on its position in a session sequence). Available options
+are: <code class="docutils literal notranslate"><span class="pre">'inv'</span></code>, <code class="docutils literal notranslate"><span class="pre">'linear'</span></code>, <code class="docutils literal notranslate"><span class="pre">'log'</span></code>, <code class="docutils literal notranslate"><span class="pre">'quadratic'</span></code>.</p>
+</dd>
+<dt><strong>return_events_from_session</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should algorithm return the same items as in session if there are no neighbors?</p>
+</dd>
+<dt><strong>required_sampling_event</strong><span class="classifier">int or str, default = None</span></dt><dd><p>Set this parameter to the event name if sessions with this event must be included in the neighbors’ selection.
+For example, an event name may be the <code class="docutils literal notranslate"><span class="pre">&quot;purchase&quot;</span></code>.</p>
+</dd>
+<dt><strong>required_sampling_event_index</strong><span class="classifier">int, default = None</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">required_sampling_event</span></code> parameter is filled then you must pass an index of a row with event names.</p>
+</dd>
+<dt><strong>sampling_event_weights_index</strong><span class="classifier">int, default = None</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">sampling_strategy</span></code> is set to <code class="docutils literal notranslate"><span class="pre">weighted_events</span></code> then you must pass an index of a row with event weights.</p>
+</dd>
+<dt><strong>recommend_any</strong><span class="classifier">bool, default = False</span></dt><dd><p>If recommender picks less items than required by the <code class="docutils literal notranslate"><span class="pre">number_of_recommendations</span></code> then add random items to
+the results.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.ranking_strategies">
-<span class="sig-name descname"><span class="pre">ranking_strategies</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.ranking_strategies" title="Permalink to this definition">¶</a></dt>
-<dd><p>List with ranking strategies: [‘linear’, ‘log’, ‘quadratic’, ‘inv’].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first docutils">
+<dt>InvalidDimensionsError</dt><dd><p>Wrong number of nested sequences within session-items or item-sessions maps.</p>
+</dd>
+<dt>InvalidTimestampError</dt><dd><p>Wrong type of timestamp - <code class="docutils literal notranslate"><span class="pre">int</span></code> type is required.</p>
+</dd>
+<dt>TypeError</dt><dd><p>Wrong type of nested structures within session-items or item-sessions maps.</p>
+</dd>
+<dt>IndexError</dt><dd><p>Wrong index of event names or wrong index of event weights.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.session_item_map">
-<span class="sig-name descname"><span class="pre">session_item_map</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.session_item_map" title="Permalink to this definition">¶</a></dt>
-<dd><dl>
-<dt>sessions = {</dt><dd><dl class="simple">
-<dt>session_id: (</dt><dd><p>[sequence_of_items],
-[sequence_of_timestamps],
-[sequence_of_event_type]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>weighting_functions: List</strong></dt><dd><p>The weighting functions: <code class="docutils literal notranslate"><span class="pre">['linear',</span> <span class="pre">'log',</span> <span class="pre">'quadratic']</span></code>.</p>
+</dd>
+<dt><strong>ranking_strategies</strong><span class="classifier">List</span></dt><dd><p>The ranking strategies: <code class="docutils literal notranslate"><span class="pre">['linear',</span> <span class="pre">'log',</span> <span class="pre">'quadratic',</span> <span class="pre">'inv']</span></code>.</p>
+</dd>
+<dt><strong>session_item_map</strong><span class="classifier">Dict</span></dt><dd><p>The map of items that are occuring the session and their timestamps, and (optional) their types and their
+weights.
+&gt;&gt;&gt; sessions = {
+…     session_id: (
+…     [sequence_of_items],
+…     [sequence_of_timestamps],
+…     [(optional) event names (types)],
+…     [(optional) weights]
+…     )
+… }</p>
+</dd>
+<dt><strong>item_session_map</strong><span class="classifier">Dict</span></dt><dd><p>The map of items and the sessions where those items are present, and the first timestamp of those sessions.
+&gt;&gt;&gt; items = {
+…     item_id: (
+…     [sequence_of_sessions],
+…     [sequence_of_the_first_session_timestamps]
+…     )
+… }</p>
+</dd>
+<dt><strong>n_of_recommendations</strong><span class="classifier">int</span></dt><dd><p>The number of items recommended.</p>
+</dd>
+<dt><strong>number_of_closest_neighbors</strong><span class="classifier">int</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">number_of_neighbors</span></code> parameter.</p>
+</dd>
+<dt><strong>sampling_strategy</strong><span class="classifier">str</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">sampling_strategy</span></code> parameter.</p>
+</dd>
+<dt><strong>possible_neighbors_sample_size</strong><span class="classifier">int</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">sample_size</span></code> parameter.</p>
+</dd>
+<dt><strong>weighting_function</strong><span class="classifier">str</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">weighting_func</span></code> parameter.</p>
+</dd>
+<dt><strong>ranking_strategy</strong><span class="classifier">str</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">ranking_strategy</span></code> parameter.</p>
+</dd>
+<dt><strong>return_events_from_session</strong><span class="classifier">bool, default = True</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">return_events_from_session</span></code> parameter.</p>
+</dd>
+<dt><strong>required_sampling_event</strong><span class="classifier">Union[int, str], default = None</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">required_sampling_event</span></code> parameter.</p>
+</dd>
+<dt><strong>required_sampling_event_index</strong><span class="classifier">int, default = None</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">required_sampling_event_index</span></code> parameter.</p>
+</dd>
+<dt><strong>sampling_event_weights_index</strong><span class="classifier">int, default = None</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">sampling_str_event_weights_index</span></code> parameter.</p>
+</dd>
+<dt><strong>recommend_any</strong><span class="classifier">bool, default = False</span></dt><dd><p>See <code class="docutils literal notranslate"><span class="pre">recommend_any</span></code> parameter.</p>
 </dd>
 </dl>
-<p>)</p>
-</dd>
-</dl>
-<p>}
-Dict populated with fit() method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.item_session_map">
-<span class="sig-name descname"><span class="pre">item_session_map</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.item_session_map" title="Permalink to this definition">¶</a></dt>
-<dd><dl>
-<dt>items = {</dt><dd><dl class="simple">
-<dt>item_id: (</dt><dd><p>[sequence_of_sessions],
-[sequence_of_the_first_session_timestamps]</p>
-</dd>
-</dl>
-<p>)</p>
-</dd>
-</dl>
-<p>}
-Dict populated with fit() method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.n_of_recommendations">
-<span class="sig-name descname"><span class="pre">n_of_recommendations</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.n_of_recommendations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of items recommended.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.number_of_closest_neighbors">
-<span class="sig-name descname"><span class="pre">number_of_closest_neighbors</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.number_of_closest_neighbors" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.sampling_strategy">
-<span class="sig-name descname"><span class="pre">sampling_strategy</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.sampling_strategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>See sampling_strategy parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.possible_neighbors_sample_size">
-<span class="sig-name descname"><span class="pre">possible_neighbors_sample_size</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.possible_neighbors_sample_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>See sample_size parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.weighting_function">
-<span class="sig-name descname"><span class="pre">weighting_function</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.weighting_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>See weighting_func parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.ranking_strategy">
-<span class="sig-name descname"><span class="pre">ranking_strategy</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.ranking_strategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>See ranking_strategy parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.return_events_from_session">
-<span class="sig-name descname"><span class="pre">return_events_from_session</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.return_events_from_session" title="Permalink to this definition">¶</a></dt>
-<dd><p>See return_events_from_session parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool, default = True</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.required_sampling_event">
-<span class="sig-name descname"><span class="pre">required_sampling_event</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.required_sampling_event" title="Permalink to this definition">¶</a></dt>
-<dd><p>See required_sampling_event parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[int, str], default = None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.required_sampling_event_index">
-<span class="sig-name descname"><span class="pre">required_sampling_event_index</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.required_sampling_event_index" title="Permalink to this definition">¶</a></dt>
-<dd><p>See required_sampling_event_index parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int, default = None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.sampling_event_weights_index">
-<span class="sig-name descname"><span class="pre">sampling_event_weights_index</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.sampling_event_weights_index" title="Permalink to this definition">¶</a></dt>
-<dd><p>See sampling_str_event_weights_index parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int, default = None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.recommend_any">
-<span class="sig-name descname"><span class="pre">recommend_any</span></span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.recommend_any" title="Permalink to this definition">¶</a></dt>
-<dd><p>See recommend_any parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool, default = False</p>
-</dd>
-</dl>
-</dd></dl>
-
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>fit()</strong></td>
+<td>Sets input session-items and item-sessions maps.</td>
+</tr>
+<tr class="row-even"><td><strong>recommend()</strong></td>
+<td>The method predicts the <code class="docutils literal notranslate"><span class="pre">n</span></code> next recommendations from a given session.</td>
+</tr>
+<tr class="row-odd"><td><strong>set_model_params()</strong></td>
+<td>Methods resets and maps the new model parameters.</td>
+</tr>
+</tbody>
+</table>
 <dl class="py method">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/model/wsknn.html#WSKNN.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets input session-items and item-sessions maps.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>sessions</strong><span class="classifier">Dict</span></dt><dd><p>The map of items that are occuring the session and their timestamps, and (optional) their types and their
+weights.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sessions</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="n">session_id</span><span class="p">:</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">sequence_of_items</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">sequence_of_timestamps</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="n">optional</span><span class="p">)</span> <span class="n">event</span> <span class="n">names</span> <span class="p">(</span><span class="n">types</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="n">optional</span><span class="p">)</span> <span class="n">weights</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>items</strong><span class="classifier">Dict</span></dt><dd><p>The map of items and the sessions where those items are present, and the first timestamp of those sessions.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="n">item_id</span><span class="p">:</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">sequence_of_sessions</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">sequence_of_the_first_session_timestamps</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.recommend">
-<span class="sig-name descname"><span class="pre">recommend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.recommend" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">recommend</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">event_stream</span></span></em>, <em><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/model/wsknn.html#WSKNN.recommend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.recommend" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method predicts n next recommendations from a given session.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>event_stream</strong><span class="classifier">List</span></dt><dd><p>Sequence of items for recommendation. It must be a nested <code class="docutils literal notranslate"><span class="pre">List</span></code> of lists:
+&gt;&gt;&gt; [
+…     [sequence_of_items],
+…     [sequence_of_timestamps],
+…     [(optional) event names (types)],
+…     [(optional) weights]
+… ]</p>
+</dd>
+<dt><strong>settings</strong><span class="classifier">Dict, default = None</span></dt><dd><p>Model settings and parameters.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>recommendations</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">item</span> <span class="n">a</span><span class="p">,</span> <span class="n">rank</span> <span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="n">item</span> <span class="n">b</span><span class="p">,</span> <span class="n">rank</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN.set_model_params">
-<span class="sig-name descname"><span class="pre">set_model_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.set_model_params" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_model_params</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">return_events_from_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">recommend_any</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/model/wsknn.html#WSKNN.set_model_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.model.wsknn.WSKNN.set_model_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Methods resets and maps the new model parameters.</p>
-</dd></dl>
-
-<p>:raises InvalidDimensionsError : wrong number of nested sequences within session-items or item-sessions maps.:
-:raises InvalidTimestampError : wrong type of timestamp - int is required.:
-:raises TypeError : wrong type of nested structures within session-items or item-sessions maps.:
-:raises IndexError :: - wrong index of event names,
-    - wrong index of event weights.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets input session-items and item-sessions maps.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>Dict</em>) – <dl>
-<dt>sessions = {</dt><dd><dl class="simple">
-<dt>session_id: (</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_types ]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>number_of_recommendations</strong><span class="classifier">int, default = None</span></dt><dd></dd>
+<dt><strong>number_of_neighbors</strong><span class="classifier">int, default = None</span></dt><dd></dd>
+<dt><strong>sampling_strategy</strong><span class="classifier">str, default = None</span></dt><dd></dd>
+<dt><strong>sample_size</strong><span class="classifier">int, default = None</span></dt><dd></dd>
+<dt><strong>weighting_func</strong><span class="classifier">str, default = None</span></dt><dd></dd>
+<dt><strong>ranking_strategy</strong><span class="classifier">str, default = None</span></dt><dd></dd>
+<dt><strong>return_events_from_session</strong><span class="classifier">bool, default = None</span></dt><dd></dd>
+<dt><strong>required_sampling_event</strong><span class="classifier">str or int, default = None</span></dt><dd></dd>
+<dt><strong>recommend_any</strong><span class="classifier">bool, default = None</span></dt><dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt>TypeError</dt><dd><p>Wrong input parameter type.</p>
+</dd>
+<dt>KeyError</dt><dd><p>Wrong name of sampling strategy, ranking strategy or weighting function.</p>
 </dd>
 </dl>
-<p>)</p>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>items</strong> (<em>Dict</em>) – <dl>
-<dt>items = {</dt><dd><dl class="simple">
-<dt>item_id: (</dt><dd><p>[ sequence_of_sessions ],
-[ sequence_of_the_first_session_timestamps ]</p>
-</dd>
-</dl>
-<p>)</p>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">recommend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method predicts n next recommendations from a given session.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>event_stream</strong> (<em>List</em>) – <p>Sequence of items for recommendation. It must be a nested List of lists:
-[</p>
-<blockquote>
-<div><p>[items],
-[timestamps],
-[(optional) event names],
-[(optional) weights]</p>
-</div></blockquote>
-<p>]</p>
-</p></li>
-<li><p><strong>settings</strong> (<em>Dict</em><em>, </em><em>default = None</em>) – Model settings and parameters.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>recommendations</strong> –</p>
-<dl class="simple">
-<dt>[</dt><dd><p>(item a, rank a), (item b, rank b)</p>
-</dd>
-</dl>
-<p>]</p>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>List</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="id2">
-<span class="sig-name descname"><span class="pre">set_model_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_events_from_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_sampling_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recommend_any</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Methods resets and maps the new model parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>number_of_recommendations</strong> (<em>int</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>number_of_neighbors</strong> (<em>int</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>sampling_strategy</strong> (<em>str</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>sample_size</strong> (<em>int</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>weighting_func</strong> (<em>str</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>ranking_strategy</strong> (<em>str</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>return_events_from_session</strong> (<em>bool</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>required_sampling_event</strong> (<em>str</em><em> or </em><em>int</em><em>, </em><em>default = None</em>) – </p></li>
-<li><p><strong>recommend_any</strong> (<em>bool</em><em>, </em><em>default = None</em>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – Wrong type of an input parameter.</p></li>
-<li><p><strong>KeyError</strong> – Wrong name of sampling strategy, ranking strategy or weighting function.</p></li>
-</ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="module-wsknn.evaluate.metrics">
-<span id="evaluation-metrics"></span><h2>Evaluation metrics<a class="headerlink" href="#module-wsknn.evaluate.metrics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="evaluation-metrics">
+<h2>Evaluation metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_mean_reciprocal_rank">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_mean_reciprocal_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_mean_reciprocal_rank" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the mean reciprocal rank of a top k recommendations.
-Given session must be longer than k events.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<dt class="sig sig-object py">
+<code class="sig-name descname"><span class="pre">score_model</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_mrr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_recall</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#score_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Function get Precision&#64;k, Recall&#64;k and MRR&#64;k.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List of sessions</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>MRR</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating MRR or should it raise an error?</p>
+</dd>
+<dt><strong>calc_mrr</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should <strong>MRR</strong> be calculated?</p>
+</dd>
+<dt><strong>calc_precision</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should <strong>precision</strong> be calculated?</p>
+</dd>
+<dt><strong>calc_recall</strong><span class="classifier">bool, default = True</span></dt><dd><p>Should <strong>recall</strong> be calculated?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating MRR or should raise an error?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Mean Reciprocal Rank: The average score of MRR per n sessions.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>scores</strong><span class="classifier">Dict</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">{'MRR':</span> <span class="pre">float,</span> <span class="pre">'Recall':</span> <span class="pre">float,</span> <span class="pre">'Precision':</span> <span class="pre">float}</span></code></p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_precision">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_precision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_precision" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the precision score of a top k recommendations.
-Given session must be longer than k events.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<dt class="sig sig-object py">
+<code class="sig-name descname"><span class="pre">get_mean_reciprocal_rank</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#get_mean_reciprocal_rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>The function calculates the mean reciprocal rank of a top <code class="docutils literal notranslate"><span class="pre">k</span></code> recommendations. Given session must be longer
+than <code class="docutils literal notranslate"><span class="pre">k</span></code> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>MRR</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating <strong>MRR</strong> or should it raise an error?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate Precision. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating Precision or should raise an error?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Precision: The average score of Precision per n sessions.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mrr</strong><span class="classifier">float</span></dt><dd><p>Mean Reciprocal Rank: The average score of <strong>MRR</strong> per <code class="docutils literal notranslate"><span class="pre">n</span></code> sessions.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<code class="sig-name descname"><span class="pre">get_precision</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#get_precision"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>The function calculates the precision score of a top <code class="docutils literal notranslate"><span class="pre">k</span></code> recommendations. Given session must be longer than
+<code class="docutils literal notranslate"><span class="pre">k</span></code> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>precision</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating <strong>precision</strong> or should it raise an error?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>precision</strong><span class="classifier">float</span></dt><dd><p>Precision: The average score of <strong>precision</strong> per <code class="docutils literal notranslate"><span class="pre">n</span></code> sessions.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Notes</p>
-<p>Precision is defined as (no of recommendations that are relevant) / (number of items recommended).</p>
+<p>Precision is defined as <code class="docutils literal notranslate"><span class="pre">(no</span> <span class="pre">of</span> <span class="pre">recommendations</span> <span class="pre">that</span> <span class="pre">are</span> <span class="pre">relevant)</span> <span class="pre">/</span> <span class="pre">(number</span> <span class="pre">of</span> <span class="pre">items</span> <span class="pre">recommended)</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wsknn.evaluate.metrics.get_recall">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">get_recall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.get_recall" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function calculates the recall score of a top k recommendations.
-Given session must be longer than k events.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<dt class="sig sig-object py">
+<code class="sig-name descname"><span class="pre">get_recall</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#get_recall"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>The function calculates the <strong>recall</strong> score of a top <code class="docutils literal notranslate"><span class="pre">k</span></code> recommendations. Given session must be longer than
+<code class="docutils literal notranslate"><span class="pre">k</span></code> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sessions</strong><span class="classifier">List</span></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_items</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="n">sequence_of_timestamps</span> <span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span> <span class="p">[</span><span class="n">OPTIONAL</span><span class="p">]</span> <span class="n">sequence_of_event_type</span> <span class="p">]</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>trained_model</strong><span class="classifier">WSKNN</span></dt><dd><p>The trained WSKNN model.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, default=0</span></dt><dd><p>Number of top recommendations. Session must have n+1 items minimum to calculate <strong>recall</strong>. Default is 0 and
+when it is set, then <code class="docutils literal notranslate"><span class="pre">k</span></code> is equal to the number of recommendations from a trained model. If <code class="docutils literal notranslate"><span class="pre">k</span></code>
+is greater than the number of recommendations then the latter is adjusted to it.</p>
+</dd>
+<dt><strong>skip_short_sessions</strong><span class="classifier">bool, default=True</span></dt><dd><p>Should the algorithm skip short sessions when calculating <strong>recall</strong> or should it raise an error?</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default = False</span></dt><dd><p>When calculating metrics slide through a single session up to the point when it is not possible to have the
+same number of evaluation products as the number of recommendations.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate Recall. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating Recall or should raise an error?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Precision: The average score of Recall per n sessions.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>recall</strong><span class="classifier">float</span></dt><dd><p>The average score of Recall per <code class="docutils literal notranslate"><span class="pre">n</span></code> sessions.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Notes</p>
 <p>Recall is defined as (no of recommendations that are relevant) / (all relevant items for a user).</p>
 </dd></dl>
 
+</div>
+<hr class="docutils" />
+<div class="section" id="module-wsknn.utils.transform">
+<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-wsknn.utils.transform" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="wsknn.evaluate.metrics.score_model">
-<span class="sig-prename descclassname"><span class="pre">wsknn.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">score_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sessions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><span class="pre">wsknn.model.wsknn.WSKNN</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_mrr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_recall</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#wsknn.evaluate.metrics.score_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function get Precision&#64;k, Recall&#64;k and MRR&#64;k.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sessions</strong> (<em>List of sessions</em>) – <dl class="simple">
-<dt>[</dt><dd><p>[ sequence_of_items ],
-[ sequence_of_timestamps ],
-[ [OPTIONAL] sequence_of_event_type ]</p>
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_gzipped_jsonl">
+<code class="sig-name descname"><span class="pre">load_gzipped_jsonl</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">filename</span></span></em>, <em><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTF-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/utils/transform.html#load_gzipped_jsonl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.utils.transform.load_gzipped_jsonl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function loads data stored in gzipped JSON Lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd><p>Path to the file.</p>
+</dd>
+<dt><strong>encoding</strong><span class="classifier">str, default = ‘utf-8’</span></dt><dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>: dict</dt><dd><p>Python dictionary with unique records.</p>
 </dd>
 </dl>
-<p>], [other session]</p>
-</p></li>
-<li><p><strong>trained_model</strong> (<a class="reference internal" href="#wsknn.model.wsknn.WSKNN" title="wsknn.model.wsknn.WSKNN"><em>WSKNN</em></a>) – Trained VSKNN model.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>default=0</em>) – Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-when it is set, then k is equal to the number of recommendations from a trained model. If k
-is greater than the number of recommendations then the latter is adjusted to it.</p></li>
-<li><p><strong>skip_short_sessions</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Should the algorithm skip short sessions when calculating MRR or should raise an error?</p></li>
-<li><p><strong>calc_mrr</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should MRR be calculated?</p></li>
-<li><p><strong>calc_precision</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should Precision be calculated?</p></li>
-<li><p><strong>calc_recall</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Should Recall be calculated?</p></li>
-<li><p><strong>sliding_window</strong> (<em>bool</em><em>, </em><em>default = False</em>) – When calculating metrics slide through a single session up to the point when it is not possible
-to have the same number of evaluation products as the number of recommendations.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><em>Dict</em></p></li>
-<li><p><strong>{‘MRR’</strong> (<em>float, ‘Recall’: float, ‘Precision’: float}</em>)</p></li>
-</ul>
-</p>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-</section>
-<hr class="docutils" />
-<section id="weighting-methods">
-<h2>Weighting methods<a class="headerlink" href="#weighting-methods" title="Permalink to this headline">¶</a></h2>
-</section>
-<hr class="docutils" />
-<section id="utilities">
-<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
-</section>
-</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_gzipped_pickle">
+<code class="sig-name descname"><span class="pre">load_gzipped_pickle</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/utils/transform.html#load_gzipped_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.utils.transform.load_gzipped_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function loads gzipped and pickled items / sessions object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>pickled_object</strong><span class="classifier">dict</span></dt><dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_jsonl">
+<code class="sig-name descname"><span class="pre">load_jsonl</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/utils/transform.html#load_jsonl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.utils.transform.load_jsonl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function loads data stored in JSON Lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd><p>Path to the file.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>: dict</dt><dd><p>Python dictionary with unique records.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
-          </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="index.html"
-       title="previous chapter">← Weighted session-based k-NN - Intro</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2022, Szymon Moliński, Sales Intelligence.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+<dl class="py function">
+<dt class="sig sig-object py" id="wsknn.utils.transform.load_pickled">
+<code class="sig-name descname"><span class="pre">load_pickled</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/utils/transform.html#load_pickled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.utils.transform.load_pickled" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function loads pickled items / sessions object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>pickled_object</strong><span class="classifier">dict</span></dt><dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
-            </div>
+</div>
+
+
           </div>
-      </page>
-    </div></div>
-    
-    
-  </body>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-row" class="row">
+
+    <div class="col-md-12">
+        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <a href="https://pypi.org/project/sphinx-sizzle-theme/"
+
+           title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"
+
+        >Sizzle</a> theme.</span>
+    </div>
+
+  </div>
+</div>
+
+<div id="tooltips" class="hidden">
+</div>
+
+<script>
+$(document).ready(function() {
+  'use strict';
+  var $search = $('.search-query');
+
+  var $filter = $('#toc-filter-query');
+  var $toclist = $('.sidebar-toc > ul').find('li');
+
+  if ($toclist.length === 0) {
+    $toclist = $('.localtoc > ul').find('li');
+  }
+
+
+  var $nav = $('#nav');
+
+  //$('#whole-page').removeClass('hidden');
+  var nav_width = $nav.width();
+
+
+  var search_url = 'search.html';
+
+  function perform_search(e) {
+    var $elem;
+
+    if (e.type === 'keypress') {
+      $elem = $(e.target);
+    }
+    else if (e.type === 'click') {
+      $elem = $(e.target).parents('.input-group').find('input');
+    }
+    var q = $elem.val().trim();
+
+    if (q) {
+      var url = search_url + '?q=' + q + '&check_keywords=yes&area=default';
+
+      location.href = url;
+    }
+  }
+
+
+  function apply_filter() {
+    var s = $filter.val().trim().toLowerCase();
+
+    $toclist.find('a').removeClass('hidden');
+    $toclist.each(function() {
+      var $this = $(this);
+      var $link = $this.find('> a');
+      var t = $link.text().toLowerCase();
+      var show = t.indexOf(s) >= 0;
+
+      if (!show) {
+        $link.addClass('hidden');
+      }
+    });
+  }
+
+  $filter.on('keyup', function(e) {
+    apply_filter();
+  });
+
+
+
+  $search.on('keypress', function(e) {
+    if (e.which == 13) {
+      perform_search(e);
+    }
+  });
+  $search.parents('.input-group').find('.input-group-addon').on('click', perform_search);
+  $(document).on('click', '.summary .fa-caret-right', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $next = $elem.next();
+    $elem.addClass('hidden');
+    $next.removeClass('hidden');
+  });
+  $(document).on('click', '.detail .fa-caret-down', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $prev = $elem.prev();
+    $elem.addClass('hidden');
+    $prev.removeClass('hidden');
+  });
+
+  $('#content').on('click', function() {
+    $('#mnav').hide();
+  });
+
+  var counter = 0;
+  var timer = null;
+
+  function show_nav() {
+    $('#content').off('mousemove', track_mouse);
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    $nav.show();
+  }
+
+  function track_mouse(e) {
+    var x = e.clientX;
+
+    if (x < 15) {
+      ++counter;
+      if (timer === null) {
+        timer = setTimeout(show_nav, 2000);
+      }
+    }
+    else {
+      counter = 0;
+    }
+    if (counter >= 20) {
+      show_nav();
+    }
+  };
+
+  function hide_nav() {
+    $nav.hide();
+    counter = 0;
+    $('#content').on('mousemove', track_mouse);
+  }
+
+  $('.hidetoc').on('click', hide_nav);
+
+  $(document).on('keyup', function(e) {
+    if (e.ctrlKey) {
+      if (e.which == 37) {      // Ctrl+left arrow
+        hide_nav();
+      }
+      else if (e.which == 39) { // Ctrl+right arrow
+        show_nav();
+      }
+    }
+  });
+
+  $('.menu-toggle').on('click', function(e) {
+    $('#mnav').toggle();
+  });
+
+  function scroll_nav(frag) {
+    var sel = '#nav ' + (frag ? 'a[href="' + frag + '"]' : '.toctree-l1 a.current');
+
+    var $link = $(sel);
+
+    if ($link.length > 0) {
+      $link[0].scrollIntoView({block: 'center'});
+    }
+  }
+
+  // If the navigator is long, then the item we clicked on to get here might
+  // not be in view. Try to scroll it into the view - a slight delay is needed
+  // to get it to sync properly with other stuff going on (as the page has just
+  // loaded). Hence the setTimeout with a timeout of 0.
+
+  function do_scroll() {
+    scroll_nav(window.location.hash);
+  }
+
+  setTimeout(do_scroll, 0);
+
+  function adjust_size() {
+    // we need to set the height explicitly so that scrolling regions in the
+    // content area work properly.
+    var h = $('#page-content').height();
+
+    $('#nav, #content').height(h);
+    if ($('#nav').is(':visible')) {
+      $('#mnav').hide();
+    }
+  }
+
+  adjust_size();
+
+  $(window).on('resize', adjust_size);
+
+  function focus_content() {
+    $('#content').focus();  // so that keyboard can be used to scroll, etc.
+  }
+
+  setTimeout(focus_content, 150);
+
+  var sizzle = $(document).data('sizzle');
+
+  function make_tooltip(id, h, b) {
+    var $e = $('<div>').attr('id', id);
+    var $b = $('<div>').addClass('tc-body').html(b);
+
+    if (h) {
+      var $h = $('<div>').addClass('tc-heading').html(h);
+      $e.append($h);
+    }
+    $e.append($b);
+    return $e;
+  }
+
+  var default_tt_options = {
+    theme: ['tooltipster-light', 'tooltipster-light-customized'],
+    interactive: true,
+    maxWidth: 600,
+    contentCloning: true
+  };
+
+  function activate_tooltips() {
+    var $tt = $('.tt');
+
+    //console.log('tt links:', $tt.length);
+    $tt.tooltipster(default_tt_options);
+  }
+
+
+
+  function add_glossary_tooltips() {
+    var links = $('a');  // can qualify with .reference.internal
+    var glinks = {};
+    var pat = /(.*)\.html#(term-.*)$/;
+    var found = false;  // links in this document
+
+    $.each(links, function(i, link) {
+        var $link = $(link);
+        var href = $link.attr('href');
+        var m = href.match(pat);
+
+        if (m) {
+          var s = m[1].replace(/^(\.\.\/)+/, '');
+
+          if (s === sizzle.app_data.glossary.document) {
+            var k = m[2];
+
+            if (k in glinks) {
+              glinks[k].push($link);
+            }
+            else {
+              glinks[k] = [$link];
+            }
+            found = true;
+          }
+        }
+    });
+    if (found) {
+      var $t = $('#tooltips');
+      var data = sizzle.app_data.glossary.terms;
+
+      $.each(glinks, function(k, v) {
+        var d = data[k];
+
+        if (d) {  // as a sanity check
+          var s = 'tc-'+ k;
+          var $e = make_tooltip(s, d.term, d.defn);
+          $t.append($e);
+
+          $.each(v, function(i, link) {
+            link.addClass('tt').attr('data-tooltip-content', '#' + s);
+          });
+        }
+      });
+    }
+  }
+
+  if (sizzle.app_data && sizzle.app_data.glossary &&
+      sizzle.app_data.glossary.document) {
+    add_glossary_tooltips();
+  }
+
+
+
+
+  function add_custom_tooltips() {
+    if (!sizzle.app_data) {
+      return;
+    }
+
+    var info_tips = sizzle.app_data.custom_data['info-tips'] || {};
+
+    if ($.isEmptyObject(info_tips)) {
+      return;
+    }
+
+    var tt_options = $.extend({contentAsHTML: true}, default_tt_options);
+
+    $('.tc-info').each(function() {
+      var $elem = $(this).prev();
+      var classes = $elem.attr('class');
+      var m = /\btci-([\S]+)/.exec(classes);
+
+      if (m !== null) {
+        var key = m[1];
+
+        if (key in info_tips) {
+          var v = info_tips[key];
+          var tt = $elem.tooltipster(tt_options).tooltipster('content', v);
+        }
+      }
+    });
+  }
+
+  add_custom_tooltips();
+
+  setTimeout(activate_tooltips, 1000);
+
+
+  // Clipboard copy for code blocks with captions
+
+  $('.code-block-caption').each(function() {
+    var $cap = $(this);
+    var $btn = $('<span class="clip-copy"><span class="copied hidden">Copied!</span><i class="fa fa-clipboard" title="Copy contents"></i></span>');
+    var $code = $cap.parent().find('.highlight');
+
+    $cap.append($btn);
+    $btn.find('.fa-clipboard').data('clip-text', $code.text());
+  });
+
+  var clipboard = new ClipboardJS('.code-block-caption .fa-clipboard', {
+    'text': function(trigger) {
+      return $(trigger).data('clip-text');
+    }
+  });
+
+  clipboard.on('success', function(e) {
+    var $copied = $(e.trigger).prev();
+
+    $copied.removeClass('hidden');
+
+    setTimeout(function() {$copied.addClass('hidden'); }, 1000);
+  });
+
+  if (sizzle.on_load) {
+    sizzle.on_load.forEach(function(f) {
+      f();
+    });
+  }
+});
+</script>
+</body>
 </html>

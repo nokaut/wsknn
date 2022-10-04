@@ -1,326 +1,731 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-      <title>wsknn.weighting package</title>
-    
-          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
-      
-      <!-- sphinx script_files -->
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-
-      
-      <!-- bundled in js (rollup iife) -->
-      <!-- <script src="_static/theme-vendors.js"></script> -->
-      <script src="_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="genindex.html" />
-  <link rel="search" title="Search" href="search.html" /> 
-  </head>
-
-  <body>
-    <div id="app">
-    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="index.html" class="home-link">
-    
-      <span class="site-name">wsknn</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
+<html lang="en-gb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+<title>wsknn - wsknn.weighting package</title>
 
-    </navlinks>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha256-8uHMIn1ru0GS5KO+zf7Zccf8Uw12IA5DrdEcmMuWLFM=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/tooltipster.bundle.min.css" integrity="sha256-Qc4lCfqZWYaHF5hgEOFrYzSIX9Rrxk0NPHRac+08QeQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" integrity="sha256-Wa1I4jhSXeWd3N6RhfPlkqr1WlT+zS3Vh2YGCg0129E=" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro|Roboto|Roboto+Mono" rel="stylesheet">
+<link href="https://fonts.red-dove.com/iosevka-ss09-regular/webfont.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/js/tooltipster.bundle.min.js" integrity="sha256-v8akIv8SCqn5f3mbVB7vEWprIizxPh6oV0yhao/dbB4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+    <script>
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        LINK_SUFFIX: '.html',
+        HAS_SOURCE:  false,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+      $(document).data('sizzle', {on_load: []});
+    </script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="app-data.js"></script>
+<link rel="index" title="Index" href="genindex.html" />
+<link rel="search" title="Search" href="search.html" />
+
+</head>
+<body class="full-height test">
+<noscript>
+  <div>
+    <div id="noscript-message">JavaScript is not enabled. It is needed for this website to work.</div>
   </div>
-</navbar>
+</noscript>
+<div id="whole-page" class="container-fluid content full-height">
+  <div id="header-row" class="row">
+    <div id="header-container" class="col-md-12">
+      <div id="hdr-left">
+        <i class="fa fa-bars menu-toggle"></i>
+        
+<a href="index.html" class="text-logo">wsknn 0.1.5 documentation</a>
 
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
       </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
+      <div id="hdr-centre" class="text-center stretch">
+        <h3 title="wsknn.weighting package">wsknn.weighting package</h3>
+        <h6>wsknn.weighting package</h6>
+      </div>
+      <div id="hdr-search">
+        
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
+      </div>
+
+      <div id="hdr-index">
+        <a href="genindex.html" class="btn btn-default" title="Go to the index"><i class="fa fa-list"></i></a>
+      </div>
+
+      <div id="hdr-source">
+        <a href="_sources/wsknn.weighting.rst.txt" class="btn btn-default" title="See the source for this page"><i class="fa fa-code"></i></a>
+      </div>
+
+      <div id="hdr-right">
+        
+  
+      </div>
+      <div id="alt-hdr-right">
 
 
+        <a href="index.html"><i class="fa fa-home mr-8"></i></a>
 
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
+
+        <a href="search.html"><i class="fa fa-search mr-8"></i></a>
+
+
+        <a href="genindex.html"><i class="fa fa-list mr-8"></i></a>
+
+
+      </div>
     </div>
   </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="index.html#weighted-session-based-k-nn-intro">Contents:</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 ">
-            
-              <a href="api.html" class="reference internal ">API</a>
-            
 
-            
-          </li>
-
-        
-      </ul>
+  <div id="content-row" class="row">
+    <div id="page-content" class="col-md-12 flex-col">
+      <div id="content-container">
+        <div id="nav">
+          
+  <div class="navsidebar">
+    <div id="sidebar-search">
+      
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
     </div>
+      <div class="sidebar-block">
+        <div class="sidebar-tocheading">
+          <div class="pull-left">
+            <h2>Table Of Contents</h2>
+          </div>
+          <div class="pull-right" title="Hide this sidebar (hover at left edge to bring it back)"><i class="fa fa-chevron-left hidetoc"></i></div>
+        </div>
+        <div class="sidebar-toc">
+      
+          <div id="toc-filter" title="Type in here to show only matching topics">
+            <input class="form-control" id="toc-filter-query" placeholder="Filter by title ...">
+          </div>
+      
+        
   
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-    
-    <li>wsknn.weighting package</li>
-  </ul>
-  
-
-  <ul class="page-nav">
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
+
   
-</div>
-<hr>
-          <div class="content" role="main" v-pre>
+        </div>
+      </div>
+  </div>
+        </div>
+        <div id="content" tabindex="0" class="stretch">
+          <div id="mnav">
             
-  <section id="wsknn-weighting-package">
+  
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html#api">API</a></li>
+</ul>
+
+  
+          </div>
+          <div class="body">
+            
+  <div class="section" id="wsknn-weighting-package">
 <h1>wsknn.weighting package<a class="headerlink" href="#wsknn-weighting-package" title="Permalink to this headline">¶</a></h1>
-<section id="submodules">
+<div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="module-wsknn.weighting.item_weighting">
+</div>
+<div class="section" id="module-wsknn.weighting.item_weighting">
 <span id="wsknn-weighting-item-weighting-module"></span><h2>wsknn.weighting.item_weighting module<a class="headerlink" href="#module-wsknn.weighting.item_weighting" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.item_weighting.inv_pos_item_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">inv_pos_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.inv_pos_item_score" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">inv_pos_item_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/item_weighting.html#inv_pos_item_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.item_weighting.inv_pos_item_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function returns the final rank as a simple inverse of the item position.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> – Inverted position rank.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Item position.</p>
 </dd>
 </dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>result</strong><span class="classifier">float</span></dt><dd><p>Inverted position rank.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.item_weighting.linear_item_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">linear_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.linear_item_score" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Function weights events based on their position in a sequence. Output is normalized to the range [0:1]. For the</dt><dd><p>long sequences of events (index 10+) it returns zero.</p>
+<code class="sig-name descname"><span class="pre">linear_item_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/item_weighting.html#linear_item_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.item_weighting.linear_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Function weights events based on their position in a sequence. Output is normalized to the range [0:1]. For the</dt><dd>long sequences of events (index 10+) it returns zero.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Item position.</p>
 </dd>
 </dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> – Linear rank.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>result</strong><span class="classifier">float</span></dt><dd><p>Linear rank.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.item_weighting.log_item_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">log_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.log_item_score" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Function returns rank as a transformed inverted log10 of the sum (position + 1.7).</dt><dd><p>Result is normalized to the range (0:1].</p>
+<code class="sig-name descname"><span class="pre">log_item_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/item_weighting.html#log_item_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.item_weighting.log_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Function returns rank as a transformed inverted log10 of the sum (position + 1.7).</dt><dd>Result is normalized to the range (0:1].</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Item position.</p>
 </dd>
 </dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> – Logarithmic rank.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>result</strong><span class="classifier">float</span></dt><dd><p>Logarithmic rank.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.item_weighting.quadratic_item_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.item_weighting.</span></span><span class="sig-name descname"><span class="pre">quadratic_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.item_weighting.quadratic_item_score" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Function is similar to inverted and linear functions but weights are decreasing at non-linear rate</dt><dd><p>and accelerate with the item position.</p>
+<code class="sig-name descname"><span class="pre">quadratic_item_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/item_weighting.html#quadratic_item_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.item_weighting.quadratic_item_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Function is similar to inverted and linear functions but weights are decreasing at non-linear rate</dt><dd>and accelerate with the item position.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Item position.</p>
 </dd>
 </dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Item position.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> – Inverted square position rank.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>result</strong><span class="classifier">float</span></dt><dd><p>Inverted square position rank.</p>
 </dd>
 </dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-</section>
-<section id="module-wsknn.weighting.session_weighting">
+</div>
+<div class="section" id="module-wsknn.weighting.session_weighting">
 <span id="wsknn-weighting-session-weighting-module"></span><h2>wsknn.weighting.session_weighting module<a class="headerlink" href="#module-wsknn.weighting.session_weighting" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.session_weighting.linear_session_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.session_weighting.</span></span><span class="sig-name descname"><span class="pre">linear_session_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.session_weighting.linear_session_score" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">linear_session_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">i</span></span></em>, <em><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/session_weighting.html#linear_session_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.session_weighting.linear_session_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Newest elements in sequence =&gt; largest weights.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>i</strong> (<em>int</em>) – Element position, i+1 must be less than length.</p></li>
-<li><p><strong>length</strong> (<em>int</em>) – Length of a sequence.</p></li>
-<li><p><strong>Results</strong> – </p></li>
-<li><p><strong>-------</strong> – </p></li>
-<li><p><strong>result</strong> (<em>float</em>) – Session rank between 0 and 1.</p></li>
-</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Element position, i+1 must be less than length.</p>
+</dd>
+<dt><strong>length</strong><span class="classifier">int</span></dt><dd><p>Length of a sequence.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="wsknn.weighting.session_weighting.log_session_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.session_weighting.</span></span><span class="sig-name descname"><span class="pre">log_session_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.session_weighting.log_session_score" title="Permalink to this definition">¶</a></dt>
-<dd><p>Newest element in sequence =&gt; largest weight.</p>
-<dl class="simple">
-<dt>Function calculates weights based on the sequence length and a position of element in a sequence.</dt><dd><p>Longer sequences create more steps between limits of 0 and 2.31.
-For example:</p>
-<ol class="loweralpha simple">
-<li><p>element position: 1, sequence length: 10   -&gt; weight = 0.97</p></li>
-<li><p>element position: 1, sequence length: 1000 -&gt; weight = 0.33</p></li>
-</ol>
-</dd>
-<dt>In practice it means that the past elements of the longest sequences have lower weights than the past elements</dt><dd><p>of a short sequence. It mimics our short-term memory and fn gives the biggest weights to the newest events and
-past and middle-sequence events are treated as a not relevant, approx.: to 90% of the sequence.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>i</strong> (<em>int</em>) – Element position, i+1 must be less than length.</p></li>
-<li><p><strong>length</strong> (<em>int</em>) – Length of a sequence.</p></li>
-<li><p><strong>Results</strong> – </p></li>
-<li><p><strong>-------</strong> – </p></li>
-<li><p><strong>result</strong> (<em>float</em>) – Session rank between 0 and 1. Normalized from 0:2.31.</p></li>
-</ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.session_weighting.quadratic_session_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.session_weighting.</span></span><span class="sig-name descname"><span class="pre">quadratic_session_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wsknn.weighting.session_weighting.quadratic_session_score" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Function penalizes old elements in sequence more than the new events. The past elements have much smaller</dt><dd><p>weights than the new ones. It follows a quadratic function.</p>
+<code class="sig-name descname"><span class="pre">quadratic_session_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">i</span></span></em>, <em><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/session_weighting.html#quadratic_session_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.session_weighting.quadratic_session_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Function penalizes old elements in sequence more than the new events. The past elements have much smaller</dt><dd>weights than the new ones. It follows a quadratic function.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>Element position, i+1 must be less than length.</p>
+</dd>
+<dt><strong>length</strong><span class="classifier">int</span></dt><dd><p>Length of a sequence.</p>
 </dd>
 </dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>i</strong> (<em>int</em>) – Element position, i+1 must be less than length.</p></li>
-<li><p><strong>length</strong> (<em>int</em>) – Length of a sequence.</p></li>
-<li><p><strong>Results</strong> – </p></li>
-<li><p><strong>-------</strong> – </p></li>
-<li><p><strong>result</strong> (<em>float</em>) – Session rank between 0 and 1.</p></li>
-</ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-</section>
-<section id="module-wsknn.weighting.weighting">
+</div>
+<div class="section" id="module-wsknn.weighting.weighting">
 <span id="wsknn-weighting-weighting-module"></span><h2>wsknn.weighting.weighting module<a class="headerlink" href="#module-wsknn.weighting.weighting" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.weighting.weight_item_score">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.weighting.</span></span><span class="sig-name descname"><span class="pre">weight_item_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.weighting.weighting.weight_item_score" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">weight_item_score</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">fn_name</span></span></em>, <em><span class="n"><span class="pre">element_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/weighting.html#weight_item_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.weighting.weight_item_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function calculates item weight based on its position in a session.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fn_name</strong> (<em>str</em>) – Function used for item weighting. Available options: ‘linear’, ‘div’, ‘log’, ‘quadratic’.</p></li>
-<li><p><strong>element_pos</strong> (<em>int</em>) – Position of an element in a sequence.</p></li>
-</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fn_name</strong><span class="classifier">str</span></dt><dd><p>Function used for item weighting. Available options: ‘linear’, ‘div’, ‘log’, ‘quadratic’.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Item weight.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+<dt><strong>element_pos</strong><span class="classifier">int</span></dt><dd><p>Position of an element in a sequence.</p>
 </dd>
 </dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>float</dt><dd><p>Item weight.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.weighting.weighting.weight_session_items">
-<span class="sig-prename descclassname"><span class="pre">wsknn.weighting.weighting.</span></span><span class="sig-name descname"><span class="pre">weight_session_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wsknn.weighting.weighting.weight_session_items" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">weight_session_items</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">fn_name</span></span></em>, <em><span class="n"><span class="pre">element_pos</span></span></em>, <em><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/weighting/weighting.html#weight_session_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.weighting.weighting.weight_session_items" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function weights session items by specific fn.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fn_name</strong> (<em>str</em>) – Function used for session weighting. Available options: ‘linear’, ‘log’, ‘quadratic’.</p></li>
-<li><p><strong>element_pos</strong> (<em>int</em>) – Position of an element in a sequence.</p></li>
-<li><p><strong>length</strong> (<em>int</em>) – Overall session length.</p></li>
-</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fn_name</strong><span class="classifier">str</span></dt><dd><p>Function used for session weighting. Available options: ‘linear’, ‘log’, ‘quadratic’.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Session’s item weight.</p>
+<dt><strong>element_pos</strong><span class="classifier">int</span></dt><dd><p>Position of an element in a sequence.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+<dt><strong>length</strong><span class="classifier">int</span></dt><dd><p>Overall session length.</p>
 </dd>
 </dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt>float</dt><dd><p>Session’s item weight.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-</section>
-<section id="module-wsknn.weighting">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.weighting" title="Permalink to this headline">¶</a></h2>
-</section>
-</section>
-
-
-          </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2022, Szymon Moliński, Sales Intelligence.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
-            </div>
+<div class="section" id="module-wsknn.weighting">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsknn.weighting" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
           </div>
-      </page>
-    </div></div>
-    
-    
-  </body>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-row" class="row">
+
+    <div class="col-md-12">
+        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <a href="https://pypi.org/project/sphinx-sizzle-theme/"
+
+           title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"
+
+        >Sizzle</a> theme.</span>
+    </div>
+
+  </div>
+</div>
+
+<div id="tooltips" class="hidden">
+</div>
+
+<script>
+$(document).ready(function() {
+  'use strict';
+  var $search = $('.search-query');
+
+  var $filter = $('#toc-filter-query');
+  var $toclist = $('.sidebar-toc > ul').find('li');
+
+  if ($toclist.length === 0) {
+    $toclist = $('.localtoc > ul').find('li');
+  }
+
+
+  var $nav = $('#nav');
+
+  //$('#whole-page').removeClass('hidden');
+  var nav_width = $nav.width();
+
+
+  var search_url = 'search.html';
+
+  function perform_search(e) {
+    var $elem;
+
+    if (e.type === 'keypress') {
+      $elem = $(e.target);
+    }
+    else if (e.type === 'click') {
+      $elem = $(e.target).parents('.input-group').find('input');
+    }
+    var q = $elem.val().trim();
+
+    if (q) {
+      var url = search_url + '?q=' + q + '&check_keywords=yes&area=default';
+
+      location.href = url;
+    }
+  }
+
+
+  function apply_filter() {
+    var s = $filter.val().trim().toLowerCase();
+
+    $toclist.find('a').removeClass('hidden');
+    $toclist.each(function() {
+      var $this = $(this);
+      var $link = $this.find('> a');
+      var t = $link.text().toLowerCase();
+      var show = t.indexOf(s) >= 0;
+
+      if (!show) {
+        $link.addClass('hidden');
+      }
+    });
+  }
+
+  $filter.on('keyup', function(e) {
+    apply_filter();
+  });
+
+
+
+  $search.on('keypress', function(e) {
+    if (e.which == 13) {
+      perform_search(e);
+    }
+  });
+  $search.parents('.input-group').find('.input-group-addon').on('click', perform_search);
+  $(document).on('click', '.summary .fa-caret-right', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $next = $elem.next();
+    $elem.addClass('hidden');
+    $next.removeClass('hidden');
+  });
+  $(document).on('click', '.detail .fa-caret-down', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $prev = $elem.prev();
+    $elem.addClass('hidden');
+    $prev.removeClass('hidden');
+  });
+
+  $('#content').on('click', function() {
+    $('#mnav').hide();
+  });
+
+  var counter = 0;
+  var timer = null;
+
+  function show_nav() {
+    $('#content').off('mousemove', track_mouse);
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    $nav.show();
+  }
+
+  function track_mouse(e) {
+    var x = e.clientX;
+
+    if (x < 15) {
+      ++counter;
+      if (timer === null) {
+        timer = setTimeout(show_nav, 2000);
+      }
+    }
+    else {
+      counter = 0;
+    }
+    if (counter >= 20) {
+      show_nav();
+    }
+  };
+
+  function hide_nav() {
+    $nav.hide();
+    counter = 0;
+    $('#content').on('mousemove', track_mouse);
+  }
+
+  $('.hidetoc').on('click', hide_nav);
+
+  $(document).on('keyup', function(e) {
+    if (e.ctrlKey) {
+      if (e.which == 37) {      // Ctrl+left arrow
+        hide_nav();
+      }
+      else if (e.which == 39) { // Ctrl+right arrow
+        show_nav();
+      }
+    }
+  });
+
+  $('.menu-toggle').on('click', function(e) {
+    $('#mnav').toggle();
+  });
+
+  function scroll_nav(frag) {
+    var sel = '#nav ' + (frag ? 'a[href="' + frag + '"]' : '.toctree-l1 a.current');
+
+    var $link = $(sel);
+
+    if ($link.length > 0) {
+      $link[0].scrollIntoView({block: 'center'});
+    }
+  }
+
+  // If the navigator is long, then the item we clicked on to get here might
+  // not be in view. Try to scroll it into the view - a slight delay is needed
+  // to get it to sync properly with other stuff going on (as the page has just
+  // loaded). Hence the setTimeout with a timeout of 0.
+
+  function do_scroll() {
+    scroll_nav(window.location.hash);
+  }
+
+  setTimeout(do_scroll, 0);
+
+  function adjust_size() {
+    // we need to set the height explicitly so that scrolling regions in the
+    // content area work properly.
+    var h = $('#page-content').height();
+
+    $('#nav, #content').height(h);
+    if ($('#nav').is(':visible')) {
+      $('#mnav').hide();
+    }
+  }
+
+  adjust_size();
+
+  $(window).on('resize', adjust_size);
+
+  function focus_content() {
+    $('#content').focus();  // so that keyboard can be used to scroll, etc.
+  }
+
+  setTimeout(focus_content, 150);
+
+  var sizzle = $(document).data('sizzle');
+
+  function make_tooltip(id, h, b) {
+    var $e = $('<div>').attr('id', id);
+    var $b = $('<div>').addClass('tc-body').html(b);
+
+    if (h) {
+      var $h = $('<div>').addClass('tc-heading').html(h);
+      $e.append($h);
+    }
+    $e.append($b);
+    return $e;
+  }
+
+  var default_tt_options = {
+    theme: ['tooltipster-light', 'tooltipster-light-customized'],
+    interactive: true,
+    maxWidth: 600,
+    contentCloning: true
+  };
+
+  function activate_tooltips() {
+    var $tt = $('.tt');
+
+    //console.log('tt links:', $tt.length);
+    $tt.tooltipster(default_tt_options);
+  }
+
+
+
+  function add_glossary_tooltips() {
+    var links = $('a');  // can qualify with .reference.internal
+    var glinks = {};
+    var pat = /(.*)\.html#(term-.*)$/;
+    var found = false;  // links in this document
+
+    $.each(links, function(i, link) {
+        var $link = $(link);
+        var href = $link.attr('href');
+        var m = href.match(pat);
+
+        if (m) {
+          var s = m[1].replace(/^(\.\.\/)+/, '');
+
+          if (s === sizzle.app_data.glossary.document) {
+            var k = m[2];
+
+            if (k in glinks) {
+              glinks[k].push($link);
+            }
+            else {
+              glinks[k] = [$link];
+            }
+            found = true;
+          }
+        }
+    });
+    if (found) {
+      var $t = $('#tooltips');
+      var data = sizzle.app_data.glossary.terms;
+
+      $.each(glinks, function(k, v) {
+        var d = data[k];
+
+        if (d) {  // as a sanity check
+          var s = 'tc-'+ k;
+          var $e = make_tooltip(s, d.term, d.defn);
+          $t.append($e);
+
+          $.each(v, function(i, link) {
+            link.addClass('tt').attr('data-tooltip-content', '#' + s);
+          });
+        }
+      });
+    }
+  }
+
+  if (sizzle.app_data && sizzle.app_data.glossary &&
+      sizzle.app_data.glossary.document) {
+    add_glossary_tooltips();
+  }
+
+
+
+
+  function add_custom_tooltips() {
+    if (!sizzle.app_data) {
+      return;
+    }
+
+    var info_tips = sizzle.app_data.custom_data['info-tips'] || {};
+
+    if ($.isEmptyObject(info_tips)) {
+      return;
+    }
+
+    var tt_options = $.extend({contentAsHTML: true}, default_tt_options);
+
+    $('.tc-info').each(function() {
+      var $elem = $(this).prev();
+      var classes = $elem.attr('class');
+      var m = /\btci-([\S]+)/.exec(classes);
+
+      if (m !== null) {
+        var key = m[1];
+
+        if (key in info_tips) {
+          var v = info_tips[key];
+          var tt = $elem.tooltipster(tt_options).tooltipster('content', v);
+        }
+      }
+    });
+  }
+
+  add_custom_tooltips();
+
+  setTimeout(activate_tooltips, 1000);
+
+
+  // Clipboard copy for code blocks with captions
+
+  $('.code-block-caption').each(function() {
+    var $cap = $(this);
+    var $btn = $('<span class="clip-copy"><span class="copied hidden">Copied!</span><i class="fa fa-clipboard" title="Copy contents"></i></span>');
+    var $code = $cap.parent().find('.highlight');
+
+    $cap.append($btn);
+    $btn.find('.fa-clipboard').data('clip-text', $code.text());
+  });
+
+  var clipboard = new ClipboardJS('.code-block-caption .fa-clipboard', {
+    'text': function(trigger) {
+      return $(trigger).data('clip-text');
+    }
+  });
+
+  clipboard.on('success', function(e) {
+    var $copied = $(e.trigger).prev();
+
+    $copied.removeClass('hidden');
+
+    setTimeout(function() {$copied.addClass('hidden'); }, 1000);
+  });
+
+  if (sizzle.on_load) {
+    sizzle.on_load.forEach(function(f) {
+      f();
+    });
+  }
+});
+</script>
+</body>
 </html>
