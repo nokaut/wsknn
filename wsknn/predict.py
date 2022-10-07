@@ -44,7 +44,7 @@ def predict(model: WSKNN,
     --------
     >>> sessions = [
             [['item a', 'item b'], []],
-            [[], []]
+            [['item x', 'item a', 'item n'], []]
     ... ]
     >>> recommendations = predict(fitted_model, )
     """
