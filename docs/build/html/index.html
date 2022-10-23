@@ -38,13 +38,15 @@
       $(document).data('sizzle', {on_load: []});
     </script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="app-data.js"></script>
 <link rel="index" title="Index" href="genindex.html" />
 <link rel="search" title="Search" href="search.html" />
-<link rel="next" title="API" href="api.html" />
+<link rel="next" title="Introduction" href="introduction.html" />
 
 </head>
 <body class="full-height test">
@@ -90,7 +92,7 @@
   <div class="prev-next">
     
       <div class="pull-right">
-        <a class="btn btn-default next" href="api.html" title="Next chapter (API)"><span class="btn-text">API</span>&nbsp;<i class="fa fa-chevron-right ml-1em" aria-hidden="true"></i></a>
+        <a class="btn btn-default next" href="introduction.html" title="Next chapter (Introduction)"><span class="btn-text">Introduction</span>&nbsp;<i class="fa fa-chevron-right ml-1em" aria-hidden="true"></i></a>
       </div>
     </div>
   
@@ -105,7 +107,7 @@
         <a href="genindex.html"><i class="fa fa-list mr-8"></i></a>
 
 
-        <a href="api.html"><i class="fa fa-chevron-right"></i></a>
+        <a href="introduction.html"><i class="fa fa-chevron-right"></i></a>
 
       </div>
     </div>
@@ -141,8 +143,8 @@
       
         
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
 
@@ -155,8 +157,8 @@
           <div id="mnav">
             
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
 
@@ -165,16 +167,54 @@
           <div class="body">
             
   <div class="section" id="weighted-session-based-k-nn-intro">
-<h1>Weighted session-based k-NN - Intro<a class="headerlink" href="#weighted-session-based-k-nn-intro" title="Permalink to this headline">¶</a></h1>
+<h1>Weighted session-based k-NN - Intro<a class="headerlink" href="#weighted-session-based-k-nn-intro" title="Permalink to this heading">¶</a></h1>
+<p>Do you build a <strong>recommender system</strong> for your website? The K-nearest neighbors algorithm is a good choice if you are looking for a simple, fast, and explainable solution. Weighted-session-based k-nn recommendations are close to the state-of-the-art methods. We don’t need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h2>
+<p><strong>Input</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wsknn</span> <span class="kn">import</span> <span class="n">fit</span>
+<span class="kn">from</span> <span class="nn">wsknn.utils</span> <span class="kn">import</span> <span class="n">load_pickled</span>
+
+
+<span class="c1"># Load data</span>
+<span class="n">ITEMS</span> <span class="o">=</span> <span class="s1">&#39;demo-data/items.pkl&#39;</span>
+<span class="n">SESSIONS</span> <span class="o">=</span> <span class="s1">&#39;demo-data/sessions.pkl&#39;</span>
+
+<span class="n">items</span> <span class="o">=</span> <span class="n">load_pickled</span><span class="p">(</span><span class="n">ITEMS</span><span class="p">)</span>
+<span class="n">sessions</span> <span class="o">=</span> <span class="n">load_pickled</span><span class="p">(</span><span class="n">SESSIONS</span><span class="p">)</span>
+
+<span class="n">trained_model</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">sessions</span><span class="p">,</span> <span class="n">items</span><span class="p">)</span>
+
+<span class="n">test_session</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;unique id&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;product id 1&#39;</span><span class="p">,</span> <span class="s1">&#39;product id 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;timestamp #1&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp #2&#39;</span><span class="p">]</span>
+<span class="p">]}</span>
+
+<span class="n">recommendations</span> <span class="o">=</span> <span class="n">trained_model</span><span class="o">.</span><span class="n">recommend</span><span class="p">(</span><span class="n">test_session</span><span class="p">,</span> <span class="n">number_of_recommendations</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">recommendations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; <span class="o">[</span>
+...  <span class="o">(</span><span class="s1">&#39;product id 3&#39;</span>, <span class="m">0</span>.7<span class="o">)</span>,
+...  <span class="o">(</span><span class="s1">&#39;product id 4&#39;</span>, <span class="m">0</span>.33<span class="o">)</span>,
+...  <span class="o">(</span><span class="s1">&#39;product id 5&#39;</span>, <span class="m">0</span>.059<span class="o">)</span>
+... <span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </div>
 </div>
+</div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
@@ -191,8 +231,8 @@
   <div id="footer-row" class="row">
 
     <div class="col-md-12">
-        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
-        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <span title="Built on 2022-10-23" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3 and the
         <a href="https://pypi.org/project/sphinx-sizzle-theme/"
 
            title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"

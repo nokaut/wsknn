@@ -38,7 +38,9 @@
       $(document).data('sizzle', {on_load: []});
     </script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
     <script src="../../../app-data.js"></script>
@@ -129,8 +131,8 @@
       
         
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#introduction">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html#api">API</a></li>
 </ul>
 
@@ -143,8 +145,8 @@
           <div id="mnav">
             
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#introduction">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html#api">API</a></li>
 </ul>
 
@@ -163,7 +165,7 @@
     <span class="n">InvalidDimensionsError</span><span class="p">,</span> <span class="n">InvalidTimestampError</span>
 
 
-<div class="viewcode-block" id="WSKNN"><a class="viewcode-back" href="../../../wsknn.model.html#wsknn.model.wsknn.WSKNN">[docs]</a><span class="k">class</span> <span class="nc">WSKNN</span><span class="p">:</span>
+<div class="viewcode-block" id="WSKNN"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN">[docs]</a><span class="k">class</span> <span class="nc">WSKNN</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The class represents the Weighted Session-Based k-nn model.</span>
 
@@ -353,7 +355,7 @@
 
     <span class="c1"># Core methods</span>
 
-<div class="viewcode-block" id="WSKNN.fit"><a class="viewcode-back" href="../../../wsknn.model.html#wsknn.model.wsknn.WSKNN.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="WSKNN.fit"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
             <span class="n">sessions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
             <span class="n">items</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -392,7 +394,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span> <span class="o">=</span> <span class="n">sessions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">item_session_map</span> <span class="o">=</span> <span class="n">items</span></div>
 
-<div class="viewcode-block" id="WSKNN.recommend"><a class="viewcode-back" href="../../../wsknn.model.html#wsknn.model.wsknn.WSKNN.recommend">[docs]</a>    <span class="k">def</span> <span class="nf">recommend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="WSKNN.recommend"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN.recommend">[docs]</a>    <span class="k">def</span> <span class="nf">recommend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                   <span class="n">event_stream</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
                   <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -427,7 +429,7 @@
 
         <span class="k">return</span> <span class="n">recommendations</span></div>
 
-<div class="viewcode-block" id="WSKNN.set_model_params"><a class="viewcode-back" href="../../../wsknn.model.html#wsknn.model.wsknn.WSKNN.set_model_params">[docs]</a>    <span class="k">def</span> <span class="nf">set_model_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="WSKNN.set_model_params"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN.set_model_params">[docs]</a>    <span class="k">def</span> <span class="nf">set_model_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                          <span class="n">number_of_recommendations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">number_of_neighbors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">sampling_strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1047,8 +1049,8 @@
   <div id="footer-row" class="row">
 
     <div class="col-md-12">
-        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
-        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <span title="Built on 2022-10-23" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3 and the
         <a href="https://pypi.org/project/sphinx-sizzle-theme/"
 
            title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"

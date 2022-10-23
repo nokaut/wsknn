@@ -38,7 +38,9 @@
       $(document).data('sizzle', {on_load: []});
     </script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
     <script src="../../../app-data.js"></script>
@@ -129,8 +131,8 @@
       
         
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#introduction">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html#api">API</a></li>
 </ul>
 
@@ -143,8 +145,8 @@
           <div id="mnav">
             
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#introduction">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html#api">API</a></li>
 </ul>
 
@@ -161,7 +163,7 @@
 <span class="kn">from</span> <span class="nn">wsknn.utils.errors</span> <span class="kn">import</span> <span class="n">TooShortSessionException</span>
 
 
-<div class="viewcode-block" id="score_model"><a class="viewcode-back" href="../../../wsknn.evaluate.html#wsknn.evaluate.metrics.score_model">[docs]</a><span class="k">def</span> <span class="nf">score_model</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+<div class="viewcode-block" id="score_model"><a class="viewcode-back" href="../../../api.html#wsknn.evaluate.metrics.score_model">[docs]</a><span class="k">def</span> <span class="nf">score_model</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
                 <span class="n">trained_model</span><span class="p">:</span> <span class="n">WSKNN</span><span class="p">,</span>
                 <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                 <span class="n">skip_short_sessions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -262,7 +264,7 @@
     <span class="k">return</span> <span class="n">scores</span></div>
 
 
-<div class="viewcode-block" id="get_mean_reciprocal_rank"><a class="viewcode-back" href="../../../wsknn.evaluate.html#wsknn.evaluate.metrics.get_mean_reciprocal_rank">[docs]</a><span class="k">def</span> <span class="nf">get_mean_reciprocal_rank</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+<div class="viewcode-block" id="get_mean_reciprocal_rank"><a class="viewcode-back" href="../../../api.html#wsknn.evaluate.metrics.get_mean_reciprocal_rank">[docs]</a><span class="k">def</span> <span class="nf">get_mean_reciprocal_rank</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
                              <span class="n">trained_model</span><span class="p">:</span> <span class="n">WSKNN</span><span class="p">,</span>
                              <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                              <span class="n">skip_short_sessions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -328,7 +330,7 @@
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mrr</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_precision"><a class="viewcode-back" href="../../../wsknn.evaluate.html#wsknn.evaluate.metrics.get_precision">[docs]</a><span class="k">def</span> <span class="nf">get_precision</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+<div class="viewcode-block" id="get_precision"><a class="viewcode-back" href="../../../api.html#wsknn.evaluate.metrics.get_precision">[docs]</a><span class="k">def</span> <span class="nf">get_precision</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
                   <span class="n">trained_model</span><span class="p">:</span> <span class="n">WSKNN</span><span class="p">,</span>
                   <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                   <span class="n">skip_short_sessions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -401,7 +403,7 @@
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_recall"><a class="viewcode-back" href="../../../wsknn.evaluate.html#wsknn.evaluate.metrics.get_recall">[docs]</a><span class="k">def</span> <span class="nf">get_recall</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+<div class="viewcode-block" id="get_recall"><a class="viewcode-back" href="../../../api.html#wsknn.evaluate.metrics.get_recall">[docs]</a><span class="k">def</span> <span class="nf">get_recall</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
                <span class="n">trained_model</span><span class="p">:</span> <span class="n">WSKNN</span><span class="p">,</span>
                <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                <span class="n">skip_short_sessions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -617,8 +619,8 @@
   <div id="footer-row" class="row">
 
     <div class="col-md-12">
-        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
-        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <span title="Built on 2022-10-23" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3 and the
         <a href="https://pypi.org/project/sphinx-sizzle-theme/"
 
            title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"

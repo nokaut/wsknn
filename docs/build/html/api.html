@@ -38,13 +38,15 @@
       $(document).data('sizzle', {on_load: []});
     </script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="app-data.js"></script>
 <link rel="index" title="Index" href="genindex.html" />
 <link rel="search" title="Search" href="search.html" />
-<link rel="prev" title="Weighted session-based k-NN - Intro" href="index.html" />
+<link rel="prev" title="Introduction" href="introduction.html" />
 
 </head>
 <body class="full-height test">
@@ -90,7 +92,7 @@
   <div class="prev-next">
     
       <div class="pull-left">
-        <a class="btn btn-default prev" href="index.html" title="Previous chapter (Weighted session-based k-NN - Intro)"><i class="fa fa-chevron-left mr-1em" aria-hidden="true"></i><span class="btn-text">Weighted session-based k-NN - Intro</span></a>
+        <a class="btn btn-default prev" href="introduction.html" title="Previous chapter (Introduction)"><i class="fa fa-chevron-left mr-1em" aria-hidden="true"></i><span class="btn-text">Introduction</span></a>
       </div>
     
     </div>
@@ -98,7 +100,7 @@
       </div>
       <div id="alt-hdr-right">
 
-        <a href="index.html"><i class="fa fa-chevron-left mr-8"></i></a>
+        <a href="introduction.html"><i class="fa fa-chevron-left mr-8"></i></a>
 
 
         <a href="index.html"><i class="fa fa-home mr-8"></i></a>
@@ -144,8 +146,8 @@
       
         
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#api">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#core-functions">Core functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fit-transform">fit_transform</a></li>
@@ -153,11 +155,25 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#core-wsknn-class">Core WSKNN class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-wsknn.model.wsknn">WSKNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsknn.model.wsknn">WSKNN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN"><code class="docutils literal notranslate"><span class="pre">WSKNN</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN.fit"><code class="docutils literal notranslate"><span class="pre">WSKNN.fit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN.recommend"><code class="docutils literal notranslate"><span class="pre">WSKNN.recommend()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN.set_model_params"><code class="docutils literal notranslate"><span class="pre">WSKNN.set_model_params()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#evaluation-metrics">Evaluation metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-wsknn.utils.transform">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-wsknn.utils.transform">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_gzipped_jsonl"><code class="docutils literal notranslate"><span class="pre">load_gzipped_jsonl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_gzipped_pickle"><code class="docutils literal notranslate"><span class="pre">load_gzipped_pickle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_jsonl"><code class="docutils literal notranslate"><span class="pre">load_jsonl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_pickled"><code class="docutils literal notranslate"><span class="pre">load_pickled()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,8 +187,8 @@
           <div id="mnav">
             
   
-    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#api">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#core-functions">Core functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fit-transform">fit_transform</a></li>
@@ -180,11 +196,25 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#core-wsknn-class">Core WSKNN class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-wsknn.model.wsknn">WSKNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsknn.model.wsknn">WSKNN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN"><code class="docutils literal notranslate"><span class="pre">WSKNN</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN.fit"><code class="docutils literal notranslate"><span class="pre">WSKNN.fit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN.recommend"><code class="docutils literal notranslate"><span class="pre">WSKNN.recommend()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#wsknn.model.wsknn.WSKNN.set_model_params"><code class="docutils literal notranslate"><span class="pre">WSKNN.set_model_params()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#evaluation-metrics">Evaluation metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-wsknn.utils.transform">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-wsknn.utils.transform">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_gzipped_jsonl"><code class="docutils literal notranslate"><span class="pre">load_gzipped_jsonl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_gzipped_pickle"><code class="docutils literal notranslate"><span class="pre">load_gzipped_pickle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_jsonl"><code class="docutils literal notranslate"><span class="pre">load_jsonl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wsknn.utils.transform.load_pickled"><code class="docutils literal notranslate"><span class="pre">load_pickled()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -194,11 +224,11 @@
           <div class="body">
             
   <div class="section" id="api">
-<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<h1>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="core-functions">
-<h2>Core functions<a class="headerlink" href="#core-functions" title="Permalink to this headline">¶</a></h2>
+<h2>Core functions<a class="headerlink" href="#core-functions" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="fit-transform">
-<h3>fit_transform<a class="headerlink" href="#fit-transform" title="Permalink to this headline">¶</a></h3>
+<h3>fit_transform<a class="headerlink" href="#fit-transform" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
 <code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">items</span></span></em>, <em><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">return_events_from_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">sampling_str_event_weights_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">recommend_any</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/fit_transform.html#fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -300,7 +330,7 @@ For example, this event may be a “purchase”.</p>
 
 </div>
 <div class="section" id="predict">
-<h3>predict<a class="headerlink" href="#predict" title="Permalink to this headline">¶</a></h3>
+<h3>predict<a class="headerlink" href="#predict" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
 <code class="sig-name descname"><span class="pre">predict</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">model</span></span></em>, <em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/predict.html#predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -358,9 +388,9 @@ Possible parameters are grouped in the <cite>settings.yml</cite> file under the 
 </div>
 </div>
 <div class="section" id="core-wsknn-class">
-<h2>Core WSKNN class<a class="headerlink" href="#core-wsknn-class" title="Permalink to this headline">¶</a></h2>
+<h2>Core WSKNN class<a class="headerlink" href="#core-wsknn-class" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="module-wsknn.model.wsknn">
-<span id="wsknn"></span><h3>WSKNN<a class="headerlink" href="#module-wsknn.model.wsknn" title="Permalink to this headline">¶</a></h3>
+<span id="wsknn"></span><h3>WSKNN<a class="headerlink" href="#module-wsknn.model.wsknn" title="Permalink to this heading">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="wsknn.model.wsknn.WSKNN">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-name descname"><span class="pre">WSKNN</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">number_of_recommendations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em><span class="n"><span class="pre">number_of_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em><span class="n"><span class="pre">sampling_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'common_items'</span></span></em>, <em><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em><span class="n"><span class="pre">weighting_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">ranking_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em><span class="n"><span class="pre">return_events_from_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">required_sampling_event_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">sampling_event_weights_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">recommend_any</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/model/wsknn.html#WSKNN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.model.wsknn.WSKNN" title="Permalink to this definition">¶</a></dt>
@@ -599,7 +629,7 @@ weights.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="evaluation-metrics">
-<h2>Evaluation metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this headline">¶</a></h2>
+<h2>Evaluation metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py">
 <code class="sig-name descname"><span class="pre">score_model</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">sessions</span></span></em>, <em><span class="n"><span class="pre">trained_model</span></span></em>, <em><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em><span class="n"><span class="pre">skip_short_sessions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_mrr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">calc_recall</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/evaluate/metrics.html#score_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -788,7 +818,7 @@ same number of evaluation products as the number of recommendations.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="module-wsknn.utils.transform">
-<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-wsknn.utils.transform" title="Permalink to this headline">¶</a></h2>
+<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-wsknn.utils.transform" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wsknn.utils.transform.load_gzipped_jsonl">
 <code class="sig-name descname"><span class="pre">load_gzipped_jsonl</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">filename</span></span></em>, <em><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTF-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsknn/utils/transform.html#load_gzipped_jsonl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsknn.utils.transform.load_gzipped_jsonl" title="Permalink to this definition">¶</a></dt>
@@ -805,7 +835,7 @@ same number of evaluation products as the number of recommendations.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt>: dict</dt><dd><p>Python dictionary with unique records.</p>
+<dt><strong>datadict</strong><span class="classifier">dict</span></dt><dd><p>Python dictionary with unique records.</p>
 </dd>
 </dl>
 </td>
@@ -851,7 +881,7 @@ same number of evaluation products as the number of recommendations.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt>: dict</dt><dd><p>Python dictionary with unique records.</p>
+<dt><strong>datadict</strong><span class="classifier">dict</span></dt><dd><p>Python dictionary with unique records.</p>
 </dd>
 </dl>
 </td>
@@ -894,8 +924,8 @@ same number of evaluation products as the number of recommendations.</p>
   <div id="footer-row" class="row">
 
     <div class="col-md-12">
-        <span title="Built on 2022-10-04" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
-        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0 and the
+        <span title="Built on 2022-10-23" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3 and the
         <a href="https://pypi.org/project/sphinx-sizzle-theme/"
 
            title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"
