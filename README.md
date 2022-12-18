@@ -16,7 +16,8 @@ sessions : dict
                    session id: (
                        [sequence of items with user interaction],
                        [timestamp of user interaction per item],
-                       [sequence of weighting factors]
+                       [(optional) sequence of event names],
+                       [(optional) sequence of weights]
                    )
                }
 
@@ -32,7 +33,10 @@ items : dict
 And you ask a model to recommend products based on the user session:
 
 ```
-user session: {session id: [[sequence of items], [sequence of timestamps]]}
+user session: 
+    {session id:
+        [[sequence of items], [sequence of timestamps], [optional event names], [optional weights]]
+    }
 ```
 
 The package is lightweight. It depends only on the `numpy` and `pyyaml`. 
@@ -58,7 +62,6 @@ categorize products and train a different model for each category,
 - there's additional overhead related to the preparation of the input.
 
 ### Example
-
 
 ```python
 

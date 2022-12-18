@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>wsknn - wsknn.model.wsknn</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha256-8uHMIn1ru0GS5KO+zf7Zccf8Uw12IA5DrdEcmMuWLFM=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/tooltipster.bundle.min.css" integrity="sha256-Qc4lCfqZWYaHF5hgEOFrYzSIX9Rrxk0NPHRac+08QeQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" integrity="sha256-Wa1I4jhSXeWd3N6RhfPlkqr1WlT+zS3Vh2YGCg0129E=" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro|Roboto|Roboto+Mono" rel="stylesheet">
+<link href="https://fonts.red-dove.com/iosevka-ss09-regular/webfont.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/sizzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/js/tooltipster.bundle.min.js" integrity="sha256-v8akIv8SCqn5f3mbVB7vEWprIizxPh6oV0yhao/dbB4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+    <script>
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        LINK_SUFFIX: '.html',
+        HAS_SOURCE:  false,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+      $(document).data('sizzle', {on_load: []});
+    </script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../app-data.js"></script>
+<link rel="index" title="Index" href="../../../genindex.html" />
+<link rel="search" title="Search" href="../../../search.html" />
+
+</head>
+<body class="full-height test">
+<noscript>
+  <div>
+    <div id="noscript-message">JavaScript is not enabled. It is needed for this website to work.</div>
+  </div>
+</noscript>
+<div id="whole-page" class="container-fluid content full-height">
+  <div id="header-row" class="row">
+    <div id="header-container" class="col-md-12">
+      <div id="hdr-left">
+        <i class="fa fa-bars menu-toggle"></i>
+        
+<a href="../../../index.html" class="text-logo">wsknn 0.1.5 documentation</a>
+
+      </div>
+      <div id="hdr-centre" class="text-center stretch">
+        <h3 title="wsknn.model.wsknn">wsknn.model.wsknn</h3>
+        <h6>wsknn.model.wsknn</h6>
+      </div>
+      <div id="hdr-search">
+        
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
+      </div>
+
+      <div id="hdr-index">
+        <a href="../../../genindex.html" class="btn btn-default" title="Go to the index"><i class="fa fa-list"></i></a>
+      </div>
+
+      <div id="hdr-right">
+        
+  
+      </div>
+      <div id="alt-hdr-right">
+
+
+        <a href="../../../index.html"><i class="fa fa-home mr-8"></i></a>
+
+
+        <a href="../../../search.html"><i class="fa fa-search mr-8"></i></a>
+
+
+        <a href="../../../genindex.html"><i class="fa fa-list mr-8"></i></a>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="content-row" class="row">
+    <div id="page-content" class="col-md-12 flex-col">
+      <div id="content-container">
+        <div id="nav">
+          
+  <div class="navsidebar">
+    <div id="sidebar-search">
+      
+<div class="input-group" title="Enter something to search for and then either press Enter or click the magnifying glass">
+  <input type="text" class="form-control search-query" placeholder="Search docs ...">
+  <div class="input-group-addon">
+    <i class="fa fa-search"></i>
+  </div>
+</div>
+    </div>
+      <div class="sidebar-block">
+        <div class="sidebar-tocheading">
+          <div class="pull-left">
+            <h2>Table Of Contents</h2>
+          </div>
+          <div class="pull-right" title="Hide this sidebar (hover at left edge to bring it back)"><i class="fa fa-chevron-left hidetoc"></i></div>
+        </div>
+        <div class="sidebar-toc">
+      
+          <div id="toc-filter" title="Type in here to show only matching topics">
+            <input class="form-control" id="toc-filter-query" placeholder="Filter by title ...">
+          </div>
+      
+        
+  
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html#api">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution.html#contribution-to-wsknn">Contribution to WSKNN</a></li>
+</ul>
+
+  
+        </div>
+      </div>
+  </div>
+        </div>
+        <div id="content" tabindex="0" class="stretch">
+          <div id="mnav">
+            
+  
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html#api">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution.html#contribution-to-wsknn">Contribution to WSKNN</a></li>
+</ul>
+
+  
+          </div>
+          <div class="body">
+            
+  <h1>Source code for wsknn.model.wsknn</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">wsknn.weighting</span> <span class="kn">import</span> <span class="n">weight_session_items</span><span class="p">,</span> <span class="n">weight_item_score</span>
+<span class="kn">from</span> <span class="nn">wsknn.utils.calc</span> <span class="kn">import</span> <span class="n">weight_set_pair</span>
+<span class="kn">from</span> <span class="nn">wsknn.utils.errors</span> <span class="kn">import</span> <span class="n">check_data_dimension</span><span class="p">,</span> <span class="n">check_numeric_type_instance</span><span class="p">,</span>\
+    <span class="n">InvalidDimensionsError</span><span class="p">,</span> <span class="n">InvalidTimestampError</span>
+
+
+<div class="viewcode-block" id="WSKNN"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN">[docs]</a><span class="k">class</span> <span class="nc">WSKNN</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The class represents the Weighted Session-Based k-nn model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    number_of_recommendations : int, default=5</span>
+<span class="sd">        The number of recommended items.</span>
+
+<span class="sd">    number_of_neighbors : int, default=10</span>
+<span class="sd">        The number of the closest sessions to choose the items from.</span>
+
+<span class="sd">    sampling_strategy : str, default=&#39;common_items&#39;</span>
+<span class="sd">        How to filter the initial sample of sessions. Available strategies are:</span>
+
+<span class="sd">        - ``&#39;common_items&#39;``: sample sessions with the same items as the input session,</span>
+<span class="sd">        - ``&#39;recent&#39;``: sample the most actual sessions,</span>
+<span class="sd">        - ``&#39;random&#39;``: get a random sample of sessions,</span>
+<span class="sd">        - ``&#39;weighted_events&#39;``: select sessions based on the specific weights assigned to events.</span>
+
+<span class="sd">    sample_size : int, default=1000</span>
+<span class="sd">        How many sessions from the model are sampled to make a recommendation.</span>
+
+<span class="sd">    weighting_func : str, default=&#39;linear&#39;</span>
+<span class="sd">        The similarity measurement between sessions. Available options: ``&#39;linear&#39;``, ``&#39;log&#39;`` and ``&#39;quadratic&#39;``.</span>
+
+<span class="sd">    ranking_strategy : str, default=&#39;linear&#39;</span>
+<span class="sd">        How we calculate an item rank (based on its position in a session sequence). Available options</span>
+<span class="sd">        are: ``&#39;inv&#39;``, ``&#39;linear&#39;``, ``&#39;log&#39;``, ``&#39;quadratic&#39;``.</span>
+
+<span class="sd">    return_events_from_session : bool, default = True</span>
+<span class="sd">        Should algorithm return the same items as in session if there are no neighbors?</span>
+
+<span class="sd">    required_sampling_event : int or str, default = None</span>
+<span class="sd">        Set this parameter to the event name if sessions with this event must be included in the neighbors&#39; selection.</span>
+<span class="sd">        For example, an event name may be the ``&quot;purchase&quot;``.</span>
+
+<span class="sd">    required_sampling_event_index : int, default = None</span>
+<span class="sd">        If ``required_sampling_event`` parameter is filled then you must pass an index of a row with event names.</span>
+
+<span class="sd">    sampling_event_weights_index : int, default = None</span>
+<span class="sd">        If ``sampling_strategy`` is set to ``weighted_events`` then you must pass an index of a row with event weights.</span>
+
+<span class="sd">    recommend_any : bool, default = False</span>
+<span class="sd">        If recommender picks less items than required by the ``number_of_recommendations`` then add random items to</span>
+<span class="sd">        the results.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    weighting_functions: List</span>
+<span class="sd">        The weighting functions: ``[&#39;linear&#39;, &#39;log&#39;, &#39;quadratic&#39;]``.</span>
+
+<span class="sd">    ranking_strategies : List</span>
+<span class="sd">        The ranking strategies: ``[&#39;linear&#39;, &#39;log&#39;, &#39;quadratic&#39;, &#39;inv&#39;]``.</span>
+
+<span class="sd">    session_item_map : Dict</span>
+<span class="sd">        The map of items that are occuring the session and their timestamps, and (optional) their types and their</span>
+<span class="sd">        weights.</span>
+<span class="sd">        &gt;&gt;&gt; sessions = {</span>
+<span class="sd">        ...     session_id: (</span>
+<span class="sd">        ...     [sequence_of_items],</span>
+<span class="sd">        ...     [sequence_of_timestamps],</span>
+<span class="sd">        ...     [(optional) event names (types)],</span>
+<span class="sd">        ...     [(optional) weights]</span>
+<span class="sd">        ...     )</span>
+<span class="sd">        ... }</span>
+
+<span class="sd">    item_session_map : Dict</span>
+<span class="sd">        The map of items and the sessions where those items are present, and the first timestamp of those sessions.</span>
+<span class="sd">        &gt;&gt;&gt; items = {</span>
+<span class="sd">        ...     item_id: (</span>
+<span class="sd">        ...     [sequence_of_sessions],</span>
+<span class="sd">        ...     [sequence_of_the_first_session_timestamps]</span>
+<span class="sd">        ...     )</span>
+<span class="sd">        ... }</span>
+
+<span class="sd">    n_of_recommendations : int</span>
+<span class="sd">        The number of items recommended.</span>
+
+<span class="sd">    number_of_closest_neighbors : int</span>
+<span class="sd">        See ``number_of_neighbors`` parameter.</span>
+
+<span class="sd">    sampling_strategy : str</span>
+<span class="sd">        See ``sampling_strategy`` parameter.</span>
+
+<span class="sd">    possible_neighbors_sample_size : int</span>
+<span class="sd">        See ``sample_size`` parameter.</span>
+
+<span class="sd">    weighting_function : str</span>
+<span class="sd">        See ``weighting_func`` parameter.</span>
+
+<span class="sd">    ranking_strategy : str</span>
+<span class="sd">        See ``ranking_strategy`` parameter.</span>
+
+<span class="sd">    return_events_from_session : bool, default = True</span>
+<span class="sd">        See ``return_events_from_session`` parameter.</span>
+
+<span class="sd">    required_sampling_event : Union[int, str], default = None</span>
+<span class="sd">        See ``required_sampling_event`` parameter.</span>
+
+<span class="sd">    required_sampling_event_index : int, default = None</span>
+<span class="sd">        See ``required_sampling_event_index`` parameter.</span>
+
+<span class="sd">    sampling_event_weights_index : int, default = None</span>
+<span class="sd">        See ``sampling_str_event_weights_index`` parameter.</span>
+
+<span class="sd">    recommend_any : bool, default = False</span>
+<span class="sd">        See ``recommend_any`` parameter.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    fit()</span>
+<span class="sd">        Sets input session-items and item-sessions maps.</span>
+
+<span class="sd">    recommend()</span>
+<span class="sd">        The method predicts the ``n`` next recommendations from a given session.</span>
+
+<span class="sd">    set_model_params()</span>
+<span class="sd">        Methods resets and maps the new model parameters.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    InvalidDimensionsError</span>
+<span class="sd">        Wrong number of nested sequences within session-items or item-sessions maps.</span>
+
+<span class="sd">    InvalidTimestampError</span>
+<span class="sd">        Wrong type of timestamp - ``int`` type is required.</span>
+
+<span class="sd">    TypeError</span>
+<span class="sd">        Wrong type of nested structures within session-items or item-sessions maps.</span>
+
+<span class="sd">    IndexError</span>
+<span class="sd">        Wrong index of event names or wrong index of event weights.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">number_of_recommendations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                 <span class="n">number_of_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                 <span class="n">sampling_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;common_items&#39;</span><span class="p">,</span>
+                 <span class="n">sample_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+                 <span class="n">weighting_func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+                 <span class="n">ranking_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+                 <span class="n">return_events_from_session</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">required_sampling_event</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">required_sampling_event_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">sampling_event_weights_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">recommend_any</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+
+        <span class="c1"># CHECKS</span>
+
+        <span class="c1"># Check if all parameters are given: required sampling event</span>
+
+        <span class="k">if</span> <span class="n">required_sampling_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># User must provide index of event names</span>
+            <span class="k">if</span> <span class="n">required_sampling_event_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;With required sampling event given you must provide index of a row with names of events!&#39;</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># Check if all parameters are given: sampling_strategy == &#39;weighted_events&#39;</span>
+        <span class="k">if</span> <span class="n">sampling_strategy</span> <span class="o">==</span> <span class="s1">&#39;weighted_events&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sampling_event_weights_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;If you want to sample sessions based on the weights then you must provide index of &#39;</span> \
+                      <span class="s1">&#39;the row with weights&#39;</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># INITILIAZATION</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;common_items&#39;</span><span class="p">,</span> <span class="s1">&#39;recent&#39;</span><span class="p">,</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_events&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weighting_functions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="s1">&#39;quadratic&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ranking_strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="s1">&#39;quadratic&#39;</span><span class="p">,</span> <span class="s1">&#39;inv&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_session_map</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_of_recommendations</span> <span class="o">=</span> <span class="n">number_of_recommendations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_closest_neighbors</span> <span class="o">=</span> <span class="n">number_of_neighbors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">possible_neighbors_sample_size</span> <span class="o">=</span> <span class="n">sample_size</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_sampling_event</span> <span class="o">=</span> <span class="n">required_sampling_event</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_sampling_strategy_valid</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weighting_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_weighting_function_valid</span><span class="p">(</span><span class="n">weighting_func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ranking_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ranking_strategy_valid</span><span class="p">(</span><span class="n">ranking_strategy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_events_from_session</span> <span class="o">=</span> <span class="n">return_events_from_session</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampling_event_weights_index</span> <span class="o">=</span> <span class="n">sampling_event_weights_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_sampling_event_index</span> <span class="o">=</span> <span class="n">required_sampling_event_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recommend_any</span> <span class="o">=</span> <span class="n">recommend_any</span>
+
+    <span class="c1"># Core methods</span>
+
+<div class="viewcode-block" id="WSKNN.fit"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">sessions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+            <span class="n">items</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets input session-items and item-sessions maps.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sessions : Dict</span>
+<span class="sd">            The map of items that are occuring the session and their timestamps, and (optional) their types and their</span>
+<span class="sd">            weights.</span>
+
+<span class="sd">            &gt;&gt;&gt; sessions = {</span>
+<span class="sd">            ...     session_id: (</span>
+<span class="sd">            ...     [sequence_of_items],</span>
+<span class="sd">            ...     [sequence_of_timestamps],</span>
+<span class="sd">            ...     [(optional) event names (types)],</span>
+<span class="sd">            ...     [(optional) weights]</span>
+<span class="sd">            ...     )</span>
+<span class="sd">            ... }</span>
+
+<span class="sd">        items : Dict</span>
+<span class="sd">            The map of items and the sessions where those items are present, and the first timestamp of those sessions.</span>
+
+<span class="sd">            &gt;&gt;&gt; items = {</span>
+<span class="sd">            ...     item_id: (</span>
+<span class="sd">            ...     [sequence_of_sessions],</span>
+<span class="sd">            ...     [sequence_of_the_first_session_timestamps]</span>
+<span class="sd">            ...     )</span>
+<span class="sd">            ... }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Check input data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_sessions_input</span><span class="p">(</span><span class="n">sessions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_items_input</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span> <span class="o">=</span> <span class="n">sessions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_session_map</span> <span class="o">=</span> <span class="n">items</span></div>
+
+<div class="viewcode-block" id="WSKNN.recommend"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN.recommend">[docs]</a>    <span class="k">def</span> <span class="nf">recommend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">event_stream</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+                  <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The method predicts n next recommendations from a given session.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        event_stream : List</span>
+<span class="sd">            Sequence of items for recommendation. It must be a nested ``List`` of lists:</span>
+<span class="sd">            &gt;&gt;&gt; [</span>
+<span class="sd">            ...     [sequence_of_items],</span>
+<span class="sd">            ...     [sequence_of_timestamps],</span>
+<span class="sd">            ...     [(optional) event names (types)],</span>
+<span class="sd">            ...     [(optional) weights]</span>
+<span class="sd">            ... ]</span>
+
+<span class="sd">        settings : Dict, default = None</span>
+<span class="sd">            Model settings and parameters.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recommendations : List</span>
+<span class="sd">            &gt;&gt;&gt; [</span>
+<span class="sd">            ...     (item a, rank a), (item b, rank b)</span>
+<span class="sd">            ... ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">settings</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_model_params</span><span class="p">(</span><span class="o">**</span><span class="n">settings</span><span class="p">)</span>
+
+        <span class="n">recommendations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict</span><span class="p">(</span><span class="n">event_stream</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">recommendations</span></div>
+
+<div class="viewcode-block" id="WSKNN.set_model_params"><a class="viewcode-back" href="../../../api.html#wsknn.model.wsknn.WSKNN.set_model_params">[docs]</a>    <span class="k">def</span> <span class="nf">set_model_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">number_of_recommendations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">number_of_neighbors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">sampling_strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">sample_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">weighting_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">ranking_strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">return_events_from_session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">required_sampling_event</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">recommend_any</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Methods resets and maps the new model parameters.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        number_of_recommendations : int, default = None</span>
+
+<span class="sd">        number_of_neighbors : int, default = None</span>
+
+<span class="sd">        sampling_strategy : str, default = None</span>
+
+<span class="sd">        sample_size : int, default = None</span>
+
+<span class="sd">        weighting_func : str, default = None</span>
+
+<span class="sd">        ranking_strategy : str, default = None</span>
+
+<span class="sd">        return_events_from_session : bool, default = None</span>
+
+<span class="sd">        required_sampling_event : str or int, default = None</span>
+
+<span class="sd">        recommend_any : bool, default = None</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            Wrong input parameter type.</span>
+
+<span class="sd">        KeyError</span>
+<span class="sd">            Wrong name of sampling strategy, ranking strategy or weighting function.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">number_of_recommendations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number_of_recommendations</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_n_of_recs</span><span class="p">(</span><span class="n">number_of_recommendations</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of output recommendations should be an integer, &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">number_of_recommendations</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">number_of_neighbors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">number_of_neighbors</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_number_of_closest_neighbors</span><span class="p">(</span><span class="n">number_of_neighbors</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of closest neighbors should be an integer, &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">number_of_neighbors</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sampling_strategy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">session_sampling_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_sampling_strategy_valid</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_sampling_strategy</span><span class="p">(</span><span class="n">session_sampling_strategy</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Defined sampling strategy should be a string. &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;Got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sample_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_possible_neighbors_sample_size</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of possible neighbors should be an integer, &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">weighting_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weighting_func</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">weighting_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_weighting_function_valid</span><span class="p">(</span><span class="n">weighting_func</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_weighting_strategy</span><span class="p">(</span><span class="n">weighting_strategy</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Defined weighting function should be a string. &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;Got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">weighting_func</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ranking_strategy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ranking_strategy</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">rank_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ranking_strategy_valid</span><span class="p">(</span><span class="n">ranking_strategy</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_ranking_strategy</span><span class="p">(</span><span class="n">rank_strategy</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Defined ranking function should be a string. &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;Got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">ranking_strategy</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_events_from_session</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">return_events_from_session</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">return_events_from_session</span> <span class="o">=</span> <span class="n">return_events_from_session</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;return_events_from_session parameter should be set only to True or False (bool). &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;Got type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">return_events_from_session</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">required_sampling_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">required_sampling_event</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">required_sampling_event</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">required_sampling_event</span> <span class="o">=</span> <span class="n">required_sampling_event</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Defined required sampling event can be int or str, other datatypes are not supported&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">recommend_any</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">recommend_any</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">recommend_any</span> <span class="o">=</span> <span class="n">recommend_any</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;recommend_any parameter should be set only to True or False (bool). &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;Got type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">recommend_any</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nearest_neighbors</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recommend_any</span><span class="p">:</span>
+                <span class="n">recs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                <span class="n">recommendations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_more_items</span><span class="p">(</span><span class="n">recs</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">recommendations</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ranked_items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rank_items</span><span class="p">(</span><span class="n">neighbors</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+            <span class="n">ranked_items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">recommendations</span> <span class="o">=</span> <span class="n">ranked_items</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n_of_recommendations</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recommend_any</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">recommendations</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_of_recommendations</span><span class="p">:</span>
+                    <span class="n">recommendations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_more_items</span><span class="p">(</span><span class="n">recommendations</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">recommendations</span>
+
+    <span class="k">def</span> <span class="nf">_get_more_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recommendations</span><span class="p">):</span>
+        <span class="n">add_items_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_of_recommendations</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">recommendations</span><span class="p">)</span>
+        <span class="n">possible_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">item_session_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">add_items_size</span><span class="p">):</span>
+            <span class="n">rnd_item</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_items</span><span class="p">)</span>
+            <span class="n">rnd_rec</span> <span class="o">=</span> <span class="p">(</span><span class="n">rnd_item</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rnd_rec</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">recommendations</span>
+
+    <span class="c1"># Settings</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_check_sessions_input</span><span class="p">(</span><span class="n">sessions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if sessions have required dimensions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sessions : Dict</span>
+<span class="sd">            The map of items that are occuring the session and their timestamps, and (optional) their types and their</span>
+<span class="sd">            weights.</span>
+
+<span class="sd">            &gt;&gt;&gt; sessions = {</span>
+<span class="sd">            ...     session_id: (</span>
+<span class="sd">            ...     [sequence_of_items],</span>
+<span class="sd">            ...     [sequence_of_timestamps],</span>
+<span class="sd">            ...     [(optional) event names (types)],</span>
+<span class="sd">            ...     [(optional) weights]</span>
+<span class="sd">            ...     )</span>
+<span class="sd">            ... }</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        InvalidDimensionsError</span>
+<span class="sd">            Number of nested sequences per record is different than 2 or 3.</span>
+
+<span class="sd">        InvalidTimestampError</span>
+<span class="sd">            Wrong type of timestamp - int is required.</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            Wrong type of a given structure.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Get sample record</span>
+        <span class="n">sample_key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sessions</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+        <span class="n">sample_rec</span> <span class="o">=</span> <span class="n">sessions</span><span class="p">[</span><span class="n">sample_key</span><span class="p">]</span>
+
+        <span class="c1"># Check dimensions</span>
+        <span class="n">test_dims</span> <span class="o">=</span> <span class="n">check_data_dimension</span><span class="p">(</span><span class="n">sample_rec</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">test_dims</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDimensionsError</span><span class="p">(</span><span class="s1">&#39;Session-items map&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Check type</span>
+        <span class="k">for</span> <span class="n">subrec</span> <span class="ow">in</span> <span class="n">sample_rec</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subrec</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Expected iterable as a part of session-items map record, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">subrec</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead.&#39;</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># Check timestamp type</span>
+        <span class="k">for</span> <span class="n">tstamp</span> <span class="ow">in</span> <span class="n">sample_rec</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">check_numeric_type_instance</span><span class="p">(</span><span class="n">tstamp</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">InvalidTimestampError</span><span class="p">(</span><span class="n">tstamp</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_check_items_input</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if sessions have required dimensions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        items : Dict</span>
+<span class="sd">            The map of items and the sessions where those items are present, and the first timestamp of those sessions.</span>
+
+<span class="sd">            &gt;&gt;&gt; items = {</span>
+<span class="sd">            ...     item_id: (</span>
+<span class="sd">            ...     [sequence_of_sessions],</span>
+<span class="sd">            ...     [sequence_of_the_first_session_timestamps]</span>
+<span class="sd">            ...     )</span>
+<span class="sd">            ... }</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        InvalidDimensionsError</span>
+<span class="sd">            Number of nested sequences per record is different than 2.</span>
+
+<span class="sd">        InvalidTimestampError</span>
+<span class="sd">            Wrong type of timestamp - int is required.</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            Wrong type of a given structure.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Get sample record</span>
+        <span class="n">sample_key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+        <span class="n">sample_rec</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">sample_key</span><span class="p">]</span>
+
+        <span class="c1"># Check dimensions</span>
+        <span class="n">test_dims</span> <span class="o">=</span> <span class="n">check_data_dimension</span><span class="p">(</span><span class="n">sample_rec</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">test_dims</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDimensionsError</span><span class="p">(</span><span class="s1">&#39;Item-sessions map&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Check type</span>
+        <span class="k">for</span> <span class="n">subrec</span> <span class="ow">in</span> <span class="n">sample_rec</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subrec</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Expected iterable as a part of item-sessions map record, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">subrec</span><span class="p">)</span><span class="si">}</span><span class="s1"> instead.&#39;</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># Check timestamp type</span>
+        <span class="k">for</span> <span class="n">tstamp</span> <span class="ow">in</span> <span class="n">sample_rec</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">check_numeric_type_instance</span><span class="p">(</span><span class="n">tstamp</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">InvalidTimestampError</span><span class="p">(</span><span class="n">tstamp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_sampling_strategy_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampling_strategy</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check sampling strategy.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sampling_strategy : str</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        KeyError</span>
+<span class="sd">            Strategy not in list defined in ``self.sampling_strategies``</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sampling_strategy : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sampling_strategy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategies</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sampling_strategy</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Given sampling strategy </span><span class="si">{</span><span class="n">sampling_strategy</span><span class="si">}</span><span class="s2"> not implemented in the package. &quot;</span> \
+                  <span class="sa">f</span><span class="s2">&quot;Use one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategies</span><span class="si">}</span><span class="s2"> instead&quot;</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_ranking_strategy_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check if ranking strategy is valid.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        strategy : str</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        KeyError</span>
+<span class="sd">            Strategy not in list ``[&#39;linear&#39;, &#39;log&#39;, &#39;quadratic&#39;, &#39;inv&#39;]``</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        strategy : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranking_strategies</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">strategy</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Given ranking strategy </span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2"> not implemented in the package. &quot;</span> \
+                  <span class="sa">f</span><span class="s2">&quot;Use &#39;linear&#39;, &#39;log&#39;, &#39;quadratic&#39;, &#39;inv&#39; instead&quot;</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_weighting_function_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wfunc</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check if weighting function is valid.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        wfunc : str</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        KeyError</span>
+<span class="sd">            Weighting function not in list ``[&#39;linear&#39;, &#39;log&#39;, &#39;quadratic&#39;]``</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        wfunc : str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">wfunc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">weighting_functions</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">wfunc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Given weighting function </span><span class="si">{</span><span class="n">wfunc</span><span class="si">}</span><span class="s2"> is not implemented in the package. &quot;</span> \
+                  <span class="sa">f</span><span class="s2">&quot;Use &#39;linear&#39;, &#39;log&#39;, &#39;quadratic&#39;, instead&quot;</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_n_of_recs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_of_recommendations</span> <span class="o">=</span> <span class="n">n</span>
+
+    <span class="k">def</span> <span class="nf">_set_number_of_closest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_closest_neighbors</span> <span class="o">=</span> <span class="n">n</span>
+
+    <span class="k">def</span> <span class="nf">_set_possible_neighbors_sample_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">possible_neighbors_sample_size</span> <span class="o">=</span> <span class="n">sample_size</span>
+
+    <span class="k">def</span> <span class="nf">_set_sampling_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sampling_strategy</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="o">=</span> <span class="n">sampling_strategy</span>
+
+    <span class="k">def</span> <span class="nf">_set_weighting_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weighting_func</span><span class="p">):</span>
+        <span class="n">weighting_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_weighting_function_valid</span><span class="p">(</span><span class="n">weighting_func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weighting_function</span> <span class="o">=</span> <span class="n">weighting_func</span>
+
+    <span class="k">def</span> <span class="nf">_set_ranking_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank_strategy</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ranking_strategy</span> <span class="o">=</span> <span class="n">rank_strategy</span>
+
+    <span class="c1"># Transform, sample, rank - core</span>
+
+    <span class="k">def</span> <span class="nf">_nearest_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method searches for nearest neighbors for a given session.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        session : List</span>
+<span class="sd">            Session is a sequence of products, events (product view / click) and timestamps of those events:</span>
+
+<span class="sd">            &gt;&gt;&gt; session = [</span>
+<span class="sd">            ...     [sequence_of_items],</span>
+<span class="sd">            ...     [sequence_of_timestamps],</span>
+<span class="sd">            ...     [optional sequence_of_event_type],</span>
+<span class="sd">            ...     [optional sequence of weights]</span>
+<span class="sd">            ... ]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        rank : List</span>
+<span class="sd">            The ``n`` closest sessions, where ``n`` - number of the closest sessions or length of ranked session if</span>
+<span class="sd">            smaller than number of the closest sessions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">possible_neighbor_sessions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_possible_neighbors</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">items_sequence</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_similarity</span><span class="p">(</span><span class="n">items_sequence</span><span class="p">,</span> <span class="n">possible_neighbor_sessions</span><span class="p">)</span>
+        <span class="n">rank</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_closest_neighbors</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rank</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_possible_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get set of possible neighbors based on the item similarity.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        session : List</span>
+<span class="sd">            Session is a sequence of products, events (product view / click) and timestamps of those events:</span>
+
+<span class="sd">            &gt;&gt;&gt; session = [</span>
+<span class="sd">            ...     [sequence_of_items],</span>
+<span class="sd">            ...     [sequence_of_timestamps],</span>
+<span class="sd">            ...     [optional sequence_of_event_type],</span>
+<span class="sd">            ...     [optional sequence of weights]</span>
+<span class="sd">            ... ]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sample_subset : List</span>
+<span class="sd">          Sample of possible neighbors. Sampling controlled by the ``sampling_strategy`` attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">session_items</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">common_sessions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">s_item</span> <span class="ow">in</span> <span class="n">session_items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s_item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_session_map</span><span class="p">:</span>
+                <span class="n">s_item_sessions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">item_session_map</span><span class="p">[</span><span class="n">s_item</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">common_sessions</span> <span class="o">|=</span> <span class="n">s_item_sessions</span>
+
+        <span class="c1"># Filter session by event if needed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_sampling_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">common_sessions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sessions_with_event</span><span class="p">(</span><span class="n">common_sessions</span><span class="p">)</span>
+
+        <span class="n">sample_subset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_possible_neighbors</span><span class="p">(</span><span class="n">common_sessions</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sample_subset</span>
+
+    <span class="k">def</span> <span class="nf">_rank_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">closest_neighbors</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Function ranks given items to return the best recommendation results.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        closest_neighbors : List</span>
+<span class="sd">            The closest sessions ranked by similarity to a given session.</span>
+
+<span class="sd">        session : List</span>
+<span class="sd">            User session.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        rank : List</span>
+<span class="sd">            The list of rated items in descending order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">session_items</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">closest_neighbors</span><span class="p">:</span>
+            <span class="n">n_items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span><span class="p">[</span><span class="n">neighbor</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">decay</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">s_item</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">session_items</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">s_item</span> <span class="ow">in</span> <span class="n">n_items</span><span class="p">:</span>
+                    <span class="n">decay</span> <span class="o">=</span> <span class="n">weight_item_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ranking_strategy</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="n">step</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">for</span> <span class="n">n_item</span> <span class="ow">in</span> <span class="n">n_items</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">n_item</span> <span class="ow">in</span> <span class="n">session_items</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_events_from_session</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">old_score</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n_item</span><span class="p">)</span>
+                    <span class="n">new_score</span> <span class="o">=</span> <span class="n">neighbor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="c1"># TODO: idf weighting</span>
+                    <span class="n">new_score</span> <span class="o">=</span> <span class="n">new_score</span> <span class="o">*</span> <span class="n">decay</span>
+
+                    <span class="k">if</span> <span class="n">old_score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">new_score</span> <span class="o">=</span> <span class="n">old_score</span> <span class="o">+</span> <span class="n">new_score</span>
+
+                    <span class="n">scores</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">n_item</span><span class="p">:</span> <span class="n">new_score</span><span class="p">})</span>
+
+        <span class="n">rank</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">scores</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">rank</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">rank</span>
+
+    <span class="c1"># Transform, sample, rank - additional</span>
+
+    <span class="k">def</span> <span class="nf">_calculate_similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_items</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">possible_neighbours</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Function calculates similarity between sessions based on the items ranking.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        session_items : List</span>
+<span class="sd">            List of items from the customer session.</span>
+
+<span class="sd">        possible_neighbours : List</span>
+<span class="sd">            List of sessions from the possible neighbors pool (based on a sampling strategy).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        neighbors : List</span>
+<span class="sd">            List of similar sessions to the customer session.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">pos_weights</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">session_items</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">session_items</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">pos_weights</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight_session_items</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weighting_function</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">session_items</span><span class="p">)</span>
+        <span class="n">neighbours</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">possible_neighbours</span><span class="p">:</span>
+            <span class="n">other_items</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span><span class="p">[</span><span class="n">other</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">similarity</span> <span class="o">=</span> <span class="n">weight_set_pair</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">other_items</span><span class="p">,</span> <span class="n">pos_weights</span><span class="p">)</span>
+            <span class="n">neighbours</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">other</span><span class="p">,</span> <span class="n">similarity</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">neighbours</span>
+
+    <span class="k">def</span> <span class="nf">_get_sessions_with_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_sessions</span><span class="p">:</span> <span class="n">Set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method parses available input sessions based on the occurrence of a specific event and returns list of</span>
+<span class="sd">        unique sessions with this event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        raw_sessions : Set</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unique_session_with_event : Set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_sessions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">sess</span> <span class="ow">in</span> <span class="n">raw_sessions</span><span class="p">:</span>
+            <span class="n">session_sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span><span class="p">[</span><span class="n">sess</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_sampling_event</span> <span class="ow">in</span> <span class="n">session_sample</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">required_sampling_event_index</span><span class="p">]:</span>
+                <span class="n">new_sessions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sess</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_sessions</span>
+
+    <span class="k">def</span> <span class="nf">_sampling_common</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessions</span><span class="p">:</span> <span class="n">Set</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Function gets the most similar sessions based on the number of common elements between sessions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sessions : Set</span>
+<span class="sd">            Unique sessions.</span>
+
+<span class="sd">        session : List</span>
+<span class="sd">            The customer session.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        result : List</span>
+<span class="sd">            List of ``n`` possible sessions with the same items as a customer session.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ses</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span><span class="p">[</span><span class="n">ses</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span> <span class="k">for</span> <span class="n">ses</span> <span class="ow">in</span> <span class="n">sessions</span><span class="p">]</span>
+        <span class="n">rank</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">]</span>
+        <span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_neighbors_sample_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sessions</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[:</span><span class="n">sample_size</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_sample_possible_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">all_sessions</span><span class="p">:</span> <span class="n">Set</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method samples possible neighbors.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        all_sessions : set</span>
+<span class="sd">            All sessions to sample possible neighbors.</span>
+
+<span class="sd">        session : List</span>
+<span class="sd">            Customer session.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sample : List</span>
+<span class="sd">            The subset of possible neighbors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampling_random</span><span class="p">(</span><span class="n">all_sessions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="o">==</span> <span class="s1">&#39;recent&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampling_recent</span><span class="p">(</span><span class="n">all_sessions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="o">==</span> <span class="s1">&#39;common_items&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampling_common</span><span class="p">(</span><span class="n">all_sessions</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span> <span class="o">==</span> <span class="s1">&#39;weighted_events&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sampling_weighted_events</span><span class="p">(</span><span class="n">all_sessions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">err_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Defined sampling strategy </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategy</span><span class="si">}</span><span class="s1"> not implemented. Available strategies are:&#39;</span> \
+                      <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sampling_strategies</span><span class="si">}</span><span class="s1">.&#39;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_sampling_random</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessions</span><span class="p">:</span> <span class="n">Set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get random sessions from the sessions space. This method is good to estimate model performance.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sessions : set</span>
+<span class="sd">            Unique sessions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sample : List</span>
+<span class="sd">            Random sample of ``self.possible_neighbors_sample_size`` sessions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_neighbors_sample_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sessions</span><span class="p">))</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sessions</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sample</span>
+
+    <span class="k">def</span> <span class="nf">_sampling_recent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessions</span><span class="p">:</span> <span class="n">Set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get most recent sessions from the possible neighbors.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sessions : set</span>
+<span class="sd">            Unique sessions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        result : List</span>
+<span class="sd">            The most recent sessions. Sample of size ``self.possible_neighbors_sample_size``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[(</span><span class="n">sid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span><span class="p">[</span><span class="n">sid</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">sid</span> <span class="ow">in</span> <span class="n">sessions</span><span class="p">]</span>
+        <span class="n">rank</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">]</span>
+        <span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_neighbors_sample_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sessions</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[:</span><span class="n">sample_size</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_sampling_weighted_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessions</span><span class="p">:</span> <span class="n">Set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get sessions with the highest weights.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sessions : set</span>
+<span class="sd">            Unique sessions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        result : List</span>
+<span class="sd">            Sessions with the highest weights. Sample of size ``self.possible_neighbors_sample_size``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[(</span>
+            <span class="n">ses</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session_item_map</span><span class="p">[</span><span class="n">ses</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">sampling_event_weights_index</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span> <span class="k">for</span> <span class="n">ses</span> <span class="ow">in</span> <span class="n">sessions</span><span class="p">]</span>
+
+        <span class="n">rank</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">]</span>
+        <span class="n">sample_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_neighbors_sample_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sessions</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[:</span><span class="n">sample_size</span><span class="p">]</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-row" class="row">
+
+    <div class="col-md-12">
+        <span title="Built on 2022-12-18" class="pull-right">&copy; Copyright 2022, Szymon Moliński, Sales Intelligence.
+        Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0 and the
+        <a href="https://pypi.org/project/sphinx-sizzle-theme/"
+
+           title="0.1.1/6a5828d9 [2022-05-03T16:20:16]"
+
+        >Sizzle</a> theme.</span>
+    </div>
+
+  </div>
+</div>
+
+<div id="tooltips" class="hidden">
+</div>
+
+<script>
+$(document).ready(function() {
+  'use strict';
+  var $search = $('.search-query');
+
+  var $filter = $('#toc-filter-query');
+  var $toclist = $('.sidebar-toc > ul').find('li');
+
+  if ($toclist.length === 0) {
+    $toclist = $('.localtoc > ul').find('li');
+  }
+
+
+  var $nav = $('#nav');
+
+  //$('#whole-page').removeClass('hidden');
+  var nav_width = $nav.width();
+
+
+  var search_url = '../../../search.html';
+
+  function perform_search(e) {
+    var $elem;
+
+    if (e.type === 'keypress') {
+      $elem = $(e.target);
+    }
+    else if (e.type === 'click') {
+      $elem = $(e.target).parents('.input-group').find('input');
+    }
+    var q = $elem.val().trim();
+
+    if (q) {
+      var url = search_url + '?q=' + q + '&check_keywords=yes&area=default';
+
+      location.href = url;
+    }
+  }
+
+
+  function apply_filter() {
+    var s = $filter.val().trim().toLowerCase();
+
+    $toclist.find('a').removeClass('hidden');
+    $toclist.each(function() {
+      var $this = $(this);
+      var $link = $this.find('> a');
+      var t = $link.text().toLowerCase();
+      var show = t.indexOf(s) >= 0;
+
+      if (!show) {
+        $link.addClass('hidden');
+      }
+    });
+  }
+
+  $filter.on('keyup', function(e) {
+    apply_filter();
+  });
+
+
+
+  $search.on('keypress', function(e) {
+    if (e.which == 13) {
+      perform_search(e);
+    }
+  });
+  $search.parents('.input-group').find('.input-group-addon').on('click', perform_search);
+  $(document).on('click', '.summary .fa-caret-right', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $next = $elem.next();
+    $elem.addClass('hidden');
+    $next.removeClass('hidden');
+  });
+  $(document).on('click', '.detail .fa-caret-down', function(e) {
+    var $elem = $(e.target).parents('li');
+    var $prev = $elem.prev();
+    $elem.addClass('hidden');
+    $prev.removeClass('hidden');
+  });
+
+  $('#content').on('click', function() {
+    $('#mnav').hide();
+  });
+
+  var counter = 0;
+  var timer = null;
+
+  function show_nav() {
+    $('#content').off('mousemove', track_mouse);
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    $nav.show();
+  }
+
+  function track_mouse(e) {
+    var x = e.clientX;
+
+    if (x < 15) {
+      ++counter;
+      if (timer === null) {
+        timer = setTimeout(show_nav, 2000);
+      }
+    }
+    else {
+      counter = 0;
+    }
+    if (counter >= 20) {
+      show_nav();
+    }
+  };
+
+  function hide_nav() {
+    $nav.hide();
+    counter = 0;
+    $('#content').on('mousemove', track_mouse);
+  }
+
+  $('.hidetoc').on('click', hide_nav);
+
+  $(document).on('keyup', function(e) {
+    if (e.ctrlKey) {
+      if (e.which == 37) {      // Ctrl+left arrow
+        hide_nav();
+      }
+      else if (e.which == 39) { // Ctrl+right arrow
+        show_nav();
+      }
+    }
+  });
+
+  $('.menu-toggle').on('click', function(e) {
+    $('#mnav').toggle();
+  });
+
+  function scroll_nav(frag) {
+    var sel = '#nav ' + (frag ? 'a[href="' + frag + '"]' : '.toctree-l1 a.current');
+
+    var $link = $(sel);
+
+    if ($link.length > 0) {
+      $link[0].scrollIntoView({block: 'center'});
+    }
+  }
+
+  // If the navigator is long, then the item we clicked on to get here might
+  // not be in view. Try to scroll it into the view - a slight delay is needed
+  // to get it to sync properly with other stuff going on (as the page has just
+  // loaded). Hence the setTimeout with a timeout of 0.
+
+  function do_scroll() {
+    scroll_nav(window.location.hash);
+  }
+
+  setTimeout(do_scroll, 0);
+
+  function adjust_size() {
+    // we need to set the height explicitly so that scrolling regions in the
+    // content area work properly.
+    var h = $('#page-content').height();
+
+    $('#nav, #content').height(h);
+    if ($('#nav').is(':visible')) {
+      $('#mnav').hide();
+    }
+  }
+
+  adjust_size();
+
+  $(window).on('resize', adjust_size);
+
+  function focus_content() {
+    $('#content').focus();  // so that keyboard can be used to scroll, etc.
+  }
+
+  setTimeout(focus_content, 150);
+
+  var sizzle = $(document).data('sizzle');
+
+  function make_tooltip(id, h, b) {
+    var $e = $('<div>').attr('id', id);
+    var $b = $('<div>').addClass('tc-body').html(b);
+
+    if (h) {
+      var $h = $('<div>').addClass('tc-heading').html(h);
+      $e.append($h);
+    }
+    $e.append($b);
+    return $e;
+  }
+
+  var default_tt_options = {
+    theme: ['tooltipster-light', 'tooltipster-light-customized'],
+    interactive: true,
+    maxWidth: 600,
+    contentCloning: true
+  };
+
+  function activate_tooltips() {
+    var $tt = $('.tt');
+
+    //console.log('tt links:', $tt.length);
+    $tt.tooltipster(default_tt_options);
+  }
+
+
+
+  function add_glossary_tooltips() {
+    var links = $('a');  // can qualify with .reference.internal
+    var glinks = {};
+    var pat = /(.*)\.html#(term-.*)$/;
+    var found = false;  // links in this document
+
+    $.each(links, function(i, link) {
+        var $link = $(link);
+        var href = $link.attr('href');
+        var m = href.match(pat);
+
+        if (m) {
+          var s = m[1].replace(/^(\.\.\/)+/, '');
+
+          if (s === sizzle.app_data.glossary.document) {
+            var k = m[2];
+
+            if (k in glinks) {
+              glinks[k].push($link);
+            }
+            else {
+              glinks[k] = [$link];
+            }
+            found = true;
+          }
+        }
+    });
+    if (found) {
+      var $t = $('#tooltips');
+      var data = sizzle.app_data.glossary.terms;
+
+      $.each(glinks, function(k, v) {
+        var d = data[k];
+
+        if (d) {  // as a sanity check
+          var s = 'tc-'+ k;
+          var $e = make_tooltip(s, d.term, d.defn);
+          $t.append($e);
+
+          $.each(v, function(i, link) {
+            link.addClass('tt').attr('data-tooltip-content', '#' + s);
+          });
+        }
+      });
+    }
+  }
+
+  if (sizzle.app_data && sizzle.app_data.glossary &&
+      sizzle.app_data.glossary.document) {
+    add_glossary_tooltips();
+  }
+
+
+
+
+  function add_custom_tooltips() {
+    if (!sizzle.app_data) {
+      return;
+    }
+
+    var info_tips = sizzle.app_data.custom_data['info-tips'] || {};
+
+    if ($.isEmptyObject(info_tips)) {
+      return;
+    }
+
+    var tt_options = $.extend({contentAsHTML: true}, default_tt_options);
+
+    $('.tc-info').each(function() {
+      var $elem = $(this).prev();
+      var classes = $elem.attr('class');
+      var m = /\btci-([\S]+)/.exec(classes);
+
+      if (m !== null) {
+        var key = m[1];
+
+        if (key in info_tips) {
+          var v = info_tips[key];
+          var tt = $elem.tooltipster(tt_options).tooltipster('content', v);
+        }
+      }
+    });
+  }
+
+  add_custom_tooltips();
+
+  setTimeout(activate_tooltips, 1000);
+
+
+  // Clipboard copy for code blocks with captions
+
+  $('.code-block-caption').each(function() {
+    var $cap = $(this);
+    var $btn = $('<span class="clip-copy"><span class="copied hidden">Copied!</span><i class="fa fa-clipboard" title="Copy contents"></i></span>');
+    var $code = $cap.parent().find('.highlight');
+
+    $cap.append($btn);
+    $btn.find('.fa-clipboard').data('clip-text', $code.text());
+  });
+
+  var clipboard = new ClipboardJS('.code-block-caption .fa-clipboard', {
+    'text': function(trigger) {
+      return $(trigger).data('clip-text');
+    }
+  });
+
+  clipboard.on('success', function(e) {
+    var $copied = $(e.trigger).prev();
+
+    $copied.removeClass('hidden');
+
+    setTimeout(function() {$copied.addClass('hidden'); }, 1000);
+  });
+
+  if (sizzle.on_load) {
+    sizzle.on_load.forEach(function(f) {
+      f();
+    });
+  }
+});
+</script>
+</body>
+</html>

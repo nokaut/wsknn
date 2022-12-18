@@ -1,7 +1,6 @@
 numpy
 pyyaml
-matplotlib
-pytest
-setuptools
-sphinx
-sphinx_press_theme
+# [dev]
+# matplotlib
+# setuptools
+# pytest
