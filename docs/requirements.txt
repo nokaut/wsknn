@@ -2,5 +2,5 @@ numpy
 pyyaml
 sphinx
 numpydoc
-sphinx-sizzle-theme
+pydata-sphinx-theme
 sphinx-copybutton

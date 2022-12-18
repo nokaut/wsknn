@@ -54,6 +54,7 @@ Contents
 
    introduction
    api
+   contribution
 
 
 Indices and tables

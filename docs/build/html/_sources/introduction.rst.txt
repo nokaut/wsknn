@@ -4,12 +4,13 @@ Introduction
 Does this data structure look familiar to you?
 
 .. code-block:: python
+
     web_event = {
-        'user_id': xyz,
-        'event_type': click,
-        'time': 2000-01-01 12:00:00,
-        'session_id': a12,
-        'product_id': c-49
+        'user_id': 'xyz',
+        'event_type': 'click',
+        'time': '2000-01-01 12:00:00',
+        'session_id': 'a12',
+        'product_id': 'c-49'
     }
 
 This is a single event that can be traced from web services and mobile devices. Every field in this dictionary is important. We can group multiple objects of this type into a **sequence** or a **session** that contains:
@@ -28,7 +29,8 @@ We provide two input structures as a **training** data:
 
 **SESSIONS**:
 
-.. code-block:: python
+.. code-block:: none
+
                sessions = {
                    session id: (
                        [sequence of items with user interaction],
@@ -40,7 +42,8 @@ We provide two input structures as a **training** data:
 
 **ITEMS / PRODUCTS**:
 
-.. code-block:: python
+.. code-block:: none
+
         items = {
             item id: (
                 [sequence of sessions with an item],
@@ -52,7 +55,8 @@ And we may ask a model to recommend products based on user session:
 
 **USER SESSION**
 
-.. code-block:: python
+.. code-block:: none
+
     {session id:
         [[sequence of items], [sequence of timestamps], [optional event names], [optional weights]]
     }
@@ -76,11 +80,9 @@ We have developed and tested this model along with other techniques: based on *R
 What are the limitations of WSKNN?
 ----------------------------------
 
-- model *memorizes session-items and item-sessions maps*, and if your product base is large and you use sessions for an extended period, then the model may be too big to fit an available memory; in this case, you can
-categorize products and train a different model for each category,
+- model *memorizes session-items and item-sessions maps*, and if your product base is large and you use sessions for an extended period, then the model may be too big to fit an available memory; in this case, you can categorize products and train a different model for each category,
 - *response time may be slower than from other models*, especially if there are available many sessions,
 - there's *additional overhead related to the preparation of the input*. But this is related to the every other model, except simple Markov Models.
-
 
 Setup
 -----
@@ -88,6 +90,7 @@ Setup
 The package can be installed with ``pip``:
 
 .. code-block:: bash
+
     pip install wsknn
 
 
@@ -105,7 +108,7 @@ Requirements
 Developers
 ----------
 
-- Szymon Moliński (Sales Intelligence : Digitree Group SA), @SimonMolinsky
+- Szymon Moliński (Sales Intelligence : Digitree Group SA), Github: @SimonMolinsky
 
 Citation
 --------
@@ -128,7 +131,8 @@ Comparison between DL and WSKNN
 Funding
 -------
 
-..  image:: ./eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg
+..  image:: ../../eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg
+    :width: 400
     :alt: Funding Bodies logos
 
 
