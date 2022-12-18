@@ -20,40 +20,42 @@ def score_model(sessions: List,
     Parameters
     ----------
     sessions : List of sessions
-               [
-                   [ sequence_of_items ],
-                   [ sequence_of_timestamps ],
-                   [ [OPTIONAL] sequence_of_event_type ]
-               ], [other session]
+        >>> [
+        ...     [
+        ...         [ sequence_of_items ],
+        ...         [ sequence_of_timestamps ],
+        ...         [ [OPTIONAL] sequence_of_event_type ]
+        ...     ],
+        ... ]
 
     trained_model : WSKNN
-                    Trained VSKNN model.
+        The trained WSKNN model.
 
     k : int, default=0
-        Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-        when it is set, then k is equal to the number of recommendations from a trained model. If k
+        Number of top recommendations. Session must have n+1 items minimum to calculate **MRR**. Default is 0 and
+        when it is set, then ``k`` is equal to the number of recommendations from a trained model. If ``k``
         is greater than the number of recommendations then the latter is adjusted to it.
 
     skip_short_sessions : bool, default=True
-                          Should the algorithm skip short sessions when calculating MRR or should raise an error?
+        Should the algorithm skip short sessions when calculating MRR or should it raise an error?
 
     calc_mrr : bool, default = True
-               Should MRR be calculated?
+        Should **MRR** be calculated?
 
     calc_precision : bool, default = True
-                     Should Precision be calculated?
+        Should **precision** be calculated?
 
     calc_recall : bool, default = True
-                  Should Recall be calculated?
+        Should **recall** be calculated?
 
     sliding_window : bool, default = False
-                     When calculating metrics slide through a single session up to the point when it is not possible
-                     to have the same number of evaluation products as the number of recommendations.
+        When calculating metrics slide through a single session up to the point when it is not possible to have the
+        same number of evaluation products as the number of recommendations.
 
     Returns
     -------
-    : Dict
-    {'MRR': float, 'Recall': float, 'Precision': float}
+    scores : Dict
+        ``{'MRR': float, 'Recall': float, 'Precision': float}``
     """
     mrrs = list()
     precisions = list()
@@ -111,37 +113,39 @@ def get_mean_reciprocal_rank(sessions: List,
                              skip_short_sessions=True,
                              sliding_window=False) -> float:
     """
-    The function calculates the mean reciprocal rank of a top k recommendations.
-    Given session must be longer than k events.
+    The function calculates the mean reciprocal rank of a top ``k`` recommendations. Given session must be longer
+    than ``k`` events.
 
     Parameters
     ----------
-    sessions : List of sessions
-               [
-                   [ sequence_of_items ],
-                   [ sequence_of_timestamps ],
-                   [ [OPTIONAL] sequence_of_event_type ]
-               ], [other session]
+    sessions : List
+        >>> [
+        ...     [
+        ...         [ sequence_of_items ],
+        ...         [ sequence_of_timestamps ],
+        ...         [ [OPTIONAL] sequence_of_event_type ]
+        ...     ],
+        ... ]
 
     trained_model : WSKNN
-                    Trained VSKNN model.
+        The trained WSKNN model.
 
     k : int, default=0
-        Number of top recommendations. Session must have n+1 items minimum to calculate MRR. Default is 0 and
-        when it is set, then k is equal to the number of recommendations from a trained model. If k
+        Number of top recommendations. Session must have n+1 items minimum to calculate **MRR**. Default is 0 and
+        when it is set, then ``k`` is equal to the number of recommendations from a trained model. If ``k``
         is greater than the number of recommendations then the latter is adjusted to it.
 
     skip_short_sessions : bool, default=True
-                          Should the algorithm skip short sessions when calculating MRR or should raise an error?
+        Should the algorithm skip short sessions when calculating **MRR** or should it raise an error?
 
     sliding_window : bool, default = False
-                     When calculating metrics slide through a single session up to the point when it is not possible
-                     to have the same number of evaluation products as the number of recommendations.
+        When calculating metrics slide through a single session up to the point when it is not possible to have the
+        same number of evaluation products as the number of recommendations.
 
     Returns
     -------
-    : float
-        Mean Reciprocal Rank: The average score of MRR per n sessions.
+    mrr : float
+        Mean Reciprocal Rank: The average score of **MRR** per ``n`` sessions.
     """
     mrrs = list()
 
@@ -175,41 +179,43 @@ def get_precision(sessions: List,
                   skip_short_sessions=True,
                   sliding_window=False) -> float:
     """
-    The function calculates the precision score of a top k recommendations.
-    Given session must be longer than k events.
+    The function calculates the precision score of a top ``k`` recommendations. Given session must be longer than
+    ``k`` events.
 
     Parameters
     ----------
-    sessions : List of sessions
-               [
-                   [ sequence_of_items ],
-                   [ sequence_of_timestamps ],
-                   [ [OPTIONAL] sequence_of_event_type ]
-               ], [other session]
+    sessions : List
+        >>> [
+        ...     [
+        ...         [ sequence_of_items ],
+        ...         [ sequence_of_timestamps ],
+        ...         [ [OPTIONAL] sequence_of_event_type ]
+        ...     ],
+        ... ]
 
     trained_model : WSKNN
-                    Trained VSKNN model.
+        The trained WSKNN model.
 
     k : int, default=0
-        Number of top recommendations. Session must have n+1 items minimum to calculate Precision. Default is 0 and
-        when it is set, then k is equal to the number of recommendations from a trained model. If k
+        Number of top recommendations. Session must have n+1 items minimum to calculate **precision**. Default is 0 and
+        when it is set, then ``k`` is equal to the number of recommendations from a trained model. If ``k``
         is greater than the number of recommendations then the latter is adjusted to it.
 
     skip_short_sessions : bool, default=True
-                          Should the algorithm skip short sessions when calculating Precision or should raise an error?
+        Should the algorithm skip short sessions when calculating **precision** or should it raise an error?
 
     sliding_window : bool, default = False
-                     When calculating metrics slide through a single session up to the point when it is not possible
-                     to have the same number of evaluation products as the number of recommendations.
+        When calculating metrics slide through a single session up to the point when it is not possible to have the
+        same number of evaluation products as the number of recommendations.
 
     Returns
     -------
-    : float
-        Precision: The average score of Precision per n sessions.
+    precision : float
+        Precision: The average score of **precision** per ``n`` sessions.
 
     Notes
     -----
-    Precision is defined as (no of recommendations that are relevant) / (number of items recommended).
+    Precision is defined as ``(no of recommendations that are relevant) / (number of items recommended)``.
     """
 
     precisions = list()
@@ -246,37 +252,39 @@ def get_recall(sessions: List,
                skip_short_sessions=True,
                sliding_window=False) -> float:
     """
-    The function calculates the recall score of a top k recommendations.
-    Given session must be longer than k events.
+    The function calculates the **recall** score of a top ``k`` recommendations. Given session must be longer than
+    ``k`` events.
 
     Parameters
     ----------
-    sessions : List of sessions
-               [
-                   [ sequence_of_items ],
-                   [ sequence_of_timestamps ],
-                   [ [OPTIONAL] sequence_of_event_type ]
-               ], [other session]
+    sessions : List
+        >>> [
+        ...     [
+        ...         [ sequence_of_items ],
+        ...         [ sequence_of_timestamps ],
+        ...         [ [OPTIONAL] sequence_of_event_type ]
+        ...     ],
+        ... ]
 
     trained_model : WSKNN
-                    Trained VSKNN model.
+        The trained WSKNN model.
 
     k : int, default=0
-        Number of top recommendations. Session must have n+1 items minimum to calculate Recall. Default is 0 and
-        when it is set, then k is equal to the number of recommendations from a trained model. If k
+        Number of top recommendations. Session must have n+1 items minimum to calculate **recall**. Default is 0 and
+        when it is set, then ``k`` is equal to the number of recommendations from a trained model. If ``k``
         is greater than the number of recommendations then the latter is adjusted to it.
 
     skip_short_sessions : bool, default=True
-                          Should the algorithm skip short sessions when calculating Recall or should raise an error?
+        Should the algorithm skip short sessions when calculating **recall** or should it raise an error?
 
     sliding_window : bool, default = False
-                     When calculating metrics slide through a single session up to the point when it is not possible
-                     to have the same number of evaluation products as the number of recommendations.
+        When calculating metrics slide through a single session up to the point when it is not possible to have the
+        same number of evaluation products as the number of recommendations.
 
     Returns
     -------
-    : float
-        Precision: The average score of Recall per n sessions.
+    recall : float
+        The average score of Recall per ``n`` sessions.
 
     Notes
     -----
@@ -334,6 +342,7 @@ def _prepare_metrics_data(session, trained_model, sliding_window):
     """
     relevant_items, recommends = _get_test_eval_preds(session, trained_model, sliding_window)
     return relevant_items, recommends
+
 
 def _get_test_eval_preds(session, trained_model: WSKNN, sliding_window: bool):
     """

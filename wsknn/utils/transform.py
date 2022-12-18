@@ -31,7 +31,7 @@ def load_jsonl(filename: str) -> dict:
 
     Returns
     -------
-    : dict
+    datadict : dict
         Python dictionary with unique records.
     """
     datadict = {}
@@ -55,7 +55,7 @@ def load_gzipped_jsonl(filename: str, encoding: str = 'UTF-8') -> dict:
 
     Returns
     -------
-    : dict
+    datadict : dict
         Python dictionary with unique records.
     """
 
