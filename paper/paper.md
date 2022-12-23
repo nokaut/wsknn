@@ -1,5 +1,5 @@
 ---
-title: 'WSKNN - Weighted Session-based K-NN recommender system'
+title: WSKNN - Weighted Session-based K-NN recommender system
 tags:
  - Python
  - machine learning
