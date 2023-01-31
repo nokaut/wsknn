@@ -1,3 +1,10 @@
+## Version 0.1.6
+
+- updated documentation,
+- updated minimal Python version,
+- added CI testing.
+
+
 ## Version 0.1.5
 
 - updated session selection algorithm, added `weighted_events` parameter that allows to weight the closest neighbours by the vector of weights,

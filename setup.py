@@ -10,10 +10,10 @@ setuptools.setup(
     version=package_version,
     author="Szymon Moliński",
     author_email="s.molinski@digitree.pl",
-    description="VSKNN model for recommendations",
+    description="WSKNN model for recommendations",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://git.sare25.com/s.molinski/vsknn-model",
+    url="https://github.com/nokaut/wsknn",
     packages=setuptools.find_packages(
         exclude=['dev']
     ),
@@ -25,5 +25,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
 )
