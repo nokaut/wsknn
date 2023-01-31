@@ -30,10 +30,10 @@ def simulate_input(number_of_sessions: int,
     max_session_length : int
         The maximum session length.
 
-    output_sessions_jsonl_path : str
+    output_sessions_json_path : str
         The path to the output sessions file.
 
-    output_items_jsonl_path : str
+    output_items_json_path : str
         The path to the output items file.
 
     item_occurence_distribution : str
@@ -80,21 +80,22 @@ def simulate_input(number_of_sessions: int,
     del items_map
 
 
-if __name__ == '__main__':
-
-    out_dir = '/Users/szymonsare/Documents/wsknn-sim-data/'
-    session_sizes = np.logspace(1, 9, num=5)
-    item_sizes = np.logspace(1, 8, num=3)
-
-    for sess_size in tqdm.tqdm(session_sizes):
-        for item_size in tqdm.tqdm(item_sizes):
-            sess_size = int(sess_size)
-            item_size = int(item_size)
-            out_sessions = out_dir + f'smap_s_{sess_size}_i_{item_size}.json'
-            out_items = out_dir + f'imap_s_{sess_size}_i_{item_size}.json'
-            simulate_input(number_of_sessions=sess_size,
-                           number_of_items=item_size,
-                           min_session_length=1,
-                           max_session_length=100,
-                           output_sessions_json_path=out_sessions,
-                           output_items_json_path=out_items)
+# if __name__ == '__main__':
+#
+#     out_dir = ''
+#     item_sizes = np.arange(1000, 112000, 10000)
+#     item_sizes = [int(x) for x in item_sizes]
+#     session_sizes = [100_000]
+#
+#     for sess_size in tqdm.tqdm(session_sizes):
+#         for item_size in tqdm.tqdm(item_sizes):
+#             sess_size = int(sess_size)
+#             item_size = int(item_size)
+#             out_sessions = out_dir + f'smap_s_{sess_size}_i_{item_size}.json'
+#             out_items = out_dir + f'imap_s_{sess_size}_i_{item_size}.json'
+#             simulate_input(number_of_sessions=sess_size,
+#                            number_of_items=item_size,
+#                            min_session_length=1,
+#                            max_session_length=30,
+#                            output_sessions_json_path=out_sessions,
+#                            output_items_json_path=out_items)
