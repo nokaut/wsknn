@@ -1,0 +1,1274 @@
+[
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999000"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255998997"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999010"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999009"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999003"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255998995"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999006"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999002"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255998998"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999009"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999003"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999001"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999003"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999009"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255998991"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999000"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255998998"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255998998"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999001"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "products_view",
+  "time": {
+   "$date": "1752255999005"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999053"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999048"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999041"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999044"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999043"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999042"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999047"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999053"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999056"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_cart",
+  "time": {
+   "$date": "1752255999040"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999052"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999048"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999040"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999058"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999056"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999051"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999045"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999054"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999046"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999049"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "add_to_wishlist",
+  "time": {
+   "$date": "1752255999056"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999107"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999093"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999091"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s1"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999104"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "q"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999108"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "w"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999096"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999109"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999098"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s4"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999104"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c3"
+   }
+  },
+  "session": {
+   "customer_id": "c3",
+   "_id": "s3"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999106"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "r"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999092"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c2"
+   }
+  },
+  "session": {
+   "customer_id": "c2",
+   "_id": "s5"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "action": "purchase",
+  "time": {
+   "$date": "1752255999104"
+  },
+  "customer": {
+   "_id": {
+    "$oid": "c1"
+   }
+  },
+  "session": {
+   "customer_id": "c1",
+   "_id": "s2"
+  },
+  "product_contexts": [
+   {
+    "product": {
+     "_id": {
+      "$oid": "t"
+     }
+    }
+   }
+  ]
+ }
+]
