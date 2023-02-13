@@ -116,16 +116,16 @@ def _get_possible_dates_lower_bound_only(lower_date, fileslist):
     return flist
 
 
-def _get_possible_dates(lower, upper):
-    date_low = datetime.strptime(lower, DATE_FORMAT)
+def _get_possible_dates(lower_date, upper_date):
+    date_low = datetime.strptime(lower_date, DATE_FORMAT)
 
-    dates = [lower]
+    dates = [lower_date]
     d0 = date_low
     while True:
         d0 = d0 + timedelta(days=1)
         dstr = d0.strftime(DATE_FORMAT)
         dates.append(dstr)
-        if dstr == upper:
+        if dstr == upper_date:
             break
 
     return dates
@@ -178,8 +178,12 @@ def parse_settings(fpath=None):
     RunetimeError
         File not found or it has missing keys.
     """
-    settings_file = PREPROCESSING_FILENAME
-    path_to_file = search_upwards_for_file(settings_file)
+
+    if fpath is None:
+        settings_file = PREPROCESSING_FILENAME
+        path_to_file = search_upwards_for_file(settings_file)
+    else:
+        path_to_file = fpath
 
     with open(path_to_file, 'r') as settings_stream:
         parsed_settings = yaml.safe_load(settings_stream)

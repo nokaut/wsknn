@@ -1,39 +1,64 @@
 import pickle
+from typing import Dict
 
-from preprocessing.utils.transform import merge_dicts
+from wsknn.preprocessing.utils.transform import merge_dicts
 
 
 class Users:
     """
     Class stores Users dict and its basic properties. The core object is a dictionary of unique users (keys) that are
-        pointing to the specific sessions and their timestamps (lists).
+    pointing to the specific sessions and their timestamps (lists).
 
-    Parameters:
-        :param event_session_key: (str)
-        :param event_user_key: (str)
-        :param event_time_key: (str)
+    Parameters
+    ----------
+    event_session_key
+        The name of a session key.
 
-    user_sessions_map = {
-        user_id: {
-            sessions: [sequence_of_sessions],
-            timestamps: [sequence_of_the_first_session_timestamps]
-        }
-    }
+    event_user_key
+        The name of a user key.
 
-    Available methods:
+    event_time_key
+        The name of a timestamp key.
 
-    - append(event): appends given dict with event to the existing dictionary,
-    - save(): Items object is stored as a Python pickle binary file,
-    - __add__(Items): adds other Users object. It is a set operation. Therefore, sessions that is assigned to the same
-        item within Users(1) and Users(2) is not duplicated.
-    - __str__(): basic info about the class.
+    Attributes
+    ----------
+    user_sessions_map : Dict
+        ``{user_id: {sessions: List, timestamps: List}}``
+
+    event_session_key
+        The name of a session key.
+
+    event_user_key
+        The name of a user key.
+
+    event_time_key
+        The name of a timestamp key.
+
+    metadata : str
+        The general description of the ``Users`` object.
+
+    Methods
+    -------
+    append(event)
+        Appends given event to the map.
+    export(filename)
+        Method exports created mapping to pickled dictionary.
+    load(filename)
+        Loads pickled ``Users`` object into a new instance of a class.
+    save_object(filename)
+        Users object is stored as a Python pickle binary file.
+    __add__(Users)
+        Adds other Users object. It is a set operation. Therefore, sessions that are assigned to the same
+        user within Users(1) and Users(2) won't be duplicated.
+    __str__()
+        The basic info about the class.
 
     """
 
     def __init__(self,
-                 event_session_key: str,
-                 event_user_key: str,
-                 event_time_key: str):
+                 event_session_key,
+                 event_user_key,
+                 event_time_key):
 
         self.user_sessions_map = dict()
 
@@ -66,13 +91,20 @@ class Users:
             """
         return meta
 
-    def _append_user_session_and_timestamp(self, user: str, session: str, timestamp: int):
+    def _append_user_session_and_timestamp(self, user, session, timestamp):
         """
-        Function appends item session and timestamp to existing list of sessions and timestamps.
+        Function appends user - session and user - timestamp to existing list of sessions and timestamps.
 
-        :param user: (str),
-        :param session: (str),
-        :param timestamp: (int)
+        Parameters
+        ----------
+        user
+            User id.
+
+        session
+            Session id.
+
+        timestamp
+            Timestamp object.
         """
         if session in self.user_sessions_map[user][0]:
 
@@ -88,11 +120,15 @@ class Users:
             # Append timestamp to timestamps
             self.user_sessions_map[user][1].append(timestamp)
 
-    def append(self, event: dict):
+    def append(self, event: Dict):
         """
-                Method appends given event into internal structure of the class.
-                :param event: (dict) keys: event_type, event_time, event_session, event_product
-                """
+        Method appends given event into user-sessions and user-timestamps map.
+
+        Parameters
+        ----------
+        event : Dict
+            Python dictionary with values of: event time, event session, event product
+        """
 
         uid = event[self.event_user_key]
         session = event[self.event_session_key]
@@ -107,11 +143,14 @@ class Users:
                 [dt]
             )
 
-    def export_to_dict(self, filename: str):
+    def export(self, filename: str):
         """
-        Method saves object's attributes dict in a pickled object.
-        :param filename: (str) path to the pickled object. If suffix .pkl is not given then methods appends it into the
-        file.
+        Method saves object's attributes in dictionary in a pickled object.
+
+        Parameters
+        ----------
+        filename : str
+            Path to the pickled object. Method appends suffix .pkl if it is not given.
         """
         pkl = '.pkl'
         if not filename.endswith(pkl):
@@ -125,11 +164,15 @@ class Users:
         with open(filename, 'wb') as storage:
             pickle.dump(objects_att_dict, storage)
 
-    def save(self, filename: str):
+    def save_object(self, filename: str):
         """
-        Method saves object in a pickled object.
-        :param filename: (str) path to the pickled object. If suffix .pkl is not given then methods appends it into the
-            file.
+        Method saves whole class object in a pickled object.
+
+        Parameters
+        ----------
+        filename : str
+            Path to the pickled object. Method appends suffix .pkl if it is not given.
+
         """
 
         pkl = '.pkl'
@@ -143,13 +186,20 @@ class Users:
         """
         Method loads pickled object and assigns its properties and data into the class instance.
 
-        :param filename:
-        :return:
+        Parameters
+        ----------
+        filename : str
+            The path to the pickled ``Users`` object.
+
+        Raises
+        ------
+        IOError
+            Method can't load pickled object into processed mapping.
         """
         # Check if current object has any items to avoid overwriting
         if self.user_sessions_map:
             raise IOError('Cannot load data into object with users! '
-                          'Create empty object to load data from pickled file.')
+                          'Created empty object to load data from pickled file.')
 
         # Load
         with open(filename, 'rb') as stored_data:
@@ -157,9 +207,17 @@ class Users:
 
     def __add__(self, other):
         """
-        Adds users and mapped sessions from one Users object into the other.
-        :param other: (Users)
-        :return: (Users)
+        Add two ``Users`` objects. Map records are not duplicated.
+
+        Parameters
+        ----------
+        other : Users
+            Other ``Users`` object.
+
+        Returns
+        -------
+        merged : Users
+            Merged objects.
         """
         merged = Users(other.event_session_key, other.event_user_key, other.event_time_key)
         merged.item_sessions_map = merge_dicts(self.user_sessions_map, other.user_sessions_map)

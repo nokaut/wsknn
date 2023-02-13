@@ -1,6 +1,6 @@
 def get_smaller_value(val1, val2):
     """
-    Function compares two values and returns smaller of them.
+    Function compares two values and returns smaller one.
 
     Parameters
     ----------
@@ -19,7 +19,7 @@ def get_smaller_value(val1, val2):
 
 def get_larger_value(val1, val2):
     """
-    Function compares two values and returns larger of them.
+    Function compares two values and returns larger one.
 
     Parameters
     ----------
