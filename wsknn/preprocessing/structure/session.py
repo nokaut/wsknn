@@ -1,12 +1,61 @@
 import pickle
 from typing import Union, Dict, List
 
-# TODO: from preprocessing.core.structure.models import SessionItemsMapModel -> def of data types
-from preprocessing.utils.calc import get_larger_value, get_smaller_value
-from preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
+
+from wsknn.preprocessing.utils.calc import get_larger_value, get_smaller_value
+from wsknn.preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
 
 
 class Sessions:
+    """
+        Class stores Users dict and its basic properties. The core object is a dictionary of unique users (keys) that are
+        pointing to the specific sessions and their timestamps (lists).
+
+        Parameters
+        ----------
+        event_session_key
+            The name of a session key.
+
+        event_user_key
+            The name of a user key.
+
+        event_time_key
+            The name of a timestamp key.
+
+        Attributes
+        ----------
+        user_sessions_map : Dict
+            ``{user_id: {sessions: List, timestamps: List}}``
+
+        event_session_key
+            The name of a session key.
+
+        event_user_key
+            The name of a user key.
+
+        event_time_key
+            The name of a timestamp key.
+
+        metadata : str
+            The general description of the ``Users`` object.
+
+        Methods
+        -------
+        append(event)
+            Appends given event to the map.
+        export(filename)
+            Method exports created mapping to pickled dictionary.
+        load(filename)
+            Loads pickled ``Users`` object into a new instance of a class.
+        save_object(filename)
+            Users object is stored as a Python pickle binary file.
+        __add__(Users)
+            Adds other Users object. It is a set operation. Therefore, sessions that are assigned to the same
+            user within Users(1) and Users(2) won't be duplicated.
+        __str__()
+            The basic info about the class.
+
+        """
 
     def __init__(self,
                  event_session_key: str,
