@@ -9,6 +9,9 @@
 
 # Bash scripts #
 *.sh
+build
+dist
+wsknn.egg-info
 
 # Created by https://www.gitignore.io/api/pydev,python,pycharm,sublimetext,jupyternotebook,visualstudiocode
 
