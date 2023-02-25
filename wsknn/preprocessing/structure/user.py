@@ -40,19 +40,23 @@ class Users:
     Methods
     -------
     append(event)
-        Appends given event to the map.
+        Appends given event to the user-sessions map.
+
     export(filename)
         Method exports created mapping to pickled dictionary.
+
     load(filename)
         Loads pickled ``Users`` object into a new instance of a class.
+
     save_object(filename)
-        Users object is stored as a Python pickle binary file.
+        The ``Users`` object is stored as a Python pickle binary file.
+
     __add__(Users)
-        Adds other Users object. It is a set operation. Therefore, sessions that are assigned to the same
-        user within Users(1) and Users(2) won't be duplicated.
+        Intersection with other ``Users`` object. It is a set operation. Therefore, sessions that are assigned to
+        the same user within ``Users(1)`` and ``Users(2)`` won't be duplicated.
+
     __str__()
         The basic info about the class.
-
     """
 
     def __init__(self,
@@ -71,23 +75,25 @@ class Users:
     @staticmethod
     def _get_metadata():
         meta = """
-            The items object is a dictionary of unique items (keys) that are pointing to the specific sessions and their 
-            timestamps (lists).
+            The users object is a dictionary of unique items (keys) that are pointing to the specific sessions and their 
+            timestamps.
 
             Key map:
 
-            item_sessions_map = {
-                item_id: (
+            ```
+            user_sessions_map = {
+                user_id: (
                     [sequence_of_sessions],
                     [sequence_of_the_first_session_timestamps]
                 )
             }
+            ```
 
             Other keys:
             - time_start: the first date in a dataset.
             - time_end: the last date in a dataset.
             - longest_sessions_vector_size: size of the longest sequence sessions,
-            - number_of_items: the length of item_sessions_map.
+            - number_of_sessions: the length of the ``user_sessions_map``.
             """
         return meta
 
@@ -98,13 +104,13 @@ class Users:
         Parameters
         ----------
         user
-            User id.
+            User index.
 
         session
-            Session id.
+            Session index.
 
         timestamp
-            Timestamp object.
+            Event time.
         """
         if session in self.user_sessions_map[user][0]:
 
@@ -127,7 +133,7 @@ class Users:
         Parameters
         ----------
         event : Dict
-            Python dictionary with values of: event time, event session, event product
+            Python dictionary with values of: event time, event session index, event product (optional).
         """
 
         uid = event[self.event_user_key]
@@ -145,7 +151,7 @@ class Users:
 
     def export(self, filename: str):
         """
-        Method saves object's attributes in dictionary in a pickled object.
+        Method saves object's attributes in a dictionary, within a pickled object.
 
         Parameters
         ----------
@@ -166,7 +172,7 @@ class Users:
 
     def save_object(self, filename: str):
         """
-        Method saves whole class object in a pickled object.
+        Method saves the whole object in a pickled file.
 
         Parameters
         ----------
@@ -184,7 +190,7 @@ class Users:
 
     def load(self, filename: str):
         """
-        Method loads pickled object and assigns its properties and data into the class instance.
+        Method loads a pickled ``Users`` object and assigns its properties and data into the class instance.
 
         Parameters
         ----------
@@ -207,7 +213,7 @@ class Users:
 
     def __add__(self, other):
         """
-        Add two ``Users`` objects. Map records are not duplicated.
+        Intersection of two user-sessions mappings. Map records are not duplicated.
 
         Parameters
         ----------

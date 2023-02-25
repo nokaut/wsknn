@@ -6,56 +6,114 @@ from wsknn.preprocessing.utils.calc import get_larger_value, get_smaller_value
 from wsknn.preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
 
 
+def clean_short_sessions(sessions, session_length: int):
+    """
+    Method cleans session-items map and leaves only sessions longer or equal to session_length.
+
+    :param session_length: (int)
+    """
+    #
+    # self.time_start = 1_000_000_000_000_000
+    # self.time_end = 0
+    # self.longest_items_vector_size = 0
+    # self.number_of_sessions = 0
+
+    sessions = list(self.session_items_actions_map.keys())
+    sessions_to_pop = list()
+
+    for session in sessions:
+        item = self.session_items_actions_map[session]
+        if len(item[0]) < session_length:
+            # remove record from a dict
+            sessions_to_pop.append(session)
+        else:
+            # TODO: update class parameters
+            pass
+
+    # Pop sessions
+    for spop in sessions_to_pop:
+        self.session_items_actions_map.pop(spop)
+
+
 class Sessions:
     """
-        Class stores Users dict and its basic properties. The core object is a dictionary of unique users (keys) that are
-        pointing to the specific sessions and their timestamps (lists).
+    Class stores session-items mapping and its basic properties. The core object is a dictionary of unique
+    sessions (keys) that are pointing to the session-items and their timestamps (lists).
 
-        Parameters
-        ----------
-        event_session_key
-            The name of a session key.
+    Parameters
+    ----------
+    event_session_key
+        The name of a session key.
 
-        event_user_key
-            The name of a user key.
+    event_product_key
+        The name of an item key.
 
-        event_time_key
-            The name of a timestamp key.
+    event_time_key
+        The name of a timestamp key.
 
-        Attributes
-        ----------
-        user_sessions_map : Dict
-            ``{user_id: {sessions: List, timestamps: List}}``
+    event_action_key : str, optional
+        The name of a key with actions that may be used for neighbors filtering.
 
-        event_session_key
-            The name of a session key.
+    event_action_weights : Dict, optional
+        Dictionary with weights that should be assigned to event actions.
 
-        event_user_key
-            The name of a user key.
+    Attributes
+    ----------
+    session_items_actions_map : Dict
+        The session-items mapper ``{session_id: [[items], [timestamps], [optional - actions], [optional - weights]]}``.
 
-        event_time_key
-            The name of a timestamp key.
+    time_start : int, default = 1_000_000_000_000_000
+        The initial timestamp, first event in whole dataset.
 
-        metadata : str
-            The general description of the ``Users`` object.
+    time_end : int, default = 0
+        The timestamp of the last event in dataset.
 
-        Methods
-        -------
-        append(event)
-            Appends given event to the map.
-        export(filename)
-            Method exports created mapping to pickled dictionary.
-        load(filename)
-            Loads pickled ``Users`` object into a new instance of a class.
-        save_object(filename)
-            Users object is stored as a Python pickle binary file.
-        __add__(Users)
-            Adds other Users object. It is a set operation. Therefore, sessions that are assigned to the same
-            user within Users(1) and Users(2) won't be duplicated.
-        __str__()
-            The basic info about the class.
+    longest_items_vector_size: int, default = 0
+        The longest sequence of products.
 
-        """
+    number_of_sessions : int, default = 0
+        The number of sessions within a ``session_items_actions_map`` object.
+
+    event_session_key
+        See the ``event_session_key`` parameter.
+
+    event_product_key
+        See the ``event_product_key`` parameter.
+
+    event_time_key
+        See the ``event_time_key`` parameter.
+
+    event_action_key
+        See the ``event_action_key`` parameter.
+
+    action_weights
+        See the ``event_action_weights`` parameter.
+
+    metadata : str
+        A description of the ``Sessions`` class.
+
+    Methods
+    -------
+    append(event)
+        Appends a single event to the session-items map.
+
+    export(filename)
+        Method exports created mapping to pickled dictionary.
+
+    load(filename)
+        Loads pickled ``Users`` object into a new instance of a class.
+
+    save_object(filename)
+        Users object is stored as a Python pickle binary file.
+
+    __add__(Users)
+        Adds other Users object. It is a set operation. Therefore, sessions that are assigned to the same
+        user within Users(1) and Users(2) won't be duplicated.
+
+    __str__()
+        The basic info about the class.
+
+    """
 
     def __init__(self,
                  event_session_key: str,
@@ -63,41 +121,7 @@ class Sessions:
                  event_time_key: str,
                  event_action_key: Union[str, None] = None,
                  event_action_weights: Dict = None):
-        """
-        Class stores Sessions dict and its basic properties. The core object is a dictionary of unique sessions (keys)
-            that are pointing to the specific items and their timestamps and event types (lists).
 
-        Parameters:
-        :param event_session_key: (str)
-        :param event_product_key: (str)
-        :param event_time_key: (str)
-        :param event_action_key: (str or None)
-        :param event_action_weights: (Dict)
-
-        sessions_dict = {
-            session_id: [
-                [items],
-                [timestamps],
-                [actions],
-                [action weights]
-            ]
-        }
-
-        Other information stored by this class are:
-            - time_start: the first date in a dataset.
-            - time_end: the last date in a dataset.
-            - longest_items_vector_size: size of the longest sequence items,
-            - number_of_sessions: the length of session-items-map.
-
-        Available methods:
-
-            - append(event): appends given dict with event to the existing dictionary,
-            - save(): Sessions object is stored as a Python pickle binary file,
-            - __add__(Items): adds other Sessions object. It is a set operation. Therefore, item that is assigned to
-                the same session within Sessions(1) and Sessions(2) is not duplicated.
-            - __str__(): basic info about the class.
-
-            """
         self.session_items_actions_map = dict()
         self.time_start = 1_000_000_000_000_000
         self.time_end = 0
@@ -116,7 +140,7 @@ class Sessions:
     def _get_metadata():
         meta = """
         The sessions object is a dictionary of unique sessions (keys) that are pointing to the specific items and their 
-        timestamps and, optionally, weighting factor.
+        timestamps and, optionally, weighting factors.
 
         Key map:
 
@@ -124,7 +148,8 @@ class Sessions:
             session_id: [
                 [items],
                 [timestamps],
-                [actions]
+                [optional - actions],
+                [optional - action weights]
             ]
         }
 
@@ -166,11 +191,6 @@ class Sessions:
                                            action: Union[str, None] = None):
         """
         Function appends item session and timestamp to existing list of sessions and timestamps.
-
-        :param session: (str),
-        :param item: (str),
-        :param action: (str),
-        :param timestamp: (int).
         """
         # Append item
         self.session_items_actions_map[session][0].append(item)
@@ -188,8 +208,12 @@ class Sessions:
 
     def append(self, event: dict):
         """
-        Method appends given event into internal structure of the class.
-        :param event: (dict) keys: event_type, event_time, event_session, event_product
+        Method appends an event into session-items map.
+
+        Parameters
+        ----------
+        event : Dict
+            Single event that consists: session id, timestamp, product, and optionally action type.
         """
 
         item = event[self.event_product_key]
@@ -225,7 +249,7 @@ class Sessions:
             # Update longest session info
             self._update_longest_event_sequence_size(len(self.session_items_actions_map[session][0]))
 
-    def clean_map(self, session_length: int):
+    def clean_short_sessions(self, session_length: int):
         """
         Method cleans session-items map and leaves only sessions longer or equal to session_length.
 
