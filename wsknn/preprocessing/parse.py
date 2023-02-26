@@ -1,95 +1,69 @@
 import gzip
 import json
 import pathlib
-from typing import Dict
+from typing import Dict, Iterable
 
-from preprocessing.core.structure.item import Items
-from preprocessing.core.structure.session import Sessions
-from preprocessing.core.structure.user import Users
-from preprocessing.utils.transform import parse_dt_to_seconds, parse_product_id_from_product_context
+from wsknn.preprocessing.structure.item import Items
+from wsknn.preprocessing.structure.session import Sessions
+from wsknn.preprocessing.structure.user import Users
+from wsknn.preprocessing.utils.transform import parse_dt_to_seconds
 
 
-def is_user_item_interaction(e_action: str, possible_actions: list) -> bool:
+def is_user_item_interaction(e_action: str, allowed_actions: Iterable) -> bool:
     """
-    Checks if event has valid type (CLICK or VIEW).
+    Checks if event has a valid action type.
 
-    :param e_action: (str) event action type.
-    :param possible_actions: (list) list of possible actions.
+    Parameters
+    ----------
+    e_action : str
+        The name of the event action.
 
+    allowed_actions : Iterable
+        The set, list or array with allowed actions.
 
+    Returns
+    -------
+    : bool
+        ``True`` if ``e_action`` is in the list of allowed interactions.
     """
 
-    if e_action in possible_actions:
+    if e_action in allowed_actions:
         return True
     return False
 
 
-def parse_event_parameters(event: Dict):
-    """
-    Function parses given event_type, event_category, session_id, product_id and event_time from AS events DB.
-        Function returns those parameters in a dict. Empty dict means that event_type, product_id, event_time or
-        session_id were not detected.
-
-    :param event: (Dict)
-    :return: (Tuple[Dict, List] or False)
-    """
-    try:
-        event_action = event['action']
-
-        ###
-        # TODO: control this part of a parser(!) - select from where pid must be parsed
-        product_id = parse_product_id_from_product_context(event['product_contexts'])
-        # product_id = parse_product_id(event['product']['_id'])
-        ###
-
-        event_time = parse_dt_to_seconds(event['time']['$date'])
-        session_id = event['session']['_id']
-        customer_id = event['session']['customer_id']
-    except KeyError:
-        return False
-    except ValueError:
-        return False
-    except TypeError as te:
-        print(te)
-        return False
-
-    if not (event_action and product_id and event_time and session_id):
-        return False
-    else:
-        event_dict = {
-            'action': event_action,
-            'time': event_time,
-            'sid': session_id,
-            'cid': customer_id
-        }
-        products = product_id
-        return event_dict, products
-
-
 def parse(dataset: str,
-          possible_actions: Dict,
-          purchase_action_name: str) -> (Items, Sessions, Users):
+          allowed_actions: Dict = None,
+          purchase_action_name=None) -> (Items, Sessions):
     """
-    Function parses data from json and gzip into items, sessions and users objects.
+    Function parses data from json and gzip into item-sessions and session-items maps.
 
-    :param dataset: (str) gzipped JSONL file or JSON file path with events.
-    :param possible_actions: (Dict) dict with possible actions and their weights.
-    :param purchase_action_name: (str) the name of the final action (it is required to apply weight into the session
-                                 vector).
+    Parameters
+    ----------
+    dataset : str
+        The gzipped JSONL file or JSON file with events.
 
-    :return: (Items, Sessions, Users)
+    allowed_actions : Dict, optional
+        Allowed actions and their weights.
+
+    purchase_action_name: Any, optional
+        The name of the final action (it is required to apply weight into the session vector).
+
+    Returns
+    -------
+    ItemsMap, SessionsMap : Items, Sessions
     """
 
     if dataset.endswith('.gz'):
-        items, sessions, users = parse_gz_fn(dataset, possible_actions, purchase_action_name)
+        items, sessions = parse_gz_fn(dataset, allowed_actions, purchase_action_name)
     elif dataset.endswith('.json') or dataset.endswith('.jsonl'):
-        items, sessions, users = parse_jsonl_fn(dataset, possible_actions, purchase_action_name)
+        items, sessions = parse_jsonl_fn(dataset, allowed_actions, purchase_action_name)
     else:
         ftype = pathlib.Path(dataset).suffix
         raise TypeError(f'Unrecognized input file type. Parser works with "gz" and "json" files, you have provided '
                         f'{ftype} type.')
 
-    return items, sessions, users
+    return items, sessions
 
 
 def parse_gz_fn(dataset: str, possible_actions: Dict, purchase_action_name: str):

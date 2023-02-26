@@ -164,36 +164,3 @@ def parse_event_actions(action: str, all_actions: List) -> Dict:
             actions_dict[act] = 0
 
     return actions_dict
-
-
-def parse_product_id(product_id) -> str:
-    """
-    Function parses product id if it is given as a dict.
-
-    :param product_id: (Dict) or (str),
-    :return: (str)
-    """
-
-    if isinstance(product_id, Dict) and product_id:
-        if '$oid' in product_id:
-            product_id = product_id['$oid']
-            return product_id
-        raise TypeError('Given dictionary with product id does not have &oid key.')
-    return product_id
-
-
-def parse_product_id_from_product_context(products: List) -> List:
-    """
-    Function parses product_context data into a list of products.
-
-    :param products: (List) product_contexts:
-        [{..., 'product': {'_id': {'$oid': '58cbd95c8e441a4c41af7905'}, ...}}]
-    :return: (List)
-    """
-    parsed_products = []
-
-    for product in products:
-        pid = product['product']['_id']['$oid']
-        parsed_products.append(pid)
-
-    return parsed_products

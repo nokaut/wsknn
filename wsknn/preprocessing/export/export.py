@@ -4,7 +4,7 @@ import json
 
 def to_json(datadict: dict, filename: str, compress=True) -> None:
     """
-    Function saves mapped item-sessions into jsonl file.
+    Function saves mapped object into jsonl file.
 
     Parameters
     ----------
@@ -12,8 +12,8 @@ def to_json(datadict: dict, filename: str, compress=True) -> None:
         Data to be stored.
 
     filename : str
-        The path to the stored object. If suffix .json or .jsonl is not given then methods appends
-        .json suffix into the file.
+        The path to the stored object. If suffix ``.json`` or ``.jsonl`` is not given then methods appends
+        ``.json`` suffix into the file.
 
     compress : bool, default=True
         Should file be compressed into a gzip archive?

@@ -1,38 +1,8 @@
 import pickle
-from typing import Union, Dict, List
-
+from typing import Union, Dict, List, Optional
 
 from wsknn.preprocessing.utils.calc import get_larger_value, get_smaller_value
 from wsknn.preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
-
-
-def clean_short_sessions(sessions, session_length: int):
-    """
-    Method cleans session-items map and leaves only sessions longer or equal to session_length.
-
-    :param session_length: (int)
-    """
-    #
-    # self.time_start = 1_000_000_000_000_000
-    # self.time_end = 0
-    # self.longest_items_vector_size = 0
-    # self.number_of_sessions = 0
-
-    sessions = list(self.session_items_actions_map.keys())
-    sessions_to_pop = list()
-
-    for session in sessions:
-        item = self.session_items_actions_map[session]
-        if len(item[0]) < session_length:
-            # remove record from a dict
-            sessions_to_pop.append(session)
-        else:
-            # TODO: update class parameters
-            pass
-
-    # Pop sessions
-    for spop in sessions_to_pop:
-        self.session_items_actions_map.pop(spop)
 
 
 class Sessions:
@@ -101,14 +71,16 @@ class Sessions:
         Method exports created mapping to pickled dictionary.
 
     load(filename)
-        Loads pickled ``Users`` object into a new instance of a class.
+        Loads pickled ``Sessions`` object into a new instance of a class.
 
     save_object(filename)
         Users object is stored as a Python pickle binary file.
 
+    update_weights()
+        Updates product-weights vector (optional).
+
     __add__(Users)
-        Adds other Users object. It is a set operation. Therefore, sessions that are assigned to the same
-        user within Users(1) and Users(2) won't be duplicated.
+        Adds other Sessions object.
 
     __str__()
         The basic info about the class.
@@ -119,7 +91,7 @@ class Sessions:
                  event_session_key: str,
                  event_product_key: str,
                  event_time_key: str,
-                 event_action_key: Union[str, None] = None,
+                 event_action_key: Optional[str],
                  event_action_weights: Dict = None):
 
         self.session_items_actions_map = dict()
@@ -208,7 +180,7 @@ class Sessions:
 
     def append(self, event: dict):
         """
-        Method appends an event into session-items map.
+        Method appends the event into session-items map.
 
         Parameters
         ----------
@@ -249,42 +221,21 @@ class Sessions:
             # Update longest session info
             self._update_longest_event_sequence_size(len(self.session_items_actions_map[session][0]))
 
-    def clean_short_sessions(self, session_length: int):
-        """
-        Method cleans session-items map and leaves only sessions longer or equal to session_length.
-
-        :param session_length: (int)
-        """
-        #
-        # self.time_start = 1_000_000_000_000_000
-        # self.time_end = 0
-        # self.longest_items_vector_size = 0
-        # self.number_of_sessions = 0
-
-        sessions = list(self.session_items_actions_map.keys())
-        sessions_to_pop = list()
-
-        for session in sessions:
-            item = self.session_items_actions_map[session]
-            if len(item[0]) < session_length:
-                # remove record from a dict
-                sessions_to_pop.append(session)
-            else:
-                # TODO: update class parameters
-                pass
-
-        # Pop sessions
-        for spop in sessions_to_pop:
-            self.session_items_actions_map.pop(spop)
-
     def update_weights(self, session_id, products: List, additive_factor: float):
         """
-        Method updates all weights accordingly to the given additive factor and a list of products with weights to
-            be updated.
+        Method updates item weights accordingly to the given additive factor. Running this method is required when
+        we generate optional weights list.
 
-        :param session_id: id of a session.
-        :param products: (List) ids of items (usually those items that have been purchased).
-        :param additive_factor: (float)
+        Parameters
+        ----------
+        session_id : Any
+            The index of a session.
+
+        products : List
+            Index of items to be weighted.
+
+        additive_factor : float
+            Weight added to the item.
         """
         for idx, item in enumerate(self.session_items_actions_map[session_id][0]):
             if item in products:
@@ -294,9 +245,23 @@ class Sessions:
 
     def export_to_dict(self, filename: str):
         """
-        Method saves object's attributes dict in a pickled object.
-        :param filename: (str) path to the pickled object. If suffix .pkl is not given then methods appends it into the
-            file.
+        Method exports object's attributes as a dictionary in a pickled object.
+
+        Parameters
+        ----------
+        filename : str
+            The path to the pickled object. If suffix .pkl is not given then methods appends it into the file.
+
+        Notes
+        -----
+        Dictionary keys are:
+            * ``map``: session-items map,
+            * ``time_start``: the earliest event time,
+            * ``time_end``: the latest event time,
+            * ``longest_items_vector_size``: the number of items in the longest session-sequence,
+            * ``number_of_sessions``: total number of parsed sessions,
+            * ``metadata``: additional class info.
+
         """
         pkl = '.pkl'
         if not filename.endswith(pkl):
@@ -316,9 +281,12 @@ class Sessions:
 
     def save(self, filename: str):
         """
-        Method saves object in a pickled object.
-        :param filename: (str) path to the pickled object. If suffix .pkl is not given then methods appends it into the
-            file.
+        Method saves ``Sessions`` class object into a pickled file.
+
+        Parameters
+        ----------
+        filename : str
+            The path to the pickled object. If suffix .pkl is not given then methods appends it into the file.
         """
 
         pkl = '.pkl'
@@ -330,10 +298,17 @@ class Sessions:
 
     def load(self, filename: str):
         """
-        Method loads pickled object and assigns its properties and data into the class instance.
+        Method loads pickled ``Sessions`` class object and assigns its properties and data into the class instance.
 
-        :param filename:
-        :return:
+        Parameters
+        ----------
+        filename : str
+            The path to the file.
+
+        Raises
+        ------
+        IOError
+            Cannot load data into ``Sessions`` object with parsed events.
         """
         # Check if current object has any items to avoid overwriting
         if self.number_of_sessions > 0:
@@ -346,9 +321,16 @@ class Sessions:
 
     def __add__(self, other):
         """
-        Adds sessions and mapped items from one Sessions object into the other.
-        :param other: (Sessions)
-        :return: (Sessions)
+        Adds sessions and mapped items from one ``Sessions`` object into the other.
+
+        Parameters
+        ----------
+        other : Sessions
+
+        Returns
+        -------
+        merged : Sessions
+            The merged and updated ``Sessions`` object.
         """
         merged = Sessions(other.event_session_key,
                           other.event_product_key,

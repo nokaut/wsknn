@@ -1,39 +1,73 @@
 import pickle
-from preprocessing.utils.calc import get_larger_value, get_smaller_value
-from preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
+from wsknn.preprocessing.utils.calc import get_larger_value, get_smaller_value
+from wsknn.preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
 
 
 class Items:
     """
-    Class stores Items dict and its basic properties. The core object is a dictionary of unique items (keys) that are
-        pointing to the specific sessions and their timestamps (lists).
+    Class stores item-sessions map and its basic properties. The core object is a dictionary of unique items (keys)
+    that are pointing to the specific sessions and their timestamps (lists).
 
-    Parameters:
-        :param event_session_key: (str)
-        :param event_product_key: (str)
-        :param event_time_key: (str)
+    Parameters
+    ----------
+    event_session_key
+        The name of a session key.
 
-    item_sessions_map = {
-        item_id: {
-            sessions: [sequence_of_sessions],
-            timestamps: [sequence_of_the_first_session_timestamps]
-        }
-    }
+    event_product_key
+        The name of an item key.
 
-    Other information stored by this class are:
-    - time_start: the first date in a dataset.
-    - time_end: the last date in a dataset.
-    - longest_sessions_vector_size: size of the longest sequence sessions,
-    - number_of_items: the length of item_sessions_map.
+    event_time_key
+        The name of a timestamp key.
 
-    Available methods:
+    Attributes
+    ----------
+    item_sessions_map : Dict
+        The item-sessions mapper ``{item_id: [[sessions], [first timestamp of each session]]}``.
 
-    - append(event): appends given dict with event to the existing dictionary,
-    - save(): Items object is stored as a Python pickle binary file,
-    - __add__(Items): adds other Items object. It is a set operation. Therefore, session that is assigned to the same
-        item within Items(1) and Items(2) is not duplicated.
-    - __str__(): basic info about the class.
+    time_start : int, default = 1_000_000_000_000_000
+        The initial timestamp, first event in whole dataset.
 
+    time_end : int, default = 0
+        The timestamp of the last event in dataset.
+
+    longest_sessions_vector_size: int, default = 0
+        The longest sequence of sessions that contained the item.
+
+    number_of_items : int, default = 0
+        The number of items within the ``item_sessions_map`` object.
+
+    event_session_key
+        See the ``event_session_key`` parameter.
+
+    event_product_key
+        See the ``event_product_key`` parameter.
+
+    event_time_key
+        See the ``event_time_key`` parameter.
+
+    metadata : str
+        A description of the ``Items`` class.
+
+    Methods
+    -------
+    append(event)
+        Appends a single event to the item-sessions map.
+
+    export(filename)
+        Method exports created mapping to a pickled dictionary.
+
+    load(filename)
+        Loads pickled ``Items`` object into a new instance of a class.
+
+    save_object(filename)
+        Items object is stored as a Python pickle binary file.
+
+    __add__(Users)
+        Adds other Items object. It is a set operation. Therefore, sessions that are assigned to the same
+        item within Items(1) and Items(2) won't be duplicated.
+
+    __str__()
+        The basic info about the class.
     """
 
     def __init__(self,
@@ -103,9 +137,16 @@ class Items:
         """
         Function appends item session and timestamp to existing list of sessions and timestamps.
 
-        :param item: (str),
-        :param session: (str),
-        :param timestamp: (int)
+        Parameters
+        ----------
+        item : str
+            ID of the product.
+
+        session : str
+            ID of the session.
+
+        timestamp : int
+            Timestamp of the event.
         """
         if session in self.item_sessions_map[item][0]:
 
@@ -131,7 +172,11 @@ class Items:
     def append(self, event: dict):
         """
         Method appends given event into internal structure of the class.
-        :param event: (dict) keys: event_type, event_time, event_session, event_product
+
+        Parameters
+        ----------
+        event : Dict
+            Expected keys: event time, event session, event product
         """
 
         item = event[self.event_product_key]
@@ -153,30 +198,24 @@ class Items:
             # Update longest session info
             self._update_longest_session_size(len(self.item_sessions_map[item][0]))
 
-    def clean_map(self, no_of_sessions: int):
-        """
-        Method cleans session-items map and leaves only sessions longer or equal to session_length.
-
-        :param no_of_sessions: (int)
-        """
-
-        items = list(self.item_sessions_map.keys())
-        items_to_pop = list()
-
-        for itm in items:
-            item = self.item_sessions_map[itm]
-            if len(item[0]) < no_of_sessions:
-                # remove record from a dict
-                items_to_pop.append(itm)
-            else:
-                # TODO: update class parameters
-                pass
-
     def export_to_dict(self, filename: str):
         """
-        Method saves object's attributes dict in a pickled object.
-        :param filename: (str) path to the pickled object. If suffix .pkl is not given then methods appends it into the
-            file.
+        Method exports object's attributes as a dictionary in a pickled object.
+
+        Parameters
+        ----------
+        filename : str
+            The path to the pickled object. If suffix .pkl is not given then methods appends it into the file.
+
+        Notes
+        -----
+        Dictionary keys are:
+            * ``map``: item-sessions map,
+            * ``time_start``: the earliest event time,
+            * ``time_end``: the latest event time,
+            * ``longest_sessions_vector_size``: the number of sessions in the longest item-sequence,
+            * ``number_of_items``: total number of parsed items,
+            * ``metadata``: additional class info.
         """
         pkl = '.pkl'
         if not filename.endswith(pkl):
@@ -196,9 +235,12 @@ class Items:
 
     def save(self, filename: str):
         """
-        Method saves object in a pickled object.
-        :param filename: (str) path to the pickled object. If suffix .pkl is not given then methods appends it into the
-            file.
+        Method saves ``Items`` class object into a pickled file.
+
+        Parameters
+        ----------
+        filename : str
+            The path to the pickled object. If suffix .pkl is not given then methods appends it into the file.
         """
 
         pkl = '.pkl'
@@ -210,10 +252,17 @@ class Items:
 
     def load(self, filename: str):
         """
-        Method loads pickled object and assigns its properties and data into the class instance.
+        Method loads pickled ``Items`` class object and assigns its properties and data into the class instance.
 
-        :param filename:
-        :return:
+        Parameters
+        ----------
+        filename : str
+            The path to the file.
+
+        Raises
+        ------
+        IOError
+            Cannot load data into ``Items`` object with parsed events.
         """
         # Check if current object has any items to avoid overwriting
         if self.item_sessions_map:
@@ -226,9 +275,16 @@ class Items:
 
     def __add__(self, other):
         """
-        Adds items and mapped sessions from one Items object into the other.
-        :param other: (Items)
-        :return: (Items)
+        Adds items and mapped sessions from one ``Items`` object into another.
+
+        Parameters
+        ----------
+        other : Items
+
+        Returns
+        -------
+        merged : Items
+            The merged and updated ``Items`` object.
         """
         merged = Items(other.event_session_key, other.event_product_key, other.event_time_key)
         merged.item_sessions_map = merge_dicts(self.item_sessions_map, other.item_sessions_map)
