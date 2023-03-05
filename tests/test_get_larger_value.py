@@ -1,5 +1,5 @@
 import unittest
-from preprocessing.utils.calc import get_larger_value
+from wsknn.preprocessing.utils.calc import get_larger_value
 
 
 class TestGetLargerValue(unittest.TestCase):

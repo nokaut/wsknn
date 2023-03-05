@@ -1,5 +1,5 @@
 import unittest
-from preprocessing.core.structure.item import Items
+from wsknn.preprocessing.structure.item import Items
 
 
 EVENT_PRODUCT_KEY = 'product'

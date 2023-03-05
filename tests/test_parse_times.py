@@ -1,8 +1,7 @@
 import unittest
-from preprocessing.utils.transform import parse_seconds_to_dt, parse_dt_to_seconds
+from wsknn.preprocessing.utils.transform import parse_seconds_to_dt, parse_dt_to_seconds
 
 
-# TODO: include timezone in time parser!
 class TestParseTime(unittest.TestCase):
 
     def test_dt_to_seconds(self):

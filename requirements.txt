@@ -4,4 +4,4 @@ more_itertools
 # [dev]
 # matplotlib
 # setuptools
-# pytest
+pytest

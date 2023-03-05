@@ -221,7 +221,7 @@ class Sessions:
             # Update longest session info
             self._update_longest_event_sequence_size(len(self.session_items_actions_map[session][0]))
 
-    def update_weights(self, session_id, products: List, additive_factor: float):
+    def update_weights(self, session_id, products: List, additive_factor=0.0):
         """
         Method updates item weights accordingly to the given additive factor. Running this method is required when
         we generate optional weights list.

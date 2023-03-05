@@ -1,5 +1,5 @@
 import unittest
-from preprocessing.utils.calc import get_smaller_value
+from wsknn.preprocessing.utils.calc import get_smaller_value
 
 
 class TestGetSmallerValue(unittest.TestCase):

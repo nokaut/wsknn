@@ -1,5 +1,5 @@
 import unittest
-from preprocessing.utils.transform import merge_dicts
+from wsknn.preprocessing.utils.transform import merge_dicts
 
 
 class TestMergeDicts(unittest.TestCase):

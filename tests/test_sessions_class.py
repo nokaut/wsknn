@@ -1,5 +1,5 @@
 import unittest
-from preprocessing.core.structure.session import Sessions
+from wsknn.preprocessing.structure.session import Sessions
 
 
 SESSION_KEY = 'sid'

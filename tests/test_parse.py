@@ -1,9 +1,8 @@
 import unittest
 
-from preprocessing.core.parse import parse
-from preprocessing.core.structure.item import Items
-from preprocessing.core.structure.session import Sessions
-from preprocessing.core.structure.user import Users
+from wsknn.preprocessing.parse import parse_fn, parse_files
+from wsknn.preprocessing.structure.item import Items
+from wsknn.preprocessing.structure.session import Sessions
 
 
 POSSIBLE_ACTIONS = {'products_view': 0.1,
@@ -12,9 +11,14 @@ POSSIBLE_ACTIONS = {'products_view': 0.1,
                     'add_to_cart': 0.5}
 
 PURCHASE_ACTION_NAME = 'purchase'
-SESSIONS = ['data/events1.json',
-            'data/events2.json',
-            'data/events3.json']
+SESSIONS = ['tdata/events1.json',
+            'tdata/events2.json',
+            'tdata/events3.json']
+
+SESSION_KEY = 'sid'
+PRODUCT_KEY = 'pid'
+ACTION_KEY = 'act'
+TIME_KEY = 'ts'
 
 
 class TestParseFn(unittest.TestCase):
@@ -22,35 +26,44 @@ class TestParseFn(unittest.TestCase):
     def test_instances(self):
 
         for fs in SESSIONS:
-            out_item, out_session, out_users = parse(fs,
-                                                     possible_actions=POSSIBLE_ACTIONS,
-                                                     purchase_action_name=PURCHASE_ACTION_NAME)
+            out_item, out_session = parse_files(fs,
+                                                session_id_key=SESSION_KEY,
+                                                product_key=PRODUCT_KEY,
+                                                action_key=ACTION_KEY,
+                                                time_key=TIME_KEY,
+                                                allowed_actions=POSSIBLE_ACTIONS,
+                                                purchase_action_name=PURCHASE_ACTION_NAME)
 
             self.assertIsInstance(out_item, Items)
             self.assertIsInstance(out_session, Sessions)
-            self.assertIsInstance(out_users, Users)
 
     def test_output_values(self):
 
-        base_items, base_sessions, base_users = parse(SESSIONS[0],
-                                                      possible_actions=POSSIBLE_ACTIONS,
-                                                      purchase_action_name=PURCHASE_ACTION_NAME)
+        base_items, base_sessions = parse_files(SESSIONS[0],
+                                                            session_id_key=SESSION_KEY,
+                                                            product_key=PRODUCT_KEY,
+                                                            action_key=ACTION_KEY,
+                                                            time_key=TIME_KEY,
+                                                            allowed_actions=POSSIBLE_ACTIONS,
+                                                            purchase_action_name=PURCHASE_ACTION_NAME)
 
         base_items_keys = list(base_items.item_sessions_map.keys()).copy()
         base_sessions_keys = list(base_sessions.session_items_actions_map.keys()).copy()
-        base_users_keys = list(base_users.user_sessions_map.keys()).copy()
 
         other_items_keys = [base_items_keys]
         other_sessions_keys = [base_sessions_keys]
-        other_users_keys = [base_users_keys]
 
         for fs in SESSIONS[1:]:
-            out_item, out_session, out_users = parse(fs,
-                                                     possible_actions=POSSIBLE_ACTIONS,
-                                                     purchase_action_name=PURCHASE_ACTION_NAME)
+            out_item, out_session = parse_fn(fs,
+                                                     allowed_actions=POSSIBLE_ACTIONS,
+                                                     purchase_action_name=PURCHASE_ACTION_NAME,
+                                             session_id_key=SESSION_KEY,
+                                             product_key=PRODUCT_KEY,
+                                             action_key=ACTION_KEY,
+                                             time_key=TIME_KEY
+                                             )
             base_items = base_items + out_item
             base_sessions = base_sessions + out_session
-            base_users = base_users + out_users
 
             # Append keys
             other_items_keys.append(
@@ -58,9 +71,6 @@ class TestParseFn(unittest.TestCase):
             )
             other_sessions_keys.append(
                 list(out_session.session_items_actions_map.keys())
-            )
-            other_users_keys.append(
-                list(out_users.user_sessions_map.keys())
             )
 
         # Check items keys
@@ -78,15 +88,6 @@ class TestParseFn(unittest.TestCase):
             issk = skset.issubset(skeys)
             msg = 'Missing keys in sessions-items map dictionary!'
             self.assertTrue(issk, msg)
-
-        # TODO: not working properly
-        # # Check items keys
-        # ukeys = set(base_users.user_sessions_map.keys())
-        # for uk in other_users_keys:
-        #     ukset = set(uk)
-        #     isuk = ukset.issubset(ukeys)
-        #     msg = 'Missing keys in users-sessions map dictionary!'
-        #     self.assertTrue(isuk, msg)
 
     def test_session_weighting(self):
         sample_session = Sessions(event_session_key='sid',
