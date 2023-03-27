@@ -40,7 +40,28 @@ class TestMergeDicts(unittest.TestCase):
             ]
         }
 
-        EXPECTED = {
+        EXPECTED_MERGED_FULLY = {
+            'a': [
+                [7, 0, 1, 2],
+                [2, 10, 20, 30],
+                ['c', 'a', 'ac', 'as'],
+                [0.3, 0.1, 0.2, 0.3]
+            ],
+            'c': [
+                ['a', 'a', 'b'],
+                [1, 3, 4],
+                ['l', 'ac', 'a'],
+                [1, 0.1, 0.1]
+            ],
+            'd': [
+                [4, 4, 4],
+                [10, 20, 545],
+                ['as', 'rt', 'k'],
+                [0.2, 0.5, 0.8]
+            ]
+        }
+
+        EXPECTED_MERGED_PARTIALLY = {
             'a': [
                 [7, 0, 1, 2],
                 [2, 10, 20, 30],
@@ -49,7 +70,7 @@ class TestMergeDicts(unittest.TestCase):
             ],
             'c': [
                 ['a', 'b'],
-                [1, 4],
+                [3, 4],
                 ['ac', 'a'],
                 [0.1, 0.1]
             ],
@@ -63,9 +84,10 @@ class TestMergeDicts(unittest.TestCase):
 
         merged = merge_dicts(d1, d2)
 
-        for k in EXPECTED.keys():
+        # Merged fully
+        for k in EXPECTED_MERGED_FULLY.keys():
             self.assertIn(k, merged)
-            self.assertEqual(EXPECTED[k], merged[k])
+            self.assertEqual(EXPECTED_MERGED_FULLY[k], merged[k])
 
 
 if __name__ == '__main__':

@@ -56,8 +56,8 @@ class TestItemsClass(unittest.TestCase):
             EVENT_TIME_KEY: 0
         }
 
-        EMPTY_ITEM_PATH = 'data/test_save_empty_item.pkl'
-        ITEM_PATH = 'data/test_save_item.pkl'
+        EMPTY_ITEM_PATH = 'tdata/test_save_empty_item.pkl'
+        ITEM_PATH = 'tdata/test_save_item.pkl'
 
         items = Items(event_product_key=EVENT_PRODUCT_KEY,
                       event_session_key=EVENT_SESSION_KEY,

@@ -46,41 +46,17 @@ def merge_vals(vals1: List, vals2: List) -> List:
     Returns
     -------
     : List
-        Merged and deduplicated lists.
+        Merged and lists.
     """
 
-    for idx in range(len(vals2[0])):
+    vals1[0].extend(vals2[0])
+    vals1[1].extend(vals2[1])
 
-        core_val = vals2[0][idx]
-        time_val = vals2[1][idx]
+    if len(vals2) >= 3:
+        vals1[2].extend(vals2[2])
 
-        if core_val in vals1[0]:
-            # Check time and update it
-            vindex = vals1[0].index(core_val)
-
-            if vals1[1][vindex] > time_val:
-                vals1[1][vindex] = time_val
-                # Append action
-                if len(vals2) >= 3:
-                    hv = vals2[2][idx]
-                    vals1[2][vindex] = hv
-                    # Append weight
-                    if len(vals2) == 4:
-                        hvw = vals2[3][idx]
-                        vals1[3][vindex] = hvw
-        else:
-            vals1[0].append(core_val)
-            vals1[1].append(time_val)
-
-            # Append action
-            if len(vals2) >= 3:
-                hv = vals2[2][idx]
-                vals1[2].append(hv)
-
-                # Append weight
-                if len(vals2) == 4:
-                    hvw = vals2[3][idx]
-                    vals1[3].append(hvw)
+    if len(vals2) == 4:
+        vals1[3].extend(vals2[3])
 
     # Sort by time
     vals1 = sort_together(vals1, key_list=(1,))

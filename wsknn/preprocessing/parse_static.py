@@ -1,7 +1,8 @@
 import gzip
 import json
 import pathlib
-from typing import Dict, Iterable
+from datetime import datetime
+from typing import Dict, Iterable, List, Any
 
 from wsknn.preprocessing.structure.item import Items
 from wsknn.preprocessing.structure.session import Sessions
@@ -35,6 +36,9 @@ def parse_files(dataset: str,
                 product_key: str,
                 action_key: str,
                 time_key: str,
+                time_to_numeric=False,
+                time_to_datetime=False,
+                datetime_format='',
                 allowed_actions: Dict = None,
                 purchase_action_name=None) -> (Items, Sessions):
     """
@@ -57,6 +61,15 @@ def parse_files(dataset: str,
     time_key : str
         The name of the event timestamp key.
 
+    time_to_numeric : bool, default = False
+        Transforms input timestamps to float values.
+
+    time_to_datetime : bool, default = False
+        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+
+    datetime_format : str
+        The format of datetime object.
+
     allowed_actions : Dict, optional
         Allowed actions and their weights.
 
@@ -75,7 +88,10 @@ def parse_files(dataset: str,
                                       session_id_key,
                                       product_key,
                                       action_key,
-                                      time_key)
+                                      time_key,
+                                      time_to_numeric,
+                                      time_to_datetime,
+                                      datetime_format)
     elif dataset.endswith('.json') or dataset.endswith('.jsonl'):
         items, sessions = parse_jsonl_fn(dataset,
                                          allowed_actions,
@@ -83,7 +99,10 @@ def parse_files(dataset: str,
                                          session_id_key,
                                          product_key,
                                          action_key,
-                                         time_key)
+                                         time_key,
+                                         time_to_numeric,
+                                         time_to_datetime,
+                                         datetime_format)
     else:
         ftype = pathlib.Path(dataset).suffix
         raise TypeError(f'Unrecognized input file type. Parser works with "gz" and "json" files, you have provided '
@@ -98,7 +117,10 @@ def parse_gz_fn(dataset: str,
                 session_id_key: str,
                 product_key: str,
                 action_key: str,
-                time_key: str):
+                time_key: str,
+                time_to_numeric: bool,
+                time_to_datetime: bool,
+                datetime_format: str):
     """
     Function parses given gzipped JSONL file into Sessions and Items objects.
 
@@ -125,6 +147,15 @@ def parse_gz_fn(dataset: str,
     time_key : str
         The name of the event timestamp key.
 
+    time_to_numeric : bool, default = True
+        Transforms input timestamps to float values.
+
+    time_to_datetime : bool, default = False
+        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+
+    datetime_format : str
+        The format of datetime object.
+
     Returns
     -------
     ItemsMap, SessionsMap : Items, Sessions
@@ -137,7 +168,10 @@ def parse_gz_fn(dataset: str,
             session_id_key,
             product_key,
             action_key,
-            time_key)
+            time_key,
+            time_to_numeric,
+            time_to_datetime,
+            datetime_format)
 
     return parsed_items, parsed_sessions
 
@@ -145,7 +179,10 @@ def parse_gz_fn(dataset: str,
 def parse_jsonl_fn(dataset: str, allowed_actions: Dict, purchase_action_name: str, session_id_key: str,
                    product_key: str,
                    action_key: str,
-                   time_key: str):
+                   time_key: str,
+                   time_to_numeric: bool,
+                   time_to_datetime: bool,
+                   datetime_format: str):
     """
     Function parses given JSONL file into Sessions and Items and Users objects.
 
@@ -172,6 +209,15 @@ def parse_jsonl_fn(dataset: str, allowed_actions: Dict, purchase_action_name: st
     time_key : str
         The name of the event timestamp key.
 
+    time_to_numeric : bool, default = True
+        Transforms input timestamps to float values.
+
+    time_to_datetime : bool, default = False
+        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+
+    datetime_format : str
+        The format of datetime object.
+
     Returns
     -------
     ItemsMap, SessionsMap : Items, Sessions
@@ -189,12 +235,17 @@ def parse_jsonl_fn(dataset: str, allowed_actions: Dict, purchase_action_name: st
             session_id_key,
             product_key,
             action_key,
-            time_key)
+            time_key,
+            time_to_numeric,
+            time_to_datetime,
+            datetime_format
+        )
 
     return parsed_items, parsed_sessions
 
 
-def check_event_keys_and_values(event, session_id_key: str,
+def check_event_keys_and_values(event: Dict,
+                                session_id_key: str,
                                 product_key: str,
                                 action_key: str,
                                 time_key: str):
@@ -227,13 +278,64 @@ def check_event_keys_and_values(event, session_id_key: str,
     return event
 
 
+def _clean_times(times: Any,
+                 time_to_numeric: bool,
+                 time_to_datetime: bool,
+                 datetime_format: str) -> List:
+    """
+    Function cleans timestamps if they don't have valid data type.
+
+    Parameters
+    ----------
+    times : List
+        The list with timestamps.
+
+    time_to_numeric : bool
+        Should time be transformed to numeric?
+
+    time_to_numeric : bool, default = True
+        Transforms input timestamps to float values.
+
+    time_to_datetime : bool, default = False
+        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+
+    datetime_format : str
+        The format of datetime object.
+
+    Returns
+    -------
+    : List
+        Parsed times.
+    """
+
+    parsed_times = times
+
+    if isinstance(times, List):
+        if time_to_numeric:
+            parsed_times = [float(x) for x in times]
+
+        if time_to_datetime:
+            parsed_times = [datetime.strptime(x, datetime_format) for x in times]
+    else:
+        if time_to_numeric:
+            parsed_times = float(times)
+
+        if time_to_datetime:
+            parsed_times = datetime.strptime(times, datetime_format)
+
+    return parsed_times
+
+
 def parse_fn(dataset,
              allowed_actions: Dict,
              purchase_action_name: str,
              session_id_key: str,
              product_key: str,
              action_key: str,
-             time_key: str) -> (Items, Sessions):
+             time_key: str,
+             time_to_numeric: bool,
+             time_to_datetime: bool,
+             datetime_format: str) -> (Items, Sessions):
     """
     Function parses given JSONL file into Sessions and Items objects.
 
@@ -260,6 +362,15 @@ def parse_fn(dataset,
     time_key : str
         The name of the event timestamp key.
 
+    time_to_numeric : bool, default = True
+        Transforms input timestamps to float values.
+
+    time_to_datetime : bool, default = False
+        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+
+    datetime_format : str
+        The format of datetime object.
+
     Returns
     -------
     ItemsMap, SessionsMap : Items, Sessions
@@ -270,10 +381,14 @@ def parse_fn(dataset,
     items_obj = Items(event_session_key=session_id_key,
                       event_product_key=product_key,
                       event_time_key=time_key)
+
     sessions_obj = Sessions(event_session_key=session_id_key,
                             event_product_key=product_key,
                             event_time_key=time_key,
-                            event_action_key=action_key)
+                            event_action_key=action_key,
+                            event_action_weights=allowed_actions)
+
+    possible_actions_list = list(allowed_actions.keys())
 
     for event in dataset:
         event = check_event_keys_and_values(event,
@@ -283,15 +398,17 @@ def parse_fn(dataset,
                                             time_key)
         # Check if params are returned
         if event:
-            products = event[product_key]  # List[List, List, List...]
             action = event[action_key]
 
-            if len(products) == 1 and action != purchase_action_name:
-                # Check how many products are returned
-                event[product_key] = products[0]
+            # parse times
+            if time_to_numeric or time_to_datetime:
+                event[time_key] = _clean_times(times=event[time_key],
+                                               time_to_numeric=time_to_numeric,
+                                               time_to_datetime=time_to_datetime,
+                                               datetime_format=datetime_format)
 
+            if action != purchase_action_name:
                 # Is session user interaction?
-                possible_actions_list = list(allowed_actions.keys())
                 if is_user_item_interaction(action, possible_actions_list):
                     # Append Event to Items and Sessions
                     items_obj.append(event)
@@ -299,6 +416,6 @@ def parse_fn(dataset,
             else:
                 # It is a purchase, update weights accordingly
                 purchase_additive_factor = allowed_actions[purchase_action_name]
-                sessions_obj.update_weights(event[session_id_key], products, purchase_additive_factor)
+                sessions_obj.update_weights_of_purchase_session(event[session_id_key], purchase_additive_factor)
 
     return items_obj, sessions_obj

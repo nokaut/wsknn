@@ -1,9 +1,8 @@
 import unittest
 
-from wsknn.preprocessing.parse import parse_fn, parse_files
+from wsknn.preprocessing.parse_static import parse_files
 from wsknn.preprocessing.structure.item import Items
 from wsknn.preprocessing.structure.session import Sessions
-
 
 POSSIBLE_ACTIONS = {'products_view': 0.1,
                     'purchase': 1,
@@ -32,7 +31,8 @@ class TestParseFn(unittest.TestCase):
                                                 action_key=ACTION_KEY,
                                                 time_key=TIME_KEY,
                                                 allowed_actions=POSSIBLE_ACTIONS,
-                                                purchase_action_name=PURCHASE_ACTION_NAME)
+                                                purchase_action_name=PURCHASE_ACTION_NAME,
+                                                time_to_numeric=True)
 
             self.assertIsInstance(out_item, Items)
             self.assertIsInstance(out_session, Sessions)
@@ -40,12 +40,13 @@ class TestParseFn(unittest.TestCase):
     def test_output_values(self):
 
         base_items, base_sessions = parse_files(SESSIONS[0],
-                                                            session_id_key=SESSION_KEY,
-                                                            product_key=PRODUCT_KEY,
-                                                            action_key=ACTION_KEY,
-                                                            time_key=TIME_KEY,
-                                                            allowed_actions=POSSIBLE_ACTIONS,
-                                                            purchase_action_name=PURCHASE_ACTION_NAME)
+                                                session_id_key=SESSION_KEY,
+                                                product_key=PRODUCT_KEY,
+                                                action_key=ACTION_KEY,
+                                                time_key=TIME_KEY,
+                                                allowed_actions=POSSIBLE_ACTIONS,
+                                                purchase_action_name=PURCHASE_ACTION_NAME,
+                                                time_to_numeric=True)
 
         base_items_keys = list(base_items.item_sessions_map.keys()).copy()
         base_sessions_keys = list(base_sessions.session_items_actions_map.keys()).copy()
@@ -54,14 +55,16 @@ class TestParseFn(unittest.TestCase):
         other_sessions_keys = [base_sessions_keys]
 
         for fs in SESSIONS[1:]:
-            out_item, out_session = parse_fn(fs,
-                                                     allowed_actions=POSSIBLE_ACTIONS,
-                                                     purchase_action_name=PURCHASE_ACTION_NAME,
-                                             session_id_key=SESSION_KEY,
-                                             product_key=PRODUCT_KEY,
-                                             action_key=ACTION_KEY,
-                                             time_key=TIME_KEY
-                                             )
+            out_item, out_session = parse_files(fs,
+                                                allowed_actions=POSSIBLE_ACTIONS,
+                                                purchase_action_name=PURCHASE_ACTION_NAME,
+                                                session_id_key=SESSION_KEY,
+                                                product_key=PRODUCT_KEY,
+                                                action_key=ACTION_KEY,
+                                                time_key=TIME_KEY,
+                                                time_to_numeric=True,
+                                                time_to_datetime=False,
+                                                datetime_format='')
             base_items = base_items + out_item
             base_sessions = base_sessions + out_session
 
@@ -121,22 +124,23 @@ class TestParseFn(unittest.TestCase):
             'dt': 4,
             'action': 'purchase'
         }
+
         event_4_products = ['a', 'c']
 
         sample_session.append(event1)
         sample_session.append(event2)
         sample_session.append(event3)
-        sample_session.update_weights(event4, event_4_products, 1)
+        sample_session.update_weights_of_purchase_session(event4['sid'], 1, bought_products=event_4_products)
 
-        EXPECTED_OUTPUT = {
-            '0': [
+        expected_output = {
+            '0': (
                 ['a', 'b', 'c'],
                 [1, 2, 3],
                 ['products_view', 'products_view', 'products_view'],
                 [1.1, 0.1, 1.1]
-            ]
+            )
         }
-        self.assertEqual(sample_session.session_items_actions_map, EXPECTED_OUTPUT)
+        self.assertEqual(sample_session.session_items_actions_map, expected_output)
 
 
 if __name__ == '__main__':

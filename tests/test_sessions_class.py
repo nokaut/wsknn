@@ -87,8 +87,8 @@ class TestSessionsClass(unittest.TestCase):
 
     def test_save_and_load(self):
 
-        EMPTY_SESSION_PATH = 'data/test_save_empty_session.pkl'
-        SESSION_PATH = 'data/test_save_session.pkl'
+        EMPTY_SESSION_PATH = 'tdata/test_save_empty_session.pkl'
+        SESSION_PATH = 'tdata/test_save_session.pkl'
 
         sessions = Sessions(event_session_key=SESSION_KEY,
                             event_product_key=ITEM_KEY,
@@ -172,7 +172,9 @@ class TestSessionsClass(unittest.TestCase):
         sessions12 = sessions1 + sessions2
 
         sessions123 = sessions12 + sessions3
-        sessions123.update_weights(EVENT4, products=EVENT_4_PRODUCTS, additive_factor=1)
+        sessions123.update_weights_of_purchase_session(EVENT4['sid'],
+                                                       additive_factor=1,
+                                                       bought_products=EVENT_4_PRODUCTS)
 
         weights12 = sessions12.session_items_actions_map['0'][-1]
         weights123 = sessions123.session_items_actions_map['0'][-1]

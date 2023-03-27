@@ -44,6 +44,17 @@ Evaluation metrics
 
 -----
 
+Preprocessing
+-------------
+
+.. autofunction:: wsknn.preprocessing.parse_static.parse_fn
+   :noindex:
+
+.. autofunction:: wsknn.preprocessing.parse_static.parse_files
+   :noindex:
+
+-----
+
 Utilities
 ---------
 

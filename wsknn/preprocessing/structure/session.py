@@ -1,5 +1,5 @@
 import pickle
-from typing import Union, Dict, List, Optional
+from typing import Union, Dict, Optional, Iterable
 
 from wsknn.preprocessing.utils.calc import get_larger_value, get_smaller_value
 from wsknn.preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
@@ -76,8 +76,8 @@ class Sessions:
     save_object(filename)
         Users object is stored as a Python pickle binary file.
 
-    update_weights()
-        Updates product-weights vector (optional).
+    update_weights_of_purchase_session()
+        Adds constant value to all weights if session ended up with purchase.
 
     __add__(Users)
         Adds other Sessions object.
@@ -173,6 +173,9 @@ class Sessions:
             # Append action type
             self.session_items_actions_map[session][2].append(action)
 
+        if self.action_weights is not None:
+            self.session_items_actions_map[session][3].append(self.action_weights.get(action))
+
         # Update the first and the last time reading if needed
         self._update_timestamps(timestamp)
         # Update longest session info
@@ -208,12 +211,19 @@ class Sessions:
                     [dt]
                 )
             else:
-                self.session_items_actions_map[session] = (
-                    [item],
-                    [dt],
-                    [action],
-                    [self.action_weights[action]]
-                )
+                if self.action_weights is None:
+                    self.session_items_actions_map[session] = (
+                        [item],
+                        [dt],
+                        [action]
+                    )
+                else:
+                    self.session_items_actions_map[session] = (
+                        [item],
+                        [dt],
+                        [action],
+                        [self.action_weights.get(action, 0.001)]
+                    )
             # Update number of sessions in the dictionary
             self._update_number_of_sessions()
             # Update the first and the last time reading if needed
@@ -221,7 +231,9 @@ class Sessions:
             # Update longest session info
             self._update_longest_event_sequence_size(len(self.session_items_actions_map[session][0]))
 
-    def update_weights(self, session_id, products: List, additive_factor=0.0):
+    def update_weights_of_purchase_session(self, session_id,
+                                           additive_factor=0.0,
+                                           bought_products: Iterable = None):
         """
         Method updates item weights accordingly to the given additive factor. Running this method is required when
         we generate optional weights list.
@@ -231,16 +243,19 @@ class Sessions:
         session_id : Any
             The index of a session.
 
-        products : List
-            Index of items to be weighted.
-
         additive_factor : float
             Weight added to the item.
+
+        bought_products : List, optional
+            If provided, then only those items weights are updated.
         """
         for idx, item in enumerate(self.session_items_actions_map[session_id][0]):
-            if item in products:
-                old_value = self.session_items_actions_map[session_id][3][idx]
-                new_value = old_value + additive_factor
+            old_value = self.session_items_actions_map[session_id][3][idx]
+            new_value = old_value + additive_factor
+            if bought_products is not None:
+                if item in bought_products:
+                    self.session_items_actions_map[session_id][3][idx] = new_value
+            else:
                 self.session_items_actions_map[session_id][3][idx] = new_value
 
     def export_to_dict(self, filename: str):

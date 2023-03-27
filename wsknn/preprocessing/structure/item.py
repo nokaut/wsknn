@@ -68,6 +68,12 @@ class Items:
 
     __str__()
         The basic info about the class.
+
+    Raises
+    ------
+    TypeError
+        Timestamps are not datatime objects or numerical objects.
+
     """
 
     def __init__(self,
@@ -126,12 +132,15 @@ class Items:
     def _update_timestamps(self, ts: int):
 
         # First
-        if ts < self.time_start:
-            self._update_first_timestamp(ts)
+        try:
+            if ts < self.time_start:
+                self._update_first_timestamp(ts)
 
-        # Last
-        if ts > self.time_end:
-            self._update_last_timestamp(ts)
+            # Last
+            if ts > self.time_end:
+                self._update_last_timestamp(ts)
+        except TypeError:
+            raise TypeError('Timestamp values should have datetime or numeric types to allow comparisons!')
 
     def _append_item_session_and_timestamp(self, item: str, session: str, timestamp: int):
         """
