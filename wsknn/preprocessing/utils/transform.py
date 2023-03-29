@@ -1,4 +1,5 @@
 import datetime
+from datetime import timezone
 from typing import Union, List, Dict
 from more_itertools import sort_together
 
@@ -82,7 +83,7 @@ def parse_dt_to_seconds(event_time: Union[int, str]) -> int:
     Returns
     -------
     timestamp_ticks : int
-        How many seconds to ``event_time`` from 1970-01-01.
+        How many seconds to ``event_time`` from 1970-01-01, UTC tz.
     """
     try:
         int(event_time)
@@ -97,6 +98,8 @@ def parse_dt_to_seconds(event_time: Union[int, str]) -> int:
                 raise TypeError('Given Datetime Format not allowed! Function uses "%Y-%m-%dT%H:%M:%S.%fZ" and '
                                 '"%Y-%m-%dT%H:%M:%S" formats')
             base_time = datetime.datetime.strptime(event_time, str_scheme)
+            # Transform to utc
+
             timestamp_ticks = int(base_time.timestamp())
             return timestamp_ticks
         else:
@@ -117,7 +120,10 @@ def parse_seconds_to_dt(timestamp2transform: int) -> str:
     s_datetime : str
         Parsed datetime in format '%Y-%m-%dT%H:%M:%S.%fZ'
     """
-    s_datetime = datetime.datetime.fromtimestamp(timestamp2transform).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    s_datetime = datetime.datetime.fromtimestamp(
+        timestamp2transform
+    ).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+
     return s_datetime
 
 
