@@ -97,23 +97,26 @@ Output:
 ]
 ```
 
+## Preprocessing Stage
+
+
 
 ## Setup
 
-Version 0.1 of a package can be installed with `pip`:
+Version 1.x of a package can be installed with `pip`:
 
 ```shell
 pip install wsknn
 ```
 
-It works with Python versions greater or equal to 3.6.
+It works with Python versions greater or equal to 3.8.
 
 ## Requirements
 
 | Package Version | Python versions | Other packages |
 |-----------------|-----------------|----------------|
-| 0.1+            | 3.6+            | numpy, yaml    |
-
+| 0.1.x           | 3.6+            | numpy, yaml    |
+ | 1.x             | 3.8+            | numpy, yaml, more_itertools |
 
 ## Developers
 

@@ -10,6 +10,9 @@
 
 # Bash scripts #
 *.sh
+build/
+dist/
+wsknn.egg-info/
 
 # Created by https://www.gitignore.io/api/pydev,python,pycharm,sublimetext,jupyternotebook,visualstudiocode
 
@@ -229,3 +232,4 @@ GitHub.sublime-settings
 .history
 
 # End of https://www.gitignore.io/api/pydev,python,pycharm,sublimetext,jupyternotebook,visualstudiocode
+.idea/*

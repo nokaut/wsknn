@@ -10,7 +10,7 @@ setuptools.setup(
     version=package_version,
     author="Szymon Moliński",
     author_email="s.molinski@digitree.pl",
-    description="WSKNN model for recommendations",
+    description="Weighted session-based model for recommendations",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/nokaut/wsknn",
@@ -19,7 +19,9 @@ setuptools.setup(
     ),
     install_requires=[
         'numpy',
-        'pyyaml'],
+        'pyyaml',
+        'more_itertools'
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
