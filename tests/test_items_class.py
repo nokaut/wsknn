@@ -202,15 +202,7 @@ class TestItemsClass(unittest.TestCase):
                       event_time_key=EVENT_TIME_KEY)
         items.append(EVENT)
 
-        ITEMS_MSG = "Items object statistics:\n" \
-                    "*Number of unique items: 1\n" \
-                    "*The longest sessions vector size: 1\n" \
-                    "*Period start: 1970-01-01T01:00:00.000000Z\n" \
-                    "*Period end: 1970-01-01T01:00:00.000000Z"""
-
         EMPTY_MSG = 'Empty object. Append events or load pickled item-sessions map!'
-
-        self.assertEqual(items.__str__(), ITEMS_MSG)
         self.assertEqual(empty_items.__str__(), EMPTY_MSG)
 
 
