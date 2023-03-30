@@ -9,8 +9,8 @@ properties:
     actions:
       # Add here action_name: weight
       # example:
-      # add_to_cart: 0.5
-      # payment: 1
+       add_to_cart: 0.5
+       payment: 1
     # The name of the event that is a transaction
     final_action_name: payment
     minimum_session_length: 3

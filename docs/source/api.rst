@@ -25,8 +25,6 @@ WSKNN
 .. automodule::  wsknn.model.wsknn
    :members:
 
------
-
 Evaluation metrics
 ------------------
 
@@ -42,7 +40,6 @@ Evaluation metrics
 .. autofunction:: wsknn.evaluate.metrics.get_recall
    :noindex:
 
------
 
 Preprocessing
 -------------
@@ -53,8 +50,6 @@ Preprocessing
 .. autofunction:: wsknn.preprocessing.parse_static.parse_files
    :noindex:
 
------
-
 Utilities
 ---------
 
@@ -62,4 +57,3 @@ Utilities
    :members:
    :undoc-members:
    :show-inheritance:
-

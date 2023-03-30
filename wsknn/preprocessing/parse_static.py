@@ -65,7 +65,7 @@ def parse_files(dataset: str,
         Transforms input timestamps to float values.
 
     time_to_datetime : bool, default = False
-        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+        Transforms input timestamps to datatime objects. Setting ``datetime_format`` parameter is required.
 
     datetime_format : str
         The format of datetime object.
@@ -78,7 +78,8 @@ def parse_files(dataset: str,
 
     Returns
     -------
-    ItemsMap, SessionsMap : Items, Sessions
+    items, sessions : Items, Sessions
+        The mappings of item-session and session-items.
     """
 
     if dataset.endswith('.gz'):
@@ -151,14 +152,15 @@ def parse_gz_fn(dataset: str,
         Transforms input timestamps to float values.
 
     time_to_datetime : bool, default = False
-        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+        Transforms input timestamps to datatime objects. Setting ``datetime_format`` parameter is required.
 
     datetime_format : str
         The format of datetime object.
 
     Returns
     -------
-    ItemsMap, SessionsMap : Items, Sessions
+    parsed_items, parsed_sessions : Items, Sessions
+        The mappings of item-session and session-items.
     """
     with gzip.open(dataset, 'rt', encoding='UTF-8') as unzipped_f:
         parsed_items, parsed_sessions = parse_fn(
@@ -213,7 +215,7 @@ def parse_jsonl_fn(dataset: str, allowed_actions: Dict, purchase_action_name: st
         Transforms input timestamps to float values.
 
     time_to_datetime : bool, default = False
-        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
+        Transforms input timestamps to datatime objects. Setting ``datetime_format`` parameter is required.
 
     datetime_format : str
         The format of datetime object.

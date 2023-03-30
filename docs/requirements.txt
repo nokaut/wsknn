@@ -4,4 +4,4 @@ sphinx
 numpydoc
 pydata-sphinx-theme
 sphinx-copybutton
-wsknn
+more_itertools

@@ -1,5 +1,4 @@
 import datetime
-from datetime import timezone
 from typing import Union, List, Dict
 from more_itertools import sort_together
 
