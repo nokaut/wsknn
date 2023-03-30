@@ -12,15 +12,14 @@
 
 import os
 import sys
-from wsknn import __version__ as release_number
-
-sys.path.insert(0, os.path.abspath('.'))
+# sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../..'))
 sys.setrecursionlimit(1000)
+from wsknn import __version__ as release_number
 
 # -- Project information -----------------------------------------------------
 project = 'wsknn'
-copyright = '2022, Szymon Moliński, Sales Intelligence'
+copyright = '2023, Szymon Moliński, Sales Intelligence'
 author = 'Szymon Moliński, Sales Intelligence'
 
 # The full version, including alpha/beta/rc tags
