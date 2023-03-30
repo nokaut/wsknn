@@ -1,0 +1,275 @@
+[
+  {
+    "act": "products_view",
+    "ts": "1652255998993",
+    "cid": "c3",
+    "sid": "s5",
+    "pid": "w"
+  },
+  {
+    "act": "products_view",
+    "ts": "1652255999005",
+    "cid": "c1",
+    "sid": "s1",
+    "pid": "q"
+  },
+  {
+    "act": "products_view",
+    "ts": "1652255999007",
+    "cid": "c2",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "products_view",
+    "ts": "1652255999001",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "q"
+  },
+  {
+    "act": "products_view",
+    "ts": "1652255999000",
+    "cid": "c1",
+    "sid": "s4",
+    "pid": "r"
+  },
+  {
+    "act": "products_view",
+    "ts": "1652255999001",
+    "cid": "c2",
+    "sid": "s5",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999048",
+    "cid": "c2",
+    "sid": "s4",
+    "pid": "y"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999053",
+    "cid": "c1",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999053",
+    "cid": "c1",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999058",
+    "cid": "c2",
+    "sid": "s1",
+    "pid": "r"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999058",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999050",
+    "cid": "c1",
+    "sid": "s1",
+    "pid": "e"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999050",
+    "cid": "c1",
+    "sid": "s4",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999042",
+    "cid": "c2",
+    "sid": "s4",
+    "pid": "y"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999055",
+    "cid": "c2",
+    "sid": "s2",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_cart",
+    "ts": "1652255999045",
+    "cid": "c2",
+    "sid": "s2",
+    "pid": "y"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999040",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "w"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999040",
+    "cid": "c2",
+    "sid": "s5",
+    "pid": "t"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999057",
+    "cid": "c1",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999056",
+    "cid": "c1",
+    "sid": "s2",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999047",
+    "cid": "c1",
+    "sid": "s3",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999046",
+    "cid": "c2",
+    "sid": "s5",
+    "pid": "r"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999047",
+    "cid": "c2",
+    "sid": "s1",
+    "pid": "r"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999046",
+    "cid": "c2",
+    "sid": "s5",
+    "pid": "w"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999051",
+    "cid": "c2",
+    "sid": "s2",
+    "pid": "r"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999058",
+    "cid": "c3",
+    "sid": "s4",
+    "pid": "q"
+  },
+  {
+    "act": "add_to_wishlist",
+    "ts": "1652255999056",
+    "cid": "c1",
+    "sid": "s5",
+    "pid": "e"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999095",
+    "cid": "c2",
+    "sid": "s4",
+    "pid": "q"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999095",
+    "cid": "c3",
+    "sid": "s2",
+    "pid": "q"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999106",
+    "cid": "c3",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999102",
+    "cid": "c1",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999090",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "e"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999102",
+    "cid": "c3",
+    "sid": "s5",
+    "pid": "y"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999091",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "t"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999095",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "r"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999102",
+    "cid": "c2",
+    "sid": "s2",
+    "pid": "e"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999094",
+    "cid": "c1",
+    "sid": "s3",
+    "pid": "t"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999092",
+    "cid": "c1",
+    "sid": "s5",
+    "pid": "y"
+  },
+  {
+    "act": "purchase",
+    "ts": "1652255999092",
+    "cid": "c3",
+    "sid": "s3",
+    "pid": "r"
+  }
+]
