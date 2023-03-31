@@ -9,11 +9,13 @@ tags:
 authors:
  - name: Szymon Moliński
    orcid: 0000-0003-3525-2104
-   affiliation: 1
+   affiliation: 1,2
 affiliations:
-- name: Digitree SA, Poland
-  index: 1
-date: 23 December 2022
+ - name: Sales Intelligence
+   index: 1
+ - name: Digitree SA
+   index: 2
+date: 31 March 2023
 bibliography: paper.bib
 
 ---
@@ -81,7 +83,7 @@ A similar architecture can be found in a stand-alone repository [@recsystemsrepo
 
 # Package structure
 
-The package is lightweight, it depends only on the `numpy` and `pyyaml` packages. It works with every currently supported Python version. It has two main functions: `fit()` to build a memory representation of a model, and `predict()` to return recommendations. What is worth noticing is that the recommendation strategy may be altered after fitting a model; it allows testing different scenarios in parallel.
+The package is lightweight, it depends only on the `numpy`, `more_itertools` and `pyyaml` packages. It works with every currently supported Python version. It has two main functions: `fit()` to build a memory representation of a model, and `predict()` to return recommendations. What is worth noticing is that **the recommendation strategy may be altered after fitting a model**; it allows testing different scenarios in parallel.
 
 The users may control:
 
@@ -102,6 +104,17 @@ The sample flow and recommendations are presented in the repository [@wsknnrepo]
 - the **mean reciprocal rank** of top `k` recommendations,
 - the **precision** score of top `k` recommendations,
 - the **recall** score of top `k` recommendations.
+
+The package can process static JSON-lines and gzipped JSON-lines files with e-commerce events with its `preprocessing` module. The module takes into account the fact that different event actions have their specific weights, and the session that ends with a purchase should be weighted as more reliable than session that ended without a transaction.
+The basic data types, `Items` and `Sessions` that are storing item-sessions and session-items mappings may be updated sequentially, what allows to process a large amounts of data that comes from the e-commerce websites.
+
+# Limitations
+
+As with every Machine Learning system, WSKNN has its limitations:
+
+- model *memorizes session-items and item-sessions maps*, and if the product base is large, and we use sessions for an extended period, then the model may be too big to fit an available memory; in this case, we can categorize products and train a different model for each category. Benchmarking shows that model memory size is directly related to the number of sessions.
+- response time may be slower than from other models, especially if there are available many items to recommend, benchmarking shows that the mean response time rises with the number of items used for training,
+- there’s additional overhead related to the preparation of the input. But this is related to the every other model, except simple Markov Models. That's why `wsknn` has a built-in `preprocessing` module that transforms common events structure into the model's format.
 
 # Acknowledgements
 
