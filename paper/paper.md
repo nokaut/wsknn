@@ -9,7 +9,7 @@ tags:
 authors:
  - name: Szymon Moliński
    orcid: 0000-0003-3525-2104
-   affiliation: 1,2
+   affiliation: "1,2"
 affiliations:
  - name: Sales Intelligence
    index: 1
