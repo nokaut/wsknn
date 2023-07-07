@@ -1,17 +1,19 @@
 import gzip
 from typing import Dict
 
+from wsknn.preprocessing.static_parsers.parse import parse_fn
 
-def parse_gizipped(dataset: str,
-                   allowed_actions: Dict,
-                   purchase_action_name: str,
-                   session_id_key: str,
-                   product_key: str,
-                   action_key: str,
-                   time_key: str,
-                   time_to_numeric: bool,
-                   time_to_datetime: bool,
-                   datetime_format: str):
+
+def parse_gzipped(dataset: str,
+                  allowed_actions: Dict,
+                  purchase_action_name: str,
+                  session_id_key: str,
+                  product_key: str,
+                  action_key: str,
+                  time_key: str,
+                  time_to_numeric: bool,
+                  time_to_datetime: bool,
+                  datetime_format: str):
     """
     Function parses given gzipped JSONL file into Sessions and Items objects.
 
