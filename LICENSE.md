@@ -1,4 +1,4 @@
-Copyright (c) Szymon Moliński, Sales Intelligence Sp. z o.o. (Digitree Group SA), 2022
+Copyright (c) Szymon Moliński, Sales Intelligence Sp. z o.o. (Digitree Group SA), 2023
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

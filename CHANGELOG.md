@@ -1,3 +1,9 @@
+## Version 1.1.1 (2023-07-08)
+
+- support for `csv` files,
+- debugged `gzip` loading.
+
+
 ## Version 0.1.6
 
 - updated documentation,
