@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Iterable
 
 
 def check_event_keys_and_values(event: Dict,
@@ -33,3 +33,26 @@ def check_event_keys_and_values(event: Dict,
         return {}
 
     return event
+
+
+def is_user_item_interaction(e_action: str, allowed_actions: Iterable) -> bool:
+    """
+    Checks if event has a valid action type.
+
+    Parameters
+    ----------
+    e_action : str
+        The name of the event action.
+
+    allowed_actions : Iterable
+        The set, list or array with allowed actions.
+
+    Returns
+    -------
+    : bool
+        ``True`` if ``e_action`` is in the list of allowed interactions.
+    """
+
+    if e_action in allowed_actions:
+        return True
+    return False

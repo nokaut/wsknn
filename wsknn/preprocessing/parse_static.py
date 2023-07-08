@@ -1,82 +1,10 @@
-import gzip
-import json
 import pathlib
-from datetime import datetime
-from typing import Dict, Iterable, List, Any
+from typing import Dict, Tuple
 
+from wsknn.preprocessing.static_parsers.csv_parser.parse import parse_csv_fn
+from wsknn.preprocessing.static_parsers.json_parser.parse import parse_gzipped_fn, parse_jsonl_fn
 from wsknn.preprocessing.structure.item import Items
 from wsknn.preprocessing.structure.session import Sessions
-
-
-def _clean_times(times: Any,
-                 time_to_numeric: bool,
-                 time_to_datetime: bool,
-                 datetime_format: str) -> List:
-    """
-    Function cleans timestamps if they don't have valid data type.
-
-    Parameters
-    ----------
-    times : List
-        The list with timestamps.
-
-    time_to_numeric : bool
-        Should time be transformed to numeric?
-
-    time_to_numeric : bool, default = True
-        Transforms input timestamps to float values.
-
-    time_to_datetime : bool, default = False
-        Transforms input timestamps to datatime objects. Setting `datetime_format` parameter is required.
-
-    datetime_format : str
-        The format of datetime object.
-
-    Returns
-    -------
-    : List
-        Parsed times.
-    """
-
-    parsed_times = times
-
-    if isinstance(times, List):
-        if time_to_numeric:
-            parsed_times = [float(x) for x in times]
-
-        if time_to_datetime:
-            parsed_times = [datetime.strptime(x, datetime_format) for x in times]
-    else:
-        if time_to_numeric:
-            parsed_times = float(times)
-
-        if time_to_datetime:
-            parsed_times = datetime.strptime(times, datetime_format)
-
-    return parsed_times
-
-
-def is_user_item_interaction(e_action: str, allowed_actions: Iterable) -> bool:
-    """
-    Checks if event has a valid action type.
-
-    Parameters
-    ----------
-    e_action : str
-        The name of the event action.
-
-    allowed_actions : Iterable
-        The set, list or array with allowed actions.
-
-    Returns
-    -------
-    : bool
-        ``True`` if ``e_action`` is in the list of allowed interactions.
-    """
-
-    if e_action in allowed_actions:
-        return True
-    return False
 
 
 def parse_files(dataset: str,
@@ -88,14 +16,14 @@ def parse_files(dataset: str,
                 time_to_datetime=False,
                 datetime_format='',
                 allowed_actions: Dict = None,
-                purchase_action_name=None) -> (Items, Sessions):
+                purchase_action_name=None) -> Tuple[Items, Sessions]:
     """
-    Function parses data from json and gzip into item-sessions and session-items maps.
+    Function parses data from csv, json and gzip json into item-sessions and session-items maps.
 
     Parameters
     ----------
     dataset : str
-        The gzipped JSONL file or JSON file with events.
+        The gzipped JSONL, JSON, CSV file with events.
 
     session_id_key : str
         The name of the session key.
@@ -131,16 +59,16 @@ def parse_files(dataset: str,
     """
 
     if dataset.endswith('.gz'):
-        items, sessions = parse_gz_fn(dataset,
-                                      allowed_actions,
-                                      purchase_action_name,
-                                      session_id_key,
-                                      product_key,
-                                      action_key,
-                                      time_key,
-                                      time_to_numeric,
-                                      time_to_datetime,
-                                      datetime_format)
+        items, sessions = parse_gzipped_fn(dataset,
+                                           allowed_actions,
+                                           purchase_action_name,
+                                           session_id_key,
+                                           product_key,
+                                           action_key,
+                                           time_key,
+                                           time_to_numeric,
+                                           time_to_datetime,
+                                           datetime_format)
     elif dataset.endswith('.json') or dataset.endswith('.jsonl'):
         items, sessions = parse_jsonl_fn(dataset,
                                          allowed_actions,
@@ -152,77 +80,20 @@ def parse_files(dataset: str,
                                          time_to_numeric,
                                          time_to_datetime,
                                          datetime_format)
+    elif dataset.endswith('.csv'):
+        items, sessions = parse_csv_fn(dataset,
+                                       allowed_actions,
+                                       purchase_action_name,
+                                       session_id_key,
+                                       product_key,
+                                       action_key,
+                                       time_key,
+                                       time_to_numeric,
+                                       time_to_datetime,
+                                       datetime_format)
     else:
         ftype = pathlib.Path(dataset).suffix
-        raise TypeError(f'Unrecognized input file type. Parser works with "gz" and "json" files, you have provided '
-                        f'{ftype} type.')
+        raise TypeError(f'Unrecognized input file type. Parser works with "gz" (gzipped json), "json", and "csv"'
+                        f'files, you have provided {ftype} type.')
 
     return items, sessions
-
-
-def parse_jsonl_fn(dataset: str, allowed_actions: Dict, purchase_action_name: str, session_id_key: str,
-                   product_key: str,
-                   action_key: str,
-                   time_key: str,
-                   time_to_numeric: bool,
-                   time_to_datetime: bool,
-                   datetime_format: str):
-    """
-    Function parses given JSONL file into Sessions and Items and Users objects.
-
-    Parameters
-    ----------
-    dataset : str
-        The JSON file with events.
-
-    allowed_actions : Dict, optional
-        Allowed actions and their weights.
-
-    purchase_action_name: Any, optional
-        The name of the final action (it is required to apply weight into the session vector).
-
-    session_id_key : str
-        The name of the session key.
-
-    product_key : str
-        The name of the product key.
-
-    action_key : str
-        The name of the event action type key.
-
-    time_key : str
-        The name of the event timestamp key.
-
-    time_to_numeric : bool, default = True
-        Transforms input timestamps to float values.
-
-    time_to_datetime : bool, default = False
-        Transforms input timestamps to datatime objects. Setting ``datetime_format`` parameter is required.
-
-    datetime_format : str
-        The format of datetime object.
-
-    Returns
-    -------
-    ItemsMap, SessionsMap : Items, Sessions
-    """
-    with open(dataset, 'r', encoding='utf-8') as jsondata:
-        try:
-            jstream = json.load(jsondata)
-        except json.decoder.JSONDecodeError:
-            jstream = [json.loads(x) for x in jsondata]
-
-        parsed_items, parsed_sessions = parse_fn(
-            jstream,
-            allowed_actions,
-            purchase_action_name,
-            session_id_key,
-            product_key,
-            action_key,
-            time_key,
-            time_to_numeric,
-            time_to_datetime,
-            datetime_format
-        )
-
-    return parsed_items, parsed_sessions

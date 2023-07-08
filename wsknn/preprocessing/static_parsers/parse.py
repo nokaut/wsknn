@@ -1,5 +1,7 @@
 from typing import Dict, Iterable
 
+from wsknn.preprocessing.static_parsers.checkers.validation import check_event_keys_and_values, is_user_item_interaction
+from wsknn.preprocessing.static_parsers.cleaners.time_transform import clean_time
 from wsknn.preprocessing.structure.item import Items
 from wsknn.preprocessing.structure.session import Sessions
 
@@ -80,10 +82,10 @@ def parse_fn(dataset: Iterable,
 
             # parse times
             if time_to_numeric or time_to_datetime:
-                event[time_key] = _clean_times(times=event[time_key],
-                                               time_to_numeric=time_to_numeric,
-                                               time_to_datetime=time_to_datetime,
-                                               datetime_format=datetime_format)
+                event[time_key] = clean_time(times=event[time_key],
+                                             time_to_numeric=time_to_numeric,
+                                             time_to_datetime=time_to_datetime,
+                                             datetime_format=datetime_format)
 
             if action != purchase_action_name:
                 # Is session user interaction?
