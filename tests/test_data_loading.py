@@ -14,3 +14,4 @@ def test_load_jsonl():
 def test_load_gzip():
     loaded_data = load_gzipped_jsonl(GZ_FILE)
     assert loaded_data == EXPECTED_DICT
+
