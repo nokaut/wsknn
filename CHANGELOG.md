@@ -1,3 +1,9 @@
+## Version 1.1.2 (2023-07-)
+
+- changed README example,
+- added `demo-readme` example to `demo-notebooks` section,
+
+
 ## Version 1.1.1 (2023-07-08)
 
 - support for `csv` files,
