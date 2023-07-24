@@ -15,36 +15,51 @@ Example
 
 .. code-block:: python
 
+   import numpy as np
    from wsknn import fit
-   from wsknn.utils import load_pickled
-
+   from wsknn.utils import load_gzipped_pickle
 
    # Load data
-   ITEMS = 'demo-data/items.pkl'
-   SESSIONS = 'demo-data/sessions.pkl'
+   ITEMS = 'demo-data/recsys-2015/parsed_items.pkl.gz'
+   SESSIONS = 'demo-data/recsys-2015/parsed_sessions.pkl.gz'
 
-   items = load_pickled(ITEMS)
-   sessions = load_pickled(SESSIONS)
+   items = load_gzipped_pickle(ITEMS)
+   sessions = load_gzipped_pickle(SESSIONS)
+   imap = items['map']
+   smap = sessions['map']
 
-   trained_model = fit(sessions, items)
+   # Train model
+   trained_model = fit(smap,
+                       imap,
+                       number_of_recommendations=5,
+                       weighting_func='log',
+                       return_events_from_session=False)
 
-   test_session = {'unique id': [
-       ['product id 1', 'product id 2'],
-       ['timestamp #1', 'timestamp #2']
-   ]}
+   # Get sample session
+   test_session_key = np.random.choice(list(smap.keys()))
+   test_session = smap[test_session_key]
+   print(test_session)  # [products], [timestamps]
 
-   recommendations = trained_model.recommend(test_session, number_of_recommendations=3)
-   print(recommendations)
-
-**Output**:
 
 .. code-block:: shell
 
-   >>> [
-   ...  ('product id 3', 0.7),
-   ...  ('product id 4', 0.33),
-   ...  ('product id 5', 0.059)
-   ... ]
+   >>> [[214850771, 214677615, 214651777], [1407592501.048, 1407592529.941, 1407592552.98]]
+
+
+.. code-block:: python
+
+   recommendations = trained_model.recommend(test_session)
+   for rec in recommendations:
+       print('Item:', rec[0], '| weight:', rec[1])
+
+
+.. code-block:: shell
+
+   >>> Item: 214676306 | weight: 1.8718411072574241
+   >>> Item: 214850758 | weight: 1.2478940715049494
+   >>> Item: 214561775 | weight: 1.2478940715049494
+   >>> Item: 214821020 | weight: 1.2478940715049494
+   >>> Item: 214848322 | weight: 1.2478940715049494
 
 Contents
 --------
