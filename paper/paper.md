@@ -132,7 +132,7 @@ The section describes WSKNN performance. Table comes from the internal experimen
 | MM                  | 0.033      | 0.262       | 0.391     | 0.177       | 0.186     | 0.164      | 0.8               | 1             |
 | POP                 | 0.006      | 0.086       | 0.126     | 0.029       | 0.036     | 0.022      | 0.4               | ~0            |
 
-We see that performance on analytical metrics is close to that of RNN-based models, but the WSKNN model is worst regarding response times.
+We see that performance on analytical metrics is close to that of RNN-based models, but the WSKNN model is worst regarding response times. More detailed comparison where more models and datasets were used is presented in [@Twardowski2021].
 
 # Limitations
 

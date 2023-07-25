@@ -4,7 +4,7 @@
 
 ## Weighted session-based k-NN - Intro
 
-Do you build a recommender system for your website? K-nearest neighbors algorithm is a good choice if you are looking for a simple, fast, and explainable solution. Weighted-session-based k-nn recommendations are close to the state-of-the-art, and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
+Do you build a recommender system for your website? K-nearest neighbors algorithm is a good choice if you are looking for a simple, fast, and explainable solution. Weighted-session-based k-nn recommendations are [close to the state-of-the-art](#sknn-performance), and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
 
 ## Documentation
 
@@ -56,7 +56,7 @@ Moreover, we can provide a package for non-programmers, and they can use `settin
 - swift prototyping,
 - easy to run in production.
 
-The model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization, and others. Its performance was always very close to the level of fine-tuned neural networks, but it was much easier and faster to train.
+The model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization, and others. [Its performance was always very close to the level of fine-tuned neural networks](#comparison-between-dl-and-wsknn), but it was much easier and faster to train.
 
 ## What are the limitations of WSKNN?
 
@@ -154,6 +154,12 @@ Szymon Moliński. (2022). WSKNN - Weighted Session-based k-NN Recommendations in
 
 - Twardowski, B., Zawistowski, P., Zaborowski, S. (2021). Metric Learning for Session-Based Recommendations. In: Hiemstra, D., Moens, MF., Mothe, J., Perego, R., Potthast, M., Sebastiani, F. (eds) Advances in Information Retrieval. ECIR 2021. Lecture Notes in Computer Science(), vol 12656. Springer, Cham. https://doi.org/10.1007/978-3-030-72113-8_43
 
+### SKNN performance
+
+The article compares performance of mutiple session-based recommender systems.
+
+- Ludewig, M., Jannach, D. Evaluation of session-based recommendation algorithms. User Model User-Adap Inter 28, 331–390 (2018). https://doi.org/10.1007/s11257-018-9209-6
+
 ## Funding
 
 ![Funding](./eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg)
@@ -204,3 +210,7 @@ As a rule of thumb you should assume that you should have ~2 times more memory a
 |  9 |     100000 |   91000 |          0.0038164   |                    276 |
 | 10 |     100000 |  101000 |          0.00490628  |                    278 |
 | 11 |     100000 |  111000 |          0.00580347  |                    281 |
+
+### How to reproduce benchmarking tables?
+
+Refer to [`https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/`](https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/) directory and use the [`benchmarking.py`](https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/benchmarking.py) file. It will load sample data from the [`https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/data/`](https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/data/) directory.
