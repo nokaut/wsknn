@@ -162,55 +162,51 @@ The article compares performance of mutiple session-based recommender systems.
 
 ## Funding
 
-![Funding](./eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg)
+![Funding](./imgs/eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg)
 
 - Development of the package was partially based on the research project
 **E-commerce Shopping Patterns Prediction System** that 
 was founded under Priority Axis 1.1 of Smart Growth Operational Programme 2014-2020 for Poland
 co-funded by European Regional Development Fund. Project number: `POIR.01.01.01-00-0632/18`
 
-## Benchmarking
+## Computational Performance
 
 As a rule of thumb you should assume that you should have ~2 times more memory available than your model's memory size
 
-- Used machine has 16GB RAM
+- Used machine has 16GB RAM and 4-core CPU with 4.5 GHz frequency
 - testing sample size - 1000 sessions
-- max session length - 30 events
+- max session length - 50 events
 - min session length - 1 event
 - basic data types (integers)
 
-### Session length vs response time vs model size
+All performance characterists were derived in [this notebook](./demo-notebooks/test_ops_times.ipynb), and you can use it for your own performance tests.
 
-|    |   sessions |   items |   mean response time |   model memory size MB |
-|---:|-----------:|--------:|---------------------:|-----------------------:|
-|  0 | 100000     |  100000 |           0.00501535 |                    278 |
-|  1 | 200000     |  100000 |           0.00707721 |                    524 |
-|  2 | 300000     |  100000 |           0.00528198 |                    769 |
-|  3 | 400000     |  100000 |           0.00546341 |                   1018 |
-|  4 | 500000     |  100000 |           0.00569851 |                   1264 |
-|  5 | 600000     |  100000 |           0.00591904 |                   1505 |
-|  6 | 700000     |  100000 |           0.00529248 |                   1764 |
-|  7 | 800000     |  100000 |           0.00524046 |                   2010 |
-|  8 | 900000     |  100000 |           0.00543461 |                   2250 |
-|  9 |      1e+06 |  100000 |           0.00673801 |                   2495 |
+### Training time in relation to session length vs number of items
 
-### Number of items vs response time vs model size
+![Training time in relation to Session length vs number of items](./imgs/training_time_vs_sessions_vs_items_heatmap.jpg)
 
-|    |   sessions |   items |   mean response time |   model memory size MB |
-|---:|-----------:|--------:|---------------------:|-----------------------:|
-|  0 |     100000 |    1000 |          1.3833e-05  |                    235 |
-|  1 |     100000 |   11000 |          7.047e-05   |                    250 |
-|  2 |     100000 |   21000 |          0.000135771 |                    252 |
-|  3 |     100000 |   31000 |          0.000257456 |                    256 |
-|  4 |     100000 |   41000 |          0.000462458 |                    259 |
-|  5 |     100000 |   51000 |          0.000775981 |                    262 |
-|  6 |     100000 |   61000 |          0.00136349  |                    265 |
-|  7 |     100000 |   71000 |          0.00211188  |                    268 |
-|  8 |     100000 |   81000 |          0.00297504  |                    271 |
-|  9 |     100000 |   91000 |          0.0038164   |                    276 |
-| 10 |     100000 |  101000 |          0.00490628  |                    278 |
-| 11 |     100000 |  111000 |          0.00580347  |                    281 |
+### Total response time for 1000 requests in relation to session length vs number of items
 
-### How to reproduce benchmarking tables?
+![Total response time for 1000 requests in relation to session length vs number of items](./imgs/response_time_vs_sessions_vs_items_heatmap.jpg)
 
-Refer to [`https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/`](https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/) directory and use the [`benchmarking.py`](https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/benchmarking.py) file. It will load sample data from the [`https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/data/`](https://github.com/nokaut/wsknn/tree/main/dev/benchmarking/data/) directory.
+### Model size in relation to session length vs number of items
+
+![Model size in relation to session length vs number of items](./imgs/model_size_vs_sessions_vs_items_heatmap.jpg)
+
+### Relation between training time and increasing number of items
+
+![Relation between training time and increasing number of items](./imgs/training_time_vs_number_of_items_plot.jpg)
+
+
+### Relation between response time and increasing number of items (for 1000 requests)
+
+![Relation between response time and increasing number of items](./imgs/response_time_vs_number_of_items_plot.jpg)
+
+### Relation between training time and increasing number of sessions
+
+![Relation between training time and increasing number of sessions](./imgs/training_time_vs_number_of_sessions_plot.jpg)
+
+
+### Relation between response time and increasing number of sessions (for 1000 requests)
+
+![Relation between response time and increasing number of sessions](./imgs/response_time_vs_number_of_sessions_plot.jpg)

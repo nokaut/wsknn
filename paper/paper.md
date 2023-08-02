@@ -121,7 +121,7 @@ The basic data types, `Items` and `Sessions` that are storing item-sessions and 
 
 # Experiments
 
-The section describes WSKNN performance. Table comes from the internal experiments in *Sales Intelligence Sp. z o.o.* company. The algorithm was compared to Session Metric Learning algorithms (SML-RNN-*) [@Twardowski2021], GRU4Rec [@gru4recrepo], popularity-based recommender (POP), and Markov model (MM). Comparison has been performed on the RecSys-2015 dataset [@recsys2015data], 90% of the oldest sessions were used as a training set, and the rest as a test set. The dataset contains 7 981 581 sessions (44% unique), 31 708 505 events, and 37 486 items. Monitored metrics are recall (REC@5, REC@20), mean reciprocal rank (MRR@5, MRR@20), mean average precision MAP@20, hit rate HR@20, training time, and latency - how long does it take for a model to prepare recommendations for 10% of the newest session in a dataset.
+This section describes WSKNN performance. Table comes from the internal experiments in *Sales Intelligence Sp. z o.o.* company. The algorithm was compared to Session Metric Learning algorithms (SML-RNN-*) [@Twardowski2021], GRU4Rec [@gru4recrepo], popularity-based recommender (POP), and Markov model (MM). Comparison has been performed on the RecSys-2015 dataset [@recsys2015data], 90% of the oldest sessions were used as a training set, and the rest as a test set. The dataset contains 7 981 581 sessions (44% unique), 31 708 505 events, and 37 486 items. Monitored metrics are recall (REC@5, REC@20), mean reciprocal rank (MRR@5, MRR@20), mean average precision MAP@20, hit rate HR@20, training time, and latency - how long does it take for a model to prepare recommendations for 10% of the newest session in a dataset.
 
 | Algorithm           | MAP@20     | REC@20      | HR@20     | MRR@20      | REC@5     | MRR@5      | Training time [s] | Test time [s] |
 | ------------------- | ---------- | ----------- | --------- | ----------- | --------- | ---------- | ----------------- |---------------|
@@ -132,7 +132,33 @@ The section describes WSKNN performance. Table comes from the internal experimen
 | MM                  | 0.033      | 0.262       | 0.391     | 0.177       | 0.186     | 0.164      | 0.8               | 1             |
 | POP                 | 0.006      | 0.086       | 0.126     | 0.029       | 0.036     | 0.022      | 0.4               | ~0            |
 
-We see that performance on analytical metrics is close to that of RNN-based models, but the WSKNN model is worst regarding response times. More detailed comparison where more models and datasets were used is presented in [@Twardowski2021].
+We see that performance on analytical metrics is close to that of RNN-based models, but the WSKNN model is worst regarding response times. More detailed comparison with more models and datasets is presented in [@Twardowski2021].
+
+## Performance
+
+The model's performance in relation to the number of sessions and number of items in a set is presented in the package repository, in the `README.md` file. The most important are training times, response times, and model size. The figures below show those metrics in relation to the number of sessions and the number of items in the training dataset.
+
+Testing environment:
+
+- Used machine has 16GB RAM and 4-core 4.5 GHz CPU
+- testing sample size - 1000 sessions
+- max session length - 50 events
+- min session length - 1 event
+- basic data types (integers)
+
+### Training time in relation to session length vs number of items
+
+![Training time in relation to Session length vs number of items](./imgs/training_time_vs_sessions_vs_items_heatmap.jpg)
+
+### Total response time for 1000 requests in relation to session length vs number of items
+
+![Total response time for 1000 requests in relation to session length vs number of items](./imgs/response_time_vs_sessions_vs_items_heatmap.jpg)
+
+### Model size in relation to session length vs number of items
+
+![Model size in relation to session length vs number of items](./imgs/model_size_vs_sessions_vs_items_heatmap.jpg)
+
+Additionally, increasing the number of items doesn't affect training time but increases response time. Increasing the number of sessions increases training time, but its effect on response time is negligible.
 
 # Limitations
 

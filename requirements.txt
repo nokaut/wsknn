@@ -5,4 +5,4 @@ more_itertools
 # matplotlib
 # setuptools
 pytest
-# tqdm
+tqdm
