@@ -165,7 +165,7 @@ def build_session_items_list(directory: str, file_type='') -> Iterator[dict]:
         yield outputd
 
 
-def test_model(model: VSKNN, settings: dict, number_of_repetitions=1000):
+def test_model(model: WSKNN, settings: dict, number_of_repetitions=1000):
     """Function tests model locally by random sampling of sessions
 
     Parameters

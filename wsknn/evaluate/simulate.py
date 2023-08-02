@@ -46,7 +46,7 @@ def simulate_input(number_of_sessions: int,
     items_map = {}
     sessions_map = {}
 
-    for session_idx in range(0, number_of_sessions):
+    for session_idx in tqdm.tqdm(range(0, number_of_sessions)):
         session_length = np.random.randint(min_session_length, max_session_length+1)
         items = np.random.randint(0, high=number_of_items, size=session_length)
         tstart = np.random.randint(1, 10)
@@ -78,6 +78,8 @@ def simulate_input(number_of_sessions: int,
 
     del sessions_map
     del items_map
+
+    return output_items_json_path, output_sessions_json_path
 
 
 # if __name__ == '__main__':

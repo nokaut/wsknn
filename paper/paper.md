@@ -86,7 +86,7 @@ The package is related to past research projects within a company [@Twardowski20
 
 # Related work
 
-The `wsknn` recommender was designed to evaluate complex deep-learning-based architectures [@Twardowski2021], but during the research, it became clear that the k-NN model's performance is close to or exceeds the performance of the neural nets algorithms. Moreover, the analysis of the literature about recommender systems shows that the k-NN-based solutions are performing well in different conditions [@Ludewig2018]. It makes `wsknn` a great benchmarking tool against novel algorithms and architectures, and the first-choice tool for the fresh start and design of the recommender system.
+The `wsknn` recommender was designed to evaluate complex deep-learning-based architectures [@Twardowski2021], but during the research, it became clear that the k-NN model's performance is close to or exceeds the performance of the neural nets algorithms (see [experimental comparison](#experiments)). Moreover, the analysis of the literature about recommender systems shows that the k-NN-based solutions are performing well in different conditions [@Ludewig2018]. It makes `wsknn` a great benchmarking tool against novel algorithms and architectures, and the first-choice tool for the fresh start and design of the recommender system.
 
 The package's algorithm can work in a cold-start scenario, and as a recommender for small and medium-sized datasets. During our own studies, the algorithm performed well for the small datasets (25k sessions; 3k items) and bigger datasets, but it has memory size limitations. As a memory-based model, it can grow up to the moment, when its usage is unfeasible. It could be an issue for production environments where the costs may exceed potential benefits. On the other hand, k-NN based approach may be placed in the bigger pipeline, where the large-space model is based on the neural network architecture, but the preliminary selection of recommendations can be done with the `wsknn` package. Especially powerful is using weights to control how the model chooses neighbors, how important items are in a session, and which actions bring the highest value to a recommendation.
 
@@ -119,13 +119,54 @@ The sample flow and recommendations are presented in the repository [@wsknnrepo]
 The package can process static JSON-lines and gzipped JSON-lines files with e-commerce events with its `preprocessing` module. The module takes into account the fact that different event actions have their specific weights, and the session that ends with a purchase should be weighted as more reliable than session that ended without a transaction.
 The basic data types, `Items` and `Sessions` that are storing item-sessions and session-items mappings may be updated sequentially, what allows to process a large amounts of data that comes from the e-commerce websites.
 
+# Experiments
+
+This section describes WSKNN performance. Table comes from the internal experiments in *Sales Intelligence Sp. z o.o.* company. The algorithm was compared to Session Metric Learning algorithms (SML-RNN-*) [@Twardowski2021], GRU4Rec [@gru4recrepo], popularity-based recommender (POP), and Markov model (MM). Comparison has been performed on the RecSys-2015 dataset [@recsys2015data], 90% of the oldest sessions were used as a training set, and the rest as a test set. The dataset contains 7 981 581 sessions (44% unique), 31 708 505 events, and 37 486 items. Monitored metrics are recall (REC@5, REC@20), mean reciprocal rank (MRR@5, MRR@20), mean average precision MAP@20, hit rate HR@20, training time, and latency - how long does it take for a model to prepare recommendations for 10% of the newest session in a dataset.
+
+| Algorithm           | MAP@20     | REC@20      | HR@20     | MRR@20      | REC@5     | MRR@5      | Training time [s] | Test time [s] |
+| ------------------- | ---------- | ----------- | --------- | ----------- | --------- | ---------- | ----------------- |---------------|
+| WSKNN               | 0.036      | 0.433       | 0.663     | 0.303       | 0.314     | 0.281      | 0.8               | 126.7         |
+| SML-RNN-AllLoss     | 0.036      | 0.427       | 0.654     | 0.287       | 0.292     | 0.264      | 17110.5           | 106.6         |
+| GRU4Rec             | 0.031      | 0.377       | 0.575     | 0.253       | 0.259     | 0.233      | 1254.4            | 52.4          |
+| SML-RNN-TripletLoss | 0.027      | 0.338       | 0.509     | 0.162       | 0.195     | 0.138      | 25096.6           | 57.3          |
+| MM                  | 0.033      | 0.262       | 0.391     | 0.177       | 0.186     | 0.164      | 0.8               | 1             |
+| POP                 | 0.006      | 0.086       | 0.126     | 0.029       | 0.036     | 0.022      | 0.4               | ~0            |
+
+We see that performance on analytical metrics is close to that of RNN-based models, but the WSKNN model is worst regarding response times. More detailed comparison with more models and datasets is presented in [@Twardowski2021].
+
+## Performance
+
+The model's performance in relation to the number of sessions and number of items in a set is presented in the package repository, in the `README.md` file. The most important are training times, response times, and model size. The figures below show those metrics in relation to the number of sessions and the number of items in the training dataset.
+
+Testing environment:
+
+- Used machine has 16GB RAM and 4-core 4.5 GHz CPU
+- testing sample size - 1000 sessions
+- max session length - 50 events
+- min session length - 1 event
+- basic data types (integers)
+
+### Training time in relation to session length vs number of items
+
+![Training time in relation to Session length vs number of items](./imgs/training_time_vs_sessions_vs_items_heatmap.jpg)
+
+### Total response time for 1000 requests in relation to session length vs number of items
+
+![Total response time for 1000 requests in relation to session length vs number of items](./imgs/response_time_vs_sessions_vs_items_heatmap.jpg)
+
+### Model size in relation to session length vs number of items
+
+![Model size in relation to session length vs number of items](./imgs/model_size_vs_sessions_vs_items_heatmap.jpg)
+
+Additionally, increasing the number of items doesn't affect training time but increases response time. Increasing the number of sessions increases training time, but its effect on response time is negligible.
+
 # Limitations
 
 As with every Machine Learning system, WSKNN has its limitations:
 
 - model *memorizes session-items and item-sessions maps*, and if the product base is large, and we use sessions for an extended period, then the model may be too big to fit an available memory; in this case, we can categorize products and train a different model for each category. Benchmarking shows that model memory size is directly related to the number of sessions.
 - response time may be slower than from other models, especially if there are available many items to recommend, benchmarking shows that the mean response time rises with the number of items used for training,
-- there’s additional overhead related to the preparation of the input. But this is related to the every other model, except simple Markov Models. That's why `wsknn` has a built-in `preprocessing` module that transforms common events structure into the model's format.
+- there’s additional overhead related to the preparation of the input. But this is related to the every other session-based model, except simple Markov Models. That's why `wsknn` has a built-in `preprocessing` module that transforms common events structure into the model's format.
 
 # Acknowledgements
 
