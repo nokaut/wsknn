@@ -134,7 +134,12 @@ It works with Python versions greater or equal to 3.8.
 | Package Version | Python versions | Requirements                  |
 |-----------------|-----------------|-------------------------------|
 | 0.1.x           | 3.6+            | numpy, pyyaml                 |
- | 1.x             | 3.8+            | numpy, pyyaml, more_itertools |
+| 1.x             | 3.8+            | numpy, pyyaml, more_itertools |
+
+## Contribution
+
+We welcome all submissions, issues, feature requests, and bug reports! To learn how to contribute to the package please visit [CONTRIBUTION.md file](https://github.com/nokaut/wsknn/blob/main/CONTRIBUTING.md)
+
 
 ## Developers
 
