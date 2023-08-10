@@ -1,10 +1,10 @@
-from typing import Dict, Union
+from typing import Dict, Union, Optional
 
 from wsknn.model.wsknn import WSKNN
 
 
 def fit(sessions: Dict,
-        items: Dict,
+        items: Dict = None,
         number_of_recommendations: int = 5,
         number_of_neighbors: int = 10,
         sampling_strategy: str = 'common_items',
@@ -31,7 +31,8 @@ def fit(sessions: Dict,
         ...    )
         ...}
 
-    items : Dict
+    items : Dict, optional
+        If not provided then item-sessions map is created from the `sessions` parameter.
         >>> items = {
         ...    item_id: (
         ...        [ sequence_of_sessions ],

@@ -1,9 +1,10 @@
-## Version 1.1.2 (2023-07-)
+## Version 1.1.2 (2023-08-)
 
 - (docs) changed README example,
 - (docs) added `demo-readme` example to `demo-notebooks` section,
 - (docs) demo example in documentation updated,
 - (docs) link to the documentation page added to README,
+- (enhancement) item-sessions map may be derived from session-items map,
 
 
 ## Version 1.1.1 (2023-07-08)
