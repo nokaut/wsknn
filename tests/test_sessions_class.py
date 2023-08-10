@@ -12,10 +12,10 @@ ACTION_WEIGHTS = {'products_view': 0.1,
                   'add_to_cart': 0.5}
 
 EVENT1 = {
-            'sid': '0',
-            'pid': 'a',
-            'dt': 1,
-            'action': 'products_view'
+    'sid': '0',
+    'pid': 'a',
+    'dt': 1,
+    'action': 'products_view'
 }
 
 EVENT2 = {

@@ -4,9 +4,13 @@
 
 ## Weighted session-based k-NN - Intro
 
-Do you build a recommender system for your website? K-nearest neighbors algorithm is a good choice if you are looking for a simple, fast, and explainable solution. Weighted-session-based k-nn recommendations are close to the state-of-the-art, and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
+Do you build a recommender system for your website? K-nearest neighbors algorithm is a good choice if you are looking for a simple, fast, and explainable solution. Weighted-session-based k-nn recommendations are [close to the state-of-the-art](#sknn-performance), and we don't need to tune multiple hyperparameters and build complex deep learning models to achieve a good result.
 
-### How does it work?
+## Documentation
+
+API Documentation is available here: [WSKNN Docs](https://wsknn.readthedocs.io/en/latest/index.html)
+
+## How does it work?
 
 You provide two input structures as **training** data:
 
@@ -44,7 +48,7 @@ The package is lightweight. It depends only on the `numpy` and `pyyaml`.
 Moreover, we can provide a package for non-programmers, and they can use `settings.yaml` to control a model behavior.
 
 
-### Why should we use WSKNN?
+## Why should we use WSKNN?
 
 - training is faster than deep learning or XGBoost algorithms, model memorizes map of session-items and item-sessions,
 - recommendations are easy to control. We can change how the algorithm works in just a few lines... of text,
@@ -52,54 +56,68 @@ Moreover, we can provide a package for non-programmers, and they can use `settin
 - swift prototyping,
 - easy to run in production.
 
-The model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization, and others. Its performance was always very close to the level of fine-tuned neural networks, but it was much easier and faster to train.
+The model was created along with multiple other approaches: based on RNN (GRU/LSTM), matrix factorization, and others. [Its performance was always very close to the level of fine-tuned neural networks](#comparison-between-dl-and-wsknn), but it was much easier and faster to train.
 
-### What are the limitations of WSKNN?
+## What are the limitations of WSKNN?
 
 - model memorizes session-items and item-sessions maps, and if your product base is large and you use sessions for an extended period, then the model may be too big to fit an available memory; in this case, you can 
 categorize products and train a different model for each category,
 - response time may be slower than from other models, especially if there are available many sessions,
 - there's additional overhead related to the preparation of the input.
 
-### Example
+## Example
+
+Example below is available in `demo-notebooks/demo-readme.ipynb` notebook.
+
+```python
+import numpy as np
+from wsknn import fit
+from wsknn.utils import load_gzipped_pickle
+
+# Load data
+ITEMS = 'demo-data/recsys-2015/parsed_items.pkl.gz'
+SESSIONS = 'demo-data/recsys-2015/parsed_sessions.pkl.gz'
+
+items = load_gzipped_pickle(ITEMS)
+sessions = load_gzipped_pickle(SESSIONS)
+imap = items['map']
+smap = sessions['map']
+
+# Train model
+trained_model = fit(smap,
+                    imap,
+                    number_of_recommendations=5,
+                    weighting_func='log',
+                    return_events_from_session=False)
+
+# Get sample session
+test_session_key = np.random.choice(list(smap.keys()))
+test_session = smap[test_session_key]
+print(test_session)  # [products], [timestamps]
+
+```
+
+```shell
+[[214850771, 214677615, 214651777], [1407592501.048, 1407592529.941, 1407592552.98]]
+```
 
 ```python
 
-from wsknn import fit
-from wsknn.utils import load_pickled
-
-# Load data
-ITEMS = 'demo-data/items.pkl'
-SESSIONS = 'demo-data/sessions.pkl'
-
-items = load_pickled(ITEMS)
-sessions = load_pickled(SESSIONS)
-
-trained_model = fit(sessions, items, number_of_recommendations=3)
-
-test_session = {'unique id': [
-    ['product id 1', 'product id 2'],
-    ['timestamp #1', 'timestamp #2']
-]}
-
 recommendations = trained_model.recommend(test_session)
-print(recommendations)
+for rec in recommendations:
+    print('Item:', rec[0], '| weight:', rec[1])
 
 ```
 
-Output:
+**Output recommendations**
 
 ```shell
-[
- ('product id 3', 0.7),
- ('product id 4', 0.33),
- ('product id 5', 0.059)
-]
+Item: 214676306 | weight: 1.8718411072574241
+Item: 214850758 | weight: 1.2478940715049494
+Item: 214561775 | weight: 1.2478940715049494
+Item: 214821020 | weight: 1.2478940715049494
+Item: 214848322 | weight: 1.2478940715049494
 ```
-
-## Preprocessing Stage
-
-
 
 ## Setup
 
@@ -136,53 +154,59 @@ Szymon Moliński. (2022). WSKNN - Weighted Session-based k-NN Recommendations in
 
 - Twardowski, B., Zawistowski, P., Zaborowski, S. (2021). Metric Learning for Session-Based Recommendations. In: Hiemstra, D., Moens, MF., Mothe, J., Perego, R., Potthast, M., Sebastiani, F. (eds) Advances in Information Retrieval. ECIR 2021. Lecture Notes in Computer Science(), vol 12656. Springer, Cham. https://doi.org/10.1007/978-3-030-72113-8_43
 
+### SKNN performance
+
+The article compares performance of mutiple session-based recommender systems.
+
+- Ludewig, M., Jannach, D. Evaluation of session-based recommendation algorithms. User Model User-Adap Inter 28, 331–390 (2018). https://doi.org/10.1007/s11257-018-9209-6
+
 ## Funding
 
-![Funding](./eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg)
+![Funding](./imgs/eu_funding_logos/FE_POIR_poziom_engl-1_rgb.jpg)
 
 - Development of the package was partially based on the research project
 **E-commerce Shopping Patterns Prediction System** that 
 was founded under Priority Axis 1.1 of Smart Growth Operational Programme 2014-2020 for Poland
 co-funded by European Regional Development Fund. Project number: `POIR.01.01.01-00-0632/18`
 
-## Benchmarking
+## Computational Performance
 
 As a rule of thumb you should assume that you should have ~2 times more memory available than your model's memory size
 
-- Used machine has 16GB RAM
+- Used machine has 16GB RAM and 4-core CPU with 4.5 GHz frequency
 - testing sample size - 1000 sessions
-- max session length - 30 events
+- max session length - 50 events
 - min session length - 1 event
 - basic data types (integers)
 
-### Session length vs response time vs model size
+All performance characterists were derived in [this notebook](./demo-notebooks/test_ops_times.ipynb), and you can use it for your own performance tests.
 
-|    |   sessions |   items |   mean response time |   model memory size MB |
-|---:|-----------:|--------:|---------------------:|-----------------------:|
-|  0 | 100000     |  100000 |           0.00501535 |                    278 |
-|  1 | 200000     |  100000 |           0.00707721 |                    524 |
-|  2 | 300000     |  100000 |           0.00528198 |                    769 |
-|  3 | 400000     |  100000 |           0.00546341 |                   1018 |
-|  4 | 500000     |  100000 |           0.00569851 |                   1264 |
-|  5 | 600000     |  100000 |           0.00591904 |                   1505 |
-|  6 | 700000     |  100000 |           0.00529248 |                   1764 |
-|  7 | 800000     |  100000 |           0.00524046 |                   2010 |
-|  8 | 900000     |  100000 |           0.00543461 |                   2250 |
-|  9 |      1e+06 |  100000 |           0.00673801 |                   2495 |
+### Training time in relation to session length vs number of items
 
-### Number of items vs response time vs model size
+![Training time in relation to Session length vs number of items](./imgs/training_time_vs_sessions_vs_items_heatmap.jpg)
 
-|    |   sessions |   items |   mean response time |   model memory size MB |
-|---:|-----------:|--------:|---------------------:|-----------------------:|
-|  0 |     100000 |    1000 |          1.3833e-05  |                    235 |
-|  1 |     100000 |   11000 |          7.047e-05   |                    250 |
-|  2 |     100000 |   21000 |          0.000135771 |                    252 |
-|  3 |     100000 |   31000 |          0.000257456 |                    256 |
-|  4 |     100000 |   41000 |          0.000462458 |                    259 |
-|  5 |     100000 |   51000 |          0.000775981 |                    262 |
-|  6 |     100000 |   61000 |          0.00136349  |                    265 |
-|  7 |     100000 |   71000 |          0.00211188  |                    268 |
-|  8 |     100000 |   81000 |          0.00297504  |                    271 |
-|  9 |     100000 |   91000 |          0.0038164   |                    276 |
-| 10 |     100000 |  101000 |          0.00490628  |                    278 |
-| 11 |     100000 |  111000 |          0.00580347  |                    281 |
+### Total response time for 1000 requests in relation to session length vs number of items
+
+![Total response time for 1000 requests in relation to session length vs number of items](./imgs/response_time_vs_sessions_vs_items_heatmap.jpg)
+
+### Model size in relation to session length vs number of items
+
+![Model size in relation to session length vs number of items](./imgs/model_size_vs_sessions_vs_items_heatmap.jpg)
+
+### Relation between training time and increasing number of items
+
+![Relation between training time and increasing number of items](./imgs/training_time_vs_number_of_items_plot.jpg)
+
+
+### Relation between response time and increasing number of items (for 1000 requests)
+
+![Relation between response time and increasing number of items](./imgs/response_time_vs_number_of_items_plot.jpg)
+
+### Relation between training time and increasing number of sessions
+
+![Relation between training time and increasing number of sessions](./imgs/training_time_vs_number_of_sessions_plot.jpg)
+
+
+### Relation between response time and increasing number of sessions (for 1000 requests)
+
+![Relation between response time and increasing number of sessions](./imgs/response_time_vs_number_of_sessions_plot.jpg)
