@@ -33,10 +33,6 @@ def _get_header(header, sep, session_index: int, product_index: int, action_inde
     except Exception as _:
         raise AttributeError('Cannot parse header from file, wrong separator!')
 
-    if len(header_names) != 4:
-        raise ValueError('Your header has more entries than session index, action type,'
-                         f'product index, and timestamp: {header_names}')
-
     # Create dictionary
 
     header_map = {
@@ -114,12 +110,18 @@ def parse_flat_file_fn(dataset: str,
 
     with open(dataset, 'r') as fin:
         if use_header_row:
-            header = _get_header(next(fin), sep=sep)
+            header = _get_header(next(fin),
+                                 sep=sep,
+                                 session_index=session_index,
+                                 product_index=product_index,
+                                 action_index=action_index,
+                                 time_index=time_index)
         else:
             header = None
 
         items, sessions = parse_stream(
             events=fin,
+            sep=sep,
             allowed_actions=allowed_actions,
             purchase_action_name=purchase_action_name,
             session_index=session_index,

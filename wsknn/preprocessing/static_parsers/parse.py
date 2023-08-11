@@ -1,6 +1,4 @@
-from typing import Dict, Iterable
-
-from typing.io import IO
+from typing import Dict, Iterable, IO
 
 from wsknn.preprocessing.static_parsers.checkers.validation import check_event_keys_and_values, is_user_item_interaction
 from wsknn.preprocessing.static_parsers.cleaners.time_transform import clean_time
@@ -104,12 +102,13 @@ def parse_fn(dataset: Iterable,
 
 
 def parse_stream(events: IO,
+                 sep: str,
                  allowed_actions: Dict,
                  purchase_action_name: str,
-                 session_index: str,
-                 product_index: str,
-                 action_index: str,
-                 time_index: str,
+                 session_index: int,
+                 product_index: int,
+                 action_index: int,
+                 time_index: int,
                  time_to_numeric: bool,
                  time_to_datetime: bool,
                  datetime_format: str,
@@ -122,6 +121,9 @@ def parse_stream(events: IO,
     ----------
     events : IO
         Stream to file.
+
+    sep : str
+        Separator between file stream records.
 
     allowed_actions : Dict, optional
         Allowed actions and their weights.
@@ -171,45 +173,68 @@ def parse_stream(events: IO,
             action_index: 'action'
         }
 
-
     items_obj = Items(event_session_key=header_names[session_index],
                       event_product_key=header_names[product_index],
                       event_time_key=header_names[time_index])
 
-    sessions_obj = Sessions(event_session_key=session_id_key,
-                            event_product_key=product_key,
-                            event_time_key=time_key,
-                            event_action_key=action_key,
+    sessions_obj = Sessions(event_session_key=header_names[session_index],
+                            event_product_key=header_names[product_index],
+                            event_time_key=header_names[time_index],
+                            event_action_key=header_names[action_index],
                             event_action_weights=allowed_actions)
 
-    possible_actions_list = list(allowed_actions.keys())
+    if allowed_actions is None:
+        possible_actions_list = None
+    else:
+        possible_actions_list = list(allowed_actions.keys())
 
-    for event in dataset:
+    for raw_event in events:
+
+        try:
+            splitted = raw_event.split(sep)
+        except Exception as ex:
+            if ignore_errors:
+                continue
+            else:
+                raise ex
+
+        event = {
+            header_names[session_index]: splitted[session_index],
+            header_names[product_index]: splitted[product_index],
+            header_names[action_index]: splitted[action_index],
+            header_names[time_index]: splitted[time_index]
+        }
+
         event = check_event_keys_and_values(event,
-                                            session_id_key,
-                                            product_key,
-                                            action_key,
-                                            time_key)
+                                            header_names[session_index],
+                                            header_names[product_index],
+                                            header_names[action_index],
+                                            header_names[time_index])
         # Check if params are returned
         if event:
-            action = event[action_key]
+            action = event[header_names[action_index]]
 
             # parse times
             if time_to_numeric or time_to_datetime:
-                event[time_key] = clean_time(times=event[time_key],
-                                             time_to_numeric=time_to_numeric,
-                                             time_to_datetime=time_to_datetime,
-                                             datetime_format=datetime_format)
+                event[header_names[time_index]] = clean_time(times=event[header_names[time_index]],
+                                                             time_to_numeric=time_to_numeric,
+                                                             time_to_datetime=time_to_datetime,
+                                                             datetime_format=datetime_format)
 
             if action != purchase_action_name:
                 # Is session user interaction?
-                if is_user_item_interaction(action, possible_actions_list):
-                    # Append Event to Items and Sessions
+                if possible_actions_list is not None:
+                    if is_user_item_interaction(action, possible_actions_list):
+                        # Append Event to Items and Sessions
+                        items_obj.append(event)
+                        sessions_obj.append(event)
+                else:
                     items_obj.append(event)
                     sessions_obj.append(event)
             else:
                 # It is a purchase, update weights accordingly
                 purchase_additive_factor = allowed_actions[purchase_action_name]
-                sessions_obj.update_weights_of_purchase_session(event[session_id_key], purchase_additive_factor)
+                sessions_obj.update_weights_of_purchase_session(event[header_names[session_index]],
+                                                                purchase_additive_factor)
 
     return items_obj, sessions_obj
