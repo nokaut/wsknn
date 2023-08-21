@@ -5,7 +5,7 @@
 - (docs) demo example in documentation updated,
 - (docs) link to the documentation page added to README,
 - (enhancement) item-sessions map may be derived from session-items map,
-
+- (feature) data can be read from the flat record structure,
 
 ## Version 1.1.1 (2023-07-08)
 
