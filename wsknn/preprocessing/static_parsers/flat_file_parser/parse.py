@@ -3,7 +3,7 @@ from typing import Dict
 from wsknn.preprocessing.static_parsers.parse import parse_stream
 
 
-def _get_header(header, sep, session_index: int, product_index: int, action_index: int, time_index: int):
+def _get_header(header, sep, session_index: int, product_index: int, time_index: int, action_index: int = None):
     """
     Function gets header names.
 
@@ -19,9 +19,9 @@ def _get_header(header, sep, session_index: int, product_index: int, action_inde
 
     product_index : int
 
-    action_index : int
-
     time_index : int
+
+    action_index : int, optional
 
     Returns
     -------
@@ -35,12 +35,19 @@ def _get_header(header, sep, session_index: int, product_index: int, action_inde
 
     # Create dictionary
 
-    header_map = {
-        session_index: header_names[session_index],
-        action_index: header_names[action_index],
-        product_index: header_names[product_index],
-        time_index: header_names[time_index]
-    }
+    if action_index is not None:
+        header_map = {
+            session_index: header_names[session_index],
+            action_index: header_names[action_index],
+            product_index: header_names[product_index],
+            time_index: header_names[time_index]
+        }
+    else:
+        header_map = {
+            session_index: header_names[session_index],
+            product_index: header_names[product_index],
+            time_index: header_names[time_index]
+        }
 
     return header_map
 
@@ -49,8 +56,8 @@ def parse_flat_file_fn(dataset: str,
                        sep: str,
                        session_index: int,
                        product_index: int,
-                       action_index: int,
                        time_index: int,
+                       action_index: int = None,
                        use_header_row: bool = False,
                        time_to_numeric=False,
                        time_to_datetime=False,
@@ -75,11 +82,11 @@ def parse_flat_file_fn(dataset: str,
     product_index : int
         The index of the product.
 
-    action_index : int
-        The index of the event action.
-
     time_index : int
         The index of the event timestamp.
+
+    action_index : int, optional
+        The index of the event action.
 
     use_header_row : bool, default = False
         Use first row values as a header.
@@ -114,8 +121,8 @@ def parse_flat_file_fn(dataset: str,
                                  sep=sep,
                                  session_index=session_index,
                                  product_index=product_index,
-                                 action_index=action_index,
-                                 time_index=time_index)
+                                 time_index=time_index,
+                                 action_index=action_index)
         else:
             header = None
 
@@ -126,8 +133,8 @@ def parse_flat_file_fn(dataset: str,
             purchase_action_name=purchase_action_name,
             session_index=session_index,
             product_index=product_index,
-            action_index=action_index,
             time_index=time_index,
+            action_index=action_index,
             time_to_numeric=time_to_numeric,
             time_to_datetime=time_to_datetime,
             datetime_format=datetime_format,

@@ -11,8 +11,8 @@ from wsknn.preprocessing.structure.session import Sessions
 def parse_files(dataset: str,
                 session_id_key: str,
                 product_key: str,
-                action_key: str,
                 time_key: str,
+                action_key: str = None,
                 time_to_numeric=False,
                 time_to_datetime=False,
                 datetime_format='',
@@ -104,8 +104,8 @@ def parse_flat_file(dataset: str,
                     sep: str,
                     session_index: int,
                     product_index: int,
-                    action_index: int,
                     time_index: int,
+                    action_index: int = None,
                     use_header_row: bool = False,
                     time_to_numeric=False,
                     time_to_datetime=False,
@@ -130,11 +130,11 @@ def parse_flat_file(dataset: str,
     product_index : int
         The index of the product.
 
-    action_index : int
-        The index of the event action.
-
     time_index : int
         The index of the event timestamp.
+
+    action_index : int, optional
+        The index of the event action.
 
     use_header_row : bool, default = False
         Use first row values as a header.
@@ -168,8 +168,8 @@ def parse_flat_file(dataset: str,
         sep=sep,
         session_index=session_index,
         product_index=product_index,
-        action_index=action_index,
         time_index=time_index,
+        action_index=action_index,
         use_header_row=use_header_row,
         time_to_numeric=time_to_numeric,
         time_to_datetime=time_to_datetime,
