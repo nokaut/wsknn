@@ -142,6 +142,21 @@ class TestParseFn(unittest.TestCase):
         }
         self.assertEqual(sample_session.session_items_actions_map, expected_output)
 
+    def test_none_action(self):
+
+        for fs in SESSIONS:
+            out_item, out_session = parse_files(fs,
+                                                session_id_key=SESSION_KEY,
+                                                product_key=PRODUCT_KEY,
+                                                time_key=TIME_KEY,
+                                                action_key=None,
+                                                allowed_actions=None,
+                                                purchase_action_name=None,
+                                                time_to_numeric=True)
+
+            self.assertIsInstance(out_item, Items)
+            self.assertIsInstance(out_session, Sessions)
+
 
 if __name__ == '__main__':
     unittest.main()

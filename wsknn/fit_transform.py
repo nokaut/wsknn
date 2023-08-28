@@ -1,10 +1,12 @@
-from typing import Dict, Union, Optional
+from typing import Dict, Union
 
+from wsknn.preprocessing.structure.item import Items
+from wsknn.preprocessing.structure.session import Sessions
 from wsknn.model.wsknn import WSKNN
 
 
-def fit(sessions: Dict,
-        items: Dict = None,
+def fit(sessions: Union[Dict, Sessions],
+        items: Union[Dict, Items] = None,
         number_of_recommendations: int = 5,
         number_of_neighbors: int = 10,
         sampling_strategy: str = 'common_items',
@@ -21,7 +23,7 @@ def fit(sessions: Dict,
 
     Parameters
     ----------
-    sessions : Dict
+    sessions : Dict or Sessions
         >>> sessions = {
         ...    session_id: (
         ...        [ sequence_of_items ],
@@ -31,7 +33,7 @@ def fit(sessions: Dict,
         ...    )
         ...}
 
-    items : Dict, optional
+    items : Dict or Items, optional
         If not provided then item-sessions map is created from the `sessions` parameter.
         >>> items = {
         ...    item_id: (
@@ -109,6 +111,13 @@ def fit(sessions: Dict,
     ... }
     >>> fitted_model = fit(input_sessions, input_items)
     """
+
+    if isinstance(sessions, Sessions):
+        sessions = sessions.session_items_actions_map
+
+    if items is not None:
+        if isinstance(items, Items):
+            items = items.item_sessions_map
 
     # Set model parameters
     wsknn = WSKNN(number_of_recommendations=number_of_recommendations,
