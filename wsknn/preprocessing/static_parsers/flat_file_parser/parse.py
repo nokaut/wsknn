@@ -64,7 +64,8 @@ def parse_flat_file_fn(dataset: str,
                        datetime_format='',
                        allowed_actions: Dict = None,
                        purchase_action_name=None,
-                       ignore_errors: bool = True):
+                       ignore_errors: bool = True,
+                       progress_bar: bool = False):
     """
     Function parses data from flat file into item-sessions and session-items maps.
 
@@ -109,6 +110,9 @@ def parse_flat_file_fn(dataset: str,
     ignore_errors : bool, default=True
         Ignore rows that raise exceptions.
 
+    progress_bar : bool
+        Show parsing progress.
+
     Returns
     -------
     items, sessions : Items, Sessions
@@ -139,7 +143,8 @@ def parse_flat_file_fn(dataset: str,
             time_to_datetime=time_to_datetime,
             datetime_format=datetime_format,
             ignore_errors=ignore_errors,
-            header_names=header
+            header_names=header,
+            progress_bar=progress_bar
         )
 
     return items, sessions

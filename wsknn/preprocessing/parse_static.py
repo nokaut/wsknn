@@ -17,7 +17,8 @@ def parse_files(dataset: str,
                 time_to_datetime=False,
                 datetime_format='',
                 allowed_actions: Dict = None,
-                purchase_action_name=None) -> Tuple[Items, Sessions]:
+                purchase_action_name=None,
+                progress_bar: bool = False) -> Tuple[Items, Sessions]:
     """
     Function parses data from csv, json and gzip json into item-sessions and session-items maps.
 
@@ -53,6 +54,9 @@ def parse_files(dataset: str,
     purchase_action_name: Any, optional
         The name of the final action (it is required to apply weight into the session vector).
 
+    progress_bar : bool, default = False
+        Show parsing progress.
+
     Returns
     -------
     items, sessions : Items, Sessions
@@ -69,7 +73,8 @@ def parse_files(dataset: str,
                                            time_key,
                                            time_to_numeric,
                                            time_to_datetime,
-                                           datetime_format)
+                                           datetime_format,
+                                           progress_bar)
     elif dataset.endswith('.json') or dataset.endswith('.jsonl'):
         items, sessions = parse_jsonl_fn(dataset,
                                          allowed_actions,
@@ -80,7 +85,8 @@ def parse_files(dataset: str,
                                          time_key,
                                          time_to_numeric,
                                          time_to_datetime,
-                                         datetime_format)
+                                         datetime_format,
+                                         progress_bar)
     elif dataset.endswith('.csv'):
         items, sessions = parse_csv_fn(dataset,
                                        allowed_actions,
@@ -91,7 +97,8 @@ def parse_files(dataset: str,
                                        time_key,
                                        time_to_numeric,
                                        time_to_datetime,
-                                       datetime_format)
+                                       datetime_format,
+                                       progress_bar)
     else:
         ftype = pathlib.Path(dataset).suffix
         raise TypeError(f'Unrecognized input file type. Parser works with "gz" (gzipped json), "json", and "csv"'

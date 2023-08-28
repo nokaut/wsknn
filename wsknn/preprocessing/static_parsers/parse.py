@@ -1,5 +1,7 @@
-from typing import Dict, Iterable, IO
-
+from typing import Dict, Iterable, IO, Tuple, List
+import pandas as pd
+from more_itertools import locate
+from tqdm import tqdm
 from wsknn.preprocessing.static_parsers.checkers.validation import check_event_keys_and_values, is_user_item_interaction
 from wsknn.preprocessing.static_parsers.cleaners.time_transform import clean_time
 from wsknn.preprocessing.structure.item import Items
@@ -15,7 +17,8 @@ def parse_fn(dataset: Iterable,
              time_key: str,
              time_to_numeric: bool,
              time_to_datetime: bool,
-             datetime_format: str) -> (Items, Sessions):
+             datetime_format: str,
+             progress_bar: bool) -> (Items, Sessions):
     """
     Function parses given dataset into Sessions and Items objects.
 
@@ -51,6 +54,9 @@ def parse_fn(dataset: Iterable,
     datetime_format : str
         The format of datetime object.
 
+    progress_bar : bool
+        Show parsing progress.
+
     Returns
     -------
     ItemsMap, SessionsMap : Items, Sessions
@@ -72,7 +78,7 @@ def parse_fn(dataset: Iterable,
     if allowed_actions is not None:
         possible_actions_list = list(allowed_actions.keys())
 
-    for event in dataset:
+    for event in (tqdm(dataset, disable=(not progress_bar))):
         event = check_event_keys_and_values(event,
                                             session_id_key,
                                             product_key,
@@ -118,7 +124,8 @@ def parse_stream(events: IO,
                  time_to_datetime: bool,
                  datetime_format: str,
                  ignore_errors: bool = True,
-                 header_names: Dict = None):
+                 header_names: Dict = None,
+                 progress_bar: bool = False):
     """
     Function parses given stream of values.
 
@@ -162,6 +169,9 @@ def parse_stream(events: IO,
 
     header_names : List, default = None
         Key names applied to the data.
+
+    progress_bar : bool, default = False
+        Show parsing progress.
 
     Returns
     -------
@@ -207,7 +217,7 @@ def parse_stream(events: IO,
     else:
         possible_actions_list = list(allowed_actions.keys())
 
-    for raw_event in events:
+    for raw_event in (tqdm(events, disable=(not progress_bar))):
 
         try:
             splitted = raw_event.split(sep)
