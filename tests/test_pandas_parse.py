@@ -6,7 +6,7 @@ import pandas as pd
 from wsknn.preprocessing.static_parsers.pandas_parser import parse_pandas
 
 
-df = pd.read_csv('tdata/ml-25m/ratings.csv', nrows=200000)
+df = pd.read_csv('tdata/ml-25m-test/ratings.csv')
 
 _ = parse_pandas(
     df=df,
