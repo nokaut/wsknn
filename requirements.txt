@@ -1,4 +1,5 @@
 numpy
+pandas
 pyyaml
 more_itertools
 # [dev]

@@ -1,4 +1,4 @@
-## Version 1.1.2 (2023-08-)
+## Version 1.2.0 (2023-08-28)
 
 - (docs) changed README example,
 - (docs) added `demo-readme` example to `demo-notebooks` section,
@@ -6,6 +6,7 @@
 - (docs) link to the documentation page added to README,
 - (enhancement) item-sessions map may be derived from session-items map,
 - (feature) data can be read from the flat record structure,
+- (feature) data can be parsed from dataframes
 
 ## Version 1.1.1 (2023-07-08)
 
