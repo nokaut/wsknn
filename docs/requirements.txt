@@ -1,5 +1,7 @@
 numpy
 pyyaml
+pandas
+tqdm
 sphinx
 numpydoc
 pydata-sphinx-theme

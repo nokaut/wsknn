@@ -6,4 +6,4 @@ from wsknn.preprocessing.structure.item import Items
 from wsknn.preprocessing.structure.session import Sessions
 
 
-__version__ = '1.1.1'
+__version__ = '1.2.0'

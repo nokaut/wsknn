@@ -1,8 +1,5 @@
 numpy
+pandas
 pyyaml
 more_itertools
-# [dev]
-# matplotlib
-# setuptools
-pytest
-# tqdm
+tqdm

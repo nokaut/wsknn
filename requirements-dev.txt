@@ -1,0 +1,8 @@
+numpy
+pyyaml
+pandas
+more_itertools
+matplotlib
+setuptools
+pytest
+tqdm
