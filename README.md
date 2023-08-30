@@ -131,11 +131,18 @@ It works with Python versions greater or equal to 3.8.
 
 ## Requirements
 
+<<<<<<< HEAD
 | Package Version | Python versions | Requirements                                |
 |-----------------|-----------------|---------------------------------------------|
 | 0.1.x           | 3.6+            | numpy, pyyaml                               |
 | 1.1.x           | 3.8+            | numpy, more_itertools, pyyaml               |
 | 1.2.x           | 3.8+            | numpy, more_itertools, pandas, pyyaml, tqdm |
+=======
+| Package Version | Python versions | Requirements                  |
+|-----------------|-----------------|-------------------------------|
+| 0.1.x           | 3.6+            | numpy, pyyaml                 |
+| 1.x             | 3.8+            | numpy, pyyaml, more_itertools |
+>>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 
 ## Contribution
 
