@@ -16,34 +16,20 @@ Here, on **GitHub**! We use **GitHub** to host the code, track issues, and featu
 
 ## Developer setup
 
-<<<<<<< HEAD
 Setup for developers differs from the package installation from `PyPI`.
-=======
-Setup for developers is different from installation of the package from `PyPI`. 
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 
 1. Fork the `wsknn` repository.
 2. Clone forked repository.
 3. Connect the main repository with your fork locally:
 
 ```shell
-<<<<<<< HEAD
-=======
-
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 git remote add upstream https://github.com/nokaut/wsknn.git
 
 ```
 
 4. Synchronize your repository with the core repository.
 
-<<<<<<< HEAD
-
 ```shell
-=======
-```shell
-
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 git checkout main
 git pull upstream main
 
@@ -52,49 +38,30 @@ git pull upstream main
 5. Create your branch.
 
 ```shell
-<<<<<<< HEAD
-=======
-
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 git checkout -b name-of-your-branch
 
 ```
 
 6. Create [virtual environment](https://docs.python.org/3/library/venv.htmlc) or [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands).
-<<<<<<< HEAD
 7. Activate your environment.
-=======
-7. Activate your environment. 
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 8. Install requirements listed in the `requirements-dev.txt` file.
 
 **Virtual Environment**
 
 ```shell
-<<<<<<< HEAD
->> (your-virtual-environment) pip install -r requirements-dev.txt
-         
-=======
-
 >> (your-virtual-environment) pip install -r requirements-dev.txt
 
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 ```
 
 **Conda**
 
 ```shell
-<<<<<<< HEAD
-=======
-
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 >> (your-conda-environment) conda install -c conda-forge --file requirements-dev.txt
 
 ```
 
 9. Make changes in a code or write something new.
 10. Write tests if required.
-<<<<<<< HEAD
 11. Perform tests with `pytest`. (Run tests from the `tests` directory).
 
 ```shell
@@ -105,23 +72,13 @@ git checkout -b name-of-your-branch
 12. If all tests pass, push changes into your fork.
 
 ```shell
-=======
-11. Push changes into your fork.
-
-```shell
-
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 git add .
 git commit -m "description what you have done"
 git push origin name-of-your-branch
 
 ```
 
-<<<<<<< HEAD
-13. Navigate to your repository. You should see a button `Compare and open a pull request`. Use it to make a pull request! Send it to the `dev` branch in the main repository. **Don't send pull requests into `main` branch of the core repository!**
-=======
-12. Navigate to your repository. You should see a button `Compare and open a pull request`. Use it to make a pull request! Send it to the `dev` branch in the main repository. **Don't send pull requests into `main` branch of the core repository!**
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
+13. Navigate to your repository. You should see a button `Compare and open a pull request`. Use it to make a pull request! Send it to the `dev` branch in the main repository. **Don't send pull requests into the `main` branch of the core repository!**
 
 ## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:

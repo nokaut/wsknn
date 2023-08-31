@@ -1,4 +1,4 @@
-## Version 1.1.2 (2023-07-)
+## Version 1.2.0 (2023-09-)
 
 - (docs) changed README example,
 - (docs) added `demo-readme` example to `demo-notebooks` section,

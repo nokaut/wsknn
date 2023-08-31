@@ -60,7 +60,7 @@ The model was created along with multiple other approaches: based on RNN (GRU/LS
 
 ## What are the limitations of WSKNN?
 
-- model memorizes session-items and item-sessions maps, and if your product base is large and you use sessions for an extended period, then the model may be too big to fit an available memory; in this case, you can 
+- model memorizes session-items and item-sessions maps, and if your product base is large, and you use sessions for an extended period, then the model may be too big to fit an available memory; in this case, you can 
 categorize products and train a different model for each category,
 - response time may be slower than from other models, especially if there are available many sessions,
 - there's additional overhead related to the preparation of the input.
@@ -131,18 +131,11 @@ It works with Python versions greater or equal to 3.8.
 
 ## Requirements
 
-<<<<<<< HEAD
 | Package Version | Python versions | Requirements                                |
 |-----------------|-----------------|---------------------------------------------|
 | 0.1.x           | 3.6+            | numpy, pyyaml                               |
 | 1.1.x           | 3.8+            | numpy, more_itertools, pyyaml               |
 | 1.2.x           | 3.8+            | numpy, more_itertools, pandas, pyyaml, tqdm |
-=======
-| Package Version | Python versions | Requirements                  |
-|-----------------|-----------------|-------------------------------|
-| 0.1.x           | 3.6+            | numpy, pyyaml                 |
-| 1.x             | 3.8+            | numpy, pyyaml, more_itertools |
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 
 ## Contribution
 
