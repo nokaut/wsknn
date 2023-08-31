@@ -1,7 +1,7 @@
 # Specific folders *
 .pytest_cache
 .pytest_cache/*
-ml-25m/
+demo-notebooks/demo-data/movielens/ml-25m/*.csv
 
 
 # OS generated files #
