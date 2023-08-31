@@ -1,9 +1,5 @@
 numpy
 pandas
 pyyaml
-<<<<<<< HEAD
 more_itertools
 tqdm
-=======
-more_itertools
->>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
