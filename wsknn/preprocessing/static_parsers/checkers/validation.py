@@ -4,8 +4,8 @@ from typing import Dict, Iterable
 def check_event_keys_and_values(event: Dict,
                                 session_id_key: str,
                                 product_key: str,
-                                action_key: str,
-                                time_key: str):
+                                time_key: str,
+                                action_key: str = None):
     """
     Function checks if event has its all keys.
 
@@ -27,7 +27,10 @@ def check_event_keys_and_values(event: Dict,
         Empty dict if there is a missing key.
     """
 
-    keys = {session_id_key, product_key, action_key, time_key}
+    keys = {session_id_key, product_key, time_key}
+
+    if action_key is not None:
+        keys.add(action_key)
 
     if not keys.issubset(set(event.keys())):
         return {}

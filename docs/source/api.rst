@@ -50,6 +50,9 @@ Preprocessing
 .. autofunction:: wsknn.preprocessing.static_parsers.parse.parse_fn
    :noindex:
 
+.. autofunction:: wsknn.preprocessing.static_parsers.pandas_parser.parse_pandas
+   :noindex:
+
 Utilities
 ---------
 

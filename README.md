@@ -141,7 +141,6 @@ It works with Python versions greater or equal to 3.8.
 
 We welcome all submissions, issues, feature requests, and bug reports! To learn how to contribute to the package please visit [CONTRIBUTION.md file](https://github.com/nokaut/wsknn/blob/main/CONTRIBUTING.md)
 
-
 ## Developers
 
 - Szymon Moliński (Sales Intelligence : Digitree Group SA)

@@ -2,6 +2,7 @@ import random
 import numpy as np
 from typing import Iterable, Union, List, Set, Dict
 
+from wsknn.preprocessing.structure.session_to_item_map import map_sessions_to_items
 from wsknn.weighting import weight_session_items, weight_item_score
 from wsknn.utils.calc import weight_set_pair
 from wsknn.utils.errors import check_data_dimension, check_numeric_type_instance,\
@@ -200,7 +201,7 @@ class WSKNN:
 
     def fit(self,
             sessions: Dict,
-            items: Dict):
+            items: Dict = None):
         """
         Sets input session-items and item-sessions maps.
 
@@ -221,6 +222,7 @@ class WSKNN:
 
         items : Dict
             The map of items and the sessions where those items are present, and the first timestamp of those sessions.
+            If not provided then item-sessions map is created from the `sessions` parameter.
 
             >>> items = {
             ...     item_id: (
@@ -232,6 +234,10 @@ class WSKNN:
 
         # Check input data
         self._check_sessions_input(sessions)
+
+        if items is None:
+            items = map_sessions_to_items(sessions)
+
         self._check_items_input(items)
 
         self.session_item_map = sessions

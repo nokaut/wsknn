@@ -12,10 +12,10 @@ ACTION_WEIGHTS = {'products_view': 0.1,
                   'add_to_cart': 0.5}
 
 EVENT1 = {
-            'sid': '0',
-            'pid': 'a',
-            'dt': 1,
-            'action': 'products_view'
+    'sid': '0',
+    'pid': 'a',
+    'dt': 1,
+    'action': 'products_view'
 }
 
 EVENT2 = {
@@ -185,6 +185,27 @@ class TestSessionsClass(unittest.TestCase):
         expected_diff = 2
 
         self.assertEqual(expected_diff, diff)
+
+    def test_no_actions(self):
+        sessions = Sessions(event_session_key=SESSION_KEY,
+                            event_product_key=ITEM_KEY,
+                            event_time_key=T_KEY,
+                            event_action_key=None,
+                            event_action_weights=None)
+
+        self.assertIsInstance(sessions, Sessions)
+
+        EXPECTED_MAP = dict()
+        EXPECTED_TIME_START = 1_000_000_000_000_000
+        EXPECTED_TIME_END = 0
+        EXPECTED_LONGEST_ITEMS_SEQUENCE = 0
+        EXPECTED_NUMBER_OF_SESSIONS = 0
+
+        self.assertEqual(EXPECTED_MAP, sessions.session_items_actions_map)
+        self.assertEqual(EXPECTED_TIME_START, sessions.time_start)
+        self.assertEqual(EXPECTED_TIME_END, sessions.time_end)
+        self.assertEqual(EXPECTED_LONGEST_ITEMS_SEQUENCE, sessions.longest_items_vector_size)
+        self.assertEqual(EXPECTED_NUMBER_OF_SESSIONS, sessions.number_of_sessions)
 
 
 if __name__ == '__main__':
