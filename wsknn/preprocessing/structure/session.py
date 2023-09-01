@@ -1,5 +1,5 @@
 import pickle
-from typing import Union, Dict, Optional, Iterable
+from typing import Union, Dict, Iterable
 
 from wsknn.preprocessing.utils.calc import get_larger_value, get_smaller_value
 from wsknn.preprocessing.utils.transform import merge_dicts, parse_seconds_to_dt
@@ -91,7 +91,7 @@ class Sessions:
                  event_session_key: str,
                  event_product_key: str,
                  event_time_key: str,
-                 event_action_key: Optional[str],
+                 event_action_key: str = None,
                  event_action_weights: Dict = None):
 
         self.session_items_actions_map = dict()

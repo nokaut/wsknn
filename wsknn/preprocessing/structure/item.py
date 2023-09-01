@@ -163,6 +163,7 @@ class Items:
             idx = self.item_sessions_map[item][0].index(session)
 
             past_ts = self.item_sessions_map[item][1][idx]
+
             if timestamp < past_ts:
                 self.item_sessions_map[item][1][idx] = timestamp
 

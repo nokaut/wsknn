@@ -14,7 +14,8 @@ def parse_gzipped_fn(dataset: str,
                      time_key: str,
                      time_to_numeric: bool,
                      time_to_datetime: bool,
-                     datetime_format: str):
+                     datetime_format: str,
+                     progress_bar: bool):
     """
     Function parses given gzipped JSONL file into Sessions and Items objects.
 
@@ -50,6 +51,9 @@ def parse_gzipped_fn(dataset: str,
     datetime_format : str
         The format of datetime object.
 
+    progress_bar : bool
+        Show parsing progress.
+
     Returns
     -------
     parsed_items, parsed_sessions : Items, Sessions
@@ -72,7 +76,9 @@ def parse_gzipped_fn(dataset: str,
             time_key,
             time_to_numeric,
             time_to_datetime,
-            datetime_format)
+            datetime_format,
+            progress_bar
+        )
 
     return parsed_items, parsed_sessions
 
@@ -86,7 +92,8 @@ def parse_jsonl_fn(dataset: str,
                    time_key: str,
                    time_to_numeric: bool,
                    time_to_datetime: bool,
-                   datetime_format: str):
+                   datetime_format: str,
+                   progress_bar: bool):
     """
     Function parses given JSONL file into Sessions and Items and Users objects.
 
@@ -122,6 +129,9 @@ def parse_jsonl_fn(dataset: str,
     datetime_format : str
         The format of datetime object.
 
+    progress_bar : bool
+        Show parsing progress.
+
     Returns
     -------
     ItemsMap, SessionsMap : Items, Sessions
@@ -142,7 +152,8 @@ def parse_jsonl_fn(dataset: str,
             time_key,
             time_to_numeric,
             time_to_datetime,
-            datetime_format
+            datetime_format,
+            progress_bar
         )
 
     return parsed_items, parsed_sessions

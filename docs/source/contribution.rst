@@ -16,6 +16,73 @@ On `GitHub <https://github.com/nokaut/wsknn>`_! We use **GitHub** to host the co
 
 ---
 
+Developer setup
+---------------
+
+Setup for developers differs from the package installation from ``PyPI``.
+
+1. Fork the ``wsknn`` repository.
+2. Clone forked repository.
+3. Connect the main repository with your fork locally:
+
+.. code-block:: shell
+
+   git remote add upstream https://github.com/nokaut/wsknn.git
+
+
+4. Synchronize your repository with the core repository.
+
+
+.. code-block:: shell
+
+   git checkout main
+   git pull upstream main
+
+
+5. Create your branch.
+
+.. code-block:: shell
+
+   git checkout -b name-of-your-branch
+
+
+6. Create [virtual environment](https://docs.python.org/3/library/venv.htmlc) or [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands).
+7. Activate your environment.
+8. Install requirements listed in the ``requirements-dev.txt`` file.
+
+**Virtual Environment**
+
+.. code-block:: shell
+
+   >> (your-virtual-environment) pip install -r requirements-dev.txt
+
+
+**Conda**
+
+.. code-block:: shell
+
+   >> (your-conda-environment) conda install -c conda-forge --file requirements-dev.txt
+
+9. Make changes in a code or write something new.
+10. Write tests if required.
+11. Perform tests with ``pytest``. (Run tests from the ``tests`` directory).
+
+.. code-block:: shell
+
+   >> (your-environment) (your-username:~/path/wsknn/tests) pytest
+
+
+12. If all tests pass, push changes into your fork.
+
+.. code-block:: shell
+
+   git add .
+   git commit -m "description what you have done"
+   git push origin name-of-your-branch
+
+13. Navigate to your repository. You should see a button ``Compare and open a pull request``. Use it to make a pull request! Send it to the ``dev`` branch in the main repository. **Don't send pull requests into ``main`` branch of the core repository!**
+
+
 We Use `Github Flow <https://guides.github.com/introduction/flow/index.html>`_
 ------------------------------------------------------------------------------
 
@@ -55,8 +122,8 @@ Write bug reports with detail, background, and sample code
 
 People *love* thorough bug reports. I'm not even kidding.
 
-Use a PEP8 Guidelines
----------------------
+Use PEP8 Guidelines
+-------------------
 
 `PEP8 Python Guidelines <https://www.python.org/dev/peps/pep-0008/>`_
 

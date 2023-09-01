@@ -1,5 +1,9 @@
 numpy
 pyyaml
+<<<<<<< HEAD
+pandas
+=======
+>>>>>>> a2793d493eb0fbe1a851929ed89c52b9545910a5
 more_itertools
 matplotlib
 setuptools

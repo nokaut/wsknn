@@ -13,7 +13,8 @@ def parse_csv_fn(dataset: str,
                  time_key: str,
                  time_to_numeric: bool,
                  time_to_datetime: bool,
-                 datetime_format: str):
+                 datetime_format: str,
+                 progress_bar: bool):
     """
     Function parses given CSV file into Sessions and Items and Users objects.
 
@@ -49,6 +50,9 @@ def parse_csv_fn(dataset: str,
     datetime_format : str
         The format of datetime object.
 
+    progress_bar : bool
+        Show parsing progress.
+
     Returns
     -------
     ItemsMap, SessionsMap : Items, Sessions
@@ -69,7 +73,8 @@ def parse_csv_fn(dataset: str,
             time_key,
             time_to_numeric,
             time_to_datetime,
-            datetime_format
+            datetime_format,
+            progress_bar
         )
 
     return parsed_items, parsed_sessions
