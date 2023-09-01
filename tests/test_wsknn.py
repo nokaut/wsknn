@@ -3,7 +3,7 @@ from wsknn.model.wsknn import WSKNN
 from wsknn.utils.errors import InvalidDimensionsError, InvalidTimestampError
 
 
-def test_vsknn_invalid_dimensions_exception():
+def test_wsknn_invalid_dimensions_exception():
 
     sessions = {
         'A': [[1, 2, 3, 4]],
@@ -21,7 +21,7 @@ def test_vsknn_invalid_dimensions_exception():
         model.fit(sessions=sessions, items=items)
 
 
-def test_vsknn_invalid_type_exception():
+def test_wsknn_invalid_type_exception():
     sessions = {
         'A': [1, 2, 3],
         'B': [4, 3],
@@ -38,7 +38,7 @@ def test_vsknn_invalid_type_exception():
         model.fit(sessions=sessions, items=items)
 
 
-def test_vsknn_timestamp_type_exception():
+def test_wsknn_timestamp_type_exception():
     sessions = {
         'A': [[1, 2, 3],
               [10, 20, 30]]
@@ -58,7 +58,7 @@ def test_vsknn_timestamp_type_exception():
         model.fit(sessions=sessions, items=items)
 
 
-def test_vsknn_flow1():
+def test_wsknn_flow1():
     # Type of sessions is str, type of items is int
     sessions = {
         'a': [
@@ -91,7 +91,7 @@ def test_vsknn_flow1():
         assert recomms == expected_recommendations[idx]
 
 
-def test_vsknn_flow2():
+def test_wsknn_flow2():
     # Type of sessions is int, type of items is str
     sessions = {
         0: [
@@ -160,6 +160,31 @@ def test_wsknn_with_weights():
                   sampling_event_weights_index=2)
 
     model.fit(sessions, items)
+
+    for idx, sess in enumerate(some_sessions):
+        recomms = model.recommend(sess)
+        assert recomms == expected_recommendations[idx]
+
+
+def test_wsknn_no_items():
+    # Type of sessions is str, type of items is int
+    sessions = {
+        'a': [
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5]
+        ],
+        'b': [
+            [2, 3, 4, 5],
+            [10, 11, 12, 13]
+        ]
+    }
+
+    some_sessions = [[[1], [100]], [[2, 3], [200, 300]]]
+
+    expected_recommendations = [[(2, 2.0), (3, 2.0), (4, 2.0), (5, 2.0)], [(4, 2.5), (5, 2.5), (1, 1.25)]]
+
+    model = WSKNN(return_events_from_session=False)
+    model.fit(sessions)
 
     for idx, sess in enumerate(some_sessions):
         recomms = model.recommend(sess)

@@ -25,6 +25,28 @@ WSKNN
 .. automodule::  wsknn.model.wsknn
    :members:
 
+
+Core WSKNN Data Structures
+----------------
+
+Sessions
+........
+
+.. automodule::  wsknn.preprocessing.structure.session.Sessions
+   :members:
+
+Items
+.....
+
+.. automodule::  wsknn.preprocessing.structure.item.Items
+   :members:
+
+Transform session-items map into item-sessions map
+..................................................
+
+.. autofunction:: wsknn.preprocessing.structure.session_to_item_map.map_sessions_to_items
+   :noindex:
+
 Evaluation metrics
 ------------------
 
@@ -48,6 +70,9 @@ Preprocessing
    :noindex:
 
 .. autofunction:: wsknn.preprocessing.static_parsers.parse.parse_fn
+   :noindex:
+
+.. autofunction:: wsknn.preprocessing.static_parsers.pandas_parser.parse_pandas
    :noindex:
 
 Utilities
