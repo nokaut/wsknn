@@ -32,9 +32,9 @@ The `WSKNN` (*Weighted Session-based K-Nearest Neighbors*) package is a lightwei
 
 The `WSKNN` recommender was designed to evaluate complex deep-learning architectures [@Twardowski2021]. During the research, it became clear that the k-NN model's performance is close to or exceeds the performance of neural networks algorithms (see [experimental comparison](#experiments)). Moreover, the literature analysis about recommender systems shows that the k-NN-based solutions are performing well in different conditions [@Ludewig2018]. It makes `WSKNN` a great benchmarking tool against novel algorithms and architectures and the first-choice tool for the fresh start and design of the recommender system.
 
-The package's algorithm can be a recommender for small and medium-sized datasets. During the internal studies in the company, the algorithm performed well for the small datasets (25k sessions; 3k items) and bigger datasets - see MovieLens 25M tutorial [@movielenstutorial25]. The model has its limitations, and the main drawback is that it is memory-hungry. As a memory-based method, it can grow up to the moment when its usage is unfeasible. It could be an issue for production environments where the memory costs may exceed potential benefits.
+The package's algorithm can be a recommender for small and medium-sized datasets. During the internal studies in the company, the algorithm performed well for the small datasets (25k sessions; 3k items) and bigger datasets - see MovieLens 25M tutorial [@movielenstutorial25]. The model has its limitations, and the main drawback is that it is memory-hungry. As a memory-based method, it can grow to the moment when its usage is unfeasible. It could be an issue for production environments where the memory costs may exceed potential benefits.
 
-The package was created during the research project of the Sales Intelligence Sp. z o.o. company [@Twardowski2021]. The company owns the price comparison service (*Nokaut.pl*) and cooperates with multiple big stores across Poland. Thus, it has access to vast amounts of sequential data sources. Currently, the package is used for SMS and mailing recommendations for big customers.
+The package was created during the research project of the Sales Intelligence Sp. z o.o. company [@Twardowski2021]. The company owns the price comparison service *Nokaut.pl* and cooperates with multiple big stores across Poland. Thus, it has access to vast amounts of sequential data sources. Currently, the package is used for SMS and mailing recommendations for big customers.
 
 # Related work
 
@@ -44,7 +44,7 @@ The other example of a repository with scripts that is not a package is [@gru4re
 
 # Package structure
 
-The package is lightweight. It depends on the `numpy` [@harris2020array], `pandas` [@reback2020pandas], `tqdm` [@casper_da_costa_luis_2023_8233425], `more_itertools` [@moreitertools], and `pyyaml` [@pyyaml]. It works with currently supported Python versions, starting from Python 3.8. It has two main functions:
+The package is lightweight. It depends on the `numpy` [@harris2020array], `pandas` [@reback2020pandas], `tqdm` [@casper_da_costa_luis_2023_8233425], `more_itertools` [@moreitertools], and `pyyaml` [@pyyaml] libraries. It works with currently supported Python versions, starting from Python 3.8. It has two main functions:
 
 - `fit()` to build a memory representation of a model as Python dictionaries with the session-items and item-sessions maps of varying sizes.
 - `predict()` to return recommendations. It is worth noticing that **the recommendation strategy may be altered after fitting a model**; it allows testing different weighting scenarios in parallel without additional models training.
@@ -61,7 +61,7 @@ The user may pass additional parameters to the `predict()` method as a dictionar
 - is there any event (user action) that must be performed within a session to build a similarity map (for example, the *transaction* event)?
 - should the algorithm recommend random items if the neighbors-items-set is smaller than the number of recommendations?
 
-The `YAML` file with documented options is provided in the top level of the package repository as `model_settings.yaml`. The user may load those settings with `pyyaml` with the function `parse_settings()`. Then, a dictionary with settings may be passed into the `predict()` function.
+The `YAML` file with documented options is provided in the top level of the package repository as `model_settings.yaml`. The user may load those settings with `pyyaml` with the function `parse_settings()`. Then, a dictionary with settings may be passed to the `predict()` function.
 
 The sample flow and recommendations are presented in the repository [@wsknnrepo]. The package has built-in evaluation metrics:
 
@@ -69,7 +69,7 @@ The sample flow and recommendations are presented in the repository [@wsknnrepo]
 - the **precision** score of top `k` recommendations,
 - the **recall** score of top `k` recommendations.
 
-The package can process static JSON-lines, gzipped JSON-lines files, and static `CSV` files with e-commerce events. The recommended way of parsing is to pass `pandas` `DataFrame` for large datasets. The `preprocessing` module prepares data.
+The package can process static JSON-lines, gzipped JSON-lines files, and static `CSV` files with e-commerce events. The recommended way of parsing is to pass `pandas` `DataFrame` for large datasets.
 
 The primary data types are `Items` and `Sessions`. Those classes store item-sessions and session-items mappings and session-related attributes. Those may be updated with the new events.
 
@@ -77,7 +77,7 @@ In the near future, the package will introduce the `tensorflow` [@tensorflow2015
 
 ## Data Formats
 
-The basic data type required by the algorithm is event. Event has
+The basic data type required by the algorithm is an **event**. An **event** has
 
 - session index, or user index,
 - a product with which the user interacts,
@@ -85,9 +85,9 @@ The basic data type required by the algorithm is event. Event has
 - (optional) action type,
 - (optional) other information, for example, product price, quantity, and user type.
 
-A group of events with the same *session index* or *user index* is a session. A session is a sequence of events whose length is not fixed.
+A group of events with the same *session index* or *user index* is a **session**. A **session** is a sequence of events whose length is not fixed.
 
-The example of a session stored by the model is:
+The example of a **session** stored by the model is:
 
 ```json
 { "user xyz": [
@@ -133,7 +133,7 @@ The other factors that the recommender may include are:
 
 # Experiments
 
-This section describes the `WSKNN` performance. The table comes from the internal experiments in *Sales Intelligence Sp. z o.o.* company. The algorithm was compared to Session Metric Learning algorithms (`SML-RNN-*`) [@Twardowski2021], `GRU4Rec` [@gru4recrepo], popularity-based recommender (`POP`), and Markov model (`MM`). Comparison has been performed on the RecSys-2015 dataset [@recsys2015data]; 90% of the oldest sessions were used as a training set, and the rest as a test set. The dataset contains 7 981 581 sessions (44% unique), 31 708 505 events, and 37 486 items. Monitored metrics are recall (REC@5, REC@20), mean reciprocal rank (MRR@5, MRR@20), mean average precision MAP@20, hit rate HR@20, training time, and latency - how long does it take for a model to prepare recommendations for 10% of the newest session in a dataset.
+This section describes the performance of `WSKNN`. The table comes from internal experiments at *Sales Intelligence Sp. z o.o.*. The algorithm was compared to Session Metric Learning algorithms (`SML-RNN-*`) [@Twardowski2021], `GRU4Rec` [@gru4recrepo], popularity-based recommender (`POP`), and Markov model (`MM`). A comparison has been performed on the RecSys-2015 dataset [@recsys2015data]; 90% of the oldest sessions were used as a training set, and the rest as a test set. The dataset contains 7 981 581 sessions (44% unique), 31 708 505 events, and 37 486 items. Monitored metrics are recall (REC@5, REC@20), mean reciprocal rank (MRR@5, MRR@20), mean average precision MAP@20, hit rate HR@20, training time, and latency - how long does it take for a model to prepare recommendations for 10% of the newest session in a dataset.
 
 | Algorithm           | MAP@20     | REC@20      | HR@20     | MRR@20      | REC@5     | MRR@5      | Training time [s] | Test time [s] |
 | ------------------- | ---------- | ----------- | --------- | ----------- | --------- | ---------- | ----------------- |---------------|
