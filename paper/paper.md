@@ -22,15 +22,15 @@ bibliography: paper.bib
 
 # Summary
 
-The users of e-commerce systems generate vast amounts of unstructured, sequential data streams. Each sequence is a varying-length list of directional (timestamped) user-product interactions. There are hidden patterns within those sequences. Users tend to interact with similar products, and interactions change over time. Based on this behavior, we can recommend the sequence of products the user may be interested in.
+Users of e-commerce systems generate vast amounts of unstructured, sequential data streams. Each sequence is a varying-length list of directional (timestamped) user-product interactions. There are hidden patterns within those sequences. Users tend to interact with similar products, and interactions change over time. Based on this behavior, we can recommend the sequence of products that the user may be interested in.
 
 The `WSKNN` (*Weighted Session-based K-Nearest Neighbors*) package is a lightweight tool for modeling user-item interactions and making recommendations from sequential datasets [@Latifi2020SessionawareRA]. It is based on the k-Nearest Neighbors algorithm (k-NN), which works with categorical, sequential, and timestamped data mainly generated in e-commerce systems. The package may be a stand-alone recommender, a reference against the more complex recommender systems, or a part of a Machine Learning pipeline.
 
 # Statement of need
 
-`WSKNN` is an abbreviation from *Weighted Session-based k-NN recommender*. The algorithm is a tuned and enhanced version of the **Vector Multiplication Session-Based kNN (V-SKNN)** algorithm [@Ludewig2018]. The package utilizes the k-NN algorithm that works with loosely structured sequential data, where sequences can have different lengths. This data type is the most common representation of the timestamped events stream from customers. A dataset example is *RecSys Challenge 2015 and the YOOCHOOSE Dataset* [@recsys2015data].
+`WSKNN` stands for *Weighted Session-based k-NN recommender*. The algorithm is a tuned and enhanced version of the **Vector Multiplication Session-Based kNN (V-SKNN)** algorithm [@Ludewig2018]. The package utilizes the k-NN algorithm that works with loosely structured sequential data, where sequences can have different lengths. This data type is the most common representation of the timestamped events stream from customers. A dataset example is *RecSys Challenge 2015 and the YOOCHOOSE Dataset* [@recsys2015data].
 
-The `WSKNN` recommender was designed to evaluate complex deep-learning architectures [@Twardowski2021]. During the research, it became clear that the k-NN model's performance is close to or exceeds the performance of neural networks algorithms (see [experimental comparison](#experiments)). Moreover, the literature analysis about recommender systems shows that the k-NN-based solutions are performing well in different conditions [@Ludewig2018]. It makes `WSKNN` a great benchmarking tool against novel algorithms and architectures and the first-choice tool for the fresh start and design of the recommender system.
+The `WSKNN` recommender was designed to evaluate complex deep-learning architectures [@Twardowski2021]. During the research, it became clear that the performance of the k-NN model is comparable to, if not better than, that of neural network algorithms (see [experimental comparison](#experiments)). Moreover, the literature analysis about recommender systems shows that the k-NN-based solutions are performing well in different conditions [@Ludewig2018]. This makes `WSKNN` a valuable benchmarking tool against novel algorithms and architectures and the first-choice tool for the fresh start and design of the recommender system.
 
 The package's algorithm can be a recommender for small and medium-sized datasets. During the internal studies in the company, the algorithm performed well for the small datasets (25k sessions; 3k items) and bigger datasets - see MovieLens 25M tutorial [@movielenstutorial25]. The model has its limitations, and the main drawback is that it is memory-hungry. As a memory-based method, it can grow to the moment when its usage is unfeasible. It could be an issue for production environments where the memory costs may exceed potential benefits.
 
@@ -46,28 +46,28 @@ The other example of a repository with scripts that is not a package is [@gru4re
 
 The package is lightweight. It depends on the `numpy` [@harris2020array], `pandas` [@reback2020pandas], `tqdm` [@casper_da_costa_luis_2023_8233425], `more_itertools` [@moreitertools], and `pyyaml` [@pyyaml] libraries. It works with currently supported Python versions, starting from Python 3.8. It has two main functions:
 
-- `fit()` to build a memory representation of a model as Python dictionaries with the session-items and item-sessions maps of varying sizes.
-- `predict()` to return recommendations. It is worth noticing that **the recommendation strategy may be altered after fitting a model**; it allows testing different weighting scenarios in parallel without additional models training.
+* `fit()` to build a memory representation of a model as Python dictionaries with the session-items and item-sessions maps of varying sizes.
+* `predict()` to return recommendations. It is worth noticing that **the recommendation strategy may be altered after fitting a model**; it allows testing different weighting scenarios in parallel without additional models training.
 
 The user may pass additional parameters to the `predict()` method as a dictionary to control model behavior on the fly. Those parameters are:
 
-- the number of recommendations,
-- the number of neighbors to choose items from (**the closest neighbors**),
-- the sampling strategy of neighbors (common items, recent sessions, random subset, custom weights assigned to events' type),
-- the sample size (an initial subset of neighbors to look for the closest neighbors),
-- a session similarity weighting function,
-- an item ranking strategy,
-- should algorithm return items that are in the recommended session?
-- is there any event (user action) that must be performed within a session to build a similarity map (for example, the *transaction* event)?
-- should the algorithm recommend random items if the neighbors-items-set is smaller than the number of recommendations?
+* the number of recommendations,
+* the number of neighbors to choose items from (**the closest neighbors**),
+* the sampling strategy of neighbors (common items, recent sessions, random subset, custom weights assigned to events' type),
+* the sample size (an initial subset of neighbors to look for the closest neighbors),
+* a session similarity weighting function,
+* an item ranking strategy,
+* should algorithm return items that are in the recommended session?
+* is there any event (user action) that must be performed within a session to build a similarity map (for example, the *transaction* event)?
+* should the algorithm recommend random items if the neighbors-items-set is smaller than the number of recommendations?
 
-The `YAML` file with documented options is provided in the top level of the package repository as `model_settings.yaml`. The user may load those settings with `pyyaml` with the function `parse_settings()`. Then, a dictionary with settings may be passed to the `predict()` function.
+The `YAML` file documenting options is provided in the top level of the package repository as `model_settings.yaml`. The user may load those settings with `pyyaml` with the function `parse_settings()`. Then, a dictionary with settings may be passed to the `predict()` function.
 
 The sample flow and recommendations are presented in the repository [@wsknnrepo]. The package has built-in evaluation metrics:
 
-- the **mean reciprocal rank** of top `k` recommendations,
-- the **precision** score of top `k` recommendations,
-- the **recall** score of top `k` recommendations.
+* the **mean reciprocal rank** of top `k` recommendations,
+* the **precision** score of top `k` recommendations,
+* the **recall** score of top `k` recommendations.
 
 The package can process static JSON-lines, gzipped JSON-lines files, and static `CSV` files with e-commerce events. The recommended way of parsing is to pass `pandas` `DataFrame` for large datasets.
 
@@ -77,13 +77,13 @@ In the near future, the package will introduce the `tensorflow` [@tensorflow2015
 
 ## Data Formats
 
-The basic data type required by the algorithm is an **event**. An **event** has
+The basic data type required by the algorithm is an **event**, which consists of:
 
-- session index, or user index,
-- a product with which the user interacts,
-- timestamp of each interaction,
-- (optional) action type,
-- (optional) other information, for example, product price, quantity, and user type.
+* session index, or user index,
+* a product with which the user interacts,
+* timestamp of each interaction,
+* (optional) action type,
+* (optional) other information, for example, product price, quantity, and user type.
 
 A group of events with the same *session index* or *user index* is a **session**. A **session** is a sequence of events whose length is not fixed.
 
@@ -125,11 +125,11 @@ It can be used for recommendations, but `WSKNN` may use additional weights provi
 
 The other factors that the recommender may include are:
 
--  The position of a product in a sequence,
--  The length of a sequence,
--  The recency of a sequence,
--  A specific action type in a sequence (for example *transaction*), sessions without transactions are excluded, or products in sessions that ended up in a transaction are more likely recommended,
-- Custom weights applied to the sequence, for example, *price*.
+* The position of a product in a sequence,
+* The length of a sequence,
+* The recency of a sequence,
+* A specific action type in a sequence (for example *transaction*), sessions without transactions are excluded, or products in sessions that ended up in a transaction are more likely recommended,
+* Custom weights applied to the sequence, for example, *price*.
 
 # Experiments
 
@@ -144,7 +144,7 @@ This section describes the performance of `WSKNN`. The table comes from internal
 | MM                  | 0.033      | 0.262       | 0.391     | 0.177       | 0.186     | 0.164      | 0.8               | 1             |
 | POP                 | 0.006      | 0.086       | 0.126     | 0.029       | 0.036     | 0.022      | 0.4               | ~0            |
 
-We see that performance on analytical metrics is close to that of RNN-based models, but the `WSKNN` model is worst regarding response times. Detailed comparison with more models and datasets is presented in [@Twardowski2021].
+While the performance of `WSKNN` on analytical metrics is comparable to RNN-based models, its response times are less optimal. Detailed comparison with more models and datasets is presented in [@Twardowski2021].
 
 ## Performance
 
@@ -152,11 +152,11 @@ The model's performance concerning the number of sessions and items in a set is 
 
 Testing environment:
 
-- Used machine has 16GB RAM and 4-core 4.5 GHz CPU
-- testing sample size - 1000 sessions
-- max session length - 50 events
-- min session length - 1 event
-- basic data types (integers)
+* Used machine has 16GB RAM and 4-core 4.5 GHz CPU
+* testing sample size - 1000 sessions
+* max session length - 50 events
+* min session length - 1 event
+* basic data types (integers)
 
 ### Training time in relation to session length vs number of items
 
@@ -174,11 +174,11 @@ Additionally, increasing the number of items doesn't affect training time but in
 
 # Limitations
 
-As with every Machine Learning system, `WSKNN` has its limitations:
+Like all Machine Learning systems, `WSKNN` has limitations:
 
-- model *memorizes session-items and item-sessions maps*, and if the product base is significant, and we use sessions for an extended period, then the model may be too big to fit into memory; in this case, we can categorize products and train a different model for each category. Benchmarking shows that model memory size is directly related to the number of sessions.
-- Response time may be slower than from other models, especially if there are many items to recommend. Benchmarking shows that the mean response time increases with the number of items used for training,
-- There’s additional overhead related to preparing the data structure for modeling. It can be done as a stand-alone step because the model uses Python dictionaries with session-items and item-sessions maps. `WSKNN` has a built-in `preprocessing` module and `Items` and `Sessions` classes, which transform and store common events structure into the model's format.
+* model *memorizes session-items and item-sessions maps*, and if the product base is significant, and we use sessions for an extended period, then the model may be too big to fit into memory; in this case, we can categorize products and train a different model for each category. Benchmarking shows that model memory size is directly related to the number of sessions.
+* Response time may be slower than from other models, especially if there are many items to recommend. Benchmarking shows that the mean response time increases with the number of items used for training,
+* There’s additional overhead related to preparing the data structure for modeling. It can be done as a stand-alone step because the model uses Python dictionaries with session-items and item-sessions maps. `WSKNN` has a built-in `preprocessing` module and `Items` and `Sessions` classes, which transform and store common events structure into the model's format.
 
 # Acknowledgements
 
