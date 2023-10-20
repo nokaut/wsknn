@@ -71,6 +71,11 @@ Contents
    api
    contribution
 
+Citation
+--------
+
+Moliński, S., (2023). WSKNN - Weighted Session-based K-NN recommender system. Journal of Open Source Software, 8(90), 5639, https://doi.org/10.21105/joss.05639
+
 
 Indices and tables
 ==================

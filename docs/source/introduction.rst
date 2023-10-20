@@ -94,7 +94,7 @@ The package can be installed with ``pip``:
     pip install wsknn
 
 
-It works with Python versions greater or equal to 3.6.
+It works with Python versions greater or equal to 3.8.
 
 Requirements
 ------------
@@ -115,7 +115,7 @@ Developers
 Citation
 --------
 
-Szymon Moliński. (2022). WSKNN - Weighted Session-based k-NN Recommendations in Python (0.1). Zenodo. https://doi.org/10.5281/zenodo.6393177
+Moliński, S., (2023). WSKNN - Weighted Session-based K-NN recommender system. Journal of Open Source Software, 8(90), 5639, https://doi.org/10.21105/joss.05639
 
 Bibliography
 ------------
