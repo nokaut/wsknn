@@ -1,6 +1,6 @@
 # WSKNN: k-NN recommender for session-based data
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6393177.svg)](https://doi.org/10.5281/zenodo.6393177)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8414248.svg)](https://doi.org/10.5281/zenodo.8414248)
 
 ## Weighted session-based k-NN - Intro
 

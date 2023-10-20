@@ -42,18 +42,28 @@ def _clip_multiple_transactions(session, items, times, actions, locs, min_sessio
     return parsed
 
 
-def _parse_full_ds(sess_idx, items, times, actions, is_transaction, min_session_length):
+def _parse_full_ds(sess_idx, items, times, actions, is_transaction, weights, min_session_length):
     if is_transaction is None:
         # Skip dividing sessions and put everything in one sequence
-        parsed = {
-            x: [items[idx], times[idx], actions[idx]]
-            for idx, x in enumerate(sess_idx) if len(items[idx]) >= min_session_length}
+        if weights is None:
+            parsed = {
+                x: [items[idx], times[idx], actions[idx]]
+                for idx, x in enumerate(sess_idx) if len(items[idx]) >= min_session_length}
+        else:
+            parsed = {
+                x: [items[idx], times[idx], actions[idx], weights[idx]]
+                for idx, x in enumerate(sess_idx) if
+                len(items[idx]) >= min_session_length}
     else:
         parsed = {}
         for idx, x in enumerate(is_transaction):
             if 1 in x:
                 if len(items[idx]) > min_session_length:
-                    parsed[sess_idx[idx]] = [items[idx], times[idx], actions[idx]]
+                    if weights is None:
+                        parsed[sess_idx[idx]] = [items[idx], times[idx], actions[idx]]
+                    else:
+                        parsed[sess_idx[idx]] = [items[idx], times[idx],
+                                                 actions[idx], weights[idx]]
             # TODO: complex parsing schema, where single session may occur multiple times! FUTURE
             #     # We have a transaction here, time to divide sequence
             #     t_idx = list(locate(x))
@@ -77,19 +87,23 @@ def _prepare_values_session_map(df: pd.DataFrame,
                                 product_key: str,
                                 time_key: str,
                                 action_key: str = None,
-                                purchase_action_name: str = None):
+                                purchase_action_name: str = None,
+                                event_weights_key: str = None):
     df = df.sort_values([session_id_key, time_key])
     gdf = df.groupby(session_id_key)
     timestamps = gdf[time_key].apply(list).values
     products = gdf[product_key].apply(list)
     actions = None
     transactions = None
+    event_weights = None
     if action_key is not None:
         actions = gdf[action_key].apply(list).values
     if purchase_action_name is not None:
         transactions = gdf['is_transaction'].apply(list).values
+    if event_weights_key is not None:
+        event_weights = gdf[event_weights_key].apply(list).values
 
-    return products.index, products.values, timestamps, actions, transactions
+    return products.index, products.values, timestamps, actions, transactions, event_weights
 
 
 def _build_maps_from_df(df: pd.DataFrame,
@@ -98,24 +112,33 @@ def _build_maps_from_df(df: pd.DataFrame,
                         time_key: str,
                         action_key: str = None,
                         purchase_action_name: str = None,
+                        event_weights_key: str = None,
                         min_session_length: int = 3) -> Dict:
     # Prepare data for session map
-    sess_idx, items, times, actions, is_transaction = _prepare_values_session_map(
+    sess_idx, items, times, actions, is_transaction, weights = _prepare_values_session_map(
         df,
         session_id_key,
         product_key,
         time_key,
         action_key,
-        purchase_action_name
+        purchase_action_name,
+        event_weights_key
     )
 
     if action_key is None:
-        level_1_parsed = {
-            x: [items[idx], times[idx]]
-            for idx, x in enumerate(sess_idx) if len(items[idx]) >= min_session_length
-        }
+        if event_weights_key is None:
+            level_1_parsed = {
+                x: [items[idx], times[idx]]
+                for idx, x in enumerate(sess_idx) if len(items[idx]) >= min_session_length
+            }
+        else:
+            level_1_parsed = {
+                x: [items[idx], times[idx], weights[idx]]
+                for idx, x in enumerate(sess_idx) if
+                len(items[idx]) >= min_session_length
+            }
     else:
-        level_1_parsed = _parse_full_ds(sess_idx, items, times, actions, is_transaction, min_session_length)
+        level_1_parsed = _parse_full_ds(sess_idx, items, times, actions, is_transaction, weights, min_session_length)
 
     return level_1_parsed
 
@@ -127,6 +150,7 @@ def parse_pandas(df: pd.DataFrame,
                  action_key: str = None,
                  allowed_actions: List = None,
                  purchase_action_name: str = None,
+                 event_weights_key: str = None,
                  min_session_length: int = 3,
                  get_items_map: bool = True) -> Dict:
     """
@@ -153,7 +177,11 @@ def parse_pandas(df: pd.DataFrame,
         Allowed actions.
 
     purchase_action_name: Any, optional
-        The name of the final action (it is required to apply weight into the session vector).
+        The name of the final action (it is required to apply weight into
+        the session vector).
+
+    event_weights_key : str, optional
+        The name of weights column.
 
     min_session_length : int, default = 3
         Minimum length of a single session.
@@ -175,7 +203,9 @@ def parse_pandas(df: pd.DataFrame,
             df = df[df[action_key].isin(allowed_actions)]
         # Check purchase action
         if purchase_action_name is not None:
-            df['is_transaction'] = (df[action_key] == purchase_action_name).astype(int)
+            df['is_transaction'] = (
+                    df[action_key] == purchase_action_name
+            ).astype(int)
 
     # Prepare maps
     sess_map = _build_maps_from_df(
@@ -185,6 +215,7 @@ def parse_pandas(df: pd.DataFrame,
         time_key,
         action_key,
         purchase_action_name,
+        event_weights_key,
         min_session_length
     )
 
