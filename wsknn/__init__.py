@@ -6,4 +6,4 @@ from wsknn.preprocessing.parse_static import parse_files, parse_flat_file
 from wsknn.preprocessing.static_parsers.pandas_parser import parse_pandas
 
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
