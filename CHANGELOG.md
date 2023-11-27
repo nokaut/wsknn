@@ -1,4 +1,11 @@
-## Version 1.2.0 (2023-09-)
+## Version 1.2.1 (2023-11-27)
+
+- (docs) updated JOSS badge,
+- (docs) updated docs,
+- (enhancement) updated import paths,
+- (feature) save and load model with `joblib`
+
+## Version 1.2.0 (2023-09-01)
 
 - (docs) changed README example,
 - (docs) added `demo-readme` example to `demo-notebooks` section,
