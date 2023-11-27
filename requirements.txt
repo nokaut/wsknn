@@ -3,3 +3,4 @@ pandas
 pyyaml
 more_itertools
 tqdm
+joblib

@@ -6,7 +6,7 @@ def predict(model: WSKNN,
             sessions: List,
             settings: Dict = None) -> List:
     """
-    The function is an alias for the .predict() method of the WSKNN model.
+    The function is an alias for the `WSKNN.recommend()` method.
 
     Parameters
     ----------

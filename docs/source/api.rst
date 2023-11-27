@@ -27,7 +27,7 @@ WSKNN
 
 
 Core WSKNN Data Structures
-----------------
+--------------------------
 
 Sessions
 ........
@@ -45,6 +45,15 @@ Transform session-items map into item-sessions map
 ..................................................
 
 .. autofunction:: wsknn.preprocessing.structure.session_to_item_map.map_sessions_to_items
+   :noindex:
+
+Save and Load model
+-------------------
+
+.. autofunction:: wsknn.import_export.ie.save
+   :noindex:
+
+.. autofunction:: wsknn.import_export.ie.load
    :noindex:
 
 Evaluation metrics
@@ -67,6 +76,9 @@ Preprocessing
 -------------
 
 .. autofunction:: wsknn.preprocessing.parse_static.parse_files
+   :noindex:
+
+.. autofunction:: wsknn.preprocessing.parse_static.parse_flat_file
    :noindex:
 
 .. autofunction:: wsknn.preprocessing.static_parsers.parse.parse_fn

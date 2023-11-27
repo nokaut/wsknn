@@ -21,7 +21,10 @@ actions_probas = [0.05, 0.95]
 actions = np.random.choice(possible_actions, size=len(df), p=actions_probas)
 df['action'] = actions
 
-def test_parsing():
+weights = np.random.random(len(df))
+df['weight'] = weights
+
+def test_parsing_without_weights():
     parsed = parse_pandas(
         df=df,
         session_id_key='userId',
@@ -55,6 +58,51 @@ def test_parsing():
         time_key='timestamp',
         action_key='action',
         purchase_action_name='ORDER',
+        min_session_length=3
+    )
+
+    assert isinstance(parsed, Dict)
+    assert parsed.get('session-map')
+    assert parsed.get('item-map')
+
+
+def test_parsing_weights():
+    parsed = parse_pandas(
+        df=df,
+        session_id_key='userId',
+        product_key='movieId',
+        time_key='timestamp',
+        action_key='action',
+        event_weights_key='weight',
+        get_items_map=False
+    )
+
+    assert isinstance(parsed, Dict)
+    assert parsed.get('session-map')
+    assert not parsed.get('item-map')
+
+    parsed = parse_pandas(
+        df=df,
+        session_id_key='userId',
+        product_key='movieId',
+        time_key='timestamp',
+        action_key='action',
+        event_weights_key='weight',
+        allowed_actions=['ORDER']
+    )
+
+    assert isinstance(parsed, Dict)
+    assert parsed.get('session-map')
+    assert parsed.get('item-map')
+
+    parsed = parse_pandas(
+        df=df,
+        session_id_key='userId',
+        product_key='movieId',
+        time_key='timestamp',
+        action_key='action',
+        purchase_action_name='ORDER',
+        event_weights_key='weight',
         min_session_length=3
     )
 

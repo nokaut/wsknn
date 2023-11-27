@@ -5,7 +5,7 @@ from typing import Iterable, Union, List, Set, Dict
 from wsknn.preprocessing.structure.session_to_item_map import map_sessions_to_items
 from wsknn.weighting import weight_session_items, weight_item_score
 from wsknn.utils.calc import weight_set_pair
-from wsknn.utils.errors import check_data_dimension, check_numeric_type_instance,\
+from wsknn.utils.errors import check_data_dimension, check_numeric_type_instance, \
     InvalidDimensionsError, InvalidTimestampError
 
 
@@ -198,7 +198,6 @@ class WSKNN:
         self.recommend_any = recommend_any
 
     # Core methods
-
     def fit(self,
             sessions: Dict,
             items: Dict = None):
