@@ -189,3 +189,33 @@ def test_wsknn_no_items():
     for idx, sess in enumerate(some_sessions):
         recomms = model.recommend(sess)
         assert recomms == expected_recommendations[idx]
+
+
+def test_batch_recommendations():
+    sessions = {
+        'a': [
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5]
+        ],
+        'b': [
+            [2, 3, 4, 5],
+            [10, 11, 12, 13]
+        ]
+    }
+
+    some_sessions = {
+        'x': [[1], [100]],
+        'y': [[2, 3], [200, 300]]
+    }
+
+    expected_recommendations = {
+        'x': [(2, 2.0), (3, 2.0), (4, 2.0), (5, 2.0)],
+        'y': [(4, 2.5), (5, 2.5), (1, 1.25)]
+    }
+
+    model = WSKNN(return_events_from_session=False)
+    model.fit(sessions)
+
+    recs = model.recommend(some_sessions)
+    for _k, _v in recs.items():
+        assert expected_recommendations[_k] == _v
