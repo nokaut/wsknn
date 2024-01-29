@@ -38,10 +38,25 @@ def test_wsknn_invalid_type_exception():
         model.fit(sessions=sessions, items=items)
 
 
+def test_wsknn_invalid_datatypes_exception():
+    sessions = {
+        'A': [[1, 2, 3], [10, 20, 30]]
+    }
+
+    items = {
+        '1': [['A'], [10]]
+    }
+
+    model = WSKNN()
+
+    with pytest.raises(TypeError):
+        model.fit(sessions=sessions, items=items)
+
+
 def test_wsknn_timestamp_type_exception():
     sessions = {
         'A': [[1, 2, 3],
-              [10, 20, 30]]
+              ['10', '20', '30']]
     }
 
     items = {

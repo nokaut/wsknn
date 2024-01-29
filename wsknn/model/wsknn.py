@@ -2,6 +2,7 @@ import random
 import numpy as np
 from typing import Iterable, Union, List, Set, Dict
 
+from wsknn.model.validators import validate_mapping_dtypes
 from wsknn.preprocessing.structure.session_to_item_map import (
     map_sessions_to_items)
 from wsknn.weighting import weight_session_items, weight_item_score
@@ -267,6 +268,12 @@ class WSKNN:
 
         if items is None:
             items = map_sessions_to_items(sessions)
+        else:
+            # Validate dtypes
+            validate_mapping_dtypes(
+                sessions=sessions,
+                items=items
+            )
 
         self._check_items_input(items)
 
