@@ -944,6 +944,7 @@ class WSKNN:
             Random sample of ``self.possible_neighbors_sample_size`` sessions.
         """
 
+        sessions = list(sessions)
         sample_size = min(self.possible_neighbors_sample_size, len(sessions))
         sample = random.sample(sessions, sample_size)
 

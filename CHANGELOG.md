@@ -1,3 +1,8 @@
+## Version 1.2.2 (2024-01-)
+
+- (bug) `random.sample(sessions)` bug: https://github.com/nokaut/wsknn/issues/64
+- 
+
 ## Version 1.2.1 (2023-11-27)
 
 - (docs) updated JOSS badge,
