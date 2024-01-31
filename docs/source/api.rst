@@ -16,6 +16,12 @@ predict
 .. autofunction:: wsknn.predict.predict
    :noindex:
 
+batch\_predict
+..............
+
+.. autofunction:: wsknn.predict.batch_predict
+   :noindex:
+
 Core WSKNN class
 ----------------
 

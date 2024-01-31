@@ -60,8 +60,8 @@ class InvalidDimensionsError(Exception):
         self.expected_dimensions = f'{expected_dimensions}'
 
     def __str__(self):
-        msg = f'Expected number(s) of nested sequences for {self.set_type} must be greater than' \
-              f' {self.expected_dimensions}'
+        msg = (f'Expected number(s) of nested sequences for {self.set_type} '
+               f'must be greater than {self.expected_dimensions}')
         return msg
 
 
@@ -74,7 +74,8 @@ class InvalidTimestampError(Exception):
         self.timestamp_type = type(timestamp_sample)
 
     def __str__(self):
-        msg = f'Expected timestamp type should be int or float, got {self.timestamp_type} instead.'
+        msg = (f'Expected timestamp type should be int or float, '
+               f'got {self.timestamp_type} instead.')
         return msg
 
 
