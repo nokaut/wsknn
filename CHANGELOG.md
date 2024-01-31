@@ -1,8 +1,8 @@
-## Version 1.2.2 (2024-01-)
+## Version 1.2.2 (2024-01-31)
 
 - (bug) `random.sample(sessions)` bug: https://github.com/nokaut/wsknn/issues/64
 - (enhancement) check if sessions and items have the same datatypes in both mappings (session-items map and item-sessions map) (https://github.com/nokaut/wsknn/issues/65)
-- (enhancement) faster batch processing with ...
+- (enhancement) batch prediction with `batch_predict()` function
 
 ## Version 1.2.1 (2023-11-27)
 
