@@ -1,6 +1,6 @@
 import random
 import numpy as np
-from typing import Iterable, Union, List, Set, Dict
+from typing import Iterable, Union, List, Set, Dict, Tuple
 
 from wsknn.model.validators import validate_mapping_dtypes
 from wsknn.preprocessing.structure.session_to_item_map import (
@@ -281,14 +281,14 @@ class WSKNN:
         self.item_session_map = items
 
     def recommend(self,
-                  event_stream: Union[List, Dict],
+                  event_stream: Union[List, Tuple, np.ndarray, Dict],
                   settings: dict = None) -> Union[List, Dict]:
         """
         The method predicts n next recommendations from a given session.
 
         Parameters
         ----------
-        event_stream : List, Dict
+        event_stream : ArrayLike, Dict
             Sequence of items for recommendation. If list then it is treated
             as a single recommendation:
 
@@ -330,12 +330,12 @@ class WSKNN:
         if settings is not None:
             self.set_model_params(**settings)
 
-        if isinstance(event_stream, List):
-            recommendations = self._predict(event_stream)
-        elif isinstance(event_stream, Dict):
+        if isinstance(event_stream, Dict):
             recommendations = {
                 _k: self._predict(rec) for _k, rec in event_stream.items()
             }
+        elif isinstance(event_stream, List) or isinstance(event_stream, Tuple) or isinstance(event_stream, np.ndarray):
+            recommendations = self._predict(event_stream)
         else:
             raise NotImplementedError('Recommendation can be done only'
                                       ' for list or dictionary as an '

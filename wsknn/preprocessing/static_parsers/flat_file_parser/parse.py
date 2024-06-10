@@ -87,7 +87,7 @@ def parse_flat_file_fn(dataset: str,
         The index of the event timestamp.
 
     action_index : int, optional
-        The index of the event action.
+        The index of the event action.z
 
     use_header_row : bool, default = False
         Use first row values as a header.

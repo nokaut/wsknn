@@ -1,3 +1,9 @@
+## Version 1.2.3 (2024-05-17)
+
+-  (bug) changed behavior of the `WSKNN.recommend()` method: https://github.com/nokaut/wsknn/issues/67
+- 
+
+
 ## Version 1.2.2 (2024-01-31)
 
 - (bug) `random.sample(sessions)` bug: https://github.com/nokaut/wsknn/issues/64
