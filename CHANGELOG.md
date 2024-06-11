@@ -1,8 +1,7 @@
-## Version 1.2.3 (2024-05-17)
+## Version 1.2.3 (2024-06-11)
 
--  (bug) changed behavior of the `WSKNN.recommend()` method: https://github.com/nokaut/wsknn/issues/67
-- 
-
+- (bug) changed behavior of the `WSKNN.recommend()` method: https://github.com/nokaut/wsknn/issues/67
+- (feature) added functionality to transform input session-items and item-sessions dataframes to WSKNN input: two new functions (`dataframe_to_item_sessions_map` and `dataframe_to_session_items_map`))
 
 ## Version 1.2.2 (2024-01-31)
 
