@@ -2,7 +2,7 @@
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.05639/status.svg)](https://doi.org/10.21105/joss.05639)
 [![Python](https://img.shields.io/pypi/pyversions/wsknn)](https://www.python.org)
-[![repostatus](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[[![repostatus](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)](https://www.repostatus.org/badges/latest/unsupported.svg)
 
 ## Weighted session-based k-NN - Intro
 
